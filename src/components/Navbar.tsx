@@ -14,10 +14,19 @@ const MENU_ITEMS = [
     {
         label: 'BRICS P2P',
         href: '#brics-p2p',
+        type: 'mega',
         subItems: [
-            { label: 'Cultural Exchange', href: '#' },
-            { label: 'Education Initiatives', href: '#' },
-            { label: 'Youth Forum', href: '#' }
+            { label: "BRICS Women's Business Alliance", href: '#' },
+            { label: 'Association of BRICS Cities and Municipalities+', href: '#' },
+            { label: 'BRICS Trade Union 2025', href: '#' },
+            { label: 'Calendar', href: '#' },
+            { label: 'BRICS Youth Council', href: '#' },
+            { label: 'BRICS Think Tanks Council and BRICS Academic Forum', href: '#' },
+            { label: 'BRICS Business Council', href: '#' },
+            { label: "BRICS People's Council | BRICS Civil Forum", href: '#' },
+            { label: 'BRICS Public Ministry Meeting - 7th Meeting of the Attorneys General of the BRICS Countries', href: '#' },
+            { label: 'BRICS+ Rectors Forum', href: '#' },
+            { label: 'BRICS Higher Control Institutions', href: '#' },
         ]
     },
     {
@@ -102,16 +111,20 @@ export default function Navbar() {
                                 {/* Dropdown Menu */}
                                 {item.subItems && (
                                     <div
-                                        className={`absolute top-full left-0 mt-0 w-48 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-200 origin-top-left
+                                        className={`absolute top-full left-0 mt-0 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all duration-200 origin-top-left
                                             ${activeDropdown === item.label ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-2 invisible'}
+                                            ${item.type === 'mega' ? 'w-[900px] left-[-150px] p-6' : 'w-56'}
                                         `}
                                     >
-                                        <div className="py-2">
+                                        <div className={`${item.type === 'mega' ? 'grid grid-cols-4 gap-x-8 gap-y-4' : 'py-2'}`}>
                                             {item.subItems.map((subItem) => (
                                                 <a
                                                     key={subItem.label}
                                                     href={subItem.href}
-                                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[var(--color-brics-blue)] transition-colors"
+                                                    className={`
+                                                        block text-[var(--color-brics-blue)] hover:text-[var(--color-brics-green)] transition-colors
+                                                        ${item.type === 'mega' ? 'text-[13px] font-bold leading-tight py-1' : 'px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'}
+                                                    `}
                                                 >
                                                     {subItem.label}
                                                 </a>
