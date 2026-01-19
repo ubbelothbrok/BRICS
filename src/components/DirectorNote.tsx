@@ -19,12 +19,12 @@ export default function DirectorNote() {
                         <h4 className="text-brics-blue font-bold tracking-widest uppercase mb-2">Welcome</h4>
                         <h2 className="text-4xl font-bold text-gray-900 mb-6">From the Director's Desk</h2>
 
-                        <div className="space-y-6 text-gray-600 leading-relaxed text-lg">
+                        <div className="space-y-6 text-gray-600 leading-relaxed text-2xl font-cursive">
                             <p>
-                                "It gives me immense pleasure to welcome you all to <span className="text-brics-dark font-semibold">Pragyaan 2026</span>. At IIT Jammu, we believe that innovation flourishes when young minds are given the freedom to explore, question, and create."
+                                "It gives me immense pleasure to welcome you all to <span className="text-brics-dark font-bold">Pragyaan 2026</span>. At IIT Jammu, we believe that innovation flourishes when young minds are given the freedom to explore, question, and create.
                             </p>
                             <p>
-                                "This Open Day is not just an event; it is a bridge connecting the aspirations of school students with the limitless possibilities of science and technology. We are opening our doors to foster a culture of curiosity and collaboration across the region."
+                                This Open Day is not just an event; it is a bridge connecting the aspirations of school students with the limitless possibilities of science and technology. We are opening our doors to foster a culture of curiosity and collaboration across the region."
                             </p>
                         </div>
 
