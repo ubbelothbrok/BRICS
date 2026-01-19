@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import MemberCountries from './components/MemberCountries';
+import Zones from './components/Zones';
 import Footer from './components/Footer';
-import News from './components/News';
+import Targets2026 from './components/Targets2026';
+import Testimonials from './components/Testimonials';
 import Loading from './components/Loading';
+import DirectorNote from './components/DirectorNote';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -26,8 +28,10 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <MemberCountries />
-        <News />
+        <DirectorNote />
+        <Zones />
+        <Targets2026 />
+        <Testimonials />
       </main>
 
       <Footer />
