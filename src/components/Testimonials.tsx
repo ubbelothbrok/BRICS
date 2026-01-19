@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import { StarIcon } from '@heroicons/react/24/solid';
 
 const reviews = [
@@ -40,6 +41,54 @@ const reviews = [
 ];
 
 export default function Testimonials() {
+    const scrollRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const scrollContainer = scrollRef.current;
+        if (!scrollContainer) return;
+
+        let scrollInterval: number;
+
+        const startScrolling = () => {
+            scrollInterval = setInterval(() => {
+                if (scrollContainer) {
+                    // Start auto scrolling
+                    scrollContainer.scrollLeft += 1;
+
+                    // Check if we've scrolled past the first set of items
+                    // We assume the first set is half the total scrollable width
+                    // This is an approximation; for pixel-perfect looping we might need layout measurement
+                    if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth / 2)) {
+                        scrollContainer.scrollLeft = 0;
+                    }
+                }
+            }, 30); // 30ms speed
+        };
+
+        const stopScrolling = () => {
+            clearInterval(scrollInterval);
+        };
+
+        // Start initially
+        startScrolling();
+
+        // Add event listeners for pause on hover/interaction
+        scrollContainer.addEventListener('mouseenter', stopScrolling);
+        scrollContainer.addEventListener('mouseleave', startScrolling);
+        scrollContainer.addEventListener('touchstart', stopScrolling);
+        scrollContainer.addEventListener('touchend', startScrolling);
+
+        return () => {
+            clearInterval(scrollInterval);
+            if (scrollContainer) {
+                scrollContainer.removeEventListener('mouseenter', stopScrolling);
+                scrollContainer.removeEventListener('mouseleave', startScrolling);
+                scrollContainer.removeEventListener('touchstart', stopScrolling);
+                scrollContainer.removeEventListener('touchend', startScrolling);
+            }
+        };
+    }, []);
+
     return (
         <section className="py-24 bg-brics-gray overflow-hidden">
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-12 text-center">
@@ -47,9 +96,13 @@ export default function Testimonials() {
                 <p className="text-gray-600 mt-4">Hear from the students, teachers, and parents who made Pragyaan 2025 iconic.</p>
             </div>
 
-            <div className="relative w-full overflow-hidden gradient-mask-l-r">
+            <div className="relative w-full">
                 {/* Scrolling Container */}
-                <div className="flex gap-8 animate-scroll whitespace-nowrap py-4 hover:pause">
+                <div
+                    ref={scrollRef}
+                    className="flex gap-8 overflow-x-auto pb-8 px-6 lg:px-12 scrollbar-hide"
+                    style={{ scrollBehavior: 'auto' }} // Ensure 'smooth' doesn't interfere with continuous loop reset
+                >
                     {/* Double the list for seamless loop */}
                     {[...reviews, ...reviews].map((review, index) => (
                         <div

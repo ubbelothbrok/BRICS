@@ -48,3 +48,12 @@ body {
 .gradient-mask-l-r {
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
