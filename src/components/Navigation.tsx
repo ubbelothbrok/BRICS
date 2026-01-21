@@ -11,6 +11,7 @@ const Navigation = () => {
           <li><a href="#faq" className="hover:text-blue-300 transition-colors duration-200">FAQ</a></li>
           <li><a href="#data" className="hover:text-blue-300 transition-colors duration-200">BRICS Data</a></li>
           <li><a href="#participants" className="hover:text-blue-300 transition-colors duration-200">Participants</a></li>
+          <li><a href="#events" className="hover:text-blue-300 transition-colors duration-200">Events</a></li>
         </ul>
       </div>
     </nav>

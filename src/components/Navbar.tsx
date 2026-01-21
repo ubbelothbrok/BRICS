@@ -5,6 +5,7 @@ const MENU_ITEMS = [
     { label: 'Zones', href: '#zones' },
     { label: 'Vision 2026', href: '#vision' },
     { label: 'Schedule', href: '#schedule' },
+    { label: 'Events', href: '#events' },
     { label: 'Team', href: '#team' },
 ];
 
