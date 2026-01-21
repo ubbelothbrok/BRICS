@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const MENU_ITEMS = [
-    { label: 'Home', href: '#' },
-    { label: 'Zones', href: '#zones' },
-    { label: 'Vision 2026', href: '#vision' },
-    { label: 'Schedule', href: '#schedule' },
-    { label: 'Events', href: '#events' },
-    { label: 'Team', href: '#team' },
+    { label: 'Home', href: '/' },
+    { label: 'Zones', href: '/#zones' },
+    { label: 'Vision 2026', href: '/#vision' },
+    { label: 'Schedule', href: '/#schedule' },
+    { label: 'Events', href: '/#events' },
+    { label: 'Team', href: '/#team' },
 ];
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const { pathname } = useLocation();
+    const isHome = pathname === '/';
 
     useEffect(() => {
         const handleScroll = () => {
@@ -20,39 +23,53 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Force scrolled state on non-home pages
+    const effectiveScrolled = isScrolled || !isHome;
+
     return (
-        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-4' : 'bg-transparent py-6'}`}>
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${effectiveScrolled ? 'py-4' : 'py-6'}`}>
+            <div className={`mx-auto transition-all duration-500 px-6 lg:px-10 ${effectiveScrolled ? 'max-w-[1200px] bg-white/70 backdrop-blur-xl border border-white/30 shadow-lg rounded-full py-3 mx-4 lg:mx-auto' : 'max-w-[1400px]'}`}>
                 <div className="flex justify-between items-center">
 
                     {/* Logo Section */}
-                    <div className="flex items-center gap-3">
-                        <img src="/logo.png" alt="Pragyaan Logo" className="h-12 w-auto object-contain" />
-                        <span className={`text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brics-blue to-brics-green ${!isScrolled && 'text-white'}`}>
+                    <Link to="/" className="flex items-center gap-3">
+                        <img src="/logo.png" alt="Pragyaan Logo" className="h-10 w-auto object-contain" />
+                        <span className={`text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brics-blue to-brics-green ${!effectiveScrolled && 'text-white'}`}>
                             Pragyaan 2026
                         </span>
-                    </div>
+                    </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden lg:flex items-center space-x-8">
+                    <div className="hidden lg:flex items-center space-x-6">
                         {MENU_ITEMS.map((item) => (
                             <a
                                 key={item.label}
                                 href={item.href}
-                                className={`text-[15px] font-medium transition-colors hover:text-brics-blue ${isScrolled ? 'text-gray-700' : 'text-white'}`}
+                                className={`text-[14px] font-medium transition-colors hover:text-brics-blue ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`}
                             >
                                 {item.label}
                             </a>
                         ))}
 
-                        <button className="bg-brics-green text-white px-6 py-2.5 rounded-full font-medium hover:bg-opacity-90 transition-all shadow-sm hover:shadow-md cursor-pointer">
-                            Register Now
-                        </button>
+                        <div className={`flex items-center gap-4 border-l pl-6 ml-2 transition-colors ${effectiveScrolled ? 'border-gray-200' : 'border-white/20'}`}>
+                            <Link
+                                to="/login"
+                                className={`text-[14px] font-semibold transition-colors hover:text-brics-blue ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`}
+                            >
+                                Login
+                            </Link>
+                            <Link
+                                to="/register"
+                                className="bg-brics-green text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all shadow-sm hover:shadow-md cursor-pointer"
+                            >
+                                Register Now
+                            </Link>
+                        </div>
                     </div>
 
                     {/* Mobile Menu Button (Hamburger) - Placeholder */}
-                    <div className="lg:hidden text-gray-700">
-                        <svg className={`w-8 h-8 ${!isScrolled && 'text-white'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                    <div className="lg:hidden">
+                        <svg className={`w-8 h-8 ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" /></svg>
                     </div>
                 </div>
             </div>

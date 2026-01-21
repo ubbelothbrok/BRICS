@@ -1,35 +1,52 @@
-export default function News() {
-  const news = [
-    {
-      id: 1,
-      title: "XVI BRICS Summit Declaration",
-      date: "October 24, 2024",
-      summary: "Leaders of BRICS countries met in Kazan, Russian Federation, from October 22 to 24, 2024 for the XVI BRICS Summit.",
-      image: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", // Placeholder abstract meeting
-      featured: true
-    },
-    {
-      id: 2,
-      title: "Meeting of BRICS Finance Ministers and Central Bank Governors",
-      date: "February 27, 2025",
-      category: "Finance Track"
-    },
-    {
-      id: 3,
-      title: "BRICS Joint Statistical Publication 2024 Released",
-      date: "January 15, 2025",
-      category: "Documents"
-    },
-    {
-      id: 4,
-      title: "New Development Bank approves new infrastructure projects",
-      date: "December 10, 2024",
-      category: "NDB"
-    }
-  ];
+import { useState, useEffect } from 'react';
+import { fetchApi } from '../utils/api';
 
-  const featured = news.find(n => n.featured);
-  const others = news.filter(n => !n.featured);
+interface NewsItem {
+  id?: number;
+  _id?: string;
+  title: string;
+  date: string;
+  summary: string;
+  image?: string;
+  category?: string;
+  featured?: boolean;
+}
+
+export default function News() {
+  const [news, setNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadNews = async () => {
+      try {
+        const data = await fetchApi('/news');
+        // If data is empty, use some defaults or handle accordingly
+        setNews(data);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadNews();
+  }, []);
+
+  if (loading) return (
+    <div className="py-24 text-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brics-blue mx-auto"></div>
+      <p className="mt-4 text-gray-600">Loading latest news...</p>
+    </div>
+  );
+
+  if (error) return (
+    <div className="py-24 text-center text-red-600">
+      <p>Error loading news: {error}</p>
+    </div>
+  );
+
+  const featured = news.find(n => n.featured) || news[0];
+  const others = news.filter(n => n !== featured);
 
   return (
     <section id="news" className="py-24 bg-white">

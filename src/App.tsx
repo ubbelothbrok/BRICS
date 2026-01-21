@@ -1,43 +1,21 @@
-import { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Zones from './components/Zones';
-import Footer from './components/Footer';
-import Targets2026 from './components/Targets2026';
-import Testimonials from './components/Testimonials';
-import Loading from './components/Loading';
-import DirectorNote from './components/DirectorNote';
-import Events from './components/Events';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Registration from './pages/Registration';
+import Login from './pages/Login';
+import AllEvents from './pages/AllEvents';
+import AdminEvents from './pages/AdminEvents';
 
 function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
-      <main>
-        <Hero />
-        <DirectorNote />
-        <Zones />
-        <Events />
-        <Targets2026 />
-        <Testimonials />
-      </main>
-
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/events" element={<AllEvents />} />
+        <Route path="/admin/events" element={<AdminEvents />} />
+      </Routes>
+    </Router>
   );
 }
 
