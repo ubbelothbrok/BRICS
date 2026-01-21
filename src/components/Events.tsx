@@ -1,50 +1,59 @@
-import { CalendarIcon, MapPinIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { useState, useEffect } from 'react';
+import { CalendarIcon, MapPinIcon, ClockIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
+import { fetchApi } from '../utils/api';
+import { Link } from 'react-router-dom';
 
-const events = [
-    {
-        title: "BRICS Academic Forum 2026",
-        date: "May 15-17, 2026",
-        location: "Kazan, Russia",
-        time: "09:00 AM - 05:00 PM",
-        description: "A gathering of scholars and experts to discuss future cooperation and academic exchanges between BRICS nations.",
-        color: "border-brics-blue",
-        tag: "Academic"
-    },
-    {
-        title: "BRICS Youth Summit",
-        date: "July 10-12, 2026",
-        location: "Rio de Janeiro, Brazil",
-        time: "10:00 AM - 04:00 PM",
-        description: "Empowering the next generation of leaders to collaborate on innovation, culture, and sustainable development.",
-        color: "border-brics-green",
-        tag: "Youth"
-    },
-    {
-        title: "Business Forum & NDB Meetings",
-        date: "September 22-24, 2026",
-        location: "Cape Town, South Africa",
-        time: "08:30 AM - 06:00 PM",
-        description: "Engaging the private sector and financial institutions to drive investment and economic growth.",
-        color: "border-brics-yellow",
-        tag: "Business"
-    }
-];
+interface EventItem {
+    _id: string;
+    title: string;
+    date: string;
+    location: string;
+    time: string;
+    description: string;
+    tag: string;
+    color: string;
+}
 
 export default function Events() {
+    const [events, setEvents] = useState<EventItem[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadEvents = async () => {
+            try {
+                const data = await fetchApi('/events');
+                setEvents(data.slice(0, 3)); // Only show top 3 on homepage
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        loadEvents();
+    }, []);
+
+    if (loading) return null;
+
     return (
         <section id="events" className="py-24 bg-gray-50">
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-                <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold text-brics-dark mb-4">Upcoming Events</h2>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Stay informed about the key gatherings and summits shaping the future of BRICS cooperation.
-                    </p>
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                    <div>
+                        <h2 className="text-4xl font-bold text-brics-dark mb-4">Upcoming Events</h2>
+                        <p className="text-xl text-gray-600 max-w-2xl">
+                            Stay informed about the key gatherings and summits shaping the future of BRICS cooperation.
+                        </p>
+                    </div>
+                    <Link to="/events" className="flex items-center gap-2 text-brics-blue font-bold hover:gap-3 transition-all group">
+                        View All Events
+                        <ArrowRightIcon className="w-5 h-5" />
+                    </Link>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {events.map((event, index) => (
+                    {events.map((event) => (
                         <div
-                            key={index}
+                            key={event._id}
                             className={`bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 ${event.color}`}
                         >
                             <div className="flex justify-between items-start mb-6">
