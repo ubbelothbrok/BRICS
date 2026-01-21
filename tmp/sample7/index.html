@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 7 - Pragyaan 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-orb orb-1"></div>
+    <div class="background-orb orb-2"></div>
+
+    <nav class="glass-nav">
+        <div class="logo">
+            <img src="logo.png" alt="Vent Logo" style="height: 40px; vertical-align: middle;">
+        </div>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="nav-content">
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#zones">Zones</a>
+                <a href="#vision">Vision</a>
+                <a href="#schedule">Schedule</a>
+            </div>
+            <button class="btn-primary">Register School</button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (CAROUSEL) -->
+    <section class="hero-carousel">
+        <div class="carousel-track">
+            <!-- Slide 1 -->
+            <div class="carousel-slide active"
+                style="background-image: url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2670&auto=format&fit=crop');">
+                <div class="overlay"></div>
+                <div class="slide-content">
+                    <h1>Pragyaan 2026: <br><span class="gradient-text">An Open Day</span></h1>
+                    <p class="subtitle">Join us on 14th-15th Feb, 2026 at IIT Jammu for a celebration of Science &
+                        Technology.</p>
+                    <button class="btn-primary" style="margin-top: 2rem;">See Schedule</button>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1564951434112-64d74cc2a2d7?q=80&w=2670&auto=format&fit=crop');">
+                <div class="overlay"></div>
+                <div class="slide-content">
+                    <h1>Igniting <span class="gradient-text">Young Minds</span></h1>
+                    <p class="subtitle">Targeting 5000+ students from 85+ schools across J&K to foster innovation.
+                    </p>
+                    <button class="btn-primary" style="margin-top: 2rem;">Join Us</button>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2670&auto=format&fit=crop');">
+                <div class="overlay"></div>
+                <div class="slide-content">
+                    <h1>Innovation Meets <span class="gradient-text">Tradition</span></h1>
+                    <p class="subtitle">A convergence of STEM, Arts, and Culture to inspire the next generation.</p>
+                    <button class="btn-primary" style="margin-top: 2rem;">Learn More</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-nav">
+            <button class="nav-dot active" data-slide="0"></button>
+            <button class="nav-dot" data-slide="1"></button>
+            <button class="nav-dot" data-slide="2"></button>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- HERO SECTION -->
+
+
+        <!-- DIRECTOR'S NOTE -->
+        <section class="section-spacing">
+            <div class="glass-card flex-row-card">
+                <div class="card-image">
+                    <img src="https://boldnewsonline.com/wp-content/uploads/2023/07/Prof.-Manoj-Singh-Gaur-1.jpg"
+                        alt="Director IIT Jammu">
+                </div>
+                <div class="card-content">
+                    <h4 class="accent-text">WELCOME</h4>
+                    <h2>From the Director's Desk</h2>
+                    <div class="quote-text">
+                        <p>"It gives me immense pleasure to welcome you all to <strong class="text-highlight">Pragyaan
+                                2026</strong>. At IIT Jammu, we believe that innovation flourishes when young minds are
+                            given the freedom to explore, question, and create."</p>
+                        <p style="margin-top: 1rem;">"This Open Day is not just an event; it is a bridge connecting the
+                            aspirations of school students with the limitless possibilities of science and technology."
+                        </p>
+                    </div>
+                    <div class="author-block">
+                        <p class="author-name">Prof. Manoj Singh Gaur</p>
+                        <p class="author-role">Director, IIT Jammu</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ZONES -->
+        <section id="zones" class="section-spacing">
+            <div class="section-header">
+                <h2>Event <span class="gradient-text">Zones</span></h2>
+                <p>Discover six distinct zones designed to spark curiosity and creativity.</p>
+            </div>
+            <div class="grid-3">
+                <!-- STEM Zone -->
+                <div class="glass-card hover-card">
+                    <div class="icon-box text-blue"><i class="fas fa-microchip"></i></div>
+                    <h3>STEM Zone</h3>
+                    <p>Hands-on experience with Robotics, AI, AR/VR, Drones, and Astronomy.</p>
+                </div>
+                <!-- Science Zone -->
+                <div class="glass-card hover-card">
+                    <div class="icon-box text-green"><i class="fas fa-flask"></i></div>
+                    <h3>Science Zone</h3>
+                    <p>Live experiments and demos from Physics, Chemistry, and Biology labs.</p>
+                </div>
+                <!-- Arts Zone -->
+                <div class="glass-card hover-card">
+                    <div class="icon-box text-purple"><i class="fas fa-palette"></i></div>
+                    <h3>Arts Zone</h3>
+                    <p>Painting exhibitions, Elocution, Bracelet making, and Documentaries.</p>
+                </div>
+                <!-- Innovation Zone -->
+                <div class="glass-card hover-card">
+                    <div class="icon-box text-orange"><i class="fas fa-rocket"></i></div>
+                    <h3>Innovation Zone</h3>
+                    <p>Showcasing cutting-edge products from industry partners and local startups.</p>
+                </div>
+                <!-- Student Zone -->
+                <div class="glass-card hover-card">
+                    <div class="icon-box text-red"><i class="fas fa-users"></i></div>
+                    <h3>Student Zone</h3>
+                    <p>Innovative projects displayed by students from 85+ participating schools.</p>
+                </div>
+                <!-- Book Zone -->
+                <div class="glass-card hover-card">
+                    <div class="icon-box text-yellow"><i class="fas fa-book-open"></i></div>
+                    <h3>Book Zone</h3>
+                    <p>A comprehensive collection of books to inspire young curious minds.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISION / TARGETS -->
+        <section id="vision" class="section-spacing">
+            <div class="split-layout">
+                <div class="text-content">
+                    <h2>Our Vision for <span class="gradient-text">2026</span></h2>
+                    <p class="body-text">Building on the massive success of Pragyaan 2025, we are scaling up to reach
+                        even more young minds.</p>
+                    <p class="body-text">With a target of over 5000 students and 85+ schools, Pragyaan 2026 aims to be
+                        the largest open-day event in the region.</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="glass-card stat-card">
+                        <span class="stat-value text-blue">5000+</span>
+                        <span class="stat-label">Footfall</span>
+                    </div>
+                    <div class="glass-card stat-card">
+                        <span class="stat-value text-green">85+</span>
+                        <span class="stat-label">Schools</span>
+                    </div>
+                    <div class="glass-card stat-card">
+                        <span class="stat-value text-red">50+</span>
+                        <span class="stat-label">Stalls</span>
+                    </div>
+                    <div class="glass-card stat-card">
+                        <span class="stat-value text-yellow">25%</span>
+                        <span class="stat-label">Growth</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="section-spacing">
+            <div class="section-header">
+                <h2>What People <span class="gradient-text">Say</span></h2>
+            </div>
+            <div class="scrolling-wrapper">
+                <div class="glass-card testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"An incredible initiative! The students were fascinated by the robotics exhibits."</p>
+                    <div class="user-info">
+                        <strong>Aravind Sharma</strong>
+                        <span>Teacher, DPS Jammu</span>
+                    </div>
+                </div>
+                <div class="glass-card testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"I loved the Drone workshop. It inspired me to pursue engineering at IIT."</p>
+                    <div class="user-info">
+                        <strong>Priya Malik</strong>
+                        <span>Student, Class 10</span>
+                    </div>
+                </div>
+                <div class="glass-card testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"Very well organized. The safety arrangements and hospitality were top-notch."</p>
+                    <div class="user-info">
+                        <strong>Rajesh Gupta</strong>
+                        <span>Parent</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>Pragyaan 2026</h3>
+                <p>Fostering innovation and bridging the gap between school education and higher technical institutes.
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="#">Home</a>
+                <a href="#">Zones</a>
+                <a href="#">Vision 2026</a>
+                <a href="#">Team</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>Indian Institute of Technology Jammu</p>
+                <p>pragyaan@iitjammu.ac.in</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Pragyaan, IIT Jammu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

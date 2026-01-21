@@ -1,0 +1,117 @@
+:root {
+    --bg-body: #e0e5ec;
+    --text-main: #4a4a4a;
+    --primary: #6c5ce7;
+    --shadow-light: #ffffff;
+    --shadow-dark: #a3b1c6;
+    
+    --font-body: 'Nunito', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+}
+
+img { max-width: 100%; height: auto; }
+.card-image img { border-radius: 30px; width: 100%; }
+
+.background-orb { display: none; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: var(--bg-body); }
+::-webkit-scrollbar-thumb { 
+    background: var(--bg-body); 
+    border-radius: 10px;
+    box-shadow: inset 3px 3px 5px var(--shadow-dark), inset -3px -3px 5px var(--shadow-light);
+    border: 3px solid transparent;
+    background-clip: content-box;
+}
+
+/* Nav */
+.glass-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem max(2rem, calc((100% - 1200px) / 2));
+    background: var(--bg-body);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    box-shadow: 9px 9px 16px var(--shadow-dark), -9px -9px 16px var(--shadow-light);
+}
+
+.nav-content { display: flex; align-items: center; gap: 1.5rem; }
+.nav-links { display: flex; align-items: center; }
+
+.nav-links a { 
+    color: var(--text-main); margin: 0 1rem; font-weight: 700; text-decoration: none;
+    padding: 10px 20px; border-radius: 30px;
+    transition: all 0.3s;
+}
+.nav-links a:hover, .nav-links a.active {
+    box-shadow: inset 6px 6px 10px 0 var(--shadow-dark), inset -6px -6px 10px 0 var(--shadow-light);
+    color: var(--primary);
+}
+
+.btn-primary {
+    background: var(--bg-body);
+    color: var(--primary);
+    border: none; padding: 10px 25px; border-radius: 50px;
+    font-weight: 800;
+    box-shadow: 9px 9px 16px var(--shadow-dark), -9px -9px 16px var(--shadow-light);
+    transition: all 0.3s;
+}
+.btn-primary:hover {
+    box-shadow: inset 6px 6px 10px 0 var(--shadow-dark), inset -6px -6px 10px 0 var(--shadow-light);
+    transform: translateY(2px);
+}
+
+.hero-carousel {
+    height: 90vh; margin-bottom: 3rem; position: relative;
+    border-radius: 0 0 50px 50px; overflow: hidden;
+    box-shadow: 20px 20px 60px var(--shadow-dark), -20px -20px 60px var(--shadow-light);
+}
+.carousel-slide { 
+    position: absolute; top:0; left:0; width:100%; height:100%; 
+    background-size: cover; background-position: center; /* Fix for background div */
+    opacity: 0; transition: opacity 1s; 
+}
+.carousel-slide.active { opacity: 1; }
+.slide-content h1 { font-size: 3.5rem; color: var(--text-main); text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+.glass-card {
+    border-radius: 50px;
+    background: var(--bg-body);
+    box-shadow: 20px 20px 60px var(--shadow-dark), -20px -20px 60px var(--shadow-light);
+    padding: 3rem; margin-bottom: 2rem;
+    border: none;
+}
+/* Director Image Fix */
+.flex-row-card { display: flex; gap: 3rem; align-items: center; }
+.card-image img { max-width: 350px; width: 100%; border-radius: 30px; }
+
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+.stat-card {
+    border-radius: 30px;
+    padding: 2rem;
+    box-shadow: inset 20px 20px 60px var(--shadow-dark), inset -20px -20px 60px var(--shadow-light);
+    text-align: center;
+}
+.stat-value { font-size: 2.5rem; font-weight: 800; color: var(--primary); }
+
+.scrolling-wrapper { display: flex; gap: 2rem; overflow-x: auto; padding: 2rem; }
+.testimonial-card { min-width: 350px; border-radius: 30px; padding: 2rem; box-shadow: 10px 10px 30px var(--shadow-dark), -10px -10px 30px var(--shadow-light); }
+
+@media(max-width:768px) {
+    .nav-content { display: none; margin-top: 1rem; flex-direction: column; }
+    .nav-content.active { display: flex; }
+    .flex-row-card { flex-direction: column; }
+    .split-layout { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+}

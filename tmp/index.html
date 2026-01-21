@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win3 Desktop</title>
+    <style>
+        :root {
+            --win-bg: #c0c0c0;
+            --win-blue: #000080;
+            --win-border-light: #ffffff;
+            --win-border-dark: #808080;
+            --win-border-black: #000000;
+            --desktop-bg: #808080;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            background-color: #008080;
+            /* Fallback Teal */
+            background-image: url('https://e0.pxfuel.com/wallpapers/472/15/desktop-wallpaper-ms-dos-ms-dos.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+        }
+
+        /* Generic Window Style */
+        .window {
+            background: var(--win-bg);
+            border-top: 2px solid var(--win-border-light);
+            border-left: 2px solid var(--win-border-light);
+            border-right: 2px solid var(--win-border-black);
+            border-bottom: 2px solid var(--win-border-black);
+            padding: 2px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            z-index: 10;
+            min-width: 200px;
+            min-height: 150px;
+        }
+
+        .window.maximized {
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: calc(100% - 35px) !important;
+            max-width: none !important;
+            max-height: none !important;
+            box-shadow: none;
+            border: none;
+            z-index: 900 !important;
+            /* Ensure on top but below taskbar and modal */
+            transform: none !important;
+        }
+
+        .title-bar {
+            background: var(--win-blue);
+            color: white;
+            padding: 4px 8px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            letter-spacing: 0.5px;
+            cursor: default;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        /* Active vs Inactive State (Simulated) */
+        .window:not(.active) .title-bar {
+            background: #808080;
+            /* Inactive gray */
+        }
+
+        .title-bar-controls {
+            display: flex;
+            gap: 2px;
+            height: 100%;
+        }
+
+        .control-box {
+            width: 18px;
+            height: 18px;
+            background: var(--win-bg);
+            border-top: 1px solid var(--win-border-light);
+            border-left: 1px solid var(--win-border-light);
+            border-right: 1px solid var(--win-border-black);
+            border-bottom: 1px solid var(--win-border-black);
+            font-size: 11px;
+            line-height: 15px;
+            text-align: center;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .control-box:active {
+            border-top: 1px solid var(--win-border-black);
+            border-left: 1px solid var(--win-border-black);
+            border-right: 1px solid var(--win-border-light);
+            border-bottom: 1px solid var(--win-border-light);
+            transform: translateY(1px);
+        }
+
+        .menu-bar {
+            display: flex;
+            background: var(--win-bg);
+            padding: 4px 8px;
+            border-bottom: 1px solid var(--win-border-black);
+            flex-shrink: 0;
+        }
+
+        .menu-item {
+            margin-right: 16px;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+            cursor: default;
+            font-size: 14px;
+        }
+
+        /* Window Content */
+        .child-window {
+            margin: 10px;
+            border: 2px solid var(--win-border-dark);
+            flex-grow: 1;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 5px;
+            padding: 10px;
+            overflow-y: auto;
+            flex-grow: 1;
+            align-content: start;
+            /* Prevent stretching rows */
+        }
+
+        /* Desktop Icons */
+        .desktop-icons-area {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 1;
+        }
+
+        .desktop-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .icon-img {
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            background-size: cover !important;
+            /* Ensure icons fit */
+            border: none;
+            /* Icons are usually transparent PNGs */
+            margin-bottom: 4px;
+            position: relative;
+        }
+
+        .icon-label {
+            font-size: 12px;
+            background: transparent;
+            border: 1px solid transparent;
+            /* Placeholder to reserve space logic */
+            padding: 2px 4px;
+            color: black;
+            font-weight: 500;
+        }
+
+        .desktop-icon:active .icon-img {
+            filter: invert(1);
+        }
+
+        .desktop-icon:active .icon-label {
+            background: var(--win-blue);
+            color: white;
+        }
+
+        /* Taskbar */
+        .taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 35px;
+            background: var(--win-bg);
+            border-top: 2px solid var(--win-border-light);
+            display: flex;
+            align-items: center;
+            padding: 2px 4px;
+            z-index: 9999;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .start-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px 8px;
+            height: 26px;
+            background: var(--win-bg);
+            border-top: 2px solid var(--win-border-light);
+            border-left: 2px solid var(--win-border-light);
+            border-right: 2px solid var(--win-border-black);
+            border-bottom: 2px solid var(--win-border-black);
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 10px;
+            cursor: pointer;
+            min-width: 60px;
+        }
+
+        .start-btn:active {
+            border-top: 2px solid var(--win-border-black);
+            border-left: 2px solid var(--win-border-black);
+            border-right: 2px solid var(--win-border-light);
+            border-bottom: 2px solid var(--win-border-light);
+            padding-top: 3px;
+            /* Depressed effect */
+        }
+
+        .start-menu {
+            position: absolute;
+            bottom: 35px;
+            left: 0;
+            width: 200px;
+            background: var(--win-bg);
+            border: 2px solid var(--win-border-light);
+            border-right-color: var(--win-border-black);
+            border-bottom-color: var(--win-border-black);
+            display: flex;
+            flex-direction: column;
+            z-index: 10000;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .start-header {
+            background: gray;
+            color: white;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+
+        .start-logo {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            display: none;
+            /* simple variant */
+        }
+
+        .start-items {
+            padding: 2px;
+        }
+
+        .start-item {
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: black;
+            text-decoration: none;
+        }
+
+        .start-item:hover {
+            background: var(--win-blue);
+            color: white;
+        }
+
+        .start-item-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            background-size: cover;
+        }
+
+        .start-divider {
+            height: 1px;
+            background: gray;
+            margin: 4px 2px;
+            border-bottom: 1px solid white;
+        }
+
+        .task-list {
+            display: flex;
+            gap: 4px;
+            flex-grow: 1;
+            padding: 0 4px;
+            overflow-x: auto;
+        }
+
+        .task-entry {
+            display: flex;
+            align-items: center;
+            padding: 2px 8px;
+            background: var(--win-bg);
+            border-top: 2px solid var(--win-border-light);
+            border-left: 2px solid var(--win-border-light);
+            border-right: 2px solid var(--win-border-black);
+            border-bottom: 2px solid var(--win-border-black);
+            cursor: pointer;
+            width: 160px;
+            min-width: 120px;
+            height: 26px;
+            user-select: none;
+            box-shadow: 1px 1px 0 black;
+        }
+
+        .task-entry.active {
+            background: #e0e0e0;
+            border-top: 2px solid var(--win-border-black);
+            border-left: 2px solid var(--win-border-black);
+            border-right: 2px solid var(--win-border-light);
+            border-bottom: 2px solid var(--win-border-light);
+            box-shadow: none;
+            margin-top: 1px;
+            font-weight: bold;
+        }
+
+        .task-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+            background: white;
+            border: 1px solid black;
+            flex-shrink: 0;
+        }
+
+        .task-title {
+            font-size: 12px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .status-tray {
+            border: 2px inset var(--win-border-light);
+            background: var(--win-bg);
+            padding: 2px 8px;
+            font-size: 12px;
+            margin-left: 4px;
+            display: flex;
+            align-items: center;
+            height: 26px;
+            min-width: 150px;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        /* Icons */
+        .icon-img.main-icon {
+            background: white;
+            border: 2px solid black;
+        }
+
+        .icon-img.main-icon::after {
+            content: none;
+        }
+
+        .icon-img.file-icon {
+            background: yellow;
+            border: 2px solid black;
+        }
+
+        .icon-img.file-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 10px 10px 0;
+            border-color: transparent #808080 transparent transparent;
+        }
+
+        .icon-img.dos-icon {
+            background: black;
+            border: 2px solid white;
+        }
+
+        .icon-img.dos-icon::after {
+            content: 'C:\\';
+            color: white;
+            font-family: monospace;
+            font-size: 8px;
+            top: 10px;
+            left: 2px;
+        }
+
+        /* Settings */
+        .settings-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .settings-option label {
+            margin-left: 10px;
+        }
+
+        /* Browser */
+        .browser-window {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: #c0c0c0;
+        }
+
+        .browser-toolbar {
+            display: flex;
+            padding: 4px;
+            gap: 4px;
+            border-bottom: 2px solid gray;
+            align-items: center;
+        }
+
+        .url-bar {
+            flex-grow: 1;
+            padding: 2px 4px;
+            font-family: monospace;
+        }
+
+        .tab-bar {
+            display: flex;
+            background: #a0a0a0;
+            padding: 4px 4px 0 4px;
+            gap: 2px;
+            border-bottom: 2px solid white;
+        }
+
+        .browser-tab {
+            padding: 4px 10px;
+            background: #c0c0c0;
+            border-top: 2px solid white;
+            border-left: 2px solid white;
+            border-right: 2px solid gray;
+            border-bottom: none;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            max-width: 150px;
+        }
+
+        .browser-tab.active {
+            background: white;
+            border-top: 2px solid gray;
+            /* Inverted look for depth or just plain white pop */
+            border-top: 2px solid white;
+            border-left: 2px solid white;
+            border-right: 2px solid gray;
+            border-bottom: 2px solid white;
+            /* Connect to content */
+            margin-bottom: -2px;
+            z-index: 10;
+            font-weight: bold;
+        }
+
+        .tab-close {
+            margin-left: 8px;
+            font-size: 10px;
+            cursor: pointer;
+            width: 12px;
+            height: 12px;
+            line-height: 10px;
+            text-align: center;
+            border: 1px solid gray;
+        }
+
+        .browser-content {
+            flex-grow: 1;
+            background: white;
+            border: 2px inset white;
+            position: relative;
+        }
+
+        .browser-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .icon-img.app-icon {
+            background: white;
+            border: 1px solid black;
+        }
+
+        .icon-img.app-icon::after {
+            content: '';
+            position: absolute;
+            background: var(--win-blue);
+            top: 5px;
+            height: 5px;
+            width: 20px;
+            left: 5px;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 20000;
+        }
+
+        .message-box {
+            width: 300px;
+            background: var(--win-bg);
+            border: 2px outset var(--win-border-light);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .msg-body {
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .msg-icon {
+            width: 32px;
+            height: 32px;
+            background: yellow;
+            border: 2px solid black;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .msg-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding-bottom: 15px;
+        }
+
+        .win-btn {
+            min-width: 60px;
+            padding: 4px 12px;
+            box-shadow: 1px 1px 0 black;
+            background: var(--win-bg);
+            border-top: 1px solid var(--win-border-light);
+            border-left: 1px solid var(--win-border-light);
+            border-right: 1px solid var(--win-border-black);
+            border-bottom: 1px solid var(--win-border-black);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Custom Retro Scrollbars */
+        ::-webkit-scrollbar {
+            width: 16px;
+            height: 16px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #ffffff;
+            background-image: linear-gradient(45deg, #c0c0c0 25%, transparent 25%, transparent 75%, #c0c0c0 75%),
+                linear-gradient(45deg, #c0c0c0 25%, transparent 25%, transparent 75%, #c0c0c0 75%);
+            background-size: 4px 4px;
+            background-position: 0 0, 2px 2px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--win-bg);
+            border-top: 2px solid var(--win-border-light);
+            border-left: 2px solid var(--win-border-light);
+            border-right: 2px solid var(--win-border-black);
+            border-bottom: 2px solid var(--win-border-black);
+        }
+
+        ::-webkit-scrollbar-button {
+            background: var(--win-bg);
+            border-top: 2px solid var(--win-border-light);
+            border-left: 2px solid var(--win-border-light);
+            border-right: 2px solid var(--win-border-black);
+            border-bottom: 2px solid var(--win-border-black);
+            display: block;
+            width: 16px;
+            height: 16px;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: var(--win-bg);
+        }
+
+        /* Adjust Task list to allow scrolling if needed, but keep hidden or small? 
+           User asked for scrollbars, let's remove the 'display:none' from task-list if it was there 
+        */
+        /* Terminal CSS */
+        .terminal-window {
+            background-color: black;
+            color: #ccc;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            padding: 5px;
+            height: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            cursor: text;
+        }
+
+        .term-output {
+            white-space: pre-wrap;
+        }
+
+        .term-input-line {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .term-prompt {
+            margin-right: 0;
+            /* Let space be handled by text logic if needed, or keep tight */
+            color: #ccc;
+        }
+
+        .term-dynamic-text {
+            color: white;
+            white-space: pre;
+            min-height: 14px;
+            /* Ensure height matches cursor */
+            display: flex;
+            /* keep inline elements */
+            align-items: center;
+        }
+
+        .cursor-block {
+            display: inline-block;
+            width: 1ch;
+            /* Exact character width */
+            height: 1.1em;
+            background: #ccc;
+            color: black;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Hidden but active input */
+        .term-input {
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            caret-color: transparent;
+            cursor: default;
+            /* text cursor might show if not careful */
+        }
+    </style>
+</head>
+<style>
+    /* Existing CSS ... */
+
+    /* Boot Screen */
+    #boot-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        color: #ccc;
+        font-family: 'Courier New', monospace;
+        z-index: 100000;
+        display: flex;
+        flex-direction: column;
+        padding: 50px;
+        font-size: 16px;
+        user-select: none;
+    }
+
+    .grub-box {
+        border: 3px double #aaa;
+        padding: 10px;
+        width: 80%;
+        max-width: 800px;
+        margin: 40px auto;
+        position: relative;
+        background: black;
+        min-height: 400px;
+    }
+
+    .grub-title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .grub-menu {
+        border: 1px solid #aaa;
+        padding: 5px;
+        min-height: 200px;
+        margin-bottom: 20px;
+    }
+
+    .grub-item {
+        padding: 2px 10px;
+        cursor: pointer;
+    }
+
+    .grub-item.selected {
+        background: #ccc;
+        color: black;
+    }
+
+    .grub-footer {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* Custom Cursor */
+    #custom-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-left: 12px solid white;
+        border-right: 6px solid transparent;
+        border-bottom: 12px solid transparent;
+        pointer-events: none;
+        z-index: 200000;
+        /* Above everything */
+        display: none;
+        filter: drop-shadow(1px 1px 1px black);
+        mix-blend-mode: normal;
+        /* Difference might be too aggressive */
+    }
+
+    /* Utility to hide desktop initially */
+    body.booting>*:not(#boot-screen):not(#custom-cursor) {
+        visibility: hidden;
+    }
+</style>
+
+<body class="booting">
+
+    <!-- Boot Screen -->
+    <div id="boot-screen">
+        <div class="grub-box">
+            <div class="grub-title">GNU GRUB version 2.06</div>
+            <div class="grub-menu">
+                <div class="grub-item selected" data-mode="fullscreen">Boot in Fullscreen</div>
+                <div class="grub-item" data-mode="normal">Normal boot</div>
+            </div>
+            <div class="grub-footer">
+                Use the &uarr; and &darr; keys to select which entry is highlighted.<br>
+                Press enter to boot the selected OS.<br>
+                <div class="grub-timer" id="grub-timer">The selected entry will be started automatically in 10s...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Icons -->
+    <div class="desktop-icons-area">
+        <div class="desktop-icon" ondblclick="wm.createWindow('program-manager')">
+            <div class="icon-img main-icon"
+                style="background-image: url('https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png'); border: none; background-color: transparent;">
+            </div>
+            <div class="icon-label" style="background:white;">Program Manager</div>
+        </div>
+
+        <div class="desktop-icon" ondblclick="wm.createWindow('dos-prompt')">
+            <div class="icon-img dos-icon"></div>
+            <div class="icon-label" style="background:white;">DOS Prompt</div>
+        </div>
+
+        <div class="desktop-icon" ondblclick="wm.openBrowser('https://www.google.com/webhp?igu=1')">
+            <div class="icon-img main-icon"
+                style="background-image: url('https://win98icons.alexmeub.com/icons/png/world-0.png'); border: none; background-color: transparent;">
+            </div>
+            <div class="icon-label" style="background:white;">Internet Browser</div>
+        </div>
+    </div>
+
+    <!-- Container for Windows -->
+    <div id="window-area"></div>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+        <div class="start-btn" onclick="wm.toggleStartMenu()">Start</div>
+        <div class="start-menu" id="start-menu" style="display: none;">
+            <div class="start-header">
+                <span class="start-logo">Windows</span>
+            </div>
+            <div class="start-items" id="start-items">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+        <div class="task-list" id="task-list"></div>
+        <div class="status-tray" id="clock"></div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div class="modal-overlay" id="confirm-modal">
+        <div class="message-box">
+            <div class="title-bar">
+                <span>Confirm Launch</span>
+            </div>
+            <div class="msg-body">
+                <div class="msg-icon">!</div>
+                <div id="modal-text">Open Application?</div>
+            </div>
+            <div class="msg-buttons">
+                <button class="win-btn" id="btn-yes">Yes</button>
+                <button class="win-btn" id="btn-no">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample Data
+        const samples = [
+            { id: 1, name: "Vent", path: "./sample1/", icon: "https://win98icons.alexmeub.com/icons/png/notepad-0.png" },
+            { id: 2, name: "Corporate", path: "./sample2/", icon: "https://win98icons.alexmeub.com/icons/png/briefcase-0.png" },
+            { id: 3, name: "Creative", path: "./sample3/", icon: "https://win98icons.alexmeub.com/icons/png/file_blue_grad_paint-0.png" },
+            { id: 4, name: "Editorial", path: "./sample4/", icon: "https://win98icons.alexmeub.com/icons/png/directory_closed-0.png" },
+            { id: 5, name: "Cyberpunk", path: "./sample5/", icon: "https://win98icons.alexmeub.com/icons/png/ms_dos-0.png" },
+            { id: 6, name: "Neumorph", path: "./sample6/", icon: "https://win98icons.alexmeub.com/icons/png/calculator-0.png" },
+            { id: 7, name: "Brutalist", path: "./sample7/", icon: "https://win98icons.alexmeub.com/icons/png/chart1-0.png" },
+            { id: 8, name: "Retro 90s", path: "./sample8/", icon: "https://win98icons.alexmeub.com/icons/png/cd_audio_cd-0.png" },
+            { id: 9, name: "Organic", path: "./sample9/", icon: "https://win98icons.alexmeub.com/icons/png/entire_network_globe-0.png" },
+            { id: 10, name: "Holograph", path: "./sample10/", icon: "https://win98icons.alexmeub.com/icons/png/joystick-0.png" },
+        ];
+
+        // --- Window Manager Class ---
+        class WindowManager {
+            constructor() {
+                this.windows = [];
+                this.windowArea = document.getElementById('window-area');
+                this.taskList = document.getElementById('task-list');
+                this.zIndexCounter = 100;
+                this.idCounter = 1;
+
+                this.browserState = {};
+                this.useInternalBrowser = true;
+
+                // Terminal History
+                this.cmdHistory = [];
+                this.historyIndex = -1;
+
+                this.initStartMenu();
+
+                // Close menu on outside click
+                document.addEventListener('click', (e) => {
+                    const menu = document.getElementById('start-menu');
+                    const btn = document.querySelector('.start-btn');
+                    if (menu.style.display === 'flex' && !menu.contains(e.target) && !btn.contains(e.target)) {
+                        this.closeStartMenu();
+                    }
+                });
+            }
+
+            // --- Helper to open browser with URL ---
+            openBrowser(url) {
+                // Check if a browser window exists?
+                // For now, let's just create a new one every time to be safe, or we can try to find one.
+                const browserWins = [...document.querySelectorAll('.browser-window')];
+                if (browserWins.length > 0) {
+                    // Add tab to first available browser
+                    const winId = browserWins[0].closest('.window').id;
+                    this.addTab(winId, url);
+                    this.focus(winId);
+                } else {
+                    this.createWindow('browser');
+                    // wait for init
+                    setTimeout(() => {
+                        const winId = this.windows[this.windows.length - 1]; // Assume last created
+                        // Actually this.windows is just an array of IDs if we tracked it, but we don't fully track IDs in a simple list in this class (we use DOM).
+                        // Let's find the last window ID.
+                        const wins = document.querySelectorAll('.window');
+                        const lastWin = wins[wins.length - 1];
+                        if (lastWin) {
+                            // Overwrite the initial tab
+                            const state = this.browserState[lastWin.id];
+                            if (state) {
+                                state.tabs[0].url = url;
+                                this.updateBrowserUI(lastWin.id);
+                            }
+                        }
+                    }, 50);
+                }
+            }
+
+            // --- Browser Logic ---
+            initBrowserWindow(winId) {
+                this.browserState[winId] = {
+                    tabs: [],
+                    activeIndex: -1
+                };
+                // Add initial tab
+                this.addTab(winId, 'https://www.google.com/webhp?igu=1');
+            }
+
+            browserBack(winId) {
+                const state = this.browserState[winId];
+                if (!state || state.activeIndex < 0) return;
+                const tab = state.tabs[state.activeIndex];
+
+                if (tab.history && tab.history.length > 0) {
+                    tab.future.push(tab.url);
+                    tab.url = tab.history.pop();
+                    this.updateBrowserUI(winId);
+                }
+            }
+
+            browserForward(winId) {
+                const state = this.browserState[winId];
+                if (!state || state.activeIndex < 0) return;
+                const tab = state.tabs[state.activeIndex];
+
+                if (tab.future && tab.future.length > 0) {
+                    tab.history.push(tab.url);
+                    tab.url = tab.future.pop();
+                    this.updateBrowserUI(winId);
+                }
+            }
+
+            browserReload(winId) {
+                const frame = document.getElementById(winId + '-frame');
+                // Re-assign src to force reload/navigate without needing internal access
+                if (frame) frame.src = frame.src;
+            }
+
+            browserNavigate(winId) {
+                const urlInput = document.getElementById(winId + '-url');
+                let input = urlInput.value.trim();
+                let url;
+
+                // Simple Regex for URL validation
+                // Check for domain-like structure or specific protocol
+                const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+                const localhostPattern = /^(https?:\/\/)?localhost(:\d+)?(\/.*)?$/;
+                const relativePattern = /^(\.?\/).*/;
+
+                if (urlPattern.test(input) || localhostPattern.test(input) || relativePattern.test(input)) {
+                    if (!input.startsWith('http') && !relativePattern.test(input)) {
+                        url = 'https://' + input;
+                    } else {
+                        url = input;
+                    }
+                } else {
+                    // Fallback to Google Search
+                    url = 'https://www.google.com/search?q=' + encodeURIComponent(input) + '&igu=1'; // igu=1 for iframe capability if supported
+                }
+
+                // Resolve to absolute URL if relative
+                try {
+                    url = new URL(url, window.location.href).href;
+                } catch (e) {
+                    // Keep original if invalid
+                }
+
+                const state = this.browserState[winId];
+                if (state && state.activeIndex >= 0) {
+                    const tab = state.tabs[state.activeIndex];
+                    if (tab.url !== url) {
+                        tab.history.push(tab.url);
+                        tab.future = []; // Clear future branch
+                        tab.url = url;
+                        this.updateBrowserUI(winId);
+                    }
+                }
+            }
+
+            addTab(winId, url) {
+                // Resolve url to absolute
+                try {
+                    url = new URL(url, window.location.href).href;
+                } catch (e) { }
+
+                const state = this.browserState[winId];
+                if (!state) return;
+                state.tabs.push({
+                    url: url,
+                    title: 'New Tab',
+                    history: [],
+                    future: []
+                });
+                this.switchTab(winId, state.tabs.length - 1);
+            }
+
+            closeTab(winId, index, event) {
+                if (event) event.stopPropagation();
+                const state = this.browserState[winId];
+                if (!state) return;
+
+                state.tabs.splice(index, 1);
+
+                if (state.tabs.length === 0) {
+                    this.close(winId);
+                } else {
+                    if (index === state.activeIndex) {
+                        this.switchTab(winId, state.tabs.length - 1);
+                    } else if (index < state.activeIndex) {
+                        state.activeIndex--;
+                        this.updateBrowserUI(winId);
+                    } else {
+                        this.updateBrowserUI(winId);
+                    }
+                }
+            }
+
+            switchTab(winId, index) {
+                const state = this.browserState[winId];
+                if (!state || !state.tabs[index]) return;
+                state.activeIndex = index;
+                this.updateBrowserUI(winId);
+            }
+
+            updateBrowserUI(winId) {
+                const state = this.browserState[winId];
+                const tabBar = document.getElementById(winId + '-tabs');
+                const frame = document.getElementById(winId + '-frame');
+                const urlInput = document.getElementById(winId + '-url');
+
+                // Render Tabs
+                tabBar.innerHTML = '';
+                state.tabs.forEach((tab, i) => {
+                    const tabEl = document.createElement('div');
+                    tabEl.className = 'browser-tab ' + (i === state.activeIndex ? 'active' : '');
+                    let displayTitle = tab.url;
+                    if (displayTitle.startsWith('https://www.google.com/search')) displayTitle = 'Google Search';
+                    else if (displayTitle.length > 20) displayTitle = displayTitle.substring(0, 20) + '...';
+
+                    tabEl.innerHTML = `${displayTitle} <span class="tab-close" onclick="wm.closeTab('${winId}', ${i}, event)">x</span>`;
+                    tabEl.onclick = () => this.switchTab(winId, i);
+                    tabBar.appendChild(tabEl);
+                });
+
+                // Update Content
+                const activeTab = state.tabs[state.activeIndex];
+                if (frame.src !== activeTab.url) {
+                    frame.src = activeTab.url;
+                    urlInput.value = activeTab.url;
+                }
+            }
+
+            initStartMenu() {
+                const container = document.getElementById('start-items');
+                container.innerHTML = '';
+
+                // Programs
+                this.addStartItem(container, "Program Manager", "https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png", () => this.createWindow('program-manager'));
+                this.addStartItem(container, "Internet Browser", "https://win98icons.alexmeub.com/icons/png/world-0.png", () => this.openBrowser('https://www.google.com/webhp?igu=1'));
+
+                // Custom Add for DOS to use CSS icon
+                const dosItem = document.createElement('div');
+                dosItem.className = 'start-item';
+                dosItem.innerHTML = `<div class="start-item-icon" style="background: none; display: flex; align-items: center; justify-content: center;"><div class="icon-img dos-icon" style="transform: scale(0.6); margin: 0;"></div></div>MS-DOS Prompt`;
+                dosItem.onclick = () => {
+                    this.createWindow('dos-prompt');
+                    this.closeStartMenu();
+                };
+                container.appendChild(dosItem);
+
+                // Divider
+                const div = document.createElement('div');
+                div.className = 'start-divider';
+                container.appendChild(div);
+
+                // About Item
+                this.addStartItem(container, "About", "https://win98icons.alexmeub.com/icons/png/help_book_big-0.png", () => this.createWindow('about-me'));
+
+                // Divider 2
+                const div2 = document.createElement('div');
+                div2.className = 'start-divider';
+                container.appendChild(div2);
+
+                // Settings
+                this.addStartItem(container, "Settings", "https://win98icons.alexmeub.com/icons/png/settings_gear-0.png", () => this.createWindow('settings'));
+
+                // Divider 3
+                const div3 = document.createElement('div');
+                div3.className = 'start-divider';
+                container.appendChild(div3);
+
+                // Sites
+                samples.forEach(s => {
+                    const icon = s.icon || "https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png";
+                    this.addStartItem(container, s.name, icon, () => confirmLaunch(s.name, s.path));
+                });
+            }
+
+            addStartItem(container, text, iconUrl, action) {
+                const item = document.createElement('div');
+                item.className = 'start-item';
+                item.innerHTML = `<div class="start-item-icon" style="background-image: url('${iconUrl}');"></div>${text}`;
+                item.onclick = () => {
+                    action();
+                    this.closeStartMenu();
+                };
+                container.appendChild(item);
+            }
+
+            toggleStartMenu() {
+                const menu = document.getElementById('start-menu');
+                if (menu.style.display === 'none') {
+                    menu.style.display = 'flex';
+                    document.querySelector('.start-btn').classList.add('active'); // toggle visual state
+                } else {
+                    this.closeStartMenu();
+                }
+            }
+
+            closeStartMenu() {
+                document.getElementById('start-menu').style.display = 'none';
+                document.querySelector('.start-btn').classList.remove('active');
+            }
+
+            createWindow(type) {
+                const id = 'win-' + (this.idCounter++);
+                const winEl = document.createElement('div');
+                winEl.className = 'window active';
+                winEl.id = id;
+                winEl.style.top = (50 + (this.idCounter * 20) % 300) + 'px'; // Cascade
+                winEl.style.left = (50 + (this.idCounter * 20) % 300) + 'px';
+                winEl.style.width = '800px';
+                winEl.style.height = '600px';
+                winEl.style.zIndex = ++this.zIndexCounter;
+
+                // Create Content based on Type
+                let contentHTML = '';
+                let title = 'Window';
+
+                if (type === 'program-manager') {
+                    title = 'Program Manager';
+                    contentHTML = `
+                        <div class="menu-bar">
+                            <span class="menu-item">F</span>ile
+                            <span class="menu-item">O</span>ptions
+                            <span class="menu-item">W</span>indow
+                            <span class="menu-item">H</span>elp
+                        </div>
+                        <div class="child-window">
+                            <div class="title-bar" style="background: var(--win-blue); justify-content: center; color: white;">
+                                <span>Pragyaan 2026 Theme Group</span>
+                            </div>
+                            <div class="icon-grid" id="${id}-grid"></div>
+                        </div>
+                    `;
+                } else if (type === 'dos-prompt') {
+                    title = 'MS-DOS Prompt';
+                    contentHTML = `
+                        <div class="child-window" style="background:black; border-color:white;">
+                            <div id="${id}-term" class="terminal-window" onclick="document.getElementById('${id}-input').focus()">
+                                <div class="term-output">Microsoft(R) Windows DOS
+(C) Copyright Microsoft Corp 1990-2026
+ 
+</div>
+                                <div class="term-input-line">
+                                    <span class="term-prompt">C:\\WINDOWS&gt;</span>
+                                    <span id="${id}-cmd-view" class="term-dynamic-text"><span class="cursor-block">&nbsp;</span></span>
+                                    <input id="${id}-input" class="term-input" type="text" autocomplete="off" 
+                                        oninput="wm.syncTerm('${id}')" 
+                                        onkeyup="wm.syncTerm('${id}')" 
+                                        onkeydown="wm.handleTermInput('${id}', event)"
+                                        onclick="wm.syncTerm('${id}')">
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (type === 'about-me') {
+                    title = 'About Me';
+                    winEl.style.width = '420px';
+                    winEl.style.height = '340px';
+                    contentHTML = `
+                        <div class="child-window" style="background: white; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                            <div style="width: 64px; height: 64px; background-image: url('https://win98icons.alexmeub.com/icons/png/help_book_big-0.png'); background-size: cover; margin-bottom: 15px;"></div>
+                            <h2 style="margin-top: 0; font-family: sans-serif;">Windows 3.0 Dashboard</h2>
+                            <p style="font-family: serif; font-size: 16px;">Created by <strong>Ragnar</strong></p>
+                            <p style="font-size: 14px; margin: 10px 0;">A retro-styled portfolio and dashboard interface mimicking the classic Windows 3.x environment.</p>
+                            <div style="margin-top: auto; border-top: 2px solid var(--win-border-light); width: 100%; padding-top: 10px;">
+                                <p style="font-size: 12px; color: gray;">Version 1.0.0 (2026)</p>
+                                <button class="win-btn" onclick="wm.close('${id}')" style="width: 80px;">OK</button>
+                            </div>
+                        </div>
+                    `;
+                } else if (type === 'settings') {
+                    title = 'Control Panel';
+                    winEl.style.width = '300px';
+                    winEl.style.height = '200px';
+                    const isChecked = this.useInternalBrowser ? 'checked' : '';
+                    contentHTML = `
+                        <div class="child-window" style="padding: 20px;">
+                            <p><strong>Browser Settings</strong></p>
+                            <div class="settings-option">
+                                <input type="checkbox" id="${id}-browser-check" ${isChecked} onchange="wm.toggleBrowserSetting(this.checked)">
+                                <label for="${id}-browser-check">Open websites in Retro Browser</label>
+                            </div>
+                            <br>
+                            <button class="win-btn" onclick="wm.close('${id}')" style="width: 80px;">OK</button>
+                        </div>
+                    `;
+                } else if (type === 'browser') {
+                    title = 'RetroScape Navigator';
+                    winEl.style.width = '900px';
+                    winEl.style.height = '700px';
+                    contentHTML = `
+                        <div class="browser-window">
+                            <div class="browser-toolbar">
+                                <button class="win-btn" style="min-width: 30px;" onclick="wm.browserBack('${id}')">&lt;</button>
+                                <button class="win-btn" style="min-width: 30px;" onclick="wm.browserForward('${id}')">&gt;</button>
+                                <button class="win-btn" style="min-width: 30px;" onclick="wm.browserReload('${id}')">R</button>
+                                <input type="text" class="url-bar" id="${id}-url" placeholder="http://..." onkeydown="if(event.key==='Enter') wm.browserNavigate('${id}')">
+                                <button class="win-btn" onclick="wm.browserNavigate('${id}')">Go</button>
+                                <button class="win-btn" onclick="wm.addTab('${id}', 'https://www.google.com/webhp?igu=1')">+</button>
+                            </div>
+                            <div class="tab-bar" id="${id}-tabs"></div>
+                            <div class="browser-content">
+                                <iframe id="${id}-frame" class="browser-iframe" src=""></iframe>
+                            </div>
+                        </div>
+                    `;
+                    // Initialize Tabs logic for this window after append
+                    setTimeout(() => {
+                        this.initBrowserWindow(id);
+                    }, 0);
+                }
+
+                winEl.innerHTML = `
+                    <div class="title-bar" onmousedown="wm.startDrag('${id}', event)">
+                        <span>${title}</span>
+                        <div class="title-bar-controls" onmousedown="event.stopPropagation()">
+                            <div class="control-box" onclick="wm.minimize('${id}')">_</div>
+                            <div class="control-box" onclick="wm.toggleMaximize('${id}')">□</div>
+                            <div class="control-box" onclick="wm.close('${id}')" style="margin-left: 2px;">X</div>
+                        </div>
+                    </div>
+                    ${contentHTML}
+                `;
+
+                // Add to DOM
+                this.windowArea.appendChild(winEl);
+
+                // If Program Manager, populate icons
+                if (type === 'program-manager') {
+                    this.populateIcons(id);
+                }
+
+                // If DOS, focus input
+                if (type === 'dos-prompt') {
+                    setTimeout(() => document.getElementById(id + '-input').focus(), 100);
+                }
+
+                // Add Taskbar Entry
+                this.addTaskbarEntry(id, title);
+                this.focus(id);
+
+                // Click to focus
+                winEl.addEventListener('mousedown', () => this.focus(id));
+            }
+
+            populateIcons(winId) {
+                const grid = document.getElementById(winId + '-grid');
+                samples.forEach(sample => {
+                    const icon = document.createElement('div');
+                    icon.className = 'desktop-icon';
+
+                    // Use sample.icon or fallback
+                    const iconUrl = sample.icon || 'https://win98icons.alexmeub.com/icons/png/computer_explorer-4.png';
+                    icon.innerHTML = `<div class="icon-img app-icon" style="background-image: url('${iconUrl}');"></div><div class="icon-label" style="background:white;">${sample.name}</div>`;
+                    icon.onclick = () => confirmLaunch(sample.name, sample.path);
+                    grid.appendChild(icon);
+                });
+            }
+
+            syncTerm(id) {
+                const input = document.getElementById(id + '-input');
+                const view = document.getElementById(id + '-cmd-view');
+                if (!input || !view) return;
+
+                const val = input.value;
+                const pos = input.selectionStart;
+
+                let charAtCursor = val.charAt(pos) || '&nbsp;';
+                if (charAtCursor === ' ') charAtCursor = '&nbsp;';
+
+                const before = val.substring(0, pos).replace(/ /g, '&nbsp;');
+                const after = val.substring(pos + 1).replace(/ /g, '&nbsp;');
+
+                view.innerHTML = `${before}<span class="cursor-block">${charAtCursor}</span>${after}`;
+            }
+
+            handleTermInput(id, e) {
+                const input = e.target;
+
+                // Tab Completion
+                if (e.key === 'Tab') {
+                    e.preventDefault();
+                    let val = input.value.toLowerCase();
+
+                    if (val.startsWith('open ')) {
+                        // Argument completion
+                        const prefix = val.substring(5);
+                        const siteMatch = samples.find(s => s.name.toLowerCase().startsWith(prefix));
+                        if (siteMatch) {
+                            input.value = 'open ' + siteMatch.name;
+                            this.syncTerm(id);
+                        }
+                    } else {
+                        // Command completion
+                        val = val.trim();
+                        if (!val) return;
+                        const cmds = ['ls', 'open', 'help', 'cls', 'pwd'];
+                        const match = cmds.find(c => c.startsWith(val));
+                        if (match) {
+                            input.value = match + (match === 'open' ? ' ' : '');
+                            this.syncTerm(id);
+                        }
+                    }
+                    return;
+                }
+
+                // History Navigation
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (this.cmdHistory.length > 0) {
+                        if (this.historyIndex < this.cmdHistory.length - 1) {
+                            this.historyIndex++;
+                            input.value = this.cmdHistory[this.cmdHistory.length - 1 - this.historyIndex];
+                            this.syncTerm(id);
+                        }
+                    }
+                    return;
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (this.historyIndex > 0) {
+                        this.historyIndex--;
+                        input.value = this.cmdHistory[this.cmdHistory.length - 1 - this.historyIndex];
+                    } else if (this.historyIndex === 0) {
+                        this.historyIndex = -1;
+                        input.value = '';
+                    }
+                    this.syncTerm(id);
+                    return;
+                }
+
+                if (e.key === 'Enter') {
+                    const cmd = input.value.trim();
+                    const output = document.getElementById(id + '-term').querySelector('.term-output');
+
+                    // Echo command with prompt
+                    output.innerText += 'C:\\WINDOWS>' + input.value + '\n';
+
+                    // Add to History
+                    if (cmd) {
+                        this.cmdHistory.push(cmd);
+                        this.historyIndex = -1;
+                    }
+
+                    // Logic
+                    const lowerCmd = cmd.toLowerCase();
+                    if (lowerCmd === 'ls') {
+                        let list = '';
+                        samples.forEach(s => s ? list += `- ${s.name}\n` : null);
+                        output.innerText += list;
+                    } else if (lowerCmd.startsWith('open ')) {
+                        const target = lowerCmd.substring(5).trim();
+                        const sample = samples.find(s => s.name.toLowerCase() === target);
+                        if (sample) {
+                            output.innerText += `Launching ${sample.name}...\n`;
+                            window.open(sample.path, '_blank');
+                        } else {
+                            output.innerText += `Error: Site '${target}' not found.\n`;
+                        }
+                    } else if (lowerCmd === 'help') {
+                        output.innerText += `Available commands:\n  ls         List all sites\n  open [name]   Open a specific site\n  cls        Clear screen\n  pwd        Print working directory\n  help       Show this message\n`;
+                    } else if (lowerCmd === 'pwd') {
+                        output.innerText += `C:\\WINDOWS\n`;
+                    } else if (lowerCmd === 'cls') {
+                        output.innerText = '';
+                    } else if (cmd !== '') {
+                        output.innerText += `Bad command or file name\n`;
+                    }
+
+                    // Reset
+                    input.value = '';
+                    this.syncTerm(id);
+
+                    // Scroll to bottom
+                    const term = document.getElementById(id + '-term');
+                    term.scrollTop = term.scrollHeight;
+                }
+            }
+
+            close(id) {
+                const win = document.getElementById(id);
+                if (win) win.remove();
+
+                const task = document.getElementById('task-' + id);
+                if (task) task.remove();
+            }
+
+            minimize(id) {
+                const win = document.getElementById(id);
+                win.style.display = 'none';
+                const task = document.getElementById('task-' + id);
+                if (task) task.classList.remove('active');
+            }
+
+            restore(id) {
+                const win = document.getElementById(id);
+                if (win.style.display === 'none') {
+                    win.style.display = 'flex';
+                    this.focus(id);
+                } else if (win.classList.contains('active')) {
+                    this.minimize(id); // Toggle behavior if already active
+                } else {
+                    this.focus(id);
+                }
+            }
+
+            toggleMaximize(id) {
+                const win = document.getElementById(id);
+                win.classList.toggle('maximized');
+                this.focus(id);
+            }
+
+            focus(id) {
+                // Demote others
+                document.querySelectorAll('.window').forEach(w => w.classList.remove('active'));
+                document.querySelectorAll('.task-entry').forEach(t => t.classList.remove('active'));
+
+                const win = document.getElementById(id);
+                if (win) {
+                    win.style.display = 'flex';
+                    win.style.zIndex = ++this.zIndexCounter;
+                    win.classList.add('active');
+                }
+
+                const task = document.getElementById('task-' + id);
+                if (task) task.classList.add('active');
+            }
+
+            addTaskbarEntry(id, title) {
+                const entry = document.createElement('div');
+                entry.id = 'task-' + id;
+                entry.className = 'task-entry';
+                entry.innerHTML = `<div class="task-icon main-icon"></div><div class="task-title">${title}</div>`;
+                entry.onclick = () => this.restore(id);
+                this.taskList.appendChild(entry);
+            }
+
+            startDrag(id, e) {
+                if (e.target.closest('.control-box')) return;
+
+                const win = document.getElementById(id);
+                if (win.classList.contains('maximized')) return;
+
+                this.focus(id);
+
+                let startX = e.clientX;
+                let startY = e.clientY;
+                let startLeft = win.offsetLeft;
+                let startTop = win.offsetTop;
+
+                const moveHandler = (ev) => {
+                    win.style.left = (startLeft + ev.clientX - startX) + 'px';
+                    win.style.top = (startTop + ev.clientY - startY) + 'px';
+                };
+
+                const upHandler = () => {
+                    document.removeEventListener('mousemove', moveHandler);
+                    document.removeEventListener('mouseup', upHandler);
+                };
+
+                document.addEventListener('mousemove', moveHandler);
+                document.addEventListener('mouseup', upHandler);
+            }
+
+            closeAllWindows() {
+                // copy array to avoid modification issues while iterating
+                const wins = [...this.windowArea.querySelectorAll('.window')];
+                wins.forEach(w => this.close(w.id));
+            }
+
+            toggleBrowserSetting(enabled) {
+                this.useInternalBrowser = enabled;
+            }
+        }
+
+        // --- Boot Loader & Cursor Logic ---
+        class BootLoader {
+            constructor() {
+                this.screen = document.getElementById('boot-screen');
+                this.items = document.querySelectorAll('.grub-item');
+                this.selectedIndex = 0;
+                this.timerEl = document.getElementById('grub-timer');
+                this.timeLeft = 10;
+                this.timerInterval = null;
+
+                // Start Timer
+                this.startTimer();
+
+                // Initialize input listeners
+                this.boundHandleInput = this.handleInput.bind(this);
+                document.addEventListener('keydown', this.boundHandleInput);
+            }
+
+            startTimer() {
+                this.timerInterval = setInterval(() => {
+                    this.timeLeft--;
+                    if (this.timerEl) this.timerEl.innerText = `The selected entry will be started automatically in ${this.timeLeft}s...`;
+
+                    if (this.timeLeft <= 0) {
+                        this.boot();
+                    }
+                }, 1000);
+            }
+
+            handleInput(e) {
+                if (this.screen.style.display === 'none') return;
+
+                // Stop timer
+                if (this.timerInterval) {
+                    clearInterval(this.timerInterval);
+                    this.timerInterval = null;
+                    if (this.timerEl) this.timerEl.innerText = "";
+                }
+
+                if (e.key === 'ArrowUp') {
+                    this.selectedIndex = 0;
+                    this.updateUI();
+                } else if (e.key === 'ArrowDown') {
+                    this.selectedIndex = 1;
+                    this.updateUI();
+                } else if (e.key === 'Enter') {
+                    this.boot();
+                }
+            }
+
+            updateUI() {
+                this.items.forEach((item, index) => {
+                    if (index === this.selectedIndex) item.classList.add('selected');
+                    else item.classList.remove('selected');
+                });
+            }
+
+            boot() {
+                if (this.timerInterval) clearInterval(this.timerInterval);
+                const mode = this.items[this.selectedIndex].getAttribute('data-mode');
+
+                // Cleanup boot screen
+                this.screen.style.display = 'none';
+                document.body.classList.remove('booting');
+                document.removeEventListener('keydown', this.boundHandleInput);
+
+                // Initialize Desktop Interaction
+                window.wm = new WindowManager();
+
+                if (mode === 'fullscreen') {
+                    document.documentElement.requestFullscreen().catch(e => console.log("Fullscreen blocked:", e));
+                }
+            }
+
+            initCursor() {
+                const cursor = document.getElementById('custom-cursor');
+                let cursorX = window.innerWidth / 2;
+                let cursorY = window.innerHeight / 2;
+                let isLocked = false;
+
+                // Move handler for LOCKED state
+                const updateCursor = (e) => {
+                    if (isLocked) {
+                        cursorX += e.movementX;
+                        cursorY += e.movementY;
+
+                        // Clamp
+                        cursorX = Math.max(0, Math.min(window.innerWidth, cursorX));
+                        cursorY = Math.max(0, Math.min(window.innerHeight, cursorY));
+
+                        cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+                    }
+                };
+
+                const requestLock = () => { document.body.requestPointerLock(); }
+
+                // Listen for lock changes
+                document.addEventListener('pointerlockchange', () => {
+                    if (document.pointerLockElement === document.body) {
+                        isLocked = true;
+                        cursor.style.display = 'block';
+                        document.body.style.cursor = 'none'; // Ensure system cursor is gone
+                        // Reset center?
+                        cursorX = window.innerWidth / 2;
+                        cursorY = window.innerHeight / 2;
+                        cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+                        document.addEventListener('mousemove', updateCursor);
+                    } else {
+                        isLocked = false;
+                        cursor.style.display = 'none';
+                        document.body.style.cursor = 'auto'; // Show system cursor when ungrabbed
+                        document.removeEventListener('mousemove', updateCursor);
+                    }
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'F2') {
+                        document.exitPointerLock();
+                    }
+                });
+
+                // Default grab
+                requestLock();
+
+                // Interaction Proxy for Clicks (since standard click works but position is fixed)
+                // Actually startDrag uses visual pos. We just need to fix startDrag.
+                // But simple clicking? 
+                // If isLocked, the browser cursor is hidden and centered. 
+                // Using standard .click() on elementFromPoint is needed for basic interaction if the browser's hit test uses the locked cursor pos (which is usually center).
+
+                // Provide global helper
+                window.getCursorPos = (e) => {
+                    if (isLocked) return { x: cursorX, y: cursorY };
+                    return { x: e.clientX, y: e.clientY };
+                };
+            }
+        }
+
+        const bootLoader = new BootLoader();
+
+        // Global Shortcut: Shift + Alt + W to Close All
+        document.addEventListener('keydown', (e) => {
+            if (window.wm && e.shiftKey && e.altKey && (e.key === 'w' || e.key === 'W')) {
+                window.wm.closeAllWindows();
+            }
+        });
+
+        // --- Common Modal Logic ---
+        const modal = document.getElementById('confirm-modal');
+        const modalText = document.getElementById('modal-text');
+        const btnYes = document.getElementById('btn-yes');
+        const btnNo = document.getElementById('btn-no');
+        let pendingUrl = null;
+
+        function confirmLaunch(name, path) {
+            if (window.wm && window.wm.useInternalBrowser) {
+                window.wm.openBrowser(path);
+                return;
+            }
+
+            pendingUrl = path;
+            modalText.innerText = `Open ${name}?`;
+            modal.style.zIndex = 99999;
+            modal.style.display = 'flex';
+        }
+
+        btnYes.onclick = () => {
+            if (pendingUrl) window.open(pendingUrl, '_blank');
+            modal.style.display = 'none';
+        };
+        btnNo.onclick = () => { modal.style.display = 'none'; };
+
+        // --- Clock ---
+        function updateClock() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('clock').innerText = `${timeStr} - ${dateStr}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Start with one window open?
+        // wm.createWindow('program-manager');
+        // User asked for desktop icons first. So we can just leave it clean.
+
+    </script>
+</body>
+
+</html>
