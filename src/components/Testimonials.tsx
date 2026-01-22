@@ -116,7 +116,7 @@ export default function Testimonials() {
                             </div>
                             <p className="text-gray-700 italic mb-6 leading-relaxed">"{review.content}"</p>
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brics-blue to-brics-green flex items-center justify-center text-white font-bold text-lg">
+                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#33C5F3] to-[#2A5CAA] flex items-center justify-center text-white font-bold text-lg">
                                     {review.name[0]}
                                 </div>
                                 <div>
