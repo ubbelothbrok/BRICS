@@ -3,11 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 
 const MENU_ITEMS = [
     { label: 'Home', href: '/' },
-    { label: 'Zones', href: '/#zones' },
-    { label: 'Vision 2026', href: '/#vision' },
-    { label: 'Schedule', href: '/#schedule' },
-    { label: 'Events', href: '/#events' },
-    { label: 'Team', href: '/#team' },
+    { label: 'Zones', href: '/zones' },
+    { label: 'Vision 2026', href: '/vision' },
+    { label: 'Schedule', href: '/schedule' },
+    { label: 'Events', href: '/events' },
+    { label: 'Team', href: '/team' },
 ];
 
 export default function Navbar() {
@@ -42,29 +42,16 @@ export default function Navbar() {
                     {/* Desktop Navigation */}
                     <div className="hidden lg:flex items-center space-x-6">
                         {MENU_ITEMS.map((item) => (
-                            <a
+                            <Link
                                 key={item.label}
-                                href={item.href}
+                                to={item.href}
                                 className={`text-[14px] font-medium transition-colors hover:text-brics-blue ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`}
                             >
                                 {item.label}
-                            </a>
+                            </Link>
                         ))}
 
-                        <div className={`flex items-center gap-4 border-l pl-6 ml-2 transition-colors ${effectiveScrolled ? 'border-gray-200' : 'border-white/20'}`}>
-                            <Link
-                                to="/login"
-                                className={`text-[14px] font-semibold transition-colors hover:text-brics-blue ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`}
-                            >
-                                Login
-                            </Link>
-                            <Link
-                                to="/register"
-                                className="bg-brics-green text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all shadow-sm hover:shadow-md cursor-pointer"
-                            >
-                                Register Now
-                            </Link>
-                        </div>
+
                     </div>
 
                     {/* Mobile Menu Button (Hamburger) - Placeholder */}

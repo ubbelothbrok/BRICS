@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "1",
+    "title": "BRICS Summit 2026",
+    "date": "May 15, 2026",
+    "location": "New Delhi, India",
+    "time": "10:00 AM - 4:00 PM",
+    "description": "The annual summit bringing together leaders from Brazil, Russia, India, China, and South Africa to discuss economic cooperation and development.",
+    "tag": "Political",
+    "color": "border-brics-blue"
+  },
+  {
+    "_id": "2",
+    "title": "Youth Innovation Forum",
+    "date": "June 10, 2026",
+    "location": "Moscow, Russia",
+    "time": "09:00 AM - 6:00 PM",
+    "description": "A gathering of young innovators and entrepreneurs to showcase their ideas and startups.",
+    "tag": "Youth",
+    "color": "border-green-500"
+  },
+  {
+    "_id": "3",
+    "title": "Cultural Exchange Festival",
+    "date": "July 20, 2026",
+    "location": "Rio de Janeiro, Brazil",
+    "time": "11:00 AM - 8:00 PM",
+    "description": "Celebrating the diverse cultures of the BRICS nations through art, music, and dance.",
+    "tag": "Culture",
+    "color": "border-yellow-500"
+  },
+    {
+    "_id": "4",
+    "title": "Tech & Trade Expo",
+    "date": "August 05, 2026",
+    "location": "Shanghai, China",
+    "time": "09:00 AM - 5:00 PM",
+    "description": "Exhibiting the latest technological advancements and fostering trade relationships among member countries.",
+    "tag": "Business",
+    "color": "border-red-500"
+  },
+  {
+    "_id": "5",
+    "title": "Academic Conference on Sustainable Development",
+    "date": "September 12, 2026",
+    "location": "Cape Town, South Africa",
+    "time": "08:30 AM - 4:30 PM",
+    "description": "Scholars and researchers discuss strategies for sustainable growth and environmental protection.",
+    "tag": "Academic",
+    "color": "border-purple-500"
+  }
+]

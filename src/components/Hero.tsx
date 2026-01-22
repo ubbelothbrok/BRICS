@@ -2,19 +2,19 @@ import { useState, useEffect } from 'react';
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2670&auto=format&fit=crop",
-    title: "Pragyaan 2026: An Open Day",
-    subtitle: "Join us on 14th-15th Feb, 2026 at IIT Jammu for a celebration of Science & Technology."
+    image: "/hero_corousel/1.jpg",
+    title: "Unveiling the Horizons of Tomorrow",
+    subtitle: "Pragyaan 2026 stands as a beacon of technological advancement, inviting participants to explore immersive realities and the future of digital interaction."
   },
   {
-    image: "https://images.unsplash.com/photo-1564951434112-64d74cc2a2d7?q=80&w=2670&auto=format&fit=crop",
-    title: "Igniting Young Minds",
-    subtitle: "Targeting 5000+ students from 85+ schools across J&K to foster innovation."
+    image: "/hero_corousel/2.jpg",
+    title: "Cultivating Innovation and Skill Development",
+    subtitle: "Through comprehensive workshops and hands-on modules, we empower the next generation of thinkers to experiment, create, and master the art of engineering."
   },
   {
-    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2670&auto=format&fit=crop",
-    title: "Innovation Meets Tradition",
-    subtitle: "A convergence of STEM, Arts, and Culture to inspire the next generation."
+    image: "/hero_corousel/3.jpg",
+    title: "A Convergence of Minds and Ideas",
+    subtitle: "Bringing together students, educators, and industry experts in a dynamic ecosystem that encourages curiosity, dialogue, and the shared pursuit of knowledge."
   }
 ];
 
@@ -46,6 +46,7 @@ export default function Hero() {
               src={slide.image}
               alt={slide.title}
               className="w-full h-full object-cover object-center brightness-50"
+              style={{ transform: index === 2 ? 'scaleX(-1)' : 'none' }}
             />
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>

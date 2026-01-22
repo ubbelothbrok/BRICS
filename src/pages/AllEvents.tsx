@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { fetchApi } from '../utils/api';
+import eventsData from '../data/db.json';
 import { CalendarIcon, MapPinIcon, ClockIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 
@@ -19,20 +19,10 @@ interface EventItem {
 export default function AllEvents() {
     const [events, setEvents] = useState<EventItem[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const loadEvents = async () => {
-            try {
-                const data = await fetchApi('/events');
-                setEvents(data);
-            } catch (err: any) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-        loadEvents();
+        setEvents(eventsData);
+        setLoading(false);
     }, []);
 
     return (
@@ -54,10 +44,6 @@ export default function AllEvents() {
                         <div className="py-24 text-center">
                             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brics-blue mx-auto"></div>
                             <p className="mt-4 text-gray-600">Loading events...</p>
-                        </div>
-                    ) : error ? (
-                        <div className="py-24 text-center text-red-600">
-                            <p>Error loading events: {error}</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

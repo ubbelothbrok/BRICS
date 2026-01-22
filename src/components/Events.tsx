@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { CalendarIcon, MapPinIcon, ClockIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
-import { fetchApi } from '../utils/api';
+import eventsData from '../data/db.json';
 import { Link } from 'react-router-dom';
 
 interface EventItem {
@@ -19,17 +19,8 @@ export default function Events() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const loadEvents = async () => {
-            try {
-                const data = await fetchApi('/events');
-                setEvents(data.slice(0, 3)); // Only show top 3 on homepage
-            } catch (err) {
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        loadEvents();
+        setEvents(eventsData.slice(0, 3)); // Only show top 3 on homepage
+        setLoading(false);
     }, []);
 
     if (loading) return null;

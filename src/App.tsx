@@ -1,19 +1,25 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import Registration from './pages/Registration';
-import Login from './pages/Login';
+
 import AllEvents from './pages/AllEvents';
-import AdminEvents from './pages/AdminEvents';
+
+
+import Zones from './pages/Zones';
+import Vision from './pages/Vision';
+import Schedule from './pages/Schedule';
+import Team from './pages/Team';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
+
         <Route path="/events" element={<AllEvents />} />
-        <Route path="/admin/events" element={<AdminEvents />} />
+        <Route path="/zones" element={<Zones />} />
+        <Route path="/vision" element={<Vision />} />
+        <Route path="/schedule" element={<Schedule />} />
+        <Route path="/team" element={<Team />} />
       </Routes>
     </Router>
   );
