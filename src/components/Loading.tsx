@@ -2,25 +2,29 @@ import React from 'react';
 
 const Loading: React.FC = () => {
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-            <div className="relative h-24 w-24">
-                {/* Green Ring */}
-                <div className="absolute inset-0 animate-spin rounded-full border-4 border-t-brics-green border-r-transparent border-b-transparent border-l-transparent" style={{ animationDuration: '1s' }}></div>
-
-                {/* Blue Ring */}
-                <div className="absolute inset-2 animate-spin rounded-full border-4 border-t-transparent border-r-brics-blue border-b-transparent border-l-transparent" style={{ animationDuration: '1.5s', animationDirection: 'reverse' }}></div>
-
-                {/* Yellow Ring */}
-                <div className="absolute inset-4 animate-spin rounded-full border-4 border-t-transparent border-r-transparent border-b-brics-yellow border-l-transparent" style={{ animationDuration: '2s' }}></div>
-
-                {/* Red Ring */}
-                <div className="absolute inset-6 animate-spin rounded-full border-4 border-t-transparent border-r-transparent border-b-transparent border-l-brics-red" style={{ animationDuration: '2.5s', animationDirection: 'reverse' }}></div>
-
-                {/* Center Logo/Dot */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-2 w-2 rounded-full bg-brics-dark animate-pulse"></div>
-                </div>
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+                <img 
+                    src="/hero_corousel/1.jpg" 
+                    alt="Background" 
+                    className="w-full h-full object-cover opacity-40 blur-sm"
+                />
+                <div className="absolute inset-0 bg-black/60"></div>
             </div>
+
+            <div className="relative z-10 flex items-center justify-center">
+                {/* Spinning Gradient Ring */}
+                <div className="absolute w-32 h-32 rounded-full border-4 border-t-[#33C5F3] border-r-[#2A5CAA] border-b-[#33C5F3]/30 border-l-[#2A5CAA]/30 animate-spin"></div>
+                
+                {/* Logo in Center */}
+                <img 
+                    src="/logo.png" 
+                    alt="Loading..." 
+                    className="w-20 h-auto object-contain animate-pulse"
+                />
+            </div>
+            <p className="mt-8 text-white font-semibold tracking-widest animate-pulse relative z-10">LOADING</p>
         </div>
     );
 };

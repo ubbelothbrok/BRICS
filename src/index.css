@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -9,12 +9,13 @@
   --color-brics-orange: #ff7f00;
   --color-brics-dark: #404040;
   --color-brics-gray: #f5f5f5;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Poppins', system-ui, sans-serif;
+  --font-heading: 'Outfit', sans-serif;
   --font-cursive: 'Caveat', cursive;
 }
 
 :root {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: var(--color-brics-dark);
@@ -25,6 +26,10 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }
 
 @keyframes scroll {

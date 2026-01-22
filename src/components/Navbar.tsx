@@ -34,7 +34,7 @@ export default function Navbar() {
                     {/* Logo Section */}
                     <Link to="/" className="flex items-center gap-3">
                         <img src="/logo.png" alt="Pragyaan Logo" className="h-10 w-auto object-contain" />
-                        <span className={`text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brics-blue to-brics-green ${!effectiveScrolled && 'text-white'}`}>
+                        <span className={`text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#33C5F3] to-[#2A5CAA] ${!effectiveScrolled && 'text-white'}`}>
                             Pragyaan 2026
                         </span>
                     </Link>
