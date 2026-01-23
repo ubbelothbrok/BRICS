@@ -1,6 +1,6 @@
 export default function DirectorNote() {
     return (
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-[var(--color-bg)] transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
                 <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
 
@@ -17,17 +17,17 @@ export default function DirectorNote() {
                     {/* Content Section */}
                     <div className="w-full md:w-1/2">
                         <h4 className="text-brics-blue font-bold tracking-widest uppercase mb-2">Welcome</h4>
-                        <h2 className="text-4xl font-bold text-gray-900 mb-6">From the Director's Desk</h2>
+                        <h2 className="text-4xl font-bold text-[var(--color-text)] mb-6 transition-colors duration-300">From the Director's Desk</h2>
 
-                        <div className="space-y-6 text-gray-600 leading-relaxed text-lg">
+                        <div className="space-y-6 text-[var(--color-text)] opacity-80 leading-relaxed text-lg transition-colors duration-300">
                             <p>
-                                "It gives me immense pleasure to welcome you all to <span className="text-brics-dark font-bold">Pragyaan 2026</span>. At IIT Jammu, we believe that innovation flourishes when young minds are given the freedom to explore, question, and create.
+                                "It gives me immense pleasure to welcome you all to <span className="text-brics-blue font-bold">Pragyaan 2026</span>. At IIT Jammu, we believe that innovation flourishes when young minds are given the freedom to explore, question, and create.
                                 This Open Day is not just an event; it is a bridge connecting the aspirations of school students with the limitless possibilities of science and technology. We are opening our doors to foster a culture of curiosity and collaboration across the region."
                             </p>
                         </div>
 
-                        <div className="mt-8 pt-8 border-t border-gray-100">
-                            <p className="text-xl font-bold text-gray-900">Prof. Manoj Singh Gaur</p>
+                        <div className="mt-8 pt-8 border-t border-[var(--color-text)]/10 transition-colors duration-300">
+                            <p className="text-xl font-bold text-[var(--color-text)] transition-colors duration-300">Prof. Manoj Singh Gaur</p>
                             <p className="text-brics-blue font-medium">Director, IIT Jammu</p>
                         </div>
                     </div>

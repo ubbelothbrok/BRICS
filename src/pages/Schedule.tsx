@@ -22,24 +22,24 @@ export default function Schedule() {
     ];
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[var(--color-bg)] transition-colors duration-300">
             <Navbar />
             <main className="pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-12">Event Schedule</h1>
+                <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-text)] mb-12 transition-colors duration-300">Event Schedule</h1>
 
                 <div className="space-y-12">
                     {days.map((day, idx) => (
-                        <div key={idx} className="border-l-4 border-brics-blue pl-8">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-6">{day.date}</h2>
+                        <div key={idx} className="border-l-4 border-brics-blue pl-8 transition-colors duration-300">
+                            <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6 transition-colors duration-300">{day.date}</h2>
                             <div className="space-y-6">
                                 {day.events.map((event, eIdx) => (
-                                    <div key={eIdx} className="bg-gray-50 p-6 rounded-xl hover:shadow-md transition-shadow">
+                                    <div key={eIdx} className="bg-[var(--color-card-bg)] p-6 rounded-xl hover:shadow-md transition-all border border-[var(--color-text)]/10 duration-300">
                                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                             <div>
-                                                <h3 className="text-xl font-bold text-gray-900">{event.title}</h3>
-                                                <p className="text-gray-600 mt-1">{event.location}</p>
+                                                <h3 className="text-xl font-bold text-[var(--color-text)] transition-colors duration-300">{event.title}</h3>
+                                                <p className="text-[var(--color-text)] opacity-70 mt-1 transition-colors duration-300">{event.location}</p>
                                             </div>
-                                            <div className="text-brics-blue font-semibold whitespace-nowrap bg-blue-50 px-4 py-2 rounded-lg">
+                                            <div className="text-brics-blue font-semibold whitespace-nowrap bg-brics-blue/10 px-4 py-2 rounded-lg transition-colors duration-300">
                                                 {event.time}
                                             </div>
                                         </div>

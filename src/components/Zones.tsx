@@ -41,11 +41,11 @@ const zones = [
 
 export default function Zones() {
     return (
-        <section id="zones" className="py-24 bg-gray-50">
+        <section id="zones" className="py-24 bg-[var(--color-bg)] transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold mb-4 text-brics-dark">Event Zones</h2>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                    <h2 className="text-4xl font-bold mb-4 text-[var(--color-text)] transition-colors duration-300">Event Zones</h2>
+                    <p className="text-xl text-[var(--color-text)] opacity-80 max-w-2xl mx-auto transition-colors duration-300">
                         Discover six distinct zones designed to spark curiosity and creativity across Science, Technology, and Arts.
                     </p>
                 </div>
@@ -54,17 +54,17 @@ export default function Zones() {
                     {zones.map((zone) => (
                         <div
                             key={zone.name}
-                            className="group bg-white rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:-translate-y-1"
+                            className="group bg-[var(--color-card-bg)] rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-[var(--color-text)]/10 hover:-translate-y-1"
                         >
-                            <div className={`w-14 h-14 rounded-xl ${zone.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                            <div className={`w-14 h-14 rounded-xl ${zone.color.replace('bg-', 'dark:bg-opacity-20 bg-')} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                                 <zone.icon className="w-8 h-8" />
                             </div>
 
-                            <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-brics-blue transition-colors">
+                            <h3 className="text-2xl font-bold mb-3 text-[var(--color-text)] group-hover:text-brics-blue transition-colors duration-300">
                                 {zone.name}
                             </h3>
 
-                            <p className="text-gray-600 leading-relaxed">
+                            <p className="text-[var(--color-text)] opacity-80 leading-relaxed transition-colors duration-300">
                                 {zone.description}
                             </p>
                         </div>

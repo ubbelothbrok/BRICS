@@ -53,8 +53,8 @@ export default function EventDetails() {
 
     if (!event) {
         return (
-            <div className="min-h-screen bg-white flex flex-col items-center justify-center">
-                <h2 className="text-3xl font-bold text-gray-800 mb-4">Event Not Found</h2>
+            <div className="min-h-screen bg-[var(--color-bg)] transition-colors duration-300 flex flex-col items-center justify-center">
+                <h2 className="text-3xl font-bold text-[var(--color-text)] mb-4 transition-colors duration-300">Event Not Found</h2>
                 <Link to="/events" className="text-brics-blue font-semibold flex items-center gap-2 hover:gap-3 transition-all">
                     <ArrowLeftIcon className="w-5 h-5" />
                     Back to Events
@@ -64,7 +64,7 @@ export default function EventDetails() {
     }
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[var(--color-bg)] transition-colors duration-300">
             <Navbar />
 
             {/* Hero Section */}
@@ -83,8 +83,8 @@ export default function EventDetails() {
                     </Link>
 
                     <span className={`inline-block px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider mb-4 ${event.category === 'Arts' ? 'bg-brics-green text-white' :
-                            event.category === 'Tech' ? 'bg-brics-blue text-white' :
-                                'bg-brics-yellow text-black'
+                        event.category === 'Tech' ? 'bg-brics-blue text-white' :
+                            'bg-brics-yellow text-black'
                         }`}>
                         {event.category}
                     </span>
@@ -115,23 +115,23 @@ export default function EventDetails() {
                 {/* Left Column: Description & Schedule */}
                 <div className="lg:col-span-2 space-y-12">
                     <section>
-                        <h2 className="text-3xl font-bold text-gray-900 mb-6">About the Event</h2>
-                        <div className="prose prose-lg text-gray-600 leading-relaxed whitespace-pre-line">
+                        <h2 className="text-3xl font-bold text-[var(--color-text)] mb-6 transition-colors duration-300">About the Event</h2>
+                        <div className="prose prose-lg text-[var(--color-text)] opacity-80 leading-relaxed whitespace-pre-line transition-colors duration-300">
                             {event.longDescription || event.description}
                         </div>
                     </section>
 
                     {event.schedule && (
                         <section>
-                            <h2 className="text-3xl font-bold text-gray-900 mb-6">Event Schedule</h2>
-                            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                            <h2 className="text-3xl font-bold text-[var(--color-text)] mb-6 transition-colors duration-300">Event Schedule</h2>
+                            <div className="bg-[var(--color-card-bg)] rounded-2xl p-8 border border-[var(--color-text)]/10 transition-colors duration-300">
                                 <div className="space-y-6">
                                     {event.schedule.map((slot, index) => (
-                                        <div key={index} className="flex gap-6 pb-6 border-b border-gray-200 last:border-0 last:pb-0">
+                                        <div key={index} className="flex gap-6 pb-6 border-b border-[var(--color-text)]/10 last:border-0 last:pb-0 transition-colors duration-300">
                                             <div className="w-24 flex-shrink-0 font-bold text-brics-blue">
                                                 {slot.time}
                                             </div>
-                                            <div className="text-gray-700 font-medium">
+                                            <div className="text-[var(--color-text)] font-medium opacity-90 transition-colors duration-300">
                                                 {slot.activity}
                                             </div>
                                         </div>
@@ -145,8 +145,8 @@ export default function EventDetails() {
                 {/* Right Column: Rules & Info */}
                 <div className="space-y-8">
                     {/* Key Info Card */}
-                    <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 sticky top-32">
-                        <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                    <div className="bg-[var(--color-card-bg)] rounded-2xl p-8 shadow-lg border border-[var(--color-text)]/10 sticky top-32 transition-colors duration-300">
+                        <h3 className="text-xl font-bold text-[var(--color-text)] mb-6 flex items-center gap-2 transition-colors duration-300">
                             <ExclamationTriangleIcon className="w-6 h-6 text-brics-orange" />
                             Rules & Guidelines
                         </h3>
@@ -154,7 +154,7 @@ export default function EventDetails() {
                         {event.rules && (
                             <ul className="space-y-4 mb-8">
                                 {event.rules.map((rule, index) => (
-                                    <li key={index} className="flex gap-3 text-gray-600 text-sm">
+                                    <li key={index} className="flex gap-3 text-[var(--color-text)] opacity-80 text-sm transition-colors duration-300">
                                         <span className="text-brics-blue font-bold">•</span>
                                         {rule}
                                     </li>
@@ -162,20 +162,20 @@ export default function EventDetails() {
                             </ul>
                         )}
 
-                        <div className="pt-6 border-t border-gray-100 space-y-4">
+                        <div className="pt-6 border-t border-[var(--color-text)]/10 space-y-4 transition-colors duration-300">
                             <div className="flex items-center gap-3">
-                                <UserGroupIcon className="w-5 h-5 text-gray-400" />
+                                <UserGroupIcon className="w-5 h-5 opacity-40" />
                                 <div>
-                                    <p className="text-xs text-gray-500 uppercase font-bold">Team Size</p>
-                                    <p className="font-medium text-gray-900">{event.teamSize || 'N/A'}</p>
+                                    <p className="text-xs text-[var(--color-text)] opacity-60 uppercase font-bold transition-colors duration-300">Team Size</p>
+                                    <p className="font-medium text-[var(--color-text)] transition-colors duration-300">{event.teamSize || 'N/A'}</p>
                                 </div>
                             </div>
 
                             <div className="flex items-center gap-3">
-                                <EnvelopeIcon className="w-5 h-5 text-gray-400" />
+                                <EnvelopeIcon className="w-5 h-5 opacity-40" />
                                 <div>
-                                    <p className="text-xs text-gray-500 uppercase font-bold">Contact</p>
-                                    <p className="font-medium text-gray-900">{event.contact || 'N/A'}</p>
+                                    <p className="text-xs text-[var(--color-text)] opacity-60 uppercase font-bold transition-colors duration-300">Contact</p>
+                                    <p className="font-medium text-[var(--color-text)] transition-colors duration-300">{event.contact || 'N/A'}</p>
                                 </div>
                             </div>
                         </div>

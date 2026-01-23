@@ -90,10 +90,10 @@ export default function Testimonials() {
     }, []);
 
     return (
-        <section className="py-24 bg-brics-gray overflow-hidden">
+        <section className="py-24 bg-[var(--color-bg)] transition-colors duration-300 overflow-hidden">
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-12 text-center">
-                <h2 className="text-4xl font-bold text-brics-dark">What People Say</h2>
-                <p className="text-gray-600 mt-4">Hear from the students, teachers, and parents who made Pragyaan 2025 iconic.</p>
+                <h2 className="text-4xl font-bold text-[var(--color-text)] transition-colors duration-300">What People Say</h2>
+                <p className="text-[var(--color-text)] opacity-80 mt-4 transition-colors duration-300">Hear from the students, teachers, and parents who made Pragyaan 2025 iconic.</p>
             </div>
 
             <div className="relative w-full">
@@ -107,20 +107,20 @@ export default function Testimonials() {
                     {[...reviews, ...reviews].map((review, index) => (
                         <div
                             key={index}
-                            className="w-[350px] md:w-[400px] flex-shrink-0 bg-white p-8 rounded-2xl shadow-sm border border-gray-100 whitespace-normal hover:shadow-md transition-shadow"
+                            className="w-[350px] md:w-[400px] flex-shrink-0 bg-[var(--color-card-bg)] p-8 rounded-2xl shadow-sm border border-[var(--color-text)]/10 whitespace-normal hover:shadow-md transition-shadow duration-300"
                         >
                             <div className="flex gap-1 mb-4">
                                 {[...Array(review.rating)].map((_, i) => (
                                     <StarIcon key={i} className="w-5 h-5 text-brics-yellow" />
                                 ))}
                             </div>
-                            <p className="text-gray-700 italic mb-6 leading-relaxed">"{review.content}"</p>
+                            <p className="italic mb-6 leading-relaxed text-[var(--color-text)] opacity-90 transition-colors duration-300">"{review.content}"</p>
                             <div className="flex items-center gap-4">
                                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#33C5F3] to-[#2A5CAA] flex items-center justify-center text-white font-bold text-lg">
                                     {review.name[0]}
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-gray-900">{review.name}</h4>
+                                    <h4 className="font-bold text-[var(--color-text)] transition-colors duration-300">{review.name}</h4>
                                     <p className="text-sm text-brics-blue font-medium">{review.role}</p>
                                 </div>
                             </div>

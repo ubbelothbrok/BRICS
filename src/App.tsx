@@ -10,6 +10,8 @@ import EventDetails from './pages/EventDetails';
 import Loading from './components/Loading';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
+import ScrollToTop from './components/ScrollToTop';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -26,20 +28,23 @@ function App() {
   }
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
+    <ThemeProvider>
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-        <Route path="/events" element={<AllEvents />} />
-        <Route path="/events/:id" element={<EventDetails />} />
-        <Route path="/zones" element={<Zones />} />
-        <Route path="/vision" element={<Vision />} />
-        <Route path="/schedule" element={<Schedule />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Registration />} />
-      </Routes>
-    </Router>
+          <Route path="/events" element={<AllEvents />} />
+          <Route path="/events/:id" element={<EventDetails />} />
+          <Route path="/zones" element={<Zones />} />
+          <Route path="/vision" element={<Vision />} />
+          <Route path="/schedule" element={<Schedule />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Registration />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 

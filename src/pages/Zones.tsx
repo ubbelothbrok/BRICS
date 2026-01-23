@@ -3,10 +3,10 @@ import Footer from '../components/Footer';
 
 export default function Zones() {
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[var(--color-bg)] transition-colors duration-300">
             <Navbar />
             <main className="pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">Engagement Zones</h1>
+                <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-text)] mb-8 transition-colors duration-300">Engagement Zones</h1>
                 <p className="text-xl text-gray-600 mb-12 max-w-3xl">
                     Explore our dedicated engagement zones designed to spark creativity,
                     foster technical skills, and showcase the future of STEM and Arts.

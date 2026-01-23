@@ -1,3 +1,12 @@
+import { Link } from 'react-router-dom';
+
+const FOOTER_LINKS = [
+  { label: 'Home', href: '/' },
+  { label: 'Zones', href: '/zones' },
+  { label: 'Vision 2026', href: '/vision' },
+  { label: 'Team', href: '/team' },
+];
+
 export default function Footer() {
   return (
     <footer className="bg-[var(--color-brics-dark)] text-white pt-16 pb-8">
@@ -6,10 +15,12 @@ export default function Footer() {
 
           {/* Column 1: Info */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <span className="text-[var(--color-brics-blue)]">Pragyaan</span>
-              <span className="text-white">2026</span>
-            </h3>
+            <Link to="/" className="inline-block">
+              <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <span className="text-[var(--color-brics-blue)]">Pragyaan</span>
+                <span className="text-white">2026</span>
+              </h3>
+            </Link>
             <p className="text-gray-400 leading-relaxed max-w-sm mb-6">
               Fostering innovation and bridging the gap between school education and higher technical institutes through STEM and Arts.
             </p>
@@ -27,9 +38,11 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-lg mb-6">Quick Links</h4>
             <ul className="space-y-4">
-              {['Home', 'Zones', 'Vision 2026', 'Team'].map(link => (
-                <li key={link}>
-                  <a href="#" className="text-gray-400 hover:text-[var(--color-brics-blue)] transition-colors">{link}</a>
+              {FOOTER_LINKS.map(link => (
+                <li key={link.label}>
+                  <Link to={link.href} className="text-gray-400 hover:text-[var(--color-brics-blue)] transition-colors">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
