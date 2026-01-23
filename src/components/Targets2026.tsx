@@ -45,9 +45,6 @@ export default function Targets2026() {
                         <p className="text-gray-600 mb-8">
                             With a target of over 5000 students and 85+ schools, Pragyaan 2026 aims to be the largest open-day event in the region, bridging the gap between advanced technology and school education.
                         </p>
-                        <button className="px-8 py-3 bg-brics-blue text-white rounded-full font-medium hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl">
-                            Register Your School
-                        </button>
                     </div>
 
                     {/* Stats Grid */}

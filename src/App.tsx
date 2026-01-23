@@ -1,17 +1,30 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-
 import AllEvents from './pages/AllEvents';
-
-
 import Zones from './pages/Zones';
 import Vision from './pages/Vision';
 import Schedule from './pages/Schedule';
 import Team from './pages/Team';
-
 import EventDetails from './pages/EventDetails';
+import Loading from './components/Loading';
+import Login from './pages/Login';
+import Registration from './pages/Registration';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <Router>
       <Routes>
@@ -23,6 +36,8 @@ function App() {
         <Route path="/vision" element={<Vision />} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registration />} />
       </Routes>
     </Router>
   );

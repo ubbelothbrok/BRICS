@@ -2,29 +2,50 @@ import React from 'react';
 
 const Loading: React.FC = () => {
     return (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black">
-            {/* Background Image */}
+        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black overflow-hidden">
+            {/* Background Image with heavy blur and dark overlay */}
             <div className="absolute inset-0 z-0">
-                <img 
-                    src="/hero_corousel/1.jpg" 
-                    alt="Background" 
-                    className="w-full h-full object-cover opacity-40 blur-sm"
+                <img
+                    src="/hero_corousel/1.jpg"
+                    alt="Background"
+                    className="w-full h-full object-cover opacity-50 blur-xl scale-110"
                 />
-                <div className="absolute inset-0 bg-black/60"></div>
+                <div className="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
             </div>
 
-            <div className="relative z-10 flex items-center justify-center">
-                {/* Spinning Gradient Ring */}
-                <div className="absolute w-32 h-32 rounded-full border-4 border-t-[#33C5F3] border-r-[#2A5CAA] border-b-[#33C5F3]/30 border-l-[#2A5CAA]/30 animate-spin"></div>
-                
-                {/* Logo in Center */}
-                <img 
-                    src="/logo.png" 
-                    alt="Loading..." 
-                    className="w-20 h-auto object-contain animate-pulse"
-                />
+            <div className="relative z-10 flex flex-col items-center">
+                {/* Circular Container with Glow */}
+                <div className="relative w-40 h-40 flex items-center justify-center">
+                    {/* Glowing Ring */}
+                    <div className="absolute inset-0 rounded-full border border-brics-blue/30"></div>
+                    <div
+                        className="absolute inset-0 rounded-full border-2 border-t-brics-blue border-r-transparent border-b-transparent border-l-transparent animate-spin"
+                        style={{ filter: 'drop-shadow(0 0 8px #002776)' }}
+                    ></div>
+
+                    {/* Subtle Outer Glow */}
+                    <div className="absolute -inset-4 rounded-full bg-brics-blue/5 blur-2xl"></div>
+
+                    {/* Logo in Center */}
+                    <img
+                        src="/logo.png"
+                        alt="Pragyaan 2026"
+                        className="w-20 h-auto object-contain brightness-110"
+                    />
+                </div>
+
+                {/* Loading Text */}
+                <div className="mt-10 flex flex-col items-center">
+                    <p className="text-white text-sm font-bold tracking-[0.4em] uppercase opacity-90">
+                        LOADING
+                    </p>
+                    <div className="mt-4 flex gap-1">
+                        <div className="w-1 h-1 bg-brics-blue rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                        <div className="w-1 h-1 bg-brics-blue rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                        <div className="w-1 h-1 bg-brics-blue rounded-full animate-bounce"></div>
+                    </div>
+                </div>
             </div>
-            <p className="mt-8 text-white font-semibold tracking-widest animate-pulse relative z-10">LOADING</p>
         </div>
     );
 };
