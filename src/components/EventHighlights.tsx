@@ -38,8 +38,8 @@ export default function EventHighlights() {
                             <div className="w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                                 <item.icon className="w-8 h-8 text-brics-blue" />
                             </div>
-                            <h3 className="text-xl font-bold text-[var(--color-text)] mb-3 transition-colors duration-300">{item.name}</h3>
-                            <p className="text-[var(--color-text)] opacity-70 text-sm leading-relaxed transition-opacity duration-300">
+                            <h3 className="text-2xl font-bold text-[var(--color-text)] mb-3 transition-colors duration-300">{item.name}</h3>
+                            <p className="text-[var(--color-text)] opacity-80 leading-relaxed transition-opacity duration-300">
                                 {item.description}
                             </p>
                         </div>
