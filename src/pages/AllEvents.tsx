@@ -2,18 +2,18 @@ import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import eventsData from '../data/db.json';
-import { CalendarIcon, MapPinIcon, ClockIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon, MapPinIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 
 interface EventItem {
-    _id: string;
+    id: number;
     title: string;
     date: string;
     location: string;
     time: string;
     description: string;
-    tag: string;
-    color: string;
+    category: string;
+    image: string;
 }
 
 export default function AllEvents() {
@@ -21,9 +21,12 @@ export default function AllEvents() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setEvents(eventsData);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        setEvents((eventsData as any).events);
         setLoading(false);
     }, []);
+
+
 
     return (
         <div className="min-h-screen bg-white">
@@ -48,46 +51,63 @@ export default function AllEvents() {
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {events.map((event) => (
-                                <div
-                                    key={event._id}
-                                    className={`bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border-t-4 ${event.color}`}
+                                <Link
+                                    to={`/events/${event.id}`}
+                                    key={event.id}
+                                    className="group relative h-[450px] overflow-hidden rounded-2xl shadow-lg block"
                                 >
-                                    <div className="flex justify-between items-start mb-6">
-                                        <span className="bg-white text-gray-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-gray-100">
-                                            {event.tag}
-                                        </span>
+                                    {/* Background Image */}
+                                    <img
+                                        src={event.image}
+                                        alt={event.title}
+                                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                    
+                                    {/* Overlay Gradient */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-80"></div>
+
+                                    {/* Content */}
+                                    <div className="absolute bottom-0 left-0 right-0 p-8 text-white transition-transform duration-500 translate-y-[100px] group-hover:translate-y-0">
+                                        
+                                        <div className="mb-4 flex items-center gap-3">
+                                            <span className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-md ${
+                                                event.category === 'Arts' ? 'bg-brics-green/80 text-white' : 
+                                                event.category === 'Tech' ? 'bg-brics-blue/80 text-white' : 
+                                                'bg-brics-yellow/80 text-black'
+                                            }`}>
+                                                {event.category}
+                                            </span>
+                                        </div>
+
+                                        <h3 className="mb-2 text-2xl font-bold leading-tight">
+                                            {event.title}
+                                        </h3>
+
+                                        <div className="mb-4 space-y-2 text-sm text-gray-200">
+                                            <div className="flex items-center gap-2">
+                                                <CalendarIcon className="h-4 w-4 text-brics-yellow" />
+                                                <span>{event.date}</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <MapPinIcon className="h-4 w-4 text-brics-yellow" />
+                                                <span>{event.location}</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="opacity-0 transition-opacity duration-500 delay-100 group-hover:opacity-100">
+                                            <p className="mb-6 text-sm leading-relaxed text-gray-300 line-clamp-3">
+                                                {event.description}
+                                            </p>
+                                            
+                                            <span className="flex items-center gap-2 font-bold text-brics-yellow hover:gap-3 transition-all">
+                                                Learn More
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                                </svg>
+                                            </span>
+                                        </div>
                                     </div>
-
-                                    <h3 className="text-2xl font-bold text-brics-dark mb-4 group-hover:text-brics-blue transition-colors">
-                                        {event.title}
-                                    </h3>
-
-                                    <div className="space-y-3 mb-6">
-                                        <div className="flex items-center gap-3 text-gray-600">
-                                            <CalendarIcon className="w-5 h-5 text-brics-blue" />
-                                            <span>{event.date}</span>
-                                        </div>
-                                        <div className="flex items-center gap-3 text-gray-600">
-                                            <ClockIcon className="w-5 h-5 text-brics-blue" />
-                                            <span>{event.time}</span>
-                                        </div>
-                                        <div className="flex items-center gap-3 text-gray-600">
-                                            <MapPinIcon className="w-5 h-5 text-brics-blue" />
-                                            <span>{event.location}</span>
-                                        </div>
-                                    </div>
-
-                                    <p className="text-gray-600 leading-relaxed mb-8">
-                                        {event.description}
-                                    </p>
-
-                                    <button className="text-brics-blue font-semibold flex items-center gap-2 hover:gap-3 transition-all">
-                                        Learn More
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                        </svg>
-                                    </button>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     )}

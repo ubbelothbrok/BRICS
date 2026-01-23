@@ -8,6 +8,7 @@ import Testimonials from '../components/Testimonials';
 import Loading from '../components/Loading';
 import DirectorNote from '../components/DirectorNote';
 import Events from '../components/Events';
+import Demos from '../components/Demos';
 
 export default function Home() {
     const [loading, setLoading] = useState(true);
@@ -32,6 +33,7 @@ export default function Home() {
                 <DirectorNote />
                 <Zones />
                 <Events />
+                <Demos />
                 <Targets2026 />
                 <Testimonials />
             </main>
