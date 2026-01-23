@@ -54,10 +54,10 @@ export default function Zones() {
                     {zones.map((zone) => (
                         <div
                             key={zone.name}
-                            className="group bg-[var(--color-card-bg)] rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-[var(--color-text)]/10 hover:-translate-y-1"
+                            className="group bg-[var(--color-card-bg)] rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-[var(--color-text)]/10 hover:-translate-y-2"
                         >
-                            <div className={`w-14 h-14 rounded-xl ${zone.color.replace('bg-', 'dark:bg-opacity-20 bg-')} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                                <zone.icon className="w-8 h-8" />
+                            <div className={`w-14 h-14 rounded-xl ${zone.color.replace('bg-', 'dark:bg-opacity-20 bg-')} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-12 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.1)] transition-all duration-300`}>
+                                <zone.icon className="w-8 h-8 transition-transform duration-300" />
                             </div>
 
                             <h3 className="text-2xl font-bold mb-3 text-[var(--color-text)] group-hover:text-brics-blue transition-colors duration-300">
