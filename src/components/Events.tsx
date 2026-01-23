@@ -62,41 +62,45 @@ export default function Events() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-80"></div>
 
                             {/* Content */}
-                            <div className="absolute bottom-0 left-0 right-0 p-8 text-white transition-transform duration-500 translate-y-[100px] group-hover:translate-y-0">
-
-                                <div className="mb-4 flex items-center gap-3">
-                                    <span className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-md ${event.category === 'Arts' ? 'bg-brics-green/80 text-white' :
+                            {/* Content */}
+                            <div className="absolute bottom-0 left-0 right-0 p-8 text-white z-20">
+                                <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
+                                    <div className="mb-3 flex items-center gap-3">
+                                        <span className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-md ${event.category === 'Arts' ? 'bg-brics-green/80 text-white' :
                                             event.category === 'Tech' ? 'bg-brics-blue/80 text-white' :
                                                 'bg-brics-yellow/80 text-black'
-                                        }`}>
-                                        {event.category}
-                                    </span>
-                                </div>
-
-                                <h3 className="mb-2 text-2xl font-bold leading-tight">
-                                    {event.title}
-                                </h3>
-
-                                <div className="mb-4 space-y-2 text-sm text-gray-200">
-                                    <div className="flex items-center gap-2">
-                                        <CalendarIcon className="h-4 w-4 text-brics-yellow" />
-                                        <span>{event.date}</span>
+                                            }`}>
+                                            {event.category}
+                                        </span>
                                     </div>
-                                    <div className="flex items-center gap-2">
-                                        <MapPinIcon className="h-4 w-4 text-brics-yellow" />
-                                        <span>{event.location}</span>
+
+                                    <h3 className="mb-2 text-2xl font-bold leading-tight drop-shadow-md">
+                                        {event.title}
+                                    </h3>
+
+                                    <div className="mb-4 space-y-2 text-sm text-gray-200 font-medium">
+                                        <div className="flex items-center gap-2">
+                                            <CalendarIcon className="h-4 w-4 text-brics-yellow" />
+                                            <span>{event.date}</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <MapPinIcon className="h-4 w-4 text-brics-yellow" />
+                                            <span>{event.location}</span>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="opacity-0 transition-opacity duration-500 delay-100 group-hover:opacity-100">
-                                    <p className="mb-6 text-sm leading-relaxed text-gray-300 line-clamp-3">
-                                        {event.description}
-                                    </p>
+                                    <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 group-hover:grid-rows-[1fr] group-hover:opacity-100">
+                                        <div className="overflow-hidden">
+                                            <p className="mb-6 text-sm leading-relaxed text-gray-300 line-clamp-3">
+                                                {event.description}
+                                            </p>
 
-                                    <span className="flex items-center gap-2 font-bold text-brics-yellow hover:gap-3 transition-all">
-                                        Learn More
-                                        <ArrowRightIcon className="h-4 w-4" />
-                                    </span>
+                                            <span className="flex items-center gap-2 font-bold text-brics-yellow hover:gap-3 transition-all cursor-pointer">
+                                                Learn More
+                                                <ArrowRightIcon className="h-4 w-4" />
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </Link>
