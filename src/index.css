@@ -15,11 +15,26 @@
 }
 
 :root {
+  --color-bg: #ffffff;
+  --color-text: var(--color-brics-dark);
+  --color-card-bg: #ffffff;
+  --color-nav-bg: rgba(255, 255, 255, 0.7);
+  --color-nav-text: #374151;
+
   font-family: 'Poppins', system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: var(--color-brics-dark);
-  background-color: #ffffff;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark {
+  --color-bg: #0f172a;
+  --color-text: #f1f5f9;
+  --color-card-bg: #1e293b;
+  --color-nav-bg: rgba(15, 23, 42, 0.7);
+  --color-nav-text: #f1f5f9;
 }
 
 body {

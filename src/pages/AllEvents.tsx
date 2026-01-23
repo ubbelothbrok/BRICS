@@ -29,7 +29,7 @@ export default function AllEvents() {
 
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[var(--color-bg)] transition-colors duration-300">
             <Navbar />
 
             <main className="pt-32 pb-24">
@@ -39,8 +39,8 @@ export default function AllEvents() {
                             <ArrowLeftIcon className="w-5 h-5" />
                             Back to Home
                         </Link>
-                        <h1 className="text-5xl font-bold text-brics-dark">Events Calendar</h1>
-                        <p className="text-xl text-gray-600 mt-4">Explore all summits, forums, and gatherings for Pragyaan 2026.</p>
+                        <h1 className="text-5xl font-bold text-[var(--color-text)] transition-colors duration-300">Events Calendar</h1>
+                        <p className="text-xl text-[var(--color-text)] opacity-80 mt-4 transition-colors duration-300">Explore all summits, forums, and gatherings for Pragyaan 2026.</p>
                     </div>
 
                     {loading ? (
@@ -71,8 +71,8 @@ export default function AllEvents() {
 
                                         <div className="mb-4 flex items-center gap-3">
                                             <span className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-md ${event.category === 'Arts' ? 'bg-brics-green/80 text-white' :
-                                                    event.category === 'Tech' ? 'bg-brics-blue/80 text-white' :
-                                                        'bg-brics-yellow/80 text-black'
+                                                event.category === 'Tech' ? 'bg-brics-blue/80 text-white' :
+                                                    'bg-brics-yellow/80 text-black'
                                                 }`}>
                                                 {event.category}
                                             </span>

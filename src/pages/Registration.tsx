@@ -36,7 +36,7 @@ export default function Registration() {
     };
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[var(--color-bg)] transition-colors duration-300">
             <Navbar />
 
             <main className="pt-32 pb-24">
@@ -51,39 +51,39 @@ export default function Registration() {
                                 Back to Home
                             </Link>
 
-                            <h1 className="text-5xl font-bold text-brics-dark mb-6 leading-tight">
+                            <h1 className="text-5xl font-bold text-[var(--color-text)] mb-6 leading-tight transition-colors duration-300">
                                 Register for <span className="text-brics-blue">Pragyaan 2026</span>
                             </h1>
-                            <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+                            <p className="text-xl text-[var(--color-text)] opacity-80 mb-12 leading-relaxed transition-colors duration-300">
                                 Join the region's largest educational open-day event. Bring your students to explore innovative projects, interactive stalls, and a world of opportunities in STEM and Arts.
                             </p>
 
                             <div className="space-y-8">
                                 <div className="flex gap-4">
-                                    <div className="bg-blue-50 p-3 rounded-xl h-fit">
+                                    <div className="bg-brics-blue/10 p-3 rounded-xl h-fit">
                                         <BuildingLibraryIcon className="w-6 h-6 text-brics-blue" />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-lg text-brics-dark">School Participation</h3>
-                                        <p className="text-gray-600">Open for all middle and high schools in the J&K region.</p>
+                                        <h3 className="font-bold text-lg text-[var(--color-text)] transition-colors duration-300">School Participation</h3>
+                                        <p className="text-[var(--color-text)] opacity-70 transition-colors duration-300">Open for all middle and high schools in the J&K region.</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="bg-green-50 p-3 rounded-xl h-fit">
+                                    <div className="bg-brics-green/10 p-3 rounded-xl h-fit">
                                         <UserGroupIcon className="w-6 h-6 text-brics-green" />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-lg text-brics-dark">Massive Engagement</h3>
-                                        <p className="text-gray-600">Interact with over 5000+ peers and professional educators.</p>
+                                        <h3 className="font-bold text-lg text-[var(--color-text)] transition-colors duration-300">Massive Engagement</h3>
+                                        <p className="text-[var(--color-text)] opacity-70 transition-colors duration-300">Interact with over 5000+ peers and professional educators.</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
-                                    <div className="bg-red-50 p-3 rounded-xl h-fit">
+                                    <div className="bg-brics-red/10 p-3 rounded-xl h-fit">
                                         <AcademicCapIcon className="w-6 h-6 text-brics-red" />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-lg text-brics-dark">Certificates & Awards</h3>
-                                        <p className="text-gray-600">Participating schools and students receive official IIT Jammu Pragyaan certificates.</p>
+                                        <h3 className="font-bold text-lg text-[var(--color-text)] transition-colors duration-300">Certificates & Awards</h3>
+                                        <p className="text-[var(--color-text)] opacity-70 transition-colors duration-300">Participating schools and students receive official IIT Jammu Pragyaan certificates.</p>
                                     </div>
                                 </div>
                             </div>
@@ -91,14 +91,14 @@ export default function Registration() {
 
                         {/* Right Side: Form */}
                         <div className="lg:w-1/2">
-                            <div className="bg-gray-50 p-8 lg:p-12 rounded-3xl border border-gray-100 shadow-sm">
+                            <div className="bg-[var(--color-card-bg)] p-8 lg:p-12 rounded-3xl border border-[var(--color-text)]/10 shadow-sm transition-colors duration-300">
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <div>
-                                        <label className="block text-sm font-semibold text-gray-700 mb-2">School Name</label>
+                                        <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">School Name</label>
                                         <input
                                             type="text"
                                             required
-                                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                            className="w-full px-4 py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
                                             placeholder="Enter your school name"
                                             value={formData.schoolName}
                                             onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
@@ -107,22 +107,22 @@ export default function Registration() {
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-sm font-semibold text-gray-700 mb-2">Contact Person</label>
+                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Contact Person</label>
                                             <input
                                                 type="text"
                                                 required
-                                                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                                className="w-full px-4 py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
                                                 placeholder="FullName"
                                                 value={formData.contactPerson}
                                                 onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Phone Number</label>
                                             <input
                                                 type="tel"
                                                 required
-                                                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                                className="w-full px-4 py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
                                                 placeholder="+91"
                                                 value={formData.phone}
                                                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -131,11 +131,11 @@ export default function Registration() {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                                        <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Email Address</label>
                                         <input
                                             type="email"
                                             required
-                                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                            className="w-full px-4 py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
                                             placeholder="school@example.com"
                                             value={formData.email}
                                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -144,27 +144,27 @@ export default function Registration() {
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-sm font-semibold text-gray-700 mb-2">Expected Students</label>
+                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Expected Students</label>
                                             <input
                                                 type="number"
                                                 required
-                                                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                                className="w-full px-4 py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
                                                 placeholder="e.g. 50"
                                                 value={formData.studentCount}
                                                 onChange={(e) => setFormData({ ...formData, studentCount: e.target.value })}
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-semibold text-gray-700 mb-2">Area of Interest</label>
+                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Area of Interest</label>
                                             <select
-                                                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                                className="w-full px-4 py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none dark:bg-slate-800"
                                                 value={formData.interest}
                                                 onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
                                             >
-                                                <option>Science & Technology</option>
-                                                <option>Arts & Culture</option>
-                                                <option>Entrepreneurship</option>
-                                                <option>Social Innovation</option>
+                                                <option className="dark:bg-slate-800">Science & Technology</option>
+                                                <option className="dark:bg-slate-800">Arts & Culture</option>
+                                                <option className="dark:bg-slate-800">Entrepreneurship</option>
+                                                <option className="dark:bg-slate-800">Social Innovation</option>
                                             </select>
                                         </div>
                                     </div>

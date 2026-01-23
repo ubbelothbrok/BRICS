@@ -31,26 +31,26 @@ export default function Login() {
     };
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[var(--color-bg)] transition-colors duration-300">
             <Navbar />
 
             <main className="pt-32 pb-24 flex items-center justify-center">
                 <div className="max-w-md w-full px-6">
-                    <div className="bg-gray-50 p-8 lg:p-12 rounded-3xl border border-gray-100 shadow-sm">
+                    <div className="bg-[var(--color-card-bg)] p-8 lg:p-12 rounded-3xl border border-[var(--color-text)]/10 shadow-sm transition-colors duration-300">
                         <div className="text-center mb-10">
-                            <h1 className="text-3xl font-bold text-brics-dark">Welcome Back</h1>
-                            <p className="text-gray-600 mt-2">Login to your Pragyaan account</p>
+                            <h1 className="text-3xl font-bold text-[var(--color-text)] transition-colors duration-300">Welcome Back</h1>
+                            <p className="text-[var(--color-text)] opacity-70 mt-2 transition-colors duration-300">Login to your Pragyaan account</p>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
-                                <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                                <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Email Address</label>
                                 <div className="relative">
-                                    <EnvelopeIcon className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                                    <EnvelopeIcon className="w-5 h-5 opacity-40 absolute left-4 top-1/2 -translate-y-1/2" />
                                     <input
                                         type="email"
                                         required
-                                        className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                        className="w-full pl-12 pr-4 py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
                                         placeholder="your@email.com"
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -59,13 +59,13 @@ export default function Login() {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                                <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Password</label>
                                 <div className="relative">
-                                    <LockClosedIcon className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                                    <LockClosedIcon className="w-5 h-5 opacity-40 absolute left-4 top-1/2 -translate-y-1/2" />
                                     <input
                                         type="password"
                                         required
-                                        className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                        className="w-full pl-12 pr-4 py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
                                         placeholder="••••••••"
                                         value={formData.password}
                                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -81,7 +81,7 @@ export default function Login() {
                                 {loading ? 'Logging in...' : 'Sign In'}
                             </button>
 
-                            <p className="text-center text-gray-600">
+                            <p className="text-center text-[var(--color-text)] opacity-70 transition-colors duration-300">
                                 Don't have an account? <Link to="/register" className="text-brics-blue font-bold">Register Now</Link>
                             </p>
                         </form>

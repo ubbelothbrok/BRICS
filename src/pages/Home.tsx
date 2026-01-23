@@ -12,7 +12,7 @@ import EventHighlights from '../components/EventHighlights';
 export default function Home() {
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[var(--color-bg)] transition-colors duration-300">
             <Navbar />
             <main>
                 <Hero />

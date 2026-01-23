@@ -29,12 +29,12 @@ export default function Events() {
     if (loading) return null;
 
     return (
-        <section id="events" className="py-24 bg-gray-50">
+        <section id="events" className="py-24 bg-[var(--color-bg)] transition-colors duration-300">
             <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                     <div>
-                        <h2 className="text-4xl font-bold text-brics-dark mb-4">Upcoming Events</h2>
-                        <p className="text-xl text-gray-600 max-w-2xl">
+                        <h2 className="text-4xl font-bold text-[var(--color-text)] mb-4 transition-colors duration-300">Upcoming Events</h2>
+                        <p className="text-xl text-[var(--color-text)] opacity-80 max-w-2xl transition-colors duration-300">
                             Stay informed about the key gatherings and summits shaping the future of BRICS cooperation.
                         </p>
                     </div>
@@ -57,19 +57,18 @@ export default function Events() {
                                 alt={event.title}
                                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />
-                            
+
                             {/* Overlay Gradient */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-80"></div>
 
                             {/* Content */}
                             <div className="absolute bottom-0 left-0 right-0 p-8 text-white transition-transform duration-500 translate-y-[100px] group-hover:translate-y-0">
-                                
+
                                 <div className="mb-4 flex items-center gap-3">
-                                    <span className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-md ${
-                                        event.category === 'Arts' ? 'bg-brics-green/80 text-white' : 
-                                        event.category === 'Tech' ? 'bg-brics-blue/80 text-white' : 
-                                        'bg-brics-yellow/80 text-black'
-                                    }`}>
+                                    <span className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-md ${event.category === 'Arts' ? 'bg-brics-green/80 text-white' :
+                                            event.category === 'Tech' ? 'bg-brics-blue/80 text-white' :
+                                                'bg-brics-yellow/80 text-black'
+                                        }`}>
                                         {event.category}
                                     </span>
                                 </div>
@@ -93,7 +92,7 @@ export default function Events() {
                                     <p className="mb-6 text-sm leading-relaxed text-gray-300 line-clamp-3">
                                         {event.description}
                                     </p>
-                                    
+
                                     <span className="flex items-center gap-2 font-bold text-brics-yellow hover:gap-3 transition-all">
                                         Learn More
                                         <ArrowRightIcon className="h-4 w-4" />

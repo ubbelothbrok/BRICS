@@ -49,12 +49,12 @@ export default function News() {
   const others = news.filter(n => n !== featured);
 
   return (
-    <section id="news" className="py-24 bg-white">
+    <section id="news" className="py-24 bg-[var(--color-bg)] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-end mb-12">
           <div>
             <span className="text-[var(--color-brics-blue)] font-semibold tracking-wide uppercase text-sm">Latest Updates</span>
-            <h2 className="mt-2 text-4xl font-bold text-[var(--color-brics-dark)]">News & Documents</h2>
+            <h2 className="mt-2 text-4xl font-bold text-[var(--color-text)] transition-colors duration-300">News & Documents</h2>
           </div>
           <button className="hidden md:flex items-center gap-2 text-[var(--color-brics-blue)] font-semibold hover:text-blue-800 transition-colors">
             View All News
@@ -76,16 +76,16 @@ export default function News() {
                   Featured
                 </div>
               </div>
-              <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+              <div className="flex items-center gap-4 text-sm text-[var(--color-text)] opacity-60 mb-3 transition-colors duration-300">
                 <span className="flex items-center gap-1">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                   {featured.date}
                 </span>
               </div>
-              <h3 className="text-2xl font-bold text-[var(--color-brics-dark)] mb-3 group-hover:text-[var(--color-brics-blue)] transition-colors">
+              <h3 className="text-2xl font-bold text-[var(--color-text)] mb-3 group-hover:text-[var(--color-brics-blue)] transition-colors duration-300">
                 {featured.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-[var(--color-text)] opacity-70 leading-relaxed transition-colors duration-300">
                 {featured.summary}
               </p>
             </article>
@@ -94,17 +94,17 @@ export default function News() {
           {/* Side List */}
           <div className="flex flex-col gap-8">
             {others.map(item => (
-              <article key={item.id} className="flex flex-col gap-2 group cursor-pointer border-b border-gray-100 pb-8 last:border-0">
+              <article key={item.id} className="flex flex-col gap-2 group cursor-pointer border-b border-[var(--color-text)]/10 pb-8 last:border-0 transition-colors duration-300">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-gray-500 font-medium flex items-center gap-1">
+                  <span className="text-[var(--color-text)] opacity-60 font-medium flex items-center gap-1 transition-colors duration-300">
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                     {item.date}
                   </span>
-                  <span className="text-[var(--color-brics-blue)] font-semibold bg-blue-50 px-2 py-0.5 rounded">
+                  <span className="text-[var(--color-brics-blue)] font-semibold bg-brics-blue/10 px-2 py-0.5 rounded">
                     {item.category}
                   </span>
                 </div>
-                <h3 className="text-lg font-bold text-[var(--color-brics-dark)] group-hover:text-[var(--color-brics-blue)] transition-colors line-clamp-2">
+                <h3 className="text-lg font-bold text-[var(--color-text)] group-hover:text-[var(--color-brics-blue)] transition-colors line-clamp-2 duration-300">
                   {item.title}
                 </h3>
                 <div className="flex items-center text-[var(--color-brics-green)] text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity -ml-4 group-hover:ml-0 duration-300">
