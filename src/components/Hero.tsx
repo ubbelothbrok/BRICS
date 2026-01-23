@@ -46,7 +46,6 @@ export default function Hero() {
               src={slide.image}
               alt={slide.title}
               className="w-full h-full object-cover object-center brightness-50"
-              style={{ transform: index === 2 ? 'scaleX(-1)' : 'none' }}
             />
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
