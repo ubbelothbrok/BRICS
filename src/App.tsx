@@ -9,6 +9,8 @@ import Vision from './pages/Vision';
 import Schedule from './pages/Schedule';
 import Team from './pages/Team';
 
+import EventDetails from './pages/EventDetails';
+
 function App() {
   return (
     <Router>
@@ -16,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/events" element={<AllEvents />} />
+        <Route path="/events/:id" element={<EventDetails />} />
         <Route path="/zones" element={<Zones />} />
         <Route path="/vision" element={<Vision />} />
         <Route path="/schedule" element={<Schedule />} />

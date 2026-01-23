@@ -1,52 +1,257 @@
-[
-  {
-    "_id": "1",
-    "title": "BRICS Summit 2026",
-    "date": "May 15, 2026",
-    "location": "New Delhi, India",
-    "time": "10:00 AM - 4:00 PM",
-    "description": "The annual summit bringing together leaders from Brazil, Russia, India, China, and South Africa to discuss economic cooperation and development.",
-    "tag": "Political",
-    "color": "border-brics-blue"
-  },
-  {
-    "_id": "2",
-    "title": "Youth Innovation Forum",
-    "date": "June 10, 2026",
-    "location": "Moscow, Russia",
-    "time": "09:00 AM - 6:00 PM",
-    "description": "A gathering of young innovators and entrepreneurs to showcase their ideas and startups.",
-    "tag": "Youth",
-    "color": "border-green-500"
-  },
-  {
-    "_id": "3",
-    "title": "Cultural Exchange Festival",
-    "date": "July 20, 2026",
-    "location": "Rio de Janeiro, Brazil",
-    "time": "11:00 AM - 8:00 PM",
-    "description": "Celebrating the diverse cultures of the BRICS nations through art, music, and dance.",
-    "tag": "Culture",
-    "color": "border-yellow-500"
-  },
+{
+  "events": [
     {
-    "_id": "4",
-    "title": "Tech & Trade Expo",
-    "date": "August 05, 2026",
-    "location": "Shanghai, China",
-    "time": "09:00 AM - 5:00 PM",
-    "description": "Exhibiting the latest technological advancements and fostering trade relationships among member countries.",
-    "tag": "Business",
-    "color": "border-red-500"
-  },
-  {
-    "_id": "5",
-    "title": "Academic Conference on Sustainable Development",
-    "date": "September 12, 2026",
-    "location": "Cape Town, South Africa",
-    "time": "08:30 AM - 4:30 PM",
-    "description": "Scholars and researchers discuss strategies for sustainable growth and environmental protection.",
-    "tag": "Academic",
-    "color": "border-purple-500"
-  }
-]
+      "id": 1,
+      "title": "Drone Showcase",
+      "date": "Feb 14",
+      "time": "10:00 AM - 04:00 PM",
+      "location": "Main Ground",
+      "category": "Tech",
+      "description": "Witness high-end drones in action including Quadcopters, Hexacopters, and FPVs. Learn about drone technology, aerodynamics, and see a live VTOL prototype demonstration.",
+      "image": "https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=1470&auto=format&fit=crop",
+      "longDescription": "Step into the future of aviation at our exclusive Drone Showcase. This event brings together the cutting edge of unmanned aerial technology, featuring a diverse fleet of drones ranging from agile FPV racers to heavy-lift industrial hexacopters.\n\nParticipants will get a rare opportunity to witness live demonstrations of autonomous flight stability, obstacle avoidance systems, and high-speed maneuvers. Our expert team from the Robotics Club will explain the aerodynamics, flight controllers, and propulsion systems that make these incredible machines fly. The highlight of the event is the unveiling of our custom-built VTOL (Vertical Take-Off and Landing) prototype, combining the versatility of a helicopter with the range of a fixed-wing aircraft.",
+      "schedule": [
+        { "time": "10:00 AM", "activity": "Introduction to Drone Types & Safety Briefing" },
+        { "time": "11:30 AM", "activity": "Live FPV Racing Demo" },
+        { "time": "01:00 PM", "activity": "Lunch Break & Static Display Interaction" },
+        { "time": "02:30 PM", "activity": "Heavy Lift & Hexacopter Showcase" },
+        { "time": "03:45 PM", "activity": "VTOL Prototype Demonstration" }
+      ],
+      "rules": [
+        "Do not cross the safety barriers during flight operations.",
+        "Flash photography is prohibited during FPV sessions.",
+        "Follow the instructions of the safety marshals at all times.",
+        "Touching the drones is only allowed during the Static Display session."
+      ],
+      "teamSize": "Open for all visitors",
+      "contact": "robotics-club@iitjammu.ac.in"
+    },
+    {
+      "id": 2,
+      "title": "The Locked Library",
+      "date": "Feb 14",
+      "time": "10:00 AM - 04:00 PM",
+      "location": "Lecture Hall Complex",
+      "category": "Arts",
+      "description": "An immersive literary escape room experience. Groups of 10-12 must solve interconnected riddles based on books, mythology, and logic within 10 minutes to escape.",
+      "image": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2690&auto=format&fit=crop",
+      "longDescription": "The Locked Library is not just a room; it's a test of wit, teamwork, and literary knowledge. Transformed into a mysterious archive of forbidden knowledge, the Lecture Hall Complex becomes the setting for high-stakes intellectual drama.\n\nTeams will find themselves locked in a room filled with cryptic manuscripts, hidden ciphers, and mythological artifacts. To escape, you must solve a chain of 6-7 interconnected riddles that draw upon classic literature, logical reasoning, and observational skills. Every solved riddle reveals a part of the key code. But usually, time is the real enemy—you have only 10 minutes to unlock the door or be trapped in the archives forever (figuratively, of course!).",
+      "schedule": [
+        { "time": "10:00 AM", "activity": "Batch 1 Entry" },
+        { "time": "10:20 AM", "activity": "Batch 2 Entry" },
+        { "time": "Continuous", "activity": "New batches every 20 minutes until 4 PM" }
+      ],
+      "rules": [
+        "Teams must consist of 10-12 members.",
+        "No use of mobile phones or internet for solving riddles.",
+        "Do not damage any props or books in the room.",
+        "Facilitators will provide maximum 2 hints per team if stuck."
+      ],
+      "teamSize": "10-12 Members",
+      "contact": "lit-club@iitjammu.ac.in"
+    },
+    {
+      "id": 3,
+      "title": "Cupcake Decoration Challenge",
+      "date": "Feb 14",
+      "time": "11:00 AM & 02:00 PM",
+      "location": "Cafeteria",
+      "category": "Arts",
+      "description": "Showcase your culinary art skills! Learn whipping and piping techniques from experts and compete to decorate the most creative cupcake. Top 3 winners get exciting rewards.",
+      "image": "https://images.unsplash.com/photo-1593187623747-7ea827ad1013?q=80&w=687&auto=format&fit=crop",
+      "longDescription": "Unleash your inner pastry chef at the Cupcake Decoration Challenge! Hosted by the Food Club, this event blends culinary skill with artistic expression. It begins with a masterclass where our expert student chefs demonstrate the art of whipping cream to the perfect consistency and using various piping nozzles to create stunning floral and abstract designs.\n\nOnce the demo is done, it's your turn. You will be given a plain cupcake, a piping bag, and an assortment of edible toppings including sprinkles, choco-chips, and fondant shapes. Your task is to transform the blank canvas into a miniature edible masterpiece. Points are awarded for creativity, neatness, and color balance.",
+      "schedule": [
+        { "time": "11:00 AM", "activity": "Morning Batch Start & Demo" },
+        { "time": "11:20 AM", "activity": "Decoration Phase Begins" },
+        { "time": "11:50 AM", "activity": "Judging & Prize Distribution" },
+        { "time": "02:00 PM", "activity": "Afternoon Batch Start & Demo" },
+        { "time": "02:50 PM", "activity": "Judging & Prize Distribution" }
+      ],
+      "rules": [
+        "All materials will be provided; no outside food items allowed.",
+        "Hygiene must be maintained (gloves and caps provided).",
+        "Decoration time is strictly limited to 30 minutes.",
+        "Judges' decision on creativity and presentation is final."
+      ],
+      "teamSize": "Individual Participation",
+      "contact": "food-club@iitjammu.ac.in"
+    },
+    {
+      "id": 4,
+      "title": "Painting Competition",
+      "date": "Feb 15",
+      "time": "09:00 AM - 12:00 PM",
+      "location": "Art Studio",
+      "category": "Arts",
+      "description": "An on-the-spot painting competition to unleash your imagination. Materials provided. Themes will be announced at the venue. Winners will be awarded certificates and prizes.",
+      "image": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=2671&auto=format&fit=crop",
+      "longDescription": "Colors speak louder than words. The Painting Competition is a sanctuary for the artists, the dreamers, and the creators. Whether you prefer the fluidity of watercolors, the texture of acrylics, or the precision of pencil sketching, this is your platform.\n\nThe event is an 'On-The-Spot' competition, meaning the theme will be revealed right at the start to ensure spontaneity and original thinking. Participants will have 3 hours to conceptualize and complete their artwork. The serene atmosphere of the Art Studio, accompanied by light instrumental music, provides the perfect ambiance for your creativity to flow onto the canvas.",
+      "schedule": [
+        { "time": "09:00 AM", "activity": "Theme Announcement & Material Distribution" },
+        { "time": "09:15 AM", "activity": "Painting Starts" },
+        { "time": "12:00 PM", "activity": "Submission Deadline" },
+        { "time": "01:00 PM", "activity": "Results & Exhibition" }
+      ],
+      "rules": [
+        "Theme will be announced on the spot.",
+        "Basic materials (paper, paints, brushes) provided; participants can bring their own specialized tools.",
+        "Digital art is not included in this specific category.",
+        "Plagiarism or copying from phone references is strictly prohibited."
+      ],
+      "teamSize": "Individual Participation",
+      "contact": "artihc-club@iitjammu.ac.in"
+    },
+    {
+      "id": 5,
+      "title": "IITian Interaction",
+      "date": "Feb 14 & 15",
+      "time": "01:00 PM - 02:00 PM",
+      "location": "Auditorium",
+      "category": "Arts",
+      "description": "A candid interactive session with IIT Jammu students. Get first-hand insights into campus life, academic preparation, career prospects, and ask your burning questions.",
+      "image": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2670&auto=format&fit=crop",
+      "longDescription": "Ever wondered what life inside an IIT is really like? Beyond the rigorous academics and competitive exams lies a vibrant world of innovation, culture, and personal growth. 'IITian Interaction' is an open forum designed to bridge the gap between school students and current IITians.\n\nIn this session, senior students from various branches will share their personal journeys—from their JEE preparation days to managing hostel life, projects, and fests. It's a no-filter conversation where you can ask about anything: how to balance studies with hobbies, what different engineering branches actually entail, and the diverse career paths available after graduation. It's not just a talk; it's a mentorship opportunity.",
+      "schedule": [
+        { "time": "01:00 PM", "activity": "Panel Introduction" },
+        { "time": "01:15 PM", "activity": "Journey Sharing (JEE to IIT)" },
+        { "time": "01:30 PM", "activity": "Open Q&A Session" },
+        { "time": "01:55 PM", "activity": "Closing Remarks" }
+      ],
+      "rules": [
+        "Respectful and relevant questioning is expected.",
+        "Questions can be submitted anonymously via slips if preferred.",
+        "No recording of personal stories without permission.",
+        "Mobile phones should be on silent mode."
+      ],
+      "teamSize": "Audience Event",
+      "contact": "outreach@iitjammu.ac.in"
+    },
+    {
+      "id": 6,
+      "title": "Jigsaw Puzzle Challenge",
+      "date": "Feb 14",
+      "time": "Continuous",
+      "location": "Student Activity Center",
+      "category": "Arts",
+      "description": "Test your spatial reasoning and teamwork with metallic, wooden, and 3D mechanical puzzles. Fastest teams to solve the puzzle sets win exciting prizes.",
+      "image": "https://images.unsplash.com/photo-1612385763901-68857dd4c43c?q=80&w=764&auto=format&fit=crop",
+      "longDescription": "Sharpen your mind and test your patience at the Jigsaw Puzzle Challenge! This isn't just about fitting cardboard pieces together; we bring you a collection of complex 3D mechanical puzzles, metallic interlocking loops, and high-difficulty wooden brain teasers.\n\nTeams will race against the clock to solve a curated set of puzzles. The challenge tests your spatial reasoning, pattern recognition, and ability to stay calm under pressure. Whether you're a casual solver or a logic puzzle enthusiast, there's a difficulty level for everyone. It's a perfect break from the high-energy tech events, allowing you to focus and problem-solve in a fun, competitive environment.",
+      "schedule": [
+        { "time": "Continuous", "activity": "Walk-in participation throughout the day (10 AM - 4 PM)" },
+        { "time": "Hourly", "activity": "Leaderboard Updates for fastest solve times" }
+      ],
+      "rules": [
+        "Teams of up to 4 members allowed.",
+        "Damaging the puzzle mechanism results in immediate disqualification.",
+        "No external tools or internet help allowed.",
+        "The timer stops only when the puzzle is fully solved/assembled."
+      ],
+      "teamSize": "3-4 Members",
+      "contact": "recreational-club@iitjammu.ac.in"
+    },
+    {
+      "id": 7,
+      "title": "Artihc Art Gallery",
+      "date": "Feb 14 & 15",
+      "time": "All Day",
+      "location": "Exhibition Hall",
+      "category": "Arts",
+      "description": "Explore a curated collection of paintings and artworks by the Artihc Club. Live demonstrations of acrylic, watercolor, and oil painting techniques by student artists.",
+      "image": "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?q=80&w=2572&auto=format&fit=crop",
+      "longDescription": "Walk through a corridor of creativity at the Artihc Art Gallery. This exhibition showcases the finest works from IIT Jammu's student artists, featuring a diverse range of styles including hyper-realism, abstract expressionism, mandala art, and digital illustrations.\n\nThe gallery is more than just a display; it's an interactive space. Throughout the day, featured artists will be conducting live demonstrations, showing how a blank canvas evolves into a masterpiece. You can interact with the artists, understand their inspirations, and even try your hand at a few brush strokes at our community canvas.",
+      "schedule": [
+        { "time": "10:00 AM", "activity": "Gallery Opens" },
+        { "time": "11:00 AM", "activity": "Live Watercolor Demo" },
+        { "time": "02:00 PM", "activity": "Live Acrylic Pouring Demo" },
+        { "time": "05:00 PM", "activity": "Gallery Closes" }
+      ],
+      "rules": [
+        "Do not touch the exhibits.",
+        "Photography is allowed without flash.",
+        "Maintain silence to appreciate the art.",
+        "Food and drinks are strictly prohibited inside the gallery."
+      ],
+      "teamSize": "Open for all visitors",
+      "contact": "artihc-club@iitjammu.ac.in"
+    },
+    {
+      "id": 8,
+      "title": "AR Builder Challenge",
+      "date": "Feb 15",
+      "time": "10:00 AM - 03:00 PM",
+      "location": "Computer Center",
+      "category": "Tech",
+      "description": "Build virtual structures using real-world hand gestures! An interactive Augmented Reality game powered by Computer Vision. Compete for stability and height scores.",
+      "image": "https://plus.unsplash.com/premium_photo-1711664260571-89851270a90d?q=80&w=1470&auto=format&fit=crop",
+      "longDescription": "Experience the magic where code meets reality. The AR Builder Challenge is a unique interactive game developed by our Coding Club. Using advanced Computer Vision and gesture recognition, we've created a system where your hand movements in the real world control virtual building blocks on a massive screen.\n\nThe objective? Build the tallest, most stable tower possible within a time limit. You simply wave your hands to pick up blocks, rotate them, and stack them. The physics engine simulates gravity and balance in real-time, so one wrong move and your virtual tower comes crumbling down! It's a fun, gamified way to understand the power of Augmented Reality.",
+      "schedule": [
+        { "time": "10:00 AM", "activity": "System Demo & Tutorial" },
+        { "time": "10:30 AM", "activity": "Open Challenge Slots Begin" },
+        { "time": "01:00 PM", "activity": "Lunch Break" },
+        { "time": "03:00 PM", "activity": "Final Logic & Stability Score Calculation" }
+      ],
+      "rules": [
+        "One player at a time in the sensor zone.",
+        "3 minutes time limit per attempt.",
+        "Score is calculated based on Height x Stability.",
+        "Intentional obstruction of sensors is not allowed."
+      ],
+      "teamSize": "Individual Participation",
+      "contact": "coding-club@iitjammu.ac.in"
+    },
+    {
+      "id": 9,
+      "title": "AI Doodle Wizard",
+      "date": "Feb 15",
+      "time": "10:00 AM - 03:00 PM",
+      "location": "Computer Center",
+      "category": "Tech",
+      "description": "Can our AI guess what you're drawing? Test our real-time machine learning model trained on the QuickDraw dataset. A fun way to see specific AI applications in action.",
+      "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670&auto=format&fit=crop",
+      "longDescription": "Step up to the digital canvas and challenge our AI! The AI Doodle Wizard is a machine learning model trained on millions of drawings from the Google QuickDraw dataset. Your task is simple: the system gives you a prompt (e.g., 'Draw a Cat'), and you have 20 seconds to sketch it.\n\nAs you draw, the neural network analyzes your strokes in real-time and guesses what you're making. It's a fascinating and hilarious demonstration of how Neural Networks recognize patterns. Can you draw well enough to convince the AI, or will your 'Bicycle' be mistaken for 'Eyeglasses'? Come find out!",
+      "schedule": [
+        { "time": "10:00 AM", "activity": "Model Training Explanation" },
+        { "time": "10:30 AM", "activity": "Play Sessions Begin" },
+        { "time": "Continuous", "activity": "Leaderboard for 'Most Recognized Doodles'" }
+      ],
+      "rules": [
+        "20 seconds per drawing round.",
+        "Drawings must be family-friendly.",
+        "No writing words/letters to cheat the AI.",
+        "Highest accuracy score of a session wins a badge."
+      ],
+      "teamSize": "Individual Participation",
+      "contact": "coding-club@iitjammu.ac.in"
+    }
+  ],
+  "demos": [
+    {
+      "id": 1,
+      "title": "Immersive Bharat Dome",
+      "description": "A breathtaking 360° projection dome offering virtual walkthroughs of India's space missions (Chandrayaan & Gaganyaan) and heritage sites. Experience history and future in surround sound.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Bharat_Mandapam_Pragati_Maidan.jpg/1280px-Bharat_Mandapam_Pragati_Maidan.jpg",
+      "tags": ["VR", "Space Tech", "Culture"]
+    },
+    {
+      "id": 2,
+      "title": "Bhashini: AI Language Bridge",
+      "description": "Witness the power of 'Bhashini', India's AI-led language translation platform. Speak in your mother tongue and hear it instantly translated into 22+ diverse Indian languages in real-time.",
+      "image": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=2000&auto=format&fit=crop",
+      "tags": ["AI", "NLP", "Digital India"]
+    },
+    {
+      "id": 3,
+      "title": "UPI World: Future of Payments",
+      "description": "Experience the global revolution of UPI. A live interactive stall demonstrating contactless voice payments, international transactions, and the seamless 'Tap & Pay' ecosystem.",
+      "image": "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=2000&auto=format&fit=crop",
+      "tags": ["FinTech", "Digital", "Innovation"]
+    },
+    {
+      "id": 4,
+      "title": "Aadhaar Face RD",
+      "description": "Next-generation biometric security is here. Test the 'Face Authentication' system that verifies identity in milliseconds without fingerprints, enabling paperless, presence-less service delivery.",
+      "image": "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=2000&auto=format&fit=crop",
+      "tags": ["DeepTech", "Security", "Biometrics"]
+    }
+  ]
+}
