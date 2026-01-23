@@ -4,19 +4,19 @@ import Footer from '../components/Footer';
 export default function Schedule() {
     const days = [
         {
-            date: "May 15 Web",
+            date: "February 14 Fri",
             events: [
-                { time: "09:00 AM", title: "Opening Ceremony", location: "Main Hall" },
-                { time: "11:00 AM", title: "Keynote: Future of BRICS", location: "Auditorium A" },
-                { time: "02:00 PM", title: "Panel: Digital Innovation", location: "Conference Room 1" },
+                { time: "09:00 AM", title: "Inauguration Ceremony", location: "Main Ground" },
+                { time: "11:00 AM", title: "Keynote: The Future of Innovation", location: "Auditorium A" },
+                { time: "02:00 PM", title: "Panel: Bridging School to STEM", location: "Conference Room 1" },
             ]
         },
         {
-            date: "May 16 Thu",
+            date: "February 15 Sat",
             events: [
-                { time: "09:30 AM", title: "Trade & Investment Forum", location: "Main Hall" },
-                { time: "01:00 PM", title: "Networking Lunch", location: "Dining Area" },
-                { time: "03:00 PM", title: "Closing Remarks", location: "Main Hall" },
+                { time: "09:30 AM", title: "School-Institute Collaboration Forum", location: "Main Hall" },
+                { time: "01:00 PM", title: "Interactive Workshop: Robotics 101", location: "Robotics Lab" },
+                { time: "03:30 PM", title: "Closing & Prize Distribution", location: "Main Ground" },
             ]
         }
     ];
@@ -26,7 +26,7 @@ export default function Schedule() {
             <Navbar />
             <main className="pt-32 pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-12">Event Schedule</h1>
-                
+
                 <div className="space-y-12">
                     {days.map((day, idx) => (
                         <div key={idx} className="border-l-4 border-brics-blue pl-8">

@@ -40,7 +40,7 @@ export default function AllEvents() {
                             Back to Home
                         </Link>
                         <h1 className="text-5xl font-bold text-brics-dark">Events Calendar</h1>
-                        <p className="text-xl text-gray-600 mt-4">Explore all summits, forums, and gatherings for BRICS 2026.</p>
+                        <p className="text-xl text-gray-600 mt-4">Explore all summits, forums, and gatherings for Pragyaan 2026.</p>
                     </div>
 
                     {loading ? (
@@ -62,19 +62,18 @@ export default function AllEvents() {
                                         alt={event.title}
                                         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
-                                    
+
                                     {/* Overlay Gradient */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-80"></div>
 
                                     {/* Content */}
                                     <div className="absolute bottom-0 left-0 right-0 p-8 text-white transition-transform duration-500 translate-y-[100px] group-hover:translate-y-0">
-                                        
+
                                         <div className="mb-4 flex items-center gap-3">
-                                            <span className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-md ${
-                                                event.category === 'Arts' ? 'bg-brics-green/80 text-white' : 
-                                                event.category === 'Tech' ? 'bg-brics-blue/80 text-white' : 
-                                                'bg-brics-yellow/80 text-black'
-                                            }`}>
+                                            <span className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur-md ${event.category === 'Arts' ? 'bg-brics-green/80 text-white' :
+                                                    event.category === 'Tech' ? 'bg-brics-blue/80 text-white' :
+                                                        'bg-brics-yellow/80 text-black'
+                                                }`}>
                                                 {event.category}
                                             </span>
                                         </div>
@@ -98,7 +97,7 @@ export default function AllEvents() {
                                             <p className="mb-6 text-sm leading-relaxed text-gray-300 line-clamp-3">
                                                 {event.description}
                                             </p>
-                                            
+
                                             <span className="flex items-center gap-2 font-bold text-brics-yellow hover:gap-3 transition-all">
                                                 Learn More
                                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

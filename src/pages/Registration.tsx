@@ -83,7 +83,7 @@ export default function Registration() {
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-lg text-brics-dark">Certificates & Awards</h3>
-                                        <p className="text-gray-600">Participating schools and students receive official BRICS Pragyaan certificates.</p>
+                                        <p className="text-gray-600">Participating schools and students receive official IIT Jammu Pragyaan certificates.</p>
                                     </div>
                                 </div>
                             </div>

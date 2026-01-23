@@ -5,13 +5,13 @@ const MENU_ITEMS = [
     { label: 'Home', href: '/' },
     { label: 'Zones', href: '/zones' },
     { label: 'Vision 2026', href: '/vision' },
-    { label: 'Schedule', href: '/schedule' },
     { label: 'Events', href: '/events' },
     { label: 'Team', href: '/team' },
 ];
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { pathname } = useLocation();
     const isHome = pathname === '/';
 
@@ -23,8 +23,13 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Force scrolled state on non-home pages
-    const effectiveScrolled = isScrolled || !isHome;
+    // Close menu when route changes
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [pathname]);
+
+    // Force scrolled state on non-home pages or when menu is open
+    const effectiveScrolled = isScrolled || !isHome || isMenuOpen;
 
     return (
         <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${effectiveScrolled ? 'py-4' : 'py-6'}`}>
@@ -40,24 +45,54 @@ export default function Navbar() {
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden lg:flex items-center space-x-6">
+                    <div className="hidden lg:flex items-center space-x-8">
                         {MENU_ITEMS.map((item) => (
                             <Link
                                 key={item.label}
                                 to={item.href}
-                                className={`text-[14px] font-medium transition-colors hover:text-brics-blue ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`}
+                                className={`text-[18px] font-bold transition-colors hover:text-brics-blue ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`}
                             >
                                 {item.label}
                             </Link>
                         ))}
-
-
                     </div>
 
-                    {/* Mobile Menu Button (Hamburger) - Placeholder */}
+                    {/* Mobile Menu Button (Hamburger) */}
                     <div className="lg:hidden">
-                        <svg className={`w-8 h-8 ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className={`p-2 rounded-lg transition-colors ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`}
+                        >
+                            {isMenuOpen ? (
+                                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            ) : (
+                                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                                </svg>
+                            )}
+                        </button>
                     </div>
+                </div>
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            <div
+                className={`lg:hidden fixed inset-0 z-[-1] bg-white/95 backdrop-blur-xl transition-all duration-500 transform ${isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+                    }`}
+            >
+                <div className="flex flex-col items-center justify-center h-full space-y-8 pt-20">
+                    {MENU_ITEMS.map((item) => (
+                        <Link
+                            key={item.label}
+                            to={item.href}
+                            className="text-2xl font-bold text-gray-800 hover:text-brics-blue transition-colors"
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            {item.label}
+                        </Link>
+                    ))}
                 </div>
             </div>
         </nav>

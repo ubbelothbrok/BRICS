@@ -3,10 +3,10 @@ import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import eventsData from '../data/db.json';
-import { 
-    CalendarIcon, 
-    MapPinIcon, 
-    ClockIcon, 
+import {
+    CalendarIcon,
+    MapPinIcon,
+    ClockIcon,
     ArrowLeftIcon,
     UserGroupIcon,
     ExclamationTriangleIcon,
@@ -69,27 +69,26 @@ export default function EventDetails() {
 
             {/* Hero Section */}
             <div className="relative h-[60vh] min-h-[500px] w-full overflow-hidden">
-                <img 
-                    src={event.image} 
-                    alt={event.title} 
+                <img
+                    src={event.image}
+                    alt={event.title}
                     className="absolute inset-0 h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                
+
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 max-w-[1400px] mx-auto w-full">
                     <Link to="/events" className="text-white/80 hover:text-white font-medium flex items-center gap-2 mb-6 w-fit transition-colors">
                         <ArrowLeftIcon className="w-5 h-5" />
                         Back to Events
                     </Link>
-                    
-                    <span className={`inline-block px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider mb-4 ${
-                        event.category === 'Arts' ? 'bg-brics-green text-white' : 
-                        event.category === 'Tech' ? 'bg-brics-blue text-white' : 
-                        'bg-brics-yellow text-black'
-                    }`}>
+
+                    <span className={`inline-block px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider mb-4 ${event.category === 'Arts' ? 'bg-brics-green text-white' :
+                            event.category === 'Tech' ? 'bg-brics-blue text-white' :
+                                'bg-brics-yellow text-black'
+                        }`}>
                         {event.category}
                     </span>
-                    
+
                     <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
                         {event.title}
                     </h1>
@@ -112,7 +111,7 @@ export default function EventDetails() {
             </div>
 
             <main className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
-                
+
                 {/* Left Column: Description & Schedule */}
                 <div className="lg:col-span-2 space-y-12">
                     <section>
@@ -151,7 +150,7 @@ export default function EventDetails() {
                             <ExclamationTriangleIcon className="w-6 h-6 text-brics-orange" />
                             Rules & Guidelines
                         </h3>
-                        
+
                         {event.rules && (
                             <ul className="space-y-4 mb-8">
                                 {event.rules.map((rule, index) => (
@@ -171,7 +170,7 @@ export default function EventDetails() {
                                     <p className="font-medium text-gray-900">{event.teamSize || 'N/A'}</p>
                                 </div>
                             </div>
-                            
+
                             <div className="flex items-center gap-3">
                                 <EnvelopeIcon className="w-5 h-5 text-gray-400" />
                                 <div>
@@ -181,9 +180,6 @@ export default function EventDetails() {
                             </div>
                         </div>
 
-                        <button className="w-full mt-8 bg-brics-blue text-white font-bold py-4 rounded-xl hover:bg-blue-900 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-300">
-                            Register Now
-                        </button>
                     </div>
                 </div>
 

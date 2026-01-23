@@ -3,10 +3,10 @@ import Footer from '../components/Footer';
 
 export default function Team() {
     const team = [
-        { name: "Dr. Sarah Chen", role: "Event Director", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" },
-        { name: "Rajesh Kumar", role: "Program Coordinator", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rajesh" },
-        { name: "Elena Volkov", role: "International Liaison", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Elena" },
-        { name: "David Nkosi", role: "Logistics Manager", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=David" },
+        { name: "Prof. Manoj Singh Gaur", role: "Director, IIT Jammu", image: "https://boldnewsonline.com/wp-content/uploads/2023/07/Prof.-Manoj-Singh-Gaur-1.jpg" },
+        { name: "Dr. Sarah Chen", role: "Event Chair", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" },
+        { name: "Rajesh Kumar", role: "Student Coordinator", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rajesh" },
+        { name: "Dr. Amit Sharma", role: "Technical Lead", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Amit" },
     ];
 
     return (
@@ -17,12 +17,12 @@ export default function Team() {
                 <p className="text-xl text-gray-600 mb-16 max-w-3xl">
                     Meet the dedicated professionals working behind the scenes to make Pragyaan 2026 a success.
                 </p>
-                
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {team.map((member, idx) => (
                         <div key={idx} className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all text-center border border-gray-100">
-                            <img 
-                                src={member.image} 
+                            <img
+                                src={member.image}
                                 alt={member.name}
                                 className="w-32 h-32 rounded-full mx-auto mb-6 bg-gray-50"
                             />
