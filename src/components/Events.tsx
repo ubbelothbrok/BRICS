@@ -49,7 +49,7 @@ export default function Events() {
                         <Link
                             to={`/events/${event.id}`}
                             key={event.id}
-                            className="group relative h-[450px] overflow-hidden rounded-2xl shadow-lg block"
+                            className="group relative h-[450px] overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 block"
                         >
                             {/* Background Image */}
                             <img

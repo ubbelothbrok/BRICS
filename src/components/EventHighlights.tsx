@@ -34,9 +34,9 @@ export default function EventHighlights() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {highlights.map((item) => (
-                        <div key={item.name} className="group relative bg-[var(--color-card-bg)] rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-8 flex flex-col items-center text-center border border-[var(--color-border)] hover:border-brics-blue">
-                            <div className={`w-16 h-16 rounded-full ${item.color.replace('bg-', 'dark:bg-opacity-20 bg-')} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                                <item.icon className="w-8 h-8" />
+                        <div key={item.name} className="group relative bg-[var(--color-card-bg)] rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 p-8 flex flex-col items-center text-center border border-[var(--color-border)] hover:border-brics-blue">
+                            <div className={`w-16 h-16 rounded-full ${item.color.replace('bg-', 'dark:bg-opacity-20 bg-')} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-12 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.1)] transition-all duration-300`}>
+                                <item.icon className="w-8 h-8 transition-transform duration-300" />
                             </div>
                             <h3 className="text-2xl font-bold text-[var(--color-text)] mb-3 transition-colors duration-300">{item.name}</h3>
                             <p className="text-[var(--color-text)] opacity-80 leading-relaxed transition-opacity duration-300">
