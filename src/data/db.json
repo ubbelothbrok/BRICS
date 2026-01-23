@@ -1,107 +1,41 @@
 {
   "events": [
     {
-      "id": 6,
-      "title": "Jigsaw Puzzle Challenge",
-      "date": "Feb 14",
-      "time": "Continuous",
-      "location": "Student Activity Center",
-      "category": "Arts",
-      "description": "Test your spatial reasoning and teamwork with metallic, wooden, and 3D mechanical puzzles. Fastest teams to solve the puzzle sets win exciting prizes.",
-      "image": "/images/jigsaw_live.jpg",
-      "longDescription": "Sharpen your mind and test your patience at the Jigsaw Puzzle Challenge! This isn't just about fitting cardboard pieces together; we bring you a collection of complex 3D mechanical puzzles, metallic interlocking loops, and high-difficulty wooden brain teasers.\n\nTeams will race against the clock to solve a curated set of puzzles. The challenge tests your spatial reasoning, pattern recognition, and ability to stay calm under pressure. Whether you're a casual solver or a logic puzzle enthusiast, there's a difficulty level for everyone. It's a perfect break from the high-energy tech events, allowing you to focus and problem-solve in a fun, competitive environment.",
-      "schedule": [
-        {
-          "time": "Continuous",
-          "activity": "Walk-in participation throughout the day (10 AM - 4 PM)"
-        },
-        {
-          "time": "Hourly",
-          "activity": "Leaderboard Updates for fastest solve times"
-        }
-      ],
-      "rules": [
-        "Teams of up to 4 members allowed.",
-        "Damaging the puzzle mechanism results in immediate disqualification.",
-        "No external tools or internet help allowed.",
-        "The timer stops only when the puzzle is fully solved/assembled."
-      ],
-      "teamSize": "3-4 Members",
-      "contact": "recreational-club@iitjammu.ac.in"
-    },
-    {
-      "id": 7,
-      "title": "Artihc Art Gallery",
-      "date": "Feb 14 & 15",
-      "time": "All Day",
-      "location": "Exhibition Hall",
-      "category": "Arts",
-      "description": "Explore a curated collection of paintings and artworks by the Artihc Club. Live demonstrations of acrylic, watercolor, and oil painting techniques by student artists.",
-      "image": "/images/art_gallery_live.jpg",
-      "longDescription": "Walk through a corridor of creativity at the Artihc Art Gallery. This exhibition showcases the finest works from IIT Jammu's student artists, featuring a diverse range of styles including hyper-realism, abstract expressionism, mandala art, and digital illustrations.\n\nThe gallery is more than just a display; it's an interactive space. Throughout the day, featured artists will be conducting live demonstrations, showing how a blank canvas evolves into a masterpiece. You can interact with the artists, understand their inspirations, and even try your hand at a few brush strokes at our community canvas.",
+      "id": 8,
+      "title": "AR Builder Challenge",
+      "date": "Feb 15",
+      "time": "10:00 AM - 03:00 PM",
+      "location": "Computer Center",
+      "category": "Tech",
+      "description": "Build virtual structures using real-world hand gestures! An interactive Augmented Reality game powered by Computer Vision. Compete for stability and height scores.",
+      "image": "/ar-builder-highlight.jpg",
+      "longDescription": "Experience the magic where code meets reality. The AR Builder Challenge is a unique interactive game developed by our Coding Club. Using advanced Computer Vision and gesture recognition, we've created a system where your hand movements in the real world control virtual building blocks on a massive screen.\n\nThe objective? Build the tallest, most stable tower possible within a time limit. You simply wave your hands to pick up blocks, rotate them, and stack them. The physics engine simulates gravity and balance in real-time, so one wrong move and your virtual tower comes crumbling down! It's a fun, gamified way to understand the power of Augmented Reality.",
       "schedule": [
         {
           "time": "10:00 AM",
-          "activity": "Gallery Opens"
+          "activity": "System Demo & Tutorial"
         },
         {
-          "time": "11:00 AM",
-          "activity": "Live Watercolor Demo"
-        },
-        {
-          "time": "02:00 PM",
-          "activity": "Live Acrylic Pouring Demo"
-        },
-        {
-          "time": "05:00 PM",
-          "activity": "Gallery Closes"
-        }
-      ],
-      "rules": [
-        "Do not touch the exhibits.",
-        "Photography is allowed without flash.",
-        "Maintain silence to appreciate the art.",
-        "Food and drinks are strictly prohibited inside the gallery."
-      ],
-      "teamSize": "Open for all visitors",
-      "contact": "artihc-club@iitjammu.ac.in"
-    },
-    {
-      "id": 4,
-      "title": "Painting Competition",
-      "date": "Feb 15",
-      "time": "09:00 AM - 12:00 PM",
-      "location": "Art Studio",
-      "category": "Arts",
-      "description": "An on-the-spot painting competition to unleash your imagination. Materials provided. Themes will be announced at the venue. Winners will be awarded certificates and prizes.",
-      "image": "/images/painting_live.jpg",
-      "longDescription": "Colors speak louder than words. The Painting Competition is a sanctuary for the artists, the dreamers, and the creators. Whether you prefer the fluidity of watercolors, the texture of acrylics, or the precision of pencil sketching, this is your platform.\n\nThe event is an 'On-The-Spot' competition, meaning the theme will be revealed right at the start to ensure spontaneity and original thinking. Participants will have 3 hours to conceptualize and complete their artwork. The serene atmosphere of the Art Studio, accompanied by light instrumental music, provides the perfect ambiance for your creativity to flow onto the canvas.",
-      "schedule": [
-        {
-          "time": "09:00 AM",
-          "activity": "Theme Announcement & Material Distribution"
-        },
-        {
-          "time": "09:15 AM",
-          "activity": "Painting Starts"
-        },
-        {
-          "time": "12:00 PM",
-          "activity": "Submission Deadline"
+          "time": "10:30 AM",
+          "activity": "Open Challenge Slots Begin"
         },
         {
           "time": "01:00 PM",
-          "activity": "Results & Exhibition"
+          "activity": "Lunch Break"
+        },
+        {
+          "time": "03:00 PM",
+          "activity": "Final Logic & Stability Score Calculation"
         }
       ],
       "rules": [
-        "Theme will be announced on the spot.",
-        "Basic materials (paper, paints, brushes) provided; participants can bring their own specialized tools.",
-        "Digital art is not included in this specific category.",
-        "Plagiarism or copying from phone references is strictly prohibited."
+        "One player at a time in the sensor zone.",
+        "3 minutes time limit per attempt.",
+        "Score is calculated based on Height x Stability.",
+        "Intentional obstruction of sensors is not allowed."
       ],
       "teamSize": "Individual Participation",
-      "contact": "artihc-club@iitjammu.ac.in"
+      "contact": "coding-club@iitjammu.ac.in"
     },
     {
       "id": 1,
@@ -143,6 +77,109 @@
       ],
       "teamSize": "Open for all visitors",
       "contact": "robotics-club@iitjammu.ac.in"
+    },
+    {
+      "id": 4,
+      "title": "Painting Competition",
+      "date": "Feb 15",
+      "time": "09:00 AM - 12:00 PM",
+      "location": "Art Studio",
+      "category": "Arts",
+      "description": "An on-the-spot painting competition to unleash your imagination. Materials provided. Themes will be announced at the venue. Winners will be awarded certificates and prizes.",
+      "image": "/images/painting_live.jpg",
+      "longDescription": "Colors speak louder than words. The Painting Competition is a sanctuary for the artists, the dreamers, and the creators. Whether you prefer the fluidity of watercolors, the texture of acrylics, or the precision of pencil sketching, this is your platform.\n\nThe event is an 'On-The-Spot' competition, meaning the theme will be revealed right at the start to ensure spontaneity and original thinking. Participants will have 3 hours to conceptualize and complete their artwork. The serene atmosphere of the Art Studio, accompanied by light instrumental music, provides the perfect ambiance for your creativity to flow onto the canvas.",
+      "schedule": [
+        {
+          "time": "09:00 AM",
+          "activity": "Theme Announcement & Material Distribution"
+        },
+        {
+          "time": "09:15 AM",
+          "activity": "Painting Starts"
+        },
+        {
+          "time": "12:00 PM",
+          "activity": "Submission Deadline"
+        },
+        {
+          "time": "01:00 PM",
+          "activity": "Results & Exhibition"
+        }
+      ],
+      "rules": [
+        "Theme will be announced on the spot.",
+        "Basic materials (paper, paints, brushes) provided; participants can bring their own specialized tools.",
+        "Digital art is not included in this specific category.",
+        "Plagiarism or copying from phone references is strictly prohibited."
+      ],
+      "teamSize": "Individual Participation",
+      "contact": "artihc-club@iitjammu.ac.in"
+    },
+    {
+      "id": 7,
+      "title": "Artihc Art Gallery",
+      "date": "Feb 14 & 15",
+      "time": "All Day",
+      "location": "Exhibition Hall",
+      "category": "Arts",
+      "description": "Explore a curated collection of paintings and artworks by the Artihc Club. Live demonstrations of acrylic, watercolor, and oil painting techniques by student artists.",
+      "image": "/images/art_gallery_live.jpg",
+      "longDescription": "Walk through a corridor of creativity at the Artihc Art Gallery. This exhibition showcases the finest works from IIT Jammu's student artists, featuring a diverse range of styles including hyper-realism, abstract expressionism, mandala art, and digital illustrations.\n\nThe gallery is more than just a display; it's an interactive space. Throughout the day, featured artists will be conducting live demonstrations, showing how a blank canvas evolves into a masterpiece. You can interact with the artists, understand their inspirations, and even try your hand at a few brush strokes at our community canvas.",
+      "schedule": [
+        {
+          "time": "10:00 AM",
+          "activity": "Gallery Opens"
+        },
+        {
+          "time": "11:00 AM",
+          "activity": "Live Watercolor Demo"
+        },
+        {
+          "time": "02:00 PM",
+          "activity": "Live Acrylic Pouring Demo"
+        },
+        {
+          "time": "05:00 PM",
+          "activity": "Gallery Closes"
+        }
+      ],
+      "rules": [
+        "Do not touch the exhibits.",
+        "Photography is allowed without flash.",
+        "Maintain silence to appreciate the art.",
+        "Food and drinks are strictly prohibited inside the gallery."
+      ],
+      "teamSize": "Open for all visitors",
+      "contact": "artihc-club@iitjammu.ac.in"
+    },
+    {
+      "id": 6,
+      "title": "Jigsaw Puzzle Challenge",
+      "date": "Feb 14",
+      "time": "Continuous",
+      "location": "Student Activity Center",
+      "category": "Arts",
+      "description": "Test your spatial reasoning and teamwork with metallic, wooden, and 3D mechanical puzzles. Fastest teams to solve the puzzle sets win exciting prizes.",
+      "image": "/images/jigsaw_live.jpg",
+      "longDescription": "Sharpen your mind and test your patience at the Jigsaw Puzzle Challenge! This isn't just about fitting cardboard pieces together; we bring you a collection of complex 3D mechanical puzzles, metallic interlocking loops, and high-difficulty wooden brain teasers.\n\nTeams will race against the clock to solve a curated set of puzzles. The challenge tests your spatial reasoning, pattern recognition, and ability to stay calm under pressure. Whether you're a casual solver or a logic puzzle enthusiast, there's a difficulty level for everyone. It's a perfect break from the high-energy tech events, allowing you to focus and problem-solve in a fun, competitive environment.",
+      "schedule": [
+        {
+          "time": "Continuous",
+          "activity": "Walk-in participation throughout the day (10 AM - 4 PM)"
+        },
+        {
+          "time": "Hourly",
+          "activity": "Leaderboard Updates for fastest solve times"
+        }
+      ],
+      "rules": [
+        "Teams of up to 4 members allowed.",
+        "Damaging the puzzle mechanism results in immediate disqualification.",
+        "No external tools or internet help allowed.",
+        "The timer stops only when the puzzle is fully solved/assembled."
+      ],
+      "teamSize": "3-4 Members",
+      "contact": "recreational-club@iitjammu.ac.in"
     },
     {
       "id": 2,
@@ -254,43 +291,6 @@
       ],
       "teamSize": "Audience Event",
       "contact": "outreach@iitjammu.ac.in"
-    },
-    {
-      "id": 8,
-      "title": "AR Builder Challenge",
-      "date": "Feb 15",
-      "time": "10:00 AM - 03:00 PM",
-      "location": "Computer Center",
-      "category": "Tech",
-      "description": "Build virtual structures using real-world hand gestures! An interactive Augmented Reality game powered by Computer Vision. Compete for stability and height scores.",
-      "image": "/images/ar_builder.jpg",
-      "longDescription": "Experience the magic where code meets reality. The AR Builder Challenge is a unique interactive game developed by our Coding Club. Using advanced Computer Vision and gesture recognition, we've created a system where your hand movements in the real world control virtual building blocks on a massive screen.\n\nThe objective? Build the tallest, most stable tower possible within a time limit. You simply wave your hands to pick up blocks, rotate them, and stack them. The physics engine simulates gravity and balance in real-time, so one wrong move and your virtual tower comes crumbling down! It's a fun, gamified way to understand the power of Augmented Reality.",
-      "schedule": [
-        {
-          "time": "10:00 AM",
-          "activity": "System Demo & Tutorial"
-        },
-        {
-          "time": "10:30 AM",
-          "activity": "Open Challenge Slots Begin"
-        },
-        {
-          "time": "01:00 PM",
-          "activity": "Lunch Break"
-        },
-        {
-          "time": "03:00 PM",
-          "activity": "Final Logic & Stability Score Calculation"
-        }
-      ],
-      "rules": [
-        "One player at a time in the sensor zone.",
-        "3 minutes time limit per attempt.",
-        "Score is calculated based on Height x Stability.",
-        "Intentional obstruction of sensors is not allowed."
-      ],
-      "teamSize": "Individual Participation",
-      "contact": "coding-club@iitjammu.ac.in"
     },
     {
       "id": 9,
