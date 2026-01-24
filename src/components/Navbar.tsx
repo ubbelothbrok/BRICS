@@ -7,6 +7,7 @@ const MENU_ITEMS = [
     { label: 'Zones', href: '/zones' },
     { label: 'Vision 2026', href: '/vision' },
     { label: 'Events', href: '/events' },
+    { label: 'Manthan', href: '/manthan' },
     { label: 'Team', href: '/team' },
 ];
 
@@ -52,7 +53,7 @@ export default function Navbar() {
                             <Link
                                 key={item.label}
                                 to={item.href}
-                                className={`text-[18px] font-bold transition-colors hover:text-brics-blue ${effectiveScrolled ? 'text-[var(--color-nav-text)]' : 'text-white'}`}
+                                className={`text-[18px] font-medium transition-colors hover:text-brics-blue ${effectiveScrolled ? 'text-[var(--color-nav-text)]' : 'text-white'}`}
                             >
                                 {item.label}
                             </Link>

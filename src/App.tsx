@@ -10,6 +10,7 @@ import EventDetails from './pages/EventDetails';
 import Loading from './components/Loading';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
+import Manthan from './pages/Manthan';
 import ScrollToTop from './components/ScrollToTop';
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/team" element={<Team />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
+          <Route path="/manthan" element={<Manthan />} />
         </Routes>
       </Router>
     </ThemeProvider>
