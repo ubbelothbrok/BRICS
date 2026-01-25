@@ -48,18 +48,17 @@ export default function CustomCursor() {
         <>
             {/* Main Dot */}
             <div
-                className="fixed top-0 left-0 w-2 h-2 bg-brics-blue rounded-full pointer-events-none z-[9999] transition-transform duration-100 ease-out"
+                className="fixed top-0 left-0 w-2 h-2 bg-[#ffff00] rounded-full pointer-events-none z-[10000] mix-blend-difference"
                 style={{
                     transform: `translate(${position.x - 4}px, ${position.y - 4}px) scale(${isMouseDown ? 0.8 : 1})`,
                 }}
             />
             {/* Outer Ring */}
             <div
-                className="fixed top-0 left-0 w-10 h-10 border border-brics-blue/30 rounded-full pointer-events-none z-[9998] transition-all duration-300 ease-out"
+                className="fixed top-0 left-0 w-10 h-10 border border-[#ffff00] rounded-full pointer-events-none z-[9999] transition-all duration-300 ease-out mix-blend-difference"
                 style={{
                     transform: `translate(${position.x - 20}px, ${position.y - 20}px) scale(${isHovering ? 1.5 : isMouseDown ? 0.9 : 1})`,
-                    backgroundColor: isHovering ? 'rgba(0, 39, 118, 0.05)' : 'transparent',
-                    borderColor: isHovering ? 'rgba(0, 39, 118, 0.8)' : 'rgba(0, 39, 118, 0.3)',
+                    backgroundColor: isHovering ? 'rgba(255, 255, 0, 0.1)' : 'transparent',
                 }}
             />
         </>
