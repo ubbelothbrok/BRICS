@@ -8,7 +8,7 @@ export default function DirectorNote() {
                     <div className="w-full md:w-1/2 relative group">
                         <div className="absolute inset-0 bg-brics-blue rounded-2xl transform translate-x-3 translate-y-3 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-300"></div>
                         <img
-                            src="https://boldnewsonline.com/wp-content/uploads/2023/07/Prof.-Manoj-Singh-Gaur-1.jpg"
+                            src="director.png"
                             alt="Director IIT Jammu"
                             className="relative w-full rounded-2xl shadow-xl object-cover aspect-[4/3] z-10"
                         />

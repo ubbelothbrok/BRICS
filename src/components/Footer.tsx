@@ -10,7 +10,7 @@ const FOOTER_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--color-brics-dark)] text-white pt-16 pb-8">
+    <footer className="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-gray-700 pb-12">
 
@@ -25,14 +25,7 @@ export default function Footer() {
             <p className="text-gray-400 leading-relaxed max-w-sm mb-6">
               Fostering innovation and bridging the gap between school education and higher technical institutes through STEM and Arts.
             </p>
-            <div className="flex gap-4">
-              {['twitter', 'facebook', 'youtube', 'instagram'].map(social => (
-                <a key={social} href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[var(--color-brics-blue)] transition-all">
-                  <span className="sr-only">{social}</span>
-                  <div className="w-5 h-5 bg-current opacity-80" /> {/* Placeholder for Social Icons */}
-                </a>
-              ))}
-            </div>
+
           </div>
 
           {/* Column 2: Links */}

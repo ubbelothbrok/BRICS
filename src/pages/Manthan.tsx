@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { DocumentCheckIcon, PencilSquareIcon, MapIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 
 export default function Manthan() {
     return (
@@ -11,9 +13,9 @@ export default function Manthan() {
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="images/manthan/speaker.jpg"
+                        src="/images/manthan/speakers.jpg"
                         alt="Conference Hall"
-                        className="w-full h-full object-cover object-[75%] md:object-center brightness-50"
+                        className="w-full h-full object-cover object-[40%] md:object-center brightness-50"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
                 </div>
@@ -32,7 +34,10 @@ export default function Manthan() {
                             <button className="px-8 py-3.5 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
                                 Download Brochure
                             </button>
-                            <button className="px-8 py-3.5 bg-brics-blue/80 hover:bg-brics-blue text-white rounded-full font-bold text-lg transition-all duration-300 cursor-pointer backdrop-blur-sm">
+                            <button
+                                onClick={() => document.getElementById('themes')?.scrollIntoView({ behavior: 'smooth' })}
+                                className="px-8 py-3.5 bg-brics-blue/80 hover:bg-brics-blue text-white rounded-full font-bold text-lg transition-all duration-300 cursor-pointer backdrop-blur-sm"
+                            >
                                 View Agenda
                             </button>
                         </div>
@@ -70,15 +75,15 @@ export default function Manthan() {
                     <div className="relative group">
                         <div className="absolute -inset-2 bg-gradient-to-r from-brics-blue to-brics-green rounded-2xl opacity-30 blur-lg group-hover:opacity-50 transition duration-500"></div>
                         <img
-                            src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2670&auto=format&fit=crop"
-                            alt="Leadership Meeting"
-                            className="relative rounded-2xl shadow-2xl w-full h-[500px] object-cover transform transition duration-500 group-hover:scale-[1.01]"
+                            src="/images/manthan/students.png"
+                            alt="Indian Students"
+                            className="relative rounded-2xl shadow-2xl w-full h-[530px] object-cover transform transition duration-500 group-hover:scale-[1.01]"
                         />
                     </div>
                 </section>
 
                 {/* --- THEMES SECTION --- */}
-                <section>
+                <section id="themes" className="scroll-mt-24">
                     <div className="text-center max-w-3xl mx-auto mb-16">
                         <h2 className="text-4xl font-bold mb-4 text-brics-blue font-heading">Thematic Agenda</h2>
                         <p className="text-gray-600">The conclave is structured around two critical themes addressed through focused, problem-solving discussions.</p>
@@ -86,48 +91,52 @@ export default function Manthan() {
 
                     <div className="grid md:grid-cols-2 gap-8">
                         {/* Theme 1 */}
-                        <div className="group relative overflow-hidden rounded-3xl h-[500px] shadow-xl">
+                        <Link to="/manthan/infrastructure" className="group relative overflow-hidden rounded-3xl h-[500px] shadow-xl cursor-pointer transition-transform duration-300 hover:scale-[1.02] block">
                             <img
-                                src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2670&auto=format&fit=crop"
+                                src="/images/manthan/infra.png"
                                 alt="School Infrastructure"
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-90 group-hover:opacity-80 transition-opacity"></div>
-                            <div className="absolute bottom-0 left-0 p-10 text-white">
+                            <div className="absolute bottom-0 left-0 p-10 text-white w-full">
                                 <div className="text-brics-yellow font-bold text-sm tracking-widest uppercase mb-2">Theme 1</div>
-                                <h3 className="text-3xl font-bold mb-4 font-heading">Infrastructure, Equity & Access</h3>
-                                <p className="text-gray-300 leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                    Addressing physical & digital foundations. Defining minimum viable standards for 2030, leveraging Samagra Shiksha & CSR for sustainable maintenance models.
-                                </p>
-                                <ul className="text-sm space-y-2 text-gray-300 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                                    <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brics-yellow rounded-full"></span>Rural & Border Area Schools</li>
-                                    <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brics-yellow rounded-full"></span>Digital Divide & Connectivity</li>
-                                    <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brics-yellow rounded-full"></span>Safety & Sanitation</li>
-                                </ul>
+                                <h3 className="text-3xl font-bold mb-0 font-heading">Infrastructure, Equity & Access</h3>
+                                <div className="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-[400px] group-hover:opacity-100 group-hover:mt-4">
+                                    <p className="text-gray-300 leading-relaxed mb-6">
+                                        Addressing physical & digital foundations. Defining minimum viable standards for 2030, leveraging Samagra Shiksha & CSR for sustainable maintenance models.
+                                    </p>
+                                    <ul className="text-sm space-y-2 text-gray-300">
+                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brics-yellow rounded-full"></span>Rural & Border Area Schools</li>
+                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brics-yellow rounded-full"></span>Digital Divide & Connectivity</li>
+                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brics-yellow rounded-full"></span>Safety & Sanitation</li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
 
                         {/* Theme 2 */}
-                        <div className="group relative overflow-hidden rounded-3xl h-[500px] shadow-xl">
+                        <Link to="/manthan/innovation" className="group relative overflow-hidden rounded-3xl h-[500px] shadow-xl cursor-pointer transition-transform duration-300 hover:scale-[1.02] block">
                             <img
-                                src="https://images.unsplash.com/photo-1581092921461-e0b960d401fd?q=80&w=2670&auto=format&fit=crop"
+                                src="/images/manthan/stem.png"
                                 alt="Future Learning"
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-90 group-hover:opacity-80 transition-opacity"></div>
-                            <div className="absolute bottom-0 left-0 p-10 text-white">
+                            <div className="absolute bottom-0 left-0 p-10 text-white w-full">
                                 <div className="text-brics-green font-bold text-sm tracking-widest uppercase mb-2">Theme 2</div>
-                                <h3 className="text-3xl font-bold mb-4 font-heading">Future-Ready Learning & Innovation</h3>
-                                <p className="text-gray-300 leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                    Tackling the "software" of education: Pedagogy and Skills. Integrating AI & Robotics into the curriculum and transforming ATLs into vivid innovation hubs.
-                                </p>
-                                <ul className="text-sm space-y-2 text-gray-300 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                                    <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brics-green rounded-full"></span>STEM, AI & Robotics Integration</li>
-                                    <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brics-green rounded-full"></span>Teacher Upskilling Strategy</li>
-                                    <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brics-green rounded-full"></span>PM SHRI as Lighthouse Schools</li>
-                                </ul>
+                                <h3 className="text-3xl font-bold mb-0 font-heading">Future-Ready Learning & Innovation</h3>
+                                <div className="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out group-hover:max-h-[400px] group-hover:opacity-100 group-hover:mt-4">
+                                    <p className="text-gray-300 leading-relaxed mb-6">
+                                        Tackling the "software" of education: Pedagogy and Skills. Integrating AI & Robotics into the curriculum and transforming ATLs into vivid innovation hubs.
+                                    </p>
+                                    <ul className="text-sm space-y-2 text-gray-300">
+                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brics-green rounded-full"></span>STEM, AI & Robotics Integration</li>
+                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brics-green rounded-full"></span>Teacher Upskilling Strategy</li>
+                                        <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-brics-green rounded-full"></span>PM SHRI as Lighthouse Schools</li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                 </section>
 
@@ -158,12 +167,12 @@ export default function Manthan() {
                             {/* Item 2 */}
                             <div className="flex flex-col md:flex-row items-center justify-between group">
                                 <div className="md:w-5/12 text-right pr-8">
-                                    <span className="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">Panel Discussion 1</span>
+                                    <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Discussion</span>
                                 </div>
                                 <div className="w-12 h-12 rounded-full bg-brics-orange text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">11:45</div>
                                 <div className="md:w-5/12 pl-8">
-                                    <h4 className="text-2xl font-bold text-gray-900 group-hover:text-brics-orange transition-colors">Infrastructure & Equity</h4>
-                                    <p className="text-gray-600 mt-2">Foundations: Minimum viable infra by 2030, funding models, and inclusion strategies.</p>
+                                    <h4 className="text-2xl font-bold text-gray-900 group-hover:text-brics-orange transition-colors">Envisioning Schools of 2030</h4>
+                                    <p className="text-gray-600 mt-2">A comprehensive 2-hour working session with Principals and Policymakers to draft the roadmap.</p>
                                 </div>
                             </div>
 
@@ -173,7 +182,7 @@ export default function Manthan() {
                                     <h4 className="text-2xl font-bold text-gray-900 group-hover:text-gray-700 transition-colors">Lunch Break</h4>
                                     <p className="text-gray-600 mt-2">Networking lunch for stakeholders to connect informally.</p>
                                 </div>
-                                <div className="w-12 h-12 rounded-full bg-gray-400 text-white flex items-center justify-center font-bold z-10 shadow-lg">01:30</div>
+                                <div className="w-12 h-12 rounded-full bg-gray-400 text-white flex items-center justify-center font-bold z-10 shadow-lg">13:45</div>
                                 <div className="md:w-5/12 pl-8">
                                     <span className="inline-block px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-medium">Networking</span>
                                 </div>
@@ -182,12 +191,12 @@ export default function Manthan() {
                             {/* Item 4 */}
                             <div className="flex flex-col md:flex-row items-center justify-between group">
                                 <div className="md:w-5/12 text-right pr-8">
-                                    <span className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Panel Discussion 2</span>
+                                    <span className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Showcase</span>
                                 </div>
-                                <div className="w-12 h-12 rounded-full bg-brics-green text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">02:00</div>
+                                <div className="w-12 h-12 rounded-full bg-brics-green text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">14:30</div>
                                 <div className="md:w-5/12 pl-8">
-                                    <h4 className="text-2xl font-bold text-gray-900 group-hover:text-brics-green transition-colors">Future-Ready Learning</h4>
-                                    <p className="text-gray-600 mt-2">Innovation: Transforming ATLs, upsilling teachers, and outcome-based STEM learning.</p>
+                                    <h4 className="text-2xl font-bold text-gray-900 group-hover:text-brics-green transition-colors">Innovation Showcase</h4>
+                                    <p className="text-gray-600 mt-2">45 minutes of spotlighting cutting-edge ed-tech and pedagogical innovations.</p>
                                 </div>
                             </div>
 
@@ -197,7 +206,7 @@ export default function Manthan() {
                                     <h4 className="text-2xl font-bold text-gray-900 group-hover:text-brics-blue transition-colors">Conclusion</h4>
                                     <p className="text-gray-600 mt-2">Release of the "Pragyaan Charter". Commitment statements and next-year roadmap.</p>
                                 </div>
-                                <div className="w-12 h-12 rounded-full bg-brics-blue text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">03:30</div>
+                                <div className="w-12 h-12 rounded-full bg-brics-blue text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">15:15</div>
                                 <div className="md:w-5/12 pl-8">
                                     <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Charter Release</span>
                                 </div>
@@ -207,31 +216,40 @@ export default function Manthan() {
                 </section>
 
                 {/* --- DIGITAL INNOVATION & CONCLUSION --- */}
-                <section className="grid lg:grid-cols-3 gap-8">
-                    {/* Digital Strategy Card */}
-                    <div className="bg-brics-dark text-white p-10 rounded-3xl lg:col-span-1 border border-gray-700 hover:border-brics-blue transition-colors duration-300">
-                        <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-2xl mb-6">📱</div>
-                        <h3 className="text-2xl font-bold mb-4 font-heading">Digital Innovation</h3>
-                        <p className="text-gray-400 mb-6 leading-relaxed">
-                            Powered by the <strong>Pragyaan Platform</strong>. Real-time digital facilities audit, live Q&A display, and instant audience polling to gauge policy sentiment.
+                {/* --- PRAGYAAN CHARTER --- */}
+                <section className="relative overflow-hidden bg-white border border-gray-200 rounded-[3rem] p-12 md:p-20 text-center shadow-lg">
+                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brics-blue via-brics-orange to-brics-green"></div>
+
+                    <div className="max-w-4xl mx-auto relative z-10">
+                        <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-8 shadow-sm border border-blue-100">
+                            <DocumentCheckIcon className="w-10 h-10 text-brics-blue" />
+                        </div>
+
+                        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 font-heading">The Pragyaan Charter</h2>
+
+                        <p className="text-xl text-gray-600 leading-relaxed mb-10">
+                            The ultimate outcome of Manthan is the <strong>"Pragyaan Charter"</strong>—a signed declaration by all participating Principals and Dignitaries. This document will codify the collective resolve to implement the "Minimum Viable Standards" for infrastructure and the "Future-Ready Pedagogy" framework in their respective institutions by 2030.
                         </p>
-                        <div className="flex flex-wrap gap-2">
-                            <span className="text-xs px-3 py-1 bg-white/10 rounded-full border border-white/20">Pre-Event Audit</span>
-                            <span className="text-xs px-3 py-1 bg-white/10 rounded-full border border-white/20">Live Polling</span>
+
+                        <div className="flex flex-wrap justify-center gap-4">
+                            <span className="px-6 py-3 bg-gray-50 rounded-full text-gray-700 font-medium border border-gray-200 flex items-center gap-2 hover:bg-white hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                                <PencilSquareIcon className="w-5 h-5 text-brics-blue" />
+                                Signed Declaration
+                            </span>
+                            <span className="px-6 py-3 bg-gray-50 rounded-full text-gray-700 font-medium border border-gray-200 flex items-center gap-2 hover:bg-white hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                                <MapIcon className="w-5 h-5 text-brics-orange" />
+                                One Year Roadmap
+                            </span>
+                            <span className="px-6 py-3 bg-gray-50 rounded-full text-gray-700 font-medium border border-gray-200 flex items-center gap-2 hover:bg-white hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                                <UserGroupIcon className="w-5 h-5 text-brics-green" />
+                                Collective Resolve
+                            </span>
                         </div>
                     </div>
 
-                    {/* Closing Statement */}
-                    <div className="bg-gradient-to-br from-blue-50 to-white text-gray-900 p-10 rounded-3xl lg:col-span-2 border border-blue-100 flex flex-col justify-center">
-                        <h3 className="text-3xl font-bold mb-6 text-brics-blue font-heading">A Roadmap for 2047</h3>
-                        <p className="text-xl text-gray-700 leading-relaxed font-light">
-                            "By addressing the foundational deficits of today while simultaneously building the capacity for the future, the conclave aims to create a replicable model for school transformation."
-                        </p>
-                        <div className="mt-8 flex items-center gap-4">
-                            <div className="h-px bg-gray-300 flex-1"></div>
-                            <span className="text-sm font-semibold text-gray-500 uppercase tracking-widest">Join the Mission</span>
-                        </div>
-                    </div>
+                    {/* Decorative background elements */}
+                    <div className="absolute top-10 left-10 w-32 h-32 bg-brics-blue/5 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-10 right-10 w-40 h-40 bg-brics-orange/5 rounded-full blur-3xl"></div>
                 </section>
 
             </main>
