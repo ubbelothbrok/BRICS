@@ -7,36 +7,35 @@ export default function Manthan() {
             <Navbar />
 
             {/* --- HERO SECTION --- */}
-            <header className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+            <header className="relative w-full h-screen min-h-[700px] overflow-hidden bg-black">
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=2670&auto=format&fit=crop"
+                        src="images/manthan/speaker.jpg"
                         alt="Conference Hall"
-                        className="w-full h-full object-cover object-center brightness-40"
+                        className="w-full h-full object-cover object-[75%] md:object-center brightness-50"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-[var(--color-bg)]"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
                 </div>
 
                 {/* Hero Content */}
-                <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-                    <div className="inline-block px-4 py-1.5 mb-6 border border-white/30 rounded-full bg-white/10 backdrop-blur-sm">
-                        <span className="text-white/90 text-sm font-medium tracking-wider uppercase">Pragyaan 2026</span>
-                    </div>
-                    <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-heading">
-                        Principal’s Conclave
-                        <span className="block text-3xl md:text-4xl mt-4 font-light opacity-90 text-blue-200">Reimagining Indian Schools</span>
-                    </h1>
-                    <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
-                        A high-intensity "Working Conclave" bringing together Principals, Policymakers, and Industry Leaders to draft the roadmap for 2030.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button className="px-8 py-3.5 bg-brics-blue hover:bg-blue-800 text-white rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg shadow-blue-900/50">
-                            Download Brochure
-                        </button>
-                        <button className="px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-full font-semibold backdrop-blur-md transition-all">
-                            View Agenda
-                        </button>
+                <div className="relative z-20 max-w-[1400px] mx-auto px-6 lg:px-12 w-full h-full flex items-center pt-20">
+                    <div className="max-w-4xl">
+                        <h1 className="text-5xl md:text-[5rem] font-bold text-white leading-[1.1] mb-6 tracking-tight drop-shadow-sm font-heading">
+                            Principal’s Conclave
+                            <span className="block text-3xl md:text-5xl mt-2 font-light opacity-90 text-blue-200">Reimagining Indian Schools</span>
+                        </h1>
+                        <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl font-light">
+                            A high-intensity "Working Conclave" bringing together Principals, Policymakers, and Industry Leaders to draft the roadmap for 2030.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <button className="px-8 py-3.5 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
+                                Download Brochure
+                            </button>
+                            <button className="px-8 py-3.5 bg-brics-blue/80 hover:bg-brics-blue text-white rounded-full font-bold text-lg transition-all duration-300 cursor-pointer backdrop-blur-sm">
+                                View Agenda
+                            </button>
+                        </div>
                     </div>
                 </div>
             </header>
