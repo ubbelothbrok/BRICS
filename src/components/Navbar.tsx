@@ -49,23 +49,32 @@ export default function Navbar() {
 
                     {/* Desktop Navigation */}
                     <div className="hidden lg:flex items-center space-x-6">
-                        {MENU_ITEMS.map((item) => (
-                            <Link
-                                key={item.label}
-                                to={item.href}
-                                className={`text-[14px] font-medium transition-colors relative group flex items-center gap-2 ${item.special
-                                    ? 'text-brics-orange font-bold hover:text-brics-red'
-                                    : (effectiveScrolled ? 'text-gray-700 hover:text-brics-blue' : 'text-white hover:text-brics-blue')
-                                    }`}
-                            >
-                                {item.label}
-                                {item.special && (
-                                    <span className="absolute -top-2 -right-5 px-1 py-[1px] bg-red-500 text-white text-[7px] font-bold rounded-full animate-pulse">
-                                        NEW
-                                    </span>
-                                )}
-                            </Link>
-                        ))}
+                        {MENU_ITEMS.map((item) => {
+                            const isActive = item.href === '/'
+                                ? pathname === '/'
+                                : pathname.startsWith(item.href);
+                            return (
+                                <Link
+                                    key={item.label}
+                                    to={item.href}
+                                    className={`text-[14px] font-medium transition-colors relative group flex items-center gap-2 ${item.special
+                                        ? 'text-brics-orange font-bold hover:text-brics-red'
+                                        : (isActive
+                                            ? 'text-brics-blue font-bold'
+                                            : (effectiveScrolled ? 'text-gray-700 hover:text-brics-blue' : 'text-white hover:text-brics-blue'))
+                                        }`}
+                                >
+                                    {item.label}
+                                    {item.special && (
+                                        <span className="absolute -top-2 -right-5 px-1 py-[1px] bg-red-500 text-white text-[7px] font-bold rounded-full animate-pulse">
+                                            NEW
+                                        </span>
+                                    )}
+                                    {/* Active Indicator Underline */}
+                                    <span className={`absolute -bottom-1.5 left-0 h-[2px] bg-brics-blue transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                                </Link>
+                            );
+                        })}
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -95,19 +104,25 @@ export default function Navbar() {
                     </button>
 
                     <div className="flex flex-col space-y-8">
-                        {MENU_ITEMS.map((item, idx) => (
-                            <Link
-                                key={item.label}
-                                to={item.href}
-                                className={`text-4xl font-bold transition-all duration-300 transform ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'}`}
-                                style={{ transitionDelay: `${idx * 50}ms` }}
-                            >
-                                <span className={`bg-clip-text text-transparent bg-gradient-to-r ${item.special ? 'from-brics-orange to-brics-red' : 'from-gray-900 to-gray-600'}`}>
-                                    {item.label}
-                                </span>
-                                {item.special && <span className="ml-4 text-xs bg-red-500 text-white px-2 py-0.5 rounded-full align-middle">NEW</span>}
-                            </Link>
-                        ))}
+                        {MENU_ITEMS.map((item, idx) => {
+                            const isActive = item.href === '/'
+                                ? pathname === '/'
+                                : pathname.startsWith(item.href);
+                            return (
+                                <Link
+                                    key={item.label}
+                                    to={item.href}
+                                    className={`text-4xl font-bold transition-all duration-300 transform flex items-center gap-4 ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'}`}
+                                    style={{ transitionDelay: `${idx * 50}ms` }}
+                                >
+                                    {isActive && <div className="w-3 h-3 rounded-full bg-brics-blue shadow-[0_0_10px_rgba(0,39,118,0.5)]"></div>}
+                                    <span className={`bg-clip-text text-transparent bg-gradient-to-r ${item.special ? 'from-brics-orange to-brics-red' : (isActive ? 'from-brics-blue to-brics-blue' : 'from-gray-900 to-gray-600')}`}>
+                                        {item.label}
+                                    </span>
+                                    {item.special && <span className="ml-4 text-xs bg-red-500 text-white px-2 py-0.5 rounded-full align-middle font-bold tracking-tight">NEW</span>}
+                                </Link>
+                            );
+                        })}
                     </div>
 
                     <div className="mt-auto border-t border-gray-100 pt-12">

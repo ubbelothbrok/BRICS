@@ -261,7 +261,7 @@
       "date": "Feb 14 & 15",
       "time": "01:00 PM - 02:00 PM",
       "location": "Auditorium",
-      "category": "Arts",
+      "category": "General",
       "description": "A candid interactive session with IIT Jammu students. Get first-hand insights into campus life, academic preparation, career prospects, and ask your burning questions.",
       "image": "/images/iitian_interaction.jpg",
       "longDescription": "Ever wondered what life inside an IIT is really like? Beyond the rigorous academics and competitive exams lies a vibrant world of innovation, culture, and personal growth. 'IITian Interaction' is an open forum designed to bridge the gap between school students and current IITians.\n\nIn this session, senior students from various branches will share their personal journeys—from their JEE preparation days to managing hostel life, projects, and fests. It's a no-filter conversation where you can ask about anything: how to balance studies with hobbies, what different engineering branches actually entail, and the diverse career paths available after graduation. It's not just a talk; it's a mentorship opportunity.",
@@ -361,6 +361,82 @@
       ],
       "teamSize": "Batches of 50 students",
       "contact": "ARYAN SINGH"
+    },
+    {
+      "id": 11,
+      "title": "Opening Plenary: Vision 2030",
+      "date": "Feb 15",
+      "time": "11:00 AM - 11:45 AM",
+      "location": "Conference Hall",
+      "category": "Conclave",
+      "description": "The official commencement of the Manthan Principal Conclave. Featuring keynotes from education leaders and the unveiling of the Pragyaan Education Vision 2030.",
+      "image": "/images/manthan/speakers.jpg",
+      "longDescription": "The Opening Plenary sets the stage for Manthan 2026. This high-level session brings together policymakers, directors of technical institutes, and school principals to discuss the evolving landscape of Indian education. The session focuses on the 'Foundations for the Future' and highlights the integration of Samagra Shiksha with modern technical aspirations.\n\nKeynote speakers will share insights on the national education roadmap, the importance of vocational training, and how engineering colleges can act as mentors for district schools. The session concludes with the ceremonial lamp lighting and the release of the Manthan Theme Paper.",
+      "schedule": [
+        { "time": "11:00 AM", "activity": "Welcome & Lamp Lighting" },
+        { "time": "11:15 AM", "activity": "Keynote: The Future of Pedagogy" },
+        { "time": "11:40 AM", "activity": "Vision 2030 Roadmap Release" }
+      ],
+      "rules": ["Exclusively for registered Principals and Educators.", "ID badges mandatory.", "Prior registration required for physical attendance."],
+      "teamSize": "Delegates Only",
+      "contact": "conclave@iitjammu.ac.in"
+    },
+    {
+      "id": 12,
+      "title": "Equity & Infrastructure Summit",
+      "date": "Feb 15",
+      "time": "11:45 AM - 01:45 PM",
+      "location": "Conference Hall",
+      "category": "Conclave",
+      "description": "A deep-dive discussion into bridging the digital divide and modernizing rural school infrastructure. Part of the Manthan Conclave Theme 1.",
+      "image": "/images/manthan/infra.png",
+      "longDescription": "Theme 1 of Manthan addresses the critical bottleneck of infrastructure and access. How can we ensure that a student in a remote village has the same digital opportunities as a student in a metro? This summit discusses the 'PM SHRI' school model, the deployment of high-speed internet in border areas, and the creation of shared lab facilities.\n\nPanelists will discuss actionable strategies for resource sharing between higher technical institutes and secondary schools. The goal is to create a 'Foundations' document that outlines minimal viable infrastructure for 21st-century learning.",
+      "schedule": [
+        { "time": "11:45 AM", "activity": "Panel Discussion: The Infrastructure Gap" },
+        { "time": "12:45 PM", "activity": "Case Studies: Successful Rural Digitalization" },
+        { "time": "01:15 PM", "activity": "Open Forum for Principals" }
+      ],
+      "rules": ["Part of the full-day Conclave pass.", "Q&A session included."],
+      "teamSize": "Panel Event",
+      "contact": "conclave@iitjammu.ac.in"
+    },
+    {
+      "id": 13,
+      "title": "Innovation & STEM Showcase",
+      "date": "Feb 15",
+      "time": "02:30 PM - 03:15 PM",
+      "location": "Conference Hall",
+      "category": "Conclave",
+      "description": "Demonstrating the future of classroom learning through AI, Robotics, and VR. Part of the Manthan Conclave Theme 2.",
+      "image": "/images/manthan/stem.png",
+      "longDescription": "Theme 2 of Manthan focuses on the 'What' and 'How' of teaching. This session is a live showcase of educational technologies that are ready for adoption in schools. From low-cost robotics kits to VR modules for science labs, educators will see firsthand how tech can enhance retention and interest.\n\nWe will also discuss teacher upskilling programs and how to integrate Tinkering Labs (ATLs) more effectively into the weekly school schedule.",
+      "schedule": [
+        { "time": "02:30 PM", "activity": "Live EdTech Demos" },
+        { "time": "02:50 PM", "activity": "Teacher Training Roadmap Announcement" },
+        { "time": "03:00 PM", "activity": "Best Practices from Top Schools" }
+      ],
+      "rules": ["Interactive session for educators.", "Demo kits available for inspection."],
+      "teamSize": "Showcase Event",
+      "contact": "conclave@iitjammu.ac.in"
+    },
+    {
+      "id": 14,
+      "title": "Charter of Resolution Signing",
+      "date": "Feb 15",
+      "time": "03:15 PM - 04:00 PM",
+      "location": "Conference Hall",
+      "category": "Conclave",
+      "description": "The closing session of Manthan where all participating leaders sign a collective resolution for the year 2026.",
+      "image": "/images/manthan/students.png",
+      "longDescription": "The culmination of Manthan 2026. Throughout the day, discussions are synthesized into a single 'Charter of Resolution'. This document outlines the commitments made by IIT Jammu and the participating schools for mentorship, resource sharing, and joint events over the next year.\n\nThe signing ceremony is followed by the valedictory address and the presentation of tokens of appreciation to the key contributors of the conclave.",
+      "schedule": [
+        { "time": "03:15 PM", "activity": "Synthesis of Resolution Points" },
+        { "time": "03:40 PM", "activity": "Signing Ceremony" },
+        { "time": "03:55 PM", "activity": "Valedictory Address" }
+      ],
+      "rules": ["Formal closing ceremony.", "Press/Media invited."],
+      "teamSize": "Ceremonial",
+      "contact": "conclave@iitjammu.ac.in"
     }
   ],
   "demos": [
