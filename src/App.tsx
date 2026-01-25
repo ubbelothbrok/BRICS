@@ -14,6 +14,9 @@ import Manthan from './pages/Manthan';
 import ScrollToTop from './components/ScrollToTop';
 import { ThemeProvider } from './context/ThemeContext';
 
+import ManthanInfrastructure from './pages/ManthanInfrastructure';
+import ManthanInnovation from './pages/ManthanInnovation';
+
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -44,6 +47,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/manthan" element={<Manthan />} />
+          <Route path="/manthan/infrastructure" element={<ManthanInfrastructure />} />
+          <Route path="/manthan/innovation" element={<ManthanInnovation />} />
         </Routes>
       </Router>
     </ThemeProvider>
