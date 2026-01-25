@@ -5,7 +5,7 @@ const MENU_ITEMS = [
     { label: 'Home', href: '/' },
     { label: 'Zones', href: '/zones' },
     { label: 'Vision 2026', href: '/vision' },
-    { label: 'Manthan', href: '/manthan' },
+    { label: 'Manthan', href: '/manthan', special: true },
     { label: 'Schedule', href: '/schedule' },
     { label: 'Events', href: '/events' },
     { label: 'Team', href: '/team' },
@@ -46,9 +46,17 @@ export default function Navbar() {
                             <Link
                                 key={item.label}
                                 to={item.href}
-                                className={`text-[14px] font-medium transition-colors hover:text-brics-blue ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`}
+                                className={`text-[14px] font-medium transition-colors relative group flex items-center gap-2 ${item.special
+                                    ? 'text-brics-orange font-bold hover:text-brics-red'
+                                    : (effectiveScrolled ? 'text-gray-700 hover:text-brics-blue' : 'text-white hover:text-brics-blue')
+                                    }`}
                             >
                                 {item.label}
+                                {item.special && (
+                                    <span className="absolute -top-2 -right-5 px-1 py-[1px] bg-red-500 text-white text-[7px] font-bold rounded-full animate-pulse">
+                                        NEW
+                                    </span>
+                                )}
                             </Link>
                         ))}
 
