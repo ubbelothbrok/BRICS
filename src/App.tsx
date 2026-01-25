@@ -16,6 +16,7 @@ import { ThemeProvider } from './context/ThemeContext';
 
 import ManthanInfrastructure from './pages/ManthanInfrastructure';
 import ManthanInnovation from './pages/ManthanInnovation';
+import CustomCursor from './components/CustomCursor';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <ThemeProvider>
+      <CustomCursor />
       <Router>
         <ScrollToTop />
         <Routes>
