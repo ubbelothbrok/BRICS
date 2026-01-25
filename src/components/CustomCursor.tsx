@@ -7,6 +7,10 @@ export default function CustomCursor() {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
+        // Only enable custom cursor if a fine pointer (mouse) is detected
+        const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+        if (isTouchDevice) return;
+
         const onMouseMove = (e: MouseEvent) => {
             setPosition({ x: e.clientX, y: e.clientY });
             if (!isVisible) setIsVisible(true);
