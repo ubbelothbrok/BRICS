@@ -58,11 +58,22 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-          <p>&copy; 2026 Pragyaan, IIT Jammu. All rights reserved.</p>
+        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500 border-t border-gray-800/50 mt-8">
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <p>&copy; {new Date().getFullYear()} Pragyaan, IIT Jammu.</p>
+            <div className="hidden md:block w-px h-4 bg-gray-800"></div>
+            <div className="flex items-center gap-2 group cursor-pointer">
+              <span className="text-gray-500">Platform developed by</span>
+              <a href="https://navrobotec.com" target="_blank" rel="noopener noreferrer" className="flex items-center hover:opacity-80 transition-opacity">
+                <span className="text-lg font-black text-gray-400 group-hover:text-white transition-colors tracking-tighter uppercase">NAVR</span>
+                <img src="/navrobotec.svg" alt="O" className="h-6 w-auto brightness-0 invert opacity-60 group-hover:opacity-100 transition-opacity mx-[-7px]" />
+                <span className="text-lg font-black text-gray-400 group-hover:text-white transition-colors tracking-tighter uppercase">BOTEC</span>
+              </a>
+            </div>
+          </div>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white">Privacy Policy</a>
-            <a href="#" className="hover:text-white">Terms of Use</a>
+            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms of Use</a>
           </div>
         </div>
       </div>
