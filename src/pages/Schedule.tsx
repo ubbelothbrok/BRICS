@@ -2,13 +2,11 @@ import { useState, useMemo } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import {
-    ClockIcon,
     MapPinIcon,
     CalendarDaysIcon,
     BeakerIcon,
     PaintBrushIcon,
-    ChatBubbleLeftRightIcon,
-    ExclamationCircleIcon
+    ChatBubbleLeftRightIcon
 } from '@heroicons/react/24/outline';
 
 type EventType = 'tech' | 'arts' | 'conclave' | 'general';
@@ -24,22 +22,14 @@ interface ScheduleItem {
     description?: string;
     image: string;
     isContinuous?: boolean;
-}
-
-// Helper to layout overlapping events
-// Returns items with attached styling properties: top, height, left, width
-interface LayoutItem extends ScheduleItem {
-    style: {
-        top: string;
-        height: string;
-        left: string;
-        width: string;
-    }
+    lane?: number; // Calculated during layout
 }
 
 const START_HOUR = 9;
 const END_HOUR = 17; // 5 PM
-const HOUR_HEIGHT = 180; // Pixels per hour
+const TOTAL_HOURS = END_HOUR - START_HOUR;
+const EVENT_HEIGHT = 100; // Height of a single event card
+const LANE_GAP = 12; // Gap between lanes
 
 const SCHEDULE_DATA: Record<DayId, ScheduleItem[]> = {
     day1: [
@@ -72,7 +62,7 @@ const SCHEDULE_DATA: Record<DayId, ScheduleItem[]> = {
             isContinuous: true
         },
         {
-            id: 'd1-cupcake1', start: 11, end: 12,
+            id: 'd1-cupcake', start: 11, end: 12,
             title: 'Cupcake Challenge', location: 'Cafeteria', type: 'arts',
             description: 'Batch 1.',
             image: "https://images.unsplash.com/photo-1593187623747-7ea827ad1013?q=80&w=687&auto=format&fit=crop"
@@ -126,7 +116,7 @@ const SCHEDULE_DATA: Record<DayId, ScheduleItem[]> = {
         {
             id: 'd2-iit', start: 13, end: 14,
             title: 'IITian Interaction', location: 'Auditorium', type: 'general',
-            description: 'Q&A session.',
+            description: 'Life at IIT.',
             image: "/images/iitian_interaction.jpg"
         },
         {
@@ -152,7 +142,7 @@ const TRACKS = [
         icon: BeakerIcon,
         color: 'text-blue-600',
         bg: 'bg-blue-50',
-        border: 'border-blue-200'
+        border: 'border-l-4 border-l-blue-500'
     },
     {
         id: 'arts',
@@ -161,7 +151,7 @@ const TRACKS = [
         icon: PaintBrushIcon,
         color: 'text-purple-600',
         bg: 'bg-purple-50',
-        border: 'border-purple-200'
+        border: 'border-l-4 border-l-purple-500'
     },
     {
         id: 'conclave',
@@ -170,67 +160,59 @@ const TRACKS = [
         icon: ChatBubbleLeftRightIcon,
         color: 'text-orange-600',
         bg: 'bg-orange-50',
-        border: 'border-orange-200'
+        border: 'border-l-4 border-l-orange-500'
     }
 ];
 
 export default function Schedule() {
     const [activeDay, setActiveDay] = useState<DayId>('day1');
 
-    // Layout Algorithm
+    // Layout Algorithm: Horizontal Gantt Lane Packing
     const layoutTracks = useMemo(() => {
         const events = SCHEDULE_DATA[activeDay];
-        const layout: Record<string, LayoutItem[]> = { tech: [], arts: [], conclave: [] };
+        const layout: Record<string, { items: ScheduleItem[], height: number }> = {
+            tech: { items: [], height: 0 },
+            arts: { items: [], height: 0 },
+            conclave: { items: [], height: 0 }
+        };
 
         TRACKS.forEach(track => {
-            // 1. Filter events for this track
             const trackEvents = events.filter(e => track.types.includes(e.type))
                 .sort((a, b) => a.start - b.start || (b.end - a.end));
 
-            // 2. Assign columns (Greedy packing)
-            const columns: LayoutItem[][] = [];
+            const lanes: number[] = []; // Stores ending time of last event in each lane
 
-            trackEvents.forEach(event => {
-                let placed = false;
-                for (let i = 0; i < columns.length; i++) {
-                    const lastInCol = columns[i][columns[i].length - 1];
-                    if (lastInCol.end <= event.start) {
-                        columns[i].push(event as any); // Temporary cast
-                        placed = true;
+            const packedEvents = trackEvents.map(event => {
+                let laneIndex = -1;
+                // Find first lane where this event fits
+                for (let i = 0; i < lanes.length; i++) {
+                    if (lanes[i] <= event.start) {
+                        laneIndex = i;
                         break;
                     }
                 }
-                if (!placed) {
-                    columns.push([event as any]);
+                // If no lane found, create new one
+                if (laneIndex === -1) {
+                    laneIndex = lanes.length;
+                    lanes.push(0);
                 }
+
+                // Update lane end time
+                lanes[laneIndex] = event.end;
+
+                return { ...event, lane: laneIndex };
             });
 
-            // 3. Calculate styles
-            const finalItems: LayoutItem[] = [];
-            const colWidth = 100 / columns.length;
-
-            columns.forEach((col, colIndex) => {
-                col.forEach(event => {
-                    finalItems.push({
-                        ...event,
-                        style: {
-                            top: `${(event.start - START_HOUR) * HOUR_HEIGHT}px`,
-                            height: `${(event.end - event.start) * HOUR_HEIGHT}px`,
-                            left: `${colIndex * colWidth}%`,
-                            width: `${colWidth}%`
-                        }
-                    });
-                });
-            });
-
-            layout[track.id] = finalItems;
+            layout[track.id] = {
+                items: packedEvents,
+                height: Math.max(1, lanes.length) * (EVENT_HEIGHT + LANE_GAP) + 20 // Base padding
+            };
         });
 
         return layout;
     }, [activeDay]);
 
-    // Grid lines
-    const hours = Array.from({ length: END_HOUR - START_HOUR + 1 }, (_, i) => START_HOUR + i);
+    const timeMarkers = Array.from({ length: TOTAL_HOURS + 1 }, (_, i) => START_HOUR + i);
 
     return (
         <div className="min-h-screen bg-white transition-colors duration-300">
@@ -239,7 +221,7 @@ export default function Schedule() {
                 {/* Header */}
                 <div className="text-center mb-10">
                     <span className="inline-block px-4 py-1.5 bg-brics-blue/10 text-brics-blue rounded-full text-sm font-bold uppercase tracking-widest mb-4">
-                        Gantt Chart View
+                        Horizontal View
                     </span>
                     <h1 className="text-5xl font-bold text-gray-900 mb-6 font-heading">
                         Program <span className="text-transparent bg-clip-text bg-gradient-to-r from-brics-blue to-brics-green">Timeline</span>
@@ -247,8 +229,8 @@ export default function Schedule() {
                 </div>
 
                 {/* Day Toggle */}
-                <div className="flex justify-center mb-10 sticky top-24 z-30">
-                    <div className="bg-white p-1.5 rounded-full shadow-xl border border-gray-100 inline-flex gap-2">
+                <div className="flex justify-center mb-10 sticky top-24 z-[200] pointer-events-none">
+                    <div className="bg-white/90 backdrop-blur-md p-1.5 rounded-full shadow-xl border border-gray-100 inline-flex gap-2 pointer-events-auto">
                         <button
                             onClick={() => setActiveDay('day1')}
                             className={`px-6 py-3 rounded-full text-lg font-bold transition-all duration-300 flex items-center gap-2 ${activeDay === 'day1'
@@ -272,124 +254,121 @@ export default function Schedule() {
                     </div>
                 </div>
 
-                {/* GANTT CHART CONTAINER */}
-                <div className="relative border border-gray-200 rounded-3xl overflow-hidden shadow-sm bg-white">
-
-                    {/* Header Row */}
-                    <div className="grid grid-cols-[80px_1fr_1fr_1fr] bg-gray-50 border-b border-gray-200 divide-x divide-gray-200">
-                        <div className="p-4 text-center text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center justify-center">
-                            Time
-                        </div>
-                        {TRACKS.map(track => {
-                            const Icon = track.icon;
-                            return (
-                                <div key={track.id} className={`p-4 flex items-center justify-center gap-2 ${track.bg}`}>
-                                    <Icon className={`w-5 h-5 ${track.color}`} />
-                                    <span className={`font-bold ${track.color}`}>{track.label}</span>
+                {/* HORIZONTAL GANTT CHART */}
+                <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
+                    <div className="overflow-x-auto">
+                        <div className="min-w-[1000px]">
+                            {/* Time Header (Sticky) */}
+                            <div className="flex border-b border-gray-200 bg-gray-50 sticky top-0 z-20">
+                                <div className="w-48 shrink-0 p-4 border-r border-gray-200 bg-gray-50 font-bold text-gray-400 text-xs uppercase tracking-wider flex items-center justify-center">
+                                    Track / Time
                                 </div>
-                            );
-                        })}
-                    </div>
-
-                    {/* Body */}
-                    <div className="relative grid grid-cols-[80px_1fr_1fr_1fr] divide-x divide-gray-200 overflow-x-auto">
-
-                        {/* Time Column Background Grid */}
-                        <div className="relative bg-gray-50/50" style={{ height: (END_HOUR - START_HOUR) * HOUR_HEIGHT }}>
-                            {hours.map((hour) => (
-                                <div
-                                    key={hour}
-                                    className="absolute w-full border-t border-gray-200 text-right pr-4 text-xs font-mono text-gray-400 font-medium pt-1"
-                                    style={{ top: (hour - START_HOUR) * HOUR_HEIGHT }}
-                                >
-                                    {hour > 12 ? `${hour - 12} PM` : (hour === 12 ? '12 PM' : `${hour} AM`)}
+                                <div className="flex-1 relative h-12">
+                                    {timeMarkers.map((hour, i) => {
+                                        // Don't render last marker to avoid overflow edge case
+                                        if (i === timeMarkers.length - 1) return null;
+                                        return (
+                                            <div
+                                                key={hour}
+                                                className="absolute top-0 bottom-0 border-l border-gray-200 text-xs font-mono font-medium text-gray-400 pl-2 flex items-center"
+                                                style={{ left: `${(i / TOTAL_HOURS) * 100}%` }}
+                                            >
+                                                {hour > 12 ? `${hour - 12} PM` : (hour === 12 ? '12 PM' : `${hour} AM`)}
+                                            </div>
+                                        );
+                                    })}
                                 </div>
-                            ))}
-                        </div>
+                            </div>
 
-                        {/* Tracks Columns */}
-                        {TRACKS.map(track => (
-                            <div key={track.id} className={`relative ${track.bg}`} style={{ height: (END_HOUR - START_HOUR) * HOUR_HEIGHT }}>
-                                {/* Vertical Text Watermark */}
-                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none">
-                                    <span className="text-[120px] font-black uppercase tracking-widest text-black/[0.03] -rotate-90 whitespace-nowrap transform origin-center">
-                                        {track.label}
-                                    </span>
-                                </div>
+                            {/* Track Rows */}
+                            <div className="divide-y divide-gray-200">
+                                {TRACKS.map(track => {
+                                    const { items, height } = layoutTracks[track.id];
+                                    const Icon = track.icon;
 
-                                {/* Horizontal Guidelines */}
-                                {hours.map((hour) => (
-                                    <div
-                                        key={hour}
-                                        className="absolute w-full border-t border-gray-200/60"
-                                        style={{ top: (hour - START_HOUR) * HOUR_HEIGHT }}
-                                    ></div>
-                                ))}
-
-                                {/* Events */}
-                                {layoutTracks[track.id as keyof typeof layoutTracks].map(event => (
-                                    <div
-                                        key={event.id}
-                                        className="absolute p-1 transition-all duration-300 hover:z-50"
-                                        style={{
-                                            top: event.style.top,
-                                            height: event.style.height,
-                                            left: event.style.left,
-                                            width: event.style.width,
-                                        }}
-                                    >
-                                        <div className="h-full w-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all flex flex-col group">
-                                            {/* Image Banner (Only visible if height > 100px) */}
-                                            {parseInt(event.style.height) > 100 && (
-                                                <div className="h-24 shrink-0 relative overflow-hidden">
-                                                    <img
-                                                        src={event.image}
-                                                        alt={event.title}
-                                                        className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-                                                    />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                    return (
+                                        <div key={track.id} className="flex group">
+                                            {/* Track Label Column */}
+                                            <div className={`w-48 shrink-0 p-6 border-r border-gray-200 ${track.bg} ${track.border} flex flex-col justify-center items-center text-center gap-3 active:sticky left-0 z-10`}>
+                                                <div className={`w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center ${track.color}`}>
+                                                    <Icon className="w-6 h-6" />
                                                 </div>
-                                            )}
+                                                <h3 className={`text-sm font-black uppercase tracking-wider ${track.color}`}>{track.label}</h3>
+                                            </div>
 
-                                            <div className="p-3 flex flex-col h-full bg-white/95 backdrop-blur-sm">
-                                                <div className="flex justify-between items-start mb-1">
-                                                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">
-                                                        {event.start > 12 ? event.start - 12 : event.start} - {event.end > 12 ? event.end - 12 : event.end}
-                                                    </span>
-                                                    {event.isContinuous && (
-                                                        <span className="bg-green-100 text-green-700 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-green-200">
-                                                            ALL DAY
-                                                        </span>
-                                                    )}
-                                                </div>
+                                            {/* Timeline Area */}
+                                            <div className={`flex-1 relative ${track.bg} border-b border-gray-100/50`} style={{ height: `${height}px` }}>
+                                                {/* Grid Guidelines */}
+                                                {timeMarkers.map((_, i) => (
+                                                    <div
+                                                        key={i}
+                                                        className="absolute top-0 bottom-0 border-l border-gray-100"
+                                                        style={{ left: `${(i / TOTAL_HOURS) * 100}%` }}
+                                                    ></div>
+                                                ))}
 
-                                                <h4 className="font-bold text-gray-900 text-sm leading-tight mb-1 line-clamp-2">
-                                                    {event.title}
-                                                </h4>
+                                                {/* Events */}
+                                                {items.map(event => (
+                                                    <div
+                                                        key={event.id}
+                                                        className="absolute rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl hover:z-30 hover:scale-[1.02] transition-all bg-white group/card"
+                                                        style={{
+                                                            left: `${((event.start - START_HOUR) / TOTAL_HOURS) * 100}%`,
+                                                            width: `${((event.end - event.start) / TOTAL_HOURS) * 100}%`,
+                                                            top: `${(event.lane || 0) * (EVENT_HEIGHT + LANE_GAP) + 16}px`, // 16px top padding
+                                                            height: `${EVENT_HEIGHT}px`
+                                                        }}
+                                                    >
+                                                        <div className="flex h-full">
+                                                            {/* Image (Left) */}
+                                                            <div className="w-24 shrink-0 relative text-black overflow-hidden">
+                                                                <img
+                                                                    src={event.image}
+                                                                    alt={event.title}
+                                                                    className="w-full h-full object-cover transform group-hover/card:scale-110 transition-transform duration-500"
+                                                                />
+                                                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 
-                                                <div className="flex items-center gap-1 text-xs text-gray-500 mb-2">
-                                                    <MapPinIcon className="w-3 h-3" />
-                                                    <span className="truncate">{event.location}</span>
-                                                </div>
+                                                                {/* Type Badge on Image */}
+                                                                <div className="absolute bottom-2 left-2 right-2">
+                                                                    <span className="text-[8px] text-white font-bold uppercase tracking-wider block truncate opacity-90">
+                                                                        {event.type}
+                                                                    </span>
+                                                                </div>
 
-                                                {parseInt(event.style.height) > 120 && (
-                                                    <p className="text-gray-500 text-xs leading-snug line-clamp-3 mt-auto">
-                                                        {event.description}
-                                                    </p>
-                                                )}
+                                                                {event.isContinuous && (
+                                                                    <div className="absolute top-2 right-2">
+                                                                        <span className="bg-green-500 text-white text-[7px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-tighter shadow-sm animate-pulse">
+                                                                            Live
+                                                                        </span>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                            {/* Content */}
+                                                            <div className="p-3 flex flex-col justify-center min-w-0 flex-1">
+                                                                <div className="flex items-center gap-2 mb-1">
+                                                                    <span className="text-[10px] font-mono font-bold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded truncate">
+                                                                        {event.start > 12 ? event.start - 12 : event.start}{event.start % 1 !== 0 ? ':30' : ''} - {event.end > 12 ? event.end - 12 : event.end}{event.end % 1 !== 0 ? ':30' : ''}
+                                                                    </span>
+                                                                </div>
+                                                                <h4 className="font-bold text-gray-900 text-sm leading-tight truncate group-hover/card:whitespace-normal group-hover/card:absolute group-hover/card:bg-white group-hover/card:z-20 group-hover/card:p-1 group-hover/card:shadow-lg group-hover/card:rounded">
+                                                                    {event.title}
+                                                                </h4>
+                                                                <div className="flex items-center gap-1 text-xs text-gray-500 mt-1 truncate">
+                                                                    <MapPinIcon className="w-3 h-3 shrink-0" />
+                                                                    <span className="truncate">{event.location}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    );
+                                })}
                             </div>
-                        ))}
-
+                        </div>
                     </div>
-                </div>
-
-                <div className="mt-12 text-center text-gray-500 text-sm flex items-center justify-center gap-2">
-                    <ExclamationCircleIcon className="w-5 h-5" />
-                    <span>Side-by-side events in the same column indicate simultaneous activities.</span>
                 </div>
             </main>
             <Footer />

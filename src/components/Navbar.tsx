@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
 
 const MENU_ITEMS = [
     { label: 'Home', href: '/' },
@@ -13,6 +14,7 @@ const MENU_ITEMS = [
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { pathname } = useLocation();
     const isHome = pathname === '/' || pathname === '/manthan';
 
@@ -24,11 +26,16 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Close menu on route change
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [pathname]);
+
     // Force scrolled state on non-home pages
     const effectiveScrolled = isScrolled || !isHome;
 
     return (
-        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${effectiveScrolled ? 'py-4' : 'py-6'}`}>
+        <nav className={`fixed top-0 left-0 right-0 transition-all duration-500 z-[300] ${effectiveScrolled ? 'py-4' : 'py-6'}`}>
             <div className={`mx-auto transition-all duration-500 px-6 lg:px-10 ${effectiveScrolled ? 'max-w-[1200px] bg-white/70 backdrop-blur-xl border border-white/30 shadow-lg rounded-full py-3 mx-4 lg:mx-auto' : 'max-w-[1400px]'}`}>
                 <div className="flex justify-between items-center">
 
@@ -59,13 +66,58 @@ export default function Navbar() {
                                 )}
                             </Link>
                         ))}
-
-
                     </div>
 
-                    {/* Mobile Menu Button (Hamburger) - Placeholder */}
-                    <div className="lg:hidden">
-                        <svg className={`w-8 h-8 ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                    {/* Mobile Menu Button */}
+                    <button
+                        className="lg:hidden p-2 rounded-full hover:bg-black/5 transition-colors"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        {isMenuOpen ? (
+                            <XMarkIcon className={`w-8 h-8 ${effectiveScrolled ? 'text-gray-900' : 'text-white'}`} />
+                        ) : (
+                            <Bars3Icon className={`w-8 h-8 ${effectiveScrolled ? 'text-gray-900' : 'text-white'}`} />
+                        )}
+                    </button>
+                </div>
+            </div>
+
+            {/* Mobile Navigation Drawer */}
+            <div className={`fixed inset-0 bg-white z-[400] transition-all duration-500 lg:hidden ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+                <div className="flex flex-col h-full bg-white px-8 pt-24 pb-12">
+                    {/* Close Button Inside Drawer */}
+                    <button
+                        className="absolute top-8 right-8 p-2 rounded-full bg-gray-100"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        <XMarkIcon className="w-8 h-8 text-gray-900" />
+                    </button>
+
+                    <div className="flex flex-col space-y-8">
+                        {MENU_ITEMS.map((item, idx) => (
+                            <Link
+                                key={item.label}
+                                to={item.href}
+                                className={`text-4xl font-bold transition-all duration-300 transform ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'}`}
+                                style={{ transitionDelay: `${idx * 50}ms` }}
+                            >
+                                <span className={`bg-clip-text text-transparent bg-gradient-to-r ${item.special ? 'from-brics-orange to-brics-red' : 'from-gray-900 to-gray-600'}`}>
+                                    {item.label}
+                                </span>
+                                {item.special && <span className="ml-4 text-xs bg-red-500 text-white px-2 py-0.5 rounded-full align-middle">NEW</span>}
+                            </Link>
+                        ))}
+                    </div>
+
+                    <div className="mt-auto border-t border-gray-100 pt-12">
+                        <p className="text-gray-400 text-sm font-medium uppercase tracking-widest mb-4">Quick Links</p>
+                        <div className="grid grid-cols-2 gap-4 text-gray-600 font-bold">
+                            <Link to="/vision" className="hover:text-brics-blue">Vision</Link>
+                            <Link to="/schedule" className="hover:text-brics-blue">Schedule</Link>
+                            <Link to="/manthan" className="hover:text-brics-blue">Manthan</Link>
+                            <Link to="/team" className="hover:text-brics-blue">Team</Link>
+                        </div>
                     </div>
                 </div>
             </div>
