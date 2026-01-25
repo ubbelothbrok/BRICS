@@ -36,7 +36,7 @@ const Loading: React.FC = () => {
 
                 {/* Loading Text */}
                 <div className="mt-10 flex flex-col items-center">
-                    <p className="text-white text-sm font-bold tracking-[0.4em] uppercase opacity-90">
+                    <p className="text-white text-sm font-bold tracking-[0.4em] opacity-90">
                         LOADING
                     </p>
                     <div className="mt-4 flex gap-1">
@@ -44,6 +44,16 @@ const Loading: React.FC = () => {
                         <div className="w-1 h-1 bg-brics-blue rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                         <div className="w-1 h-1 bg-brics-blue rounded-full animate-bounce"></div>
                     </div>
+                </div>
+            </div>
+
+            {/* Navrobotec Branding at Bottom */}
+            <div className="absolute bottom-10 z-10 flex items-center gap-2 opacity-60">
+                <span className="text-gray-400 text-xs font-medium tracking-wide">Platform developed by</span>
+                <div className="flex items-center">
+                    <span className="text-sm font-black text-gray-300 tracking-tighter uppercase">NAVR</span>
+                    <img src="/navrobotec.svg" alt="O" className="h-5 w-auto brightness-0 invert mx-[-5px]" />
+                    <span className="text-sm font-black text-gray-300 tracking-tighter uppercase">BOTEC</span>
                 </div>
             </div>
         </div>
