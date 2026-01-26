@@ -176,6 +176,33 @@ const formatTime = (time: number): string => {
 
 export default function Schedule() {
     const [activeDay, setActiveDay] = useState<DayId>('day1');
+    const [longPressedEvent, setLongPressedEvent] = useState<string | null>(null);
+    const [longPressTimer, setLongPressTimer] = useState<number | null>(null);
+
+    // Long press handlers for mobile tooltip
+    const handleTouchStart = (eventId: string) => {
+        const timer = window.setTimeout(() => {
+            setLongPressedEvent(eventId);
+        }, 500); // 500ms long press
+        setLongPressTimer(timer);
+    };
+
+    const handleTouchEnd = () => {
+        if (longPressTimer) {
+            clearTimeout(longPressTimer);
+            setLongPressTimer(null);
+        }
+        // Keep tooltip visible for a moment after release
+        setTimeout(() => setLongPressedEvent(null), 2000);
+    };
+
+    const handleTouchCancel = () => {
+        if (longPressTimer) {
+            clearTimeout(longPressTimer);
+            setLongPressTimer(null);
+        }
+        setLongPressedEvent(null);
+    };
 
     // Layout Algorithm: Horizontal Gantt Lane Packing
     const layoutTracks = useMemo(() => {
@@ -323,6 +350,12 @@ export default function Schedule() {
                                                         to={`/events/${event.id}`}
                                                         key={`${event.id}-${index}`}
                                                         className="absolute rounded-xl shadow-sm border border-gray-200 overflow-visible hover:shadow-2xl hover:z-50 transition-all bg-gray-900 group/card block"
+                                                        onTouchStart={(e) => {
+                                                            e.preventDefault();
+                                                            handleTouchStart(`${event.id}-${index}`);
+                                                        }}
+                                                        onTouchEnd={handleTouchEnd}
+                                                        onTouchCancel={handleTouchCancel}
                                                         style={{
                                                             left: `${((event.start - START_HOUR) / TOTAL_HOURS) * 100}%`,
                                                             width: `${((event.end - event.start) / TOTAL_HOURS) * 100}%`,
@@ -369,8 +402,11 @@ export default function Schedule() {
                                                         </div>
 
 
-                                                        {/* Hover Tooltip - Full Content with Enhanced Interactivity */}
-                                                        <div className="absolute left-0 top-full mt-3 w-96 bg-white rounded-2xl shadow-2xl border-2 border-gray-200 p-6 opacity-0 invisible group-hover/card:opacity-100 group-hover/card:visible transition-all duration-300 transform group-hover/card:translate-y-0 translate-y-2 z-50 pointer-events-none group-hover/card:scale-100 scale-95">
+                                                        {/* Hover Tooltip - Desktop hover + Mobile long press */}
+                                                        <div className={`absolute left-0 top-full mt-3 w-96 bg-white rounded-2xl shadow-2xl border-2 border-gray-200 p-6 transition-all duration-300 transform z-50 pointer-events-none ${longPressedEvent === `${event.id}-${index}`
+                                                            ? 'opacity-100 visible translate-y-0 scale-100'
+                                                            : 'opacity-0 invisible translate-y-2 scale-95 md:group-hover/card:opacity-100 md:group-hover/card:visible md:group-hover/card:translate-y-0 md:group-hover/card:scale-100'
+                                                            }`}>
                                                             {/* Pointer Arrow */}
                                                             <div className="absolute -top-3 left-8 w-6 h-6 bg-white border-l-2 border-t-2 border-gray-200 transform rotate-45"></div>
 
@@ -407,22 +443,6 @@ export default function Schedule() {
                                                                         </span>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-
-                                                            {event.description && (
-                                                                <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 mb-4 border border-blue-100">
-                                                                    <p className="text-sm text-gray-700 leading-relaxed italic">
-                                                                        "{event.description}"
-                                                                    </p>
-                                                                </div>
-                                                            )}
-
-                                                            <div className="flex items-center justify-between">
-                                                                <span className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full text-xs font-bold uppercase tracking-wider shadow-md">
-                                                                    <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                                                                    {event.type}
-                                                                </span>
-                                                                <span className="text-xs text-gray-400 font-medium">Click for details</span>
                                                             </div>
                                                         </div>
                                                     </Link>
