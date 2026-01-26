@@ -141,15 +141,73 @@ export default function Manthan() {
                 </section>
 
                 {/* --- TIMELINE SECTION --- */}
-                <section className="bg-blue-50/50 rounded-[3rem] p-12 md:p-20">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold mb-4 text-brics-blue font-heading">Event Format & Timeline</h2>
+                <section className="bg-blue-50/50 rounded-[3rem] p-6 md:p-12 lg:p-20">
+                    <div className="text-center mb-12 md:mb-16">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brics-blue font-heading">Event Format & Timeline</h2>
                         <p className="text-gray-600">Zero formalities, 100% problem-solving. A structured day for tangible output.</p>
                     </div>
 
-                    <div className="relative">
-                        {/* Connector Line */}
-                        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200 hidden md:block"></div>
+                    {/* MOBILE TIMELINE - Vertical Left-Aligned */}
+                    <div className="md:hidden space-y-8">
+                        {/* Item 1 */}
+                        <div className="relative pl-12">
+                            <div className="absolute left-5 top-0 bottom-0 w-0.5 h-[calc(100%+2rem)] bg-gray-300"></div>
+                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-brics-blue text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">11:00</div>
+                            <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
+                                <h4 className="text-xl font-bold text-gray-900 mb-2">Opening Plenary</h4>
+                                <p className="text-gray-600 text-sm mb-3">Vision setting: Framing the 'Why'. High-impact talks by IIT Jammu Leadership & Ministry Officials.</p>
+                                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">Vision Setting</span>
+                            </div>
+                        </div>
+
+                        {/* Item 2 */}
+                        <div className="relative pl-12">
+                            <div className="absolute left-5 top-0 bottom-0 w-0.5 h-[calc(100%+2rem)] bg-gray-300"></div>
+                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-brics-orange text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">11:45</div>
+                            <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
+                                <h4 className="text-xl font-bold text-gray-900 mb-2">Envisioning Schools of 2030</h4>
+                                <p className="text-gray-600 text-sm mb-3">A comprehensive 2-hour working session with Principals and Policymakers to draft the roadmap.</p>
+                                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">Discussion</span>
+                            </div>
+                        </div>
+
+                        {/* Item 3 */}
+                        <div className="relative pl-12">
+                            <div className="absolute left-5 top-0 bottom-0 w-0.5 h-[calc(100%+2rem)] bg-gray-300"></div>
+                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-gray-400 text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">13:45</div>
+                            <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
+                                <h4 className="text-xl font-bold text-gray-900 mb-2">Lunch Break</h4>
+                                <p className="text-gray-600 text-sm mb-3">Networking lunch for stakeholders to connect informally.</p>
+                                <span className="inline-block px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">Networking</span>
+                            </div>
+                        </div>
+
+                        {/* Item 4 */}
+                        <div className="relative pl-12">
+                            <div className="absolute left-5 top-0 bottom-0 w-0.5 h-[calc(100%+2rem)] bg-gray-300"></div>
+                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-brics-green text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">14:30</div>
+                            <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
+                                <h4 className="text-xl font-bold text-gray-900 mb-2">Innovation Showcase</h4>
+                                <p className="text-gray-600 text-sm mb-3">45 minutes of spotlighting cutting-edge ed-tech and pedagogical innovations.</p>
+                                <span className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Showcase</span>
+                            </div>
+                        </div>
+
+                        {/* Item 5 */}
+                        <div className="relative pl-12">
+                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-brics-blue text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">15:15</div>
+                            <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
+                                <h4 className="text-xl font-bold text-gray-900 mb-2">Conclusion</h4>
+                                <p className="text-gray-600 text-sm mb-3">Release of the "Pragyaan Charter". Commitment statements and next-year roadmap.</p>
+                                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">Charter Release</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* DESKTOP TIMELINE - Alternating Layout */}
+                    <div className="hidden md:block relative">
+                        {/* Connector Line - Trimmed to align with circles */}
+                        <div className="absolute left-1/2 transform -translate-x-1/2 top-10 bottom-10 w-1 bg-gray-200"></div>
 
                         <div className="space-y-12">
                             {/* Item 1 */}
