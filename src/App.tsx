@@ -16,7 +16,7 @@ import { ThemeProvider } from './context/ThemeContext';
 
 import ManthanInfrastructure from './pages/ManthanInfrastructure';
 import ManthanInnovation from './pages/ManthanInnovation';
-import SubmitAbstract from './pages/SubmitAbstract';
+import SubmitAbstract from './pages/SubmitAbstract.tsx';
 import CustomCursor from './components/CustomCursor';
 
 function App() {
