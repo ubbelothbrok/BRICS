@@ -31,9 +31,12 @@ export default function Manthan() {
                             A high-intensity "Working Conclave" bringing together Principals, Policymakers, and Industry Leaders to draft the roadmap for 2030.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <button className="px-8 py-3.5 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
-                                Download Brochure
-                            </button>
+                            <Link
+                                to="/manthan/submit-abstract"
+                                className="px-8 py-3.5 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all duration-300 cursor-pointer text-center"
+                            >
+                                Submit Abstract
+                            </Link>
                             <button
                                 onClick={() => document.getElementById('themes')?.scrollIntoView({ behavior: 'smooth' })}
                                 className="px-8 py-3.5 bg-brics-blue/80 hover:bg-brics-blue text-white rounded-full font-bold text-lg transition-all duration-300 cursor-pointer backdrop-blur-sm"
