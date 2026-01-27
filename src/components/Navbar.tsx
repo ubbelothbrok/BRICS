@@ -35,8 +35,8 @@ export default function Navbar() {
     const effectiveScrolled = isScrolled || !isHome;
 
     return (
-        <nav className={`fixed top-0 left-0 right-0 transition-all duration-500 z-[300] ${effectiveScrolled ? 'py-4' : 'py-6'}`}>
-            <div className={`mx-auto transition-all duration-500 px-6 lg:px-10 ${effectiveScrolled ? 'max-w-[1200px] bg-white/70 backdrop-blur-xl border border-white/30 shadow-lg rounded-full py-3 mx-4 lg:mx-auto' : 'max-w-[1400px]'}`}>
+        <nav className={`fixed top-0 left-0 w-full max-w-[100vw] transition-all duration-500 z-[300] ${effectiveScrolled ? 'py-4' : 'py-6'}`}>
+            <div className={`mx-auto transition-all duration-500 px-6 lg:px-10 ${effectiveScrolled ? 'max-w-[1200px] bg-white/70 backdrop-blur-xl border border-white/30 shadow-lg rounded-full py-3 mx-6 md:mx-10 lg:mx-auto' : 'max-w-[1400px]'}`}>
                 <div className="flex justify-between items-center">
 
                     {/* Logo Section */}

@@ -7,11 +7,10 @@ import {
 } from '@heroicons/react/24/outline';
 
 interface EventInteractionProps {
-    eventId: number;
     onCommentSubmit?: (data: { userName: string; comment: string; imageUrl?: string }) => void;
 }
 
-export default function EventInteraction({ eventId, onCommentSubmit }: EventInteractionProps) {
+export default function EventInteraction({ onCommentSubmit }: EventInteractionProps) {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [comment, setComment] = useState('');
     const [userName, setUserName] = useState('');
