@@ -2,10 +2,7 @@ import { useState, useEffect } from 'react';
 import {
     ChatBubbleLeftIcon,
     UserCircleIcon,
-    ClockIcon,
-    ArrowUturnRightIcon,
-    PaperAirplaneIcon,
-    XMarkIcon
+    ArrowUturnRightIcon
 } from '@heroicons/react/24/outline';
 
 interface Reply {
@@ -37,6 +34,7 @@ export default function EventComments({ comments: externalComments }: EventComme
     const [replyingTo, setReplyingTo] = useState<string | null>(null);
     const [replyText, setReplyText] = useState('');
     const [replyName, setReplyName] = useState('');
+    const [visibleCount, setVisibleCount] = useState(3);
 
     // Sync external comments with local state
     useEffect(() => {
@@ -78,155 +76,149 @@ export default function EventComments({ comments: externalComments }: EventComme
         setReplyingTo(null);
     };
 
-    const cancelReply = () => {
-        setReplyingTo(null);
-        setReplyText('');
-        setReplyName('');
+    const handleSeeMore = () => {
+        setVisibleCount(prev => prev + 3);
     };
+
+    const visibleComments = comments.slice(0, visibleCount);
 
     if (comments.length === 0) {
         return (
-            <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-12">
-                <div className="bg-gradient-to-br from-gray-50 to-blue-50/30 rounded-2xl p-12 text-center border-2 border-gray-100">
-                    <ChatBubbleLeftIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">No Comments Yet</h3>
-                    <p className="text-gray-600">Be the first to share your experience!</p>
+            <section className="max-w-[800px] mx-auto px-4 py-8">
+                <div className="bg-gray-50 rounded-2xl p-8 text-center border border-gray-200">
+                    <ChatBubbleLeftIcon className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                    <h3 className="text-xl font-bold text-gray-800 mb-1">No Comments Yet</h3>
+                    <p className="text-gray-500 text-sm">Be the first to share your experience!</p>
                 </div>
             </section>
         );
     }
 
     return (
-        <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-12">
-            <div className="mb-8 text-center">
-                <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-brics-blue via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-3">
-                    Community Feedback
+        <section className="max-w-[800px] mx-auto px-4 py-8">
+            <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-brics-blue via-indigo-600 to-purple-600 bg-clip-text text-transparent flex items-center gap-2">
+                    <span className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
+                    Live Feedback
                 </h2>
-                <p className="text-gray-600 text-sm md:text-base">
-                    See what others are saying about this event
-                </p>
+                <span className="text-gray-500 text-sm">{comments.length} comments</span>
             </div>
 
-            <div className="space-y-6">
-                {comments.map((comment) => (
-                    <div
-                        key={comment.id}
-                        className="bg-white rounded-2xl p-6 md:p-8 shadow-lg border-2 border-gray-100 hover:shadow-xl transition-all duration-300"
-                    >
-                        {/* Comment Header */}
-                        <div className="flex items-start gap-4 mb-4">
-                            {/* Avatar */}
-                            <div className="flex-shrink-0">
-                                {comment.selfieUrl ? (
-                                    <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-gradient-to-r from-brics-blue to-indigo-500 ring-offset-2">
-                                        <img
-                                            src={comment.selfieUrl}
-                                            alt={comment.userName}
-                                            className="w-full h-full object-cover"
-                                        />
+            <div className="space-y-4 relative">
+                <div className="space-y-4">
+                    {visibleComments.map((comment) => (
+                        <div key={comment.id} className="animate-fadeIn">
+                            {/* Main Comment Bubble */}
+                            <div className="flex gap-3">
+                                <div className="flex-shrink-0 mt-1">
+                                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center ring-2 ring-white shadow-sm">
+                                        <UserCircleIcon className="w-5 h-5 text-indigo-500" />
                                     </div>
-                                ) : (
-                                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                                        <UserCircleIcon className="w-8 h-8 text-gray-500" />
+                                </div>
+                                <div className="flex-1 max-w-[85%]">
+                                    <div className="flex items-baseline gap-2 mb-1">
+                                        <span className="font-bold text-sm text-gray-900">{comment.userName}</span>
+                                        <span className="text-xs text-gray-400">{formatTimeAgo(comment.timestamp)}</span>
                                     </div>
-                                )}
-                            </div>
 
-                            {/* User Info */}
-                            <div className="flex-1 min-w-0">
-                                <h4 className="font-bold text-gray-900 text-lg">
-                                    {comment.userName}
-                                </h4>
-                                <div className="flex items-center gap-2 text-sm text-gray-500">
-                                    <ClockIcon className="w-4 h-4" />
-                                    <span>{formatTimeAgo(comment.timestamp)}</span>
+                                    <div className="bg-white rounded-2xl rounded-tl-sm p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                                        <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{comment.comment}</p>
+
+                                        {/* Attachment Image */}
+                                        {comment.selfieUrl && (
+                                            <div className="mt-3 rounded-lg overflow-hidden">
+                                                <img
+                                                    src={comment.selfieUrl}
+                                                    alt="Attached"
+                                                    className="max-h-60 w-auto object-cover rounded-lg border border-gray-100"
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Action row */}
+                                    <div className="mt-1 flex gap-4">
+                                        <button
+                                            onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
+                                            className="text-xs font-medium text-gray-500 hover:text-brics-blue transition-colors flex items-center gap-1"
+                                        >
+                                            <ArrowUturnRightIcon className="w-3 h-3" />
+                                            {replyingTo === comment.id ? 'Cancel' : 'Reply'}
+                                        </button>
+
+                                        {comment.replies.length > 0 && (
+                                            <span className="text-xs text-gray-400 flex items-center gap-1">
+                                                <ChatBubbleLeftIcon className="w-3 h-3" />
+                                                {comment.replies.length} replies
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    {/* Reply Input */}
+                                    {replyingTo === comment.id && (
+                                        <div className="mt-3 bg-gray-50 rounded-xl p-3 border border-gray-200 animate-slideDown">
+                                            <input
+                                                type="text"
+                                                value={replyName}
+                                                onChange={(e) => setReplyName(e.target.value)}
+                                                placeholder="Name (opt)"
+                                                className="w-full mb-2 px-3 py-1.5 bg-white border border-gray-200 rounded text-xs focus:ring-1 focus:ring-brics-blue outline-none"
+                                            />
+                                            <textarea
+                                                value={replyText}
+                                                onChange={(e) => setReplyText(e.target.value)}
+                                                placeholder="Reply..."
+                                                className="w-full h-16 px-3 py-2 bg-white border border-gray-200 rounded text-xs focus:ring-1 focus:ring-brics-blue outline-none resize-none mb-2"
+                                            />
+                                            <div className="flex justify-end gap-2">
+                                                <button
+                                                    onClick={() => handleReplySubmit(comment.id)}
+                                                    className="px-3 py-1 bg-brics-blue text-white rounded text-xs font-medium hover:bg-blue-700 transition-colors"
+                                                >
+                                                    Send
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Replies List */}
+                                    {comment.replies.length > 0 && (
+                                        <div className="mt-2 space-y-2 pl-2 border-l-2 border-gray-100">
+                                            {comment.replies.map((reply) => (
+                                                <div key={reply.id} className="bg-gray-50 rounded-xl rounded-tl-sm p-2.5">
+                                                    <div className="flex items-center gap-2 mb-1">
+                                                        <span className="font-bold text-xs text-gray-800">{reply.userName}</span>
+                                                        <span className="text-[10px] text-gray-400">{formatTimeAgo(reply.timestamp)}</span>
+                                                    </div>
+                                                    <p className="text-gray-600 text-xs">{reply.comment}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
+                    ))}
+                </div>
 
-                        {/* Comment Text */}
-                        <p className="text-gray-700 leading-relaxed mb-4 pl-16">
-                            {comment.comment}
-                        </p>
-
-                        {/* Reply Button */}
-                        <div className="pl-16">
-                            <button
-                                onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
-                                className="flex items-center gap-2 text-sm font-semibold text-brics-blue hover:text-indigo-600 transition-colors"
-                            >
-                                <ArrowUturnRightIcon className="w-4 h-4" />
-                                {replyingTo === comment.id ? 'Cancel Reply' : 'Reply'}
-                            </button>
-                        </div>
-
-                        {/* Reply Form */}
-                        {replyingTo === comment.id && (
-                            <div className="mt-4 pl-16 animate-fadeIn">
-                                <div className="bg-gradient-to-br from-blue-50 to-indigo-50/50 rounded-xl p-4 border-2 border-blue-100">
-                                    <div className="space-y-3">
-                                        <input
-                                            type="text"
-                                            value={replyName}
-                                            onChange={(e) => setReplyName(e.target.value)}
-                                            placeholder="Your name (optional)"
-                                            className="w-full px-4 py-2 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-brics-blue focus:border-brics-blue transition-all outline-none text-sm"
-                                        />
-                                        <textarea
-                                            value={replyText}
-                                            onChange={(e) => setReplyText(e.target.value)}
-                                            placeholder="Write your reply..."
-                                            className="w-full h-24 px-4 py-3 bg-white border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-brics-blue focus:border-brics-blue transition-all outline-none text-sm resize-none"
-                                        />
-                                        <div className="flex gap-2">
-                                            <button
-                                                onClick={() => handleReplySubmit(comment.id)}
-                                                disabled={!replyText.trim()}
-                                                className="flex-1 py-2 bg-gradient-to-r from-brics-blue to-indigo-600 text-white rounded-lg font-semibold text-sm shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
-                                            >
-                                                <PaperAirplaneIcon className="w-4 h-4" />
-                                                Post Reply
-                                            </button>
-                                            <button
-                                                onClick={cancelReply}
-                                                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold text-sm transition-all flex items-center gap-2"
-                                            >
-                                                <XMarkIcon className="w-4 h-4" />
-                                                Cancel
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                {/* See More Button */}
+                {visibleCount < comments.length && (
+                    <div className="text-center pt-4">
+                        <button
+                            onClick={handleSeeMore}
+                            className="group inline-flex items-center gap-2 px-6 py-2 bg-white border border-gray-200 rounded-full shadow-sm hover:shadow-md hover:border-brics-blue/30 transition-all duration-300"
+                        >
+                            <span className="text-sm font-medium text-gray-600 group-hover:text-brics-blue">
+                                See More Comments
+                            </span>
+                            <div className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-brics-blue/10 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3 text-gray-500 group-hover:text-brics-blue">
+                                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                                </svg>
                             </div>
-                        )}
-
-                        {/* Replies */}
-                        {comment.replies.length > 0 && (
-                            <div className="mt-6 pl-16 space-y-4">
-                                {comment.replies.map((reply) => (
-                                    <div
-                                        key={reply.id}
-                                        className="bg-gradient-to-br from-gray-50 to-blue-50/30 rounded-xl p-4 border-l-4 border-brics-blue animate-fadeIn"
-                                    >
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <UserCircleIcon className="w-6 h-6 text-gray-400" />
-                                            <span className="font-bold text-gray-900 text-sm">
-                                                {reply.userName}
-                                            </span>
-                                            <span className="text-xs text-gray-500">•</span>
-                                            <span className="text-xs text-gray-500">
-                                                {formatTimeAgo(reply.timestamp)}
-                                            </span>
-                                        </div>
-                                        <p className="text-gray-700 text-sm leading-relaxed pl-8">
-                                            {reply.comment}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
+                        </button>
                     </div>
-                ))}
+                )}
             </div>
         </section>
     );

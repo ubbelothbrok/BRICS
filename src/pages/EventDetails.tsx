@@ -76,6 +76,14 @@ export default function EventDetails() {
             selfieUrl: 'https://i.pravatar.cc/150?img=12',
             timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000),
             replies: []
+        },
+        {
+            id: '4',
+            eventId: 8,
+            userName: 'Sarah Jenkins',
+            comment: 'Does anyone know if the recording will be available later?',
+            timestamp: new Date(Date.now() - 26 * 60 * 60 * 1000),
+            replies: []
         }
     ]);
 
@@ -168,8 +176,7 @@ export default function EventDetails() {
 
                 {/* Left Column: Interaction, Description & Schedule */}
                 <div className="lg:col-span-2 space-y-12">
-                    {/* Event Interaction Section */}
-                    <EventInteraction eventId={event.id} onCommentSubmit={handleCommentSubmit} />
+
 
                     <section>
                         <h2 className="text-3xl font-bold text-[var(--color-text)] mb-6 transition-colors duration-300">About the Event</h2>
@@ -241,6 +248,11 @@ export default function EventDetails() {
                 </div>
 
             </main>
+
+            {/* Event Interaction Section */}
+            <section className="max-w-[800px] mx-auto px-4 mb-8">
+                <EventInteraction eventId={event.id} onCommentSubmit={handleCommentSubmit} />
+            </section>
 
             {/* Comments Section */}
             <EventComments
