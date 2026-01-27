@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import {
@@ -34,47 +35,47 @@ const LANE_GAP = 12; // Gap between lanes
 const SCHEDULE_DATA: Record<DayId, ScheduleItem[]> = {
     day1: [
         {
-            id: 'd1-drone', start: 10, end: 16,
+            id: '1', start: 10, end: 16,
             title: 'Drone Showcase', location: 'Main Ground', type: 'tech',
             description: 'FPV racing, hexacopters, VTOL demos.',
             image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=1470&auto=format&fit=crop",
             isContinuous: true
         },
         {
-            id: 'd1-tinker', start: 10, end: 16,
+            id: '10', start: 10, end: 16,
             title: 'Tinkering Shop', location: 'Tinkering Lab', type: 'tech',
             description: 'Circuit building workshop.',
             image: "/images/tinkering_workshop.png",
             isContinuous: true
         },
         {
-            id: 'd1-library', start: 10, end: 16,
+            id: '2', start: 10, end: 16,
             title: 'Locked Library', location: 'LHC', type: 'arts',
             description: 'Escape room.',
             image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2690&auto=format&fit=crop",
             isContinuous: true
         },
         {
-            id: 'd1-art', start: 10, end: 16,
+            id: '7', start: 10, end: 16,
             title: 'Art Gallery', location: 'SAC', type: 'arts',
             description: 'Exhibition.',
             image: "/images/art_gallery_live.jpg",
             isContinuous: true
         },
         {
-            id: 'd1-cupcake', start: 11, end: 12,
+            id: '3', start: 11, end: 12,
             title: 'Cupcake Challenge', location: 'Cafeteria', type: 'arts',
             description: 'Batch 1.',
             image: "https://images.unsplash.com/photo-1593187623747-7ea827ad1013?q=80&w=687&auto=format&fit=crop"
         },
         {
-            id: 'd1-cupcake2', start: 14, end: 15,
+            id: '3', start: 14, end: 15,
             title: 'Cupcake Challenge', location: 'Cafeteria', type: 'arts',
             description: 'Batch 2.',
             image: "https://images.unsplash.com/photo-1593187623747-7ea827ad1013?q=80&w=687&auto=format&fit=crop"
         },
         {
-            id: 'd1-iit', start: 13, end: 14,
+            id: '5', start: 13, end: 14,
             title: 'IITian Interaction', location: 'Auditorium', type: 'general',
             description: 'Q&A session.',
             image: "/images/iitian_interaction.jpg"
@@ -82,51 +83,51 @@ const SCHEDULE_DATA: Record<DayId, ScheduleItem[]> = {
     ],
     day2: [
         {
-            id: 'd2-paint', start: 9, end: 12,
+            id: '4', start: 9, end: 12,
             title: 'Painting Comp', location: 'Art Studio', type: 'arts',
             description: 'Live art.',
             image: "/images/painting_live.jpg"
         },
         {
-            id: 'd2-ar', start: 10, end: 15,
+            id: '8', start: 10, end: 15,
             title: 'AR Builder', location: 'Comp Center', type: 'tech',
             description: 'VR/AR Demo.',
             image: "/images/ar_builder.jpg",
             isContinuous: true
         },
         {
-            id: 'd2-doodle', start: 10, end: 15,
+            id: '9', start: 10, end: 15,
             title: 'AI Doodle', location: 'Comp Center', type: 'tech',
             description: 'ML Demo.',
             image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670&auto=format&fit=crop",
             isContinuous: true
         },
         {
-            id: 'd2-manthan-open', start: 11, end: 11.75,
+            id: '11', start: 11, end: 11.75,
             title: 'Opening Plenary', location: 'Conf Hall', type: 'conclave',
             description: 'Vision Setting.',
             image: "/images/manthan/speakers.jpg"
         },
         {
-            id: 'd2-manthan-discuss', start: 11.75, end: 13.75,
+            id: '12', start: 11.75, end: 13.75,
             title: 'Discussion Rounds', location: 'Conf Hall', type: 'conclave',
             description: 'Policymaking.',
             image: "/images/manthan/infra.png"
         },
         {
-            id: 'd2-iit', start: 13, end: 14,
+            id: '5', start: 13, end: 14,
             title: 'IITian Interaction', location: 'Auditorium', type: 'general',
             description: 'Life at IIT.',
             image: "/images/iitian_interaction.jpg"
         },
         {
-            id: 'd2-manthan-show', start: 14.5, end: 15.25,
+            id: '13', start: 14.5, end: 15.25,
             title: 'Innovation Showcase', location: 'Conf Hall', type: 'conclave',
             description: 'EdTech Demos.',
             image: "/images/manthan/stem.png"
         },
         {
-            id: 'd2-manthan-close', start: 15.25, end: 16,
+            id: '14', start: 15.25, end: 16,
             title: 'Charter Release', location: 'Conf Hall', type: 'conclave',
             description: 'Closing.',
             image: "/images/manthan/students.png"
@@ -164,8 +165,44 @@ const TRACKS = [
     }
 ];
 
+const formatTime = (time: number): string => {
+    const hours = Math.floor(time);
+    const minutes = Math.round((time - hours) * 60);
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours > 12 ? hours - 12 : (hours === 0 ? 12 : hours);
+    const displayMinutes = minutes === 0 ? '' : `:${minutes.toString().padStart(2, '0')}`;
+    return `${displayHours}${displayMinutes} ${period}`;
+};
+
 export default function Schedule() {
     const [activeDay, setActiveDay] = useState<DayId>('day1');
+    const [longPressedEvent, setLongPressedEvent] = useState<string | null>(null);
+    const [longPressTimer, setLongPressTimer] = useState<number | null>(null);
+
+    // Long press handlers for mobile tooltip
+    const handleTouchStart = (eventId: string) => {
+        const timer = window.setTimeout(() => {
+            setLongPressedEvent(eventId);
+        }, 500); // 500ms long press
+        setLongPressTimer(timer);
+    };
+
+    const handleTouchEnd = () => {
+        if (longPressTimer) {
+            clearTimeout(longPressTimer);
+            setLongPressTimer(null);
+        }
+        // Keep tooltip visible for a moment after release
+        setTimeout(() => setLongPressedEvent(null), 2000);
+    };
+
+    const handleTouchCancel = () => {
+        if (longPressTimer) {
+            clearTimeout(longPressTimer);
+            setLongPressTimer(null);
+        }
+        setLongPressedEvent(null);
+    };
 
     // Layout Algorithm: Horizontal Gantt Lane Packing
     const layoutTracks = useMemo(() => {
@@ -251,7 +288,7 @@ export default function Schedule() {
                     </div>
                 </div>
 
-                {/* HORIZONTAL GANTT CHART */}
+                {/* HORIZONTAL GANTT CHART (All Screens) */}
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden flex flex-col">
                     <div className="overflow-x-auto">
                         <div className="min-w-[1000px]">
@@ -305,10 +342,17 @@ export default function Schedule() {
                                                 ))}
 
                                                 {/* Events */}
-                                                {items.map(event => (
-                                                    <div
-                                                        key={event.id}
-                                                        className="absolute rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl hover:z-30 hover:scale-[1.02] transition-all bg-white group/card"
+                                                {items.map((event, index) => (
+                                                    <Link
+                                                        to={`/events/${event.id}`}
+                                                        key={`${event.id}-${index}`}
+                                                        className="absolute rounded-xl shadow-sm border border-gray-200 overflow-visible hover:shadow-2xl hover:z-50 transition-all bg-gray-900 group/card block"
+                                                        onTouchStart={(e) => {
+                                                            e.preventDefault();
+                                                            handleTouchStart(`${event.id}-${index}`);
+                                                        }}
+                                                        onTouchEnd={handleTouchEnd}
+                                                        onTouchCancel={handleTouchCancel}
                                                         style={{
                                                             left: `${((event.start - START_HOUR) / TOTAL_HOURS) * 100}%`,
                                                             width: `${((event.end - event.start) / TOTAL_HOURS) * 100}%`,
@@ -316,48 +360,89 @@ export default function Schedule() {
                                                             height: `${EVENT_HEIGHT}px`
                                                         }}
                                                     >
-                                                        <div className="flex h-full">
-                                                            {/* Image (Left) */}
-                                                            <div className="w-24 shrink-0 relative text-black overflow-hidden">
+                                                        <div className="flex h-full relative overflow-hidden rounded-xl">
+
+                                                            {/* Background Image - Fully Visible */}
+                                                            <div className="absolute inset-0">
                                                                 <img
                                                                     src={event.image}
-                                                                    alt={event.title}
-                                                                    className="w-full h-full object-cover transform group-hover/card:scale-110 transition-transform duration-500"
+                                                                    alt=""
+                                                                    className="w-full h-full object-cover opacity-100 transition-transform duration-700 group-hover/card:scale-110"
                                                                 />
-                                                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-
-                                                                {/* Type Badge on Image */}
-                                                                <div className="absolute bottom-2 left-2 right-2">
-                                                                    <span className="text-[8px] text-white font-bold uppercase tracking-wider block truncate opacity-90">
-                                                                        {event.type}
-                                                                    </span>
-                                                                </div>
-
-                                                                {event.isContinuous && (
-                                                                    <div className="absolute top-2 right-2">
-                                                                        <span className="bg-green-500 text-white text-[7px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-tighter shadow-sm animate-pulse">
-                                                                            Live
-                                                                        </span>
-                                                                    </div>
-                                                                )}
+                                                                {/* Dark Gradient for Text Readability - Strengthened for light images */}
+                                                                <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/30"></div>
                                                             </div>
+
+                                                            {/* Type Indicator Strip */}
+                                                            <div className={`absolute left-0 top-0 bottom-0 w-1.5 z-10 ${event.type === 'tech' ? 'bg-blue-500' :
+                                                                event.type === 'arts' ? 'bg-purple-500' : 'bg-orange-500'
+                                                                }`}></div>
+
                                                             {/* Content */}
-                                                            <div className="p-3 flex flex-col justify-center min-w-0 flex-1">
+                                                            <div className="p-3 pl-5 flex flex-col justify-center min-w-0 flex-1 h-full relative z-10 text-shadow-sm">
                                                                 <div className="flex items-center gap-2 mb-1">
-                                                                    <span className="text-[10px] font-mono font-bold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded truncate">
-                                                                        {event.start > 12 ? event.start - 12 : event.start}{event.start % 1 !== 0 ? ':30' : ''} - {event.end > 12 ? event.end - 12 : event.end}{event.end % 1 !== 0 ? ':30' : ''}
+                                                                    <span className="text-[10px] font-mono font-bold text-white/90 bg-black/40 px-1.5 py-0.5 rounded truncate border border-white/20 backdrop-blur-md shadow-sm">
+                                                                        {formatTime(event.start)} - {formatTime(event.end)}
                                                                     </span>
+                                                                    {event.isContinuous && (
+                                                                        <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.8)]" title="Live Now"></span>
+                                                                    )}
                                                                 </div>
-                                                                <h4 className="font-bold text-gray-900 text-sm leading-tight truncate group-hover/card:whitespace-normal group-hover/card:absolute group-hover/card:bg-white group-hover/card:z-20 group-hover/card:p-1 group-hover/card:shadow-lg group-hover/card:rounded">
+                                                                <h4 className="font-bold text-white text-sm leading-tight truncate drop-shadow-md filter shadow-black">
                                                                     {event.title}
                                                                 </h4>
-                                                                <div className="flex items-center gap-1 text-xs text-gray-500 mt-1 truncate">
+                                                                <div className="flex items-center gap-1 text-xs text-white/90 mt-1 truncate drop-shadow">
                                                                     <MapPinIcon className="w-3 h-3 shrink-0" />
                                                                     <span className="truncate">{event.location}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+
+
+                                                        {/* Hover Tooltip - Desktop hover + Mobile long press */}
+                                                        <div className={`absolute left-0 top-full mt-3 w-96 bg-white rounded-2xl shadow-2xl border-2 border-gray-200 p-6 transition-all duration-300 transform z-50 pointer-events-none ${longPressedEvent === `${event.id}-${index}`
+                                                            ? 'opacity-100 visible translate-y-0 scale-100'
+                                                            : 'opacity-0 invisible translate-y-2 scale-95 md:group-hover/card:opacity-100 md:group-hover/card:visible md:group-hover/card:translate-y-0 md:group-hover/card:scale-100'
+                                                            }`}>
+                                                            {/* Pointer Arrow */}
+                                                            <div className="absolute -top-3 left-8 w-6 h-6 bg-white border-l-2 border-t-2 border-gray-200 transform rotate-45"></div>
+
+                                                            {/* Gradient Border Accent */}
+                                                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brics-blue via-brics-orange to-brics-green rounded-t-2xl"></div>
+
+                                                            <div className="flex gap-4 mb-4 relative">
+                                                                <div className="relative group/img">
+                                                                    <img
+                                                                        src={event.image}
+                                                                        alt={event.title}
+                                                                        className="w-24 h-24 rounded-xl object-cover shadow-md ring-2 ring-gray-100 group-hover/img:ring-brics-blue transition-all duration-300"
+                                                                    />
+                                                                    {event.isContinuous && (
+                                                                        <div className="absolute -top-1 -right-1">
+                                                                            <span className="bg-green-500 text-white text-[9px] font-bold px-2 py-1 rounded-full uppercase tracking-wider shadow-lg animate-pulse flex items-center gap-1">
+                                                                                <span className="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span>
+                                                                                Live
+                                                                            </span>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                                <div className="flex-1">
+                                                                    <h4 className="font-bold text-gray-900 text-lg mb-2 leading-tight">
+                                                                        {event.title}
+                                                                    </h4>
+                                                                    <div className="flex items-center gap-1.5 text-xs text-gray-600 mb-2">
+                                                                        <MapPinIcon className="w-4 h-4 shrink-0 text-brics-orange" />
+                                                                        <span className="font-medium">{event.location}</span>
+                                                                    </div>
+                                                                    <div className="flex items-center gap-2">
+                                                                        <span className="text-xs font-mono font-bold text-white bg-gradient-to-r from-brics-blue to-blue-600 px-3 py-1.5 rounded-lg shadow-sm">
+                                                                            {formatTime(event.start)} - {formatTime(event.end)}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </Link>
                                                 ))}
                                             </div>
                                         </div>
@@ -367,8 +452,9 @@ export default function Schedule() {
                         </div>
                     </div>
                 </div>
-            </main>
+            </main >
             <Footer />
-        </div>
+        </div >
     );
 }
+

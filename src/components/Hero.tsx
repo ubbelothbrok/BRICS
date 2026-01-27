@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const slides = [
   {
@@ -61,10 +62,13 @@ export default function Hero() {
                 {slide.subtitle}
               </p>
 
-              <div className={`transition-all duration-1000 delay-700 transform ${index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-                <button className="px-8 py-3.5 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
+              <div className={`flex flex-wrap gap-4 transition-all duration-1000 delay-700 transform ${index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                <Link to="/events" className="px-8 py-3.5 bg-white text-black rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 cursor-pointer">
+                  Explore Events
+                </Link>
+                <Link to="/schedule" className="px-8 py-3.5 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
                   See Schedule
-                </button>
+                </Link>
               </div>
             </div>
           </div>

@@ -125,15 +125,7 @@ export default function Navbar() {
                         })}
                     </div>
 
-                    <div className="mt-auto border-t border-gray-100 pt-12">
-                        <p className="text-gray-400 text-sm font-medium uppercase tracking-widest mb-4">Quick Links</p>
-                        <div className="grid grid-cols-2 gap-4 text-gray-600 font-bold">
-                            <Link to="/vision" className="hover:text-brics-blue">Vision</Link>
-                            <Link to="/schedule" className="hover:text-brics-blue">Schedule</Link>
-                            <Link to="/manthan" className="hover:text-brics-blue">Manthan</Link>
-                            <Link to="/team" className="hover:text-brics-blue">Team</Link>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </nav>
