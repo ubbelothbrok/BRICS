@@ -373,11 +373,24 @@
       "image": "/images/manthan/speakers.jpg",
       "longDescription": "The Opening Plenary sets the stage for Manthan 2026. This high-level session brings together policymakers, directors of technical institutes, and school principals to discuss the evolving landscape of Indian education. The session focuses on the 'Foundations for the Future' and highlights the integration of Samagra Shiksha with modern technical aspirations.\n\nKeynote speakers will share insights on the national education roadmap, the importance of vocational training, and how engineering colleges can act as mentors for district schools. The session concludes with the ceremonial lamp lighting and the release of the Manthan Theme Paper.",
       "schedule": [
-        { "time": "11:00 AM", "activity": "Welcome & Lamp Lighting" },
-        { "time": "11:15 AM", "activity": "Keynote: The Future of Pedagogy" },
-        { "time": "11:40 AM", "activity": "Vision 2030 Roadmap Release" }
+        {
+          "time": "11:00 AM",
+          "activity": "Welcome & Lamp Lighting"
+        },
+        {
+          "time": "11:15 AM",
+          "activity": "Keynote: The Future of Pedagogy"
+        },
+        {
+          "time": "11:40 AM",
+          "activity": "Vision 2030 Roadmap Release"
+        }
       ],
-      "rules": ["Exclusively for registered Principals and Educators.", "ID badges mandatory.", "Prior registration required for physical attendance."],
+      "rules": [
+        "Exclusively for registered Principals and Educators.",
+        "ID badges mandatory.",
+        "Prior registration required for physical attendance."
+      ],
       "teamSize": "Delegates Only",
       "contact": "conclave@iitjammu.ac.in"
     },
@@ -392,11 +405,23 @@
       "image": "/images/manthan/infra.png",
       "longDescription": "Theme 1 of Manthan addresses the critical bottleneck of infrastructure and access. How can we ensure that a student in a remote village has the same digital opportunities as a student in a metro? This summit discusses the 'PM SHRI' school model, the deployment of high-speed internet in border areas, and the creation of shared lab facilities.\n\nPanelists will discuss actionable strategies for resource sharing between higher technical institutes and secondary schools. The goal is to create a 'Foundations' document that outlines minimal viable infrastructure for 21st-century learning.",
       "schedule": [
-        { "time": "11:45 AM", "activity": "Panel Discussion: The Infrastructure Gap" },
-        { "time": "12:45 PM", "activity": "Case Studies: Successful Rural Digitalization" },
-        { "time": "01:15 PM", "activity": "Open Forum for Principals" }
+        {
+          "time": "11:45 AM",
+          "activity": "Panel Discussion: The Infrastructure Gap"
+        },
+        {
+          "time": "12:45 PM",
+          "activity": "Case Studies: Successful Rural Digitalization"
+        },
+        {
+          "time": "01:15 PM",
+          "activity": "Open Forum for Principals"
+        }
       ],
-      "rules": ["Part of the full-day Conclave pass.", "Q&A session included."],
+      "rules": [
+        "Part of the full-day Conclave pass.",
+        "Q&A session included."
+      ],
       "teamSize": "Panel Event",
       "contact": "conclave@iitjammu.ac.in"
     },
@@ -411,11 +436,23 @@
       "image": "/images/manthan/stem.png",
       "longDescription": "Theme 2 of Manthan focuses on the 'What' and 'How' of teaching. This session is a live showcase of educational technologies that are ready for adoption in schools. From low-cost robotics kits to VR modules for science labs, educators will see firsthand how tech can enhance retention and interest.\n\nWe will also discuss teacher upskilling programs and how to integrate Tinkering Labs (ATLs) more effectively into the weekly school schedule.",
       "schedule": [
-        { "time": "02:30 PM", "activity": "Live EdTech Demos" },
-        { "time": "02:50 PM", "activity": "Teacher Training Roadmap Announcement" },
-        { "time": "03:00 PM", "activity": "Best Practices from Top Schools" }
+        {
+          "time": "02:30 PM",
+          "activity": "Live EdTech Demos"
+        },
+        {
+          "time": "02:50 PM",
+          "activity": "Teacher Training Roadmap Announcement"
+        },
+        {
+          "time": "03:00 PM",
+          "activity": "Best Practices from Top Schools"
+        }
       ],
-      "rules": ["Interactive session for educators.", "Demo kits available for inspection."],
+      "rules": [
+        "Interactive session for educators.",
+        "Demo kits available for inspection."
+      ],
       "teamSize": "Showcase Event",
       "contact": "conclave@iitjammu.ac.in"
     },
@@ -430,11 +467,23 @@
       "image": "/images/manthan/students.png",
       "longDescription": "The culmination of Manthan 2026. Throughout the day, discussions are synthesized into a single 'Charter of Resolution'. This document outlines the commitments made by IIT Jammu and the participating schools for mentorship, resource sharing, and joint events over the next year.\n\nThe signing ceremony is followed by the valedictory address and the presentation of tokens of appreciation to the key contributors of the conclave.",
       "schedule": [
-        { "time": "03:15 PM", "activity": "Synthesis of Resolution Points" },
-        { "time": "03:40 PM", "activity": "Signing Ceremony" },
-        { "time": "03:55 PM", "activity": "Valedictory Address" }
+        {
+          "time": "03:15 PM",
+          "activity": "Synthesis of Resolution Points"
+        },
+        {
+          "time": "03:40 PM",
+          "activity": "Signing Ceremony"
+        },
+        {
+          "time": "03:55 PM",
+          "activity": "Valedictory Address"
+        }
       ],
-      "rules": ["Formal closing ceremony.", "Press/Media invited."],
+      "rules": [
+        "Formal closing ceremony.",
+        "Press/Media invited."
+      ],
       "teamSize": "Ceremonial",
       "contact": "conclave@iitjammu.ac.in"
     }
@@ -445,6 +494,7 @@
       "title": "Immersive Bharat Dome",
       "description": "A breathtaking 360° projection dome offering virtual walkthroughs of India's space missions (Chandrayaan & Gaganyaan) and heritage sites. Experience history and future in surround sound.",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Bharat_Mandapam_Pragati_Maidan.jpg/1280px-Bharat_Mandapam_Pragati_Maidan.jpg",
+      "link": "/demos/bharat-dome",
       "tags": [
         "VR",
         "Space Tech",
@@ -453,35 +503,14 @@
     },
     {
       "id": 2,
-      "title": "Bhashini: AI Language Bridge",
-      "description": "Witness the power of 'Bhashini', India's AI-led language translation platform. Speak in your mother tongue and hear it instantly translated into 22+ diverse Indian languages in real-time.",
-      "image": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=2000&auto=format&fit=crop",
+      "title": "NAVRobotec",
+      "description": "Building next generation of robotics and IoT kits for STEAM learning in schools along with a curriculum for class 6 to 9 on Design & Computational Thinking.",
+      "image": "/showcase/navrobotec/nav.png",
+      "link": "/demos/navrobotec",
       "tags": [
-        "AI",
-        "NLP",
-        "Digital India"
-      ]
-    },
-    {
-      "id": 3,
-      "title": "UPI World: Future of Payments",
-      "description": "Experience the global revolution of UPI. A live interactive stall demonstrating contactless voice payments, international transactions, and the seamless 'Tap & Pay' ecosystem.",
-      "image": "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=2000&auto=format&fit=crop",
-      "tags": [
-        "FinTech",
-        "Digital",
-        "Innovation"
-      ]
-    },
-    {
-      "id": 4,
-      "title": "Aadhaar Face RD",
-      "description": "Next-generation biometric security is here. Test the 'Face Authentication' system that verifies identity in milliseconds without fingerprints, enabling paperless, presence-less service delivery.",
-      "image": "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?q=80&w=2000&auto=format&fit=crop",
-      "tags": [
-        "DeepTech",
-        "Security",
-        "Biometrics"
+        "Robotics",
+        "STEAM",
+        "Education"
       ]
     }
   ]

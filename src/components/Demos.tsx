@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import db from '../data/db.json';
 
 interface DemoItem {
@@ -7,6 +8,7 @@ interface DemoItem {
     description: string;
     image: string;
     tags: string[];
+    link?: string;
 }
 
 export default function Demos() {
@@ -41,9 +43,10 @@ export default function Demos() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                     {demos.map((demo) => (
-                        <div
+                        <Link
+                            to={demo.link || '#'}
                             key={demo.id}
-                            className="group relative overflow-hidden rounded-3xl shadow-2xl transition-all duration-500 hover:-translate-y-2 aspect-square xs:aspect-[4/3] md:aspect-[4/3] lg:aspect-[16/9]"
+                            className="group relative overflow-hidden rounded-3xl shadow-2xl transition-all duration-500 hover:-translate-y-2 aspect-square xs:aspect-[4/3] md:aspect-[4/3] lg:aspect-[16/9] block"
                         >
                             <img
                                 src={demo.image}
@@ -67,7 +70,7 @@ export default function Demos() {
                                     {demo.description}
                                 </p>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>
