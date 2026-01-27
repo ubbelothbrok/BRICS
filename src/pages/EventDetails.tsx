@@ -13,7 +13,8 @@ import {
     ArrowLeftIcon,
     UserGroupIcon,
     ExclamationTriangleIcon,
-    EnvelopeIcon
+    EnvelopeIcon,
+    CameraIcon
 } from '@heroicons/react/24/outline';
 
 interface ScheduleItem {
@@ -130,7 +131,7 @@ export default function EventDetails() {
             <Navbar />
 
             {/* Hero Section */}
-            <div className="relative h-[60vh] min-h-[500px] w-full overflow-hidden">
+            <div className="relative h-[80vh] w-full overflow-hidden flex flex-col justify-end">
                 <img
                     src={event.image}
                     alt={event.title}
@@ -138,11 +139,15 @@ export default function EventDetails() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
 
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 max-w-[1400px] mx-auto w-full">
-                    <Link to="/events" className="text-white/80 hover:text-white font-medium flex items-center gap-2 mb-6 w-fit transition-colors">
+                {/* Back Button (Top) */}
+                <div className="absolute top-0 left-0 right-0 pt-32 px-6 md:px-12 max-w-[1400px] mx-auto w-full z-10">
+                    <Link to="/events" className="text-white/80 hover:text-white font-medium flex items-center gap-2 w-fit transition-colors bg-black/20 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/10">
                         <ArrowLeftIcon className="w-5 h-5" />
                         Back to Events
                     </Link>
+                </div>
+
+                <div className="relative p-6 md:p-12 max-w-[1400px] mx-auto w-full">
 
                     <span className={`inline-block px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider mb-4 ${event.category === 'Arts' ? 'bg-brics-green text-white' :
                         event.category === 'Tech' ? 'bg-brics-blue text-white' :
@@ -155,19 +160,29 @@ export default function EventDetails() {
                         {event.title}
                     </h1>
 
-                    <div className="flex flex-wrap gap-6 text-white/90 text-lg">
-                        <div className="flex items-center gap-3">
-                            <CalendarIcon className="w-6 h-6 text-brics-yellow" />
-                            <span>{event.date}</span>
+                    <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+                        <div className="flex flex-wrap gap-6 text-white/90 text-lg">
+                            <div className="flex items-center gap-3">
+                                <CalendarIcon className="w-6 h-6 text-brics-yellow" />
+                                <span>{event.date}</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <ClockIcon className="w-6 h-6 text-brics-yellow" />
+                                <span>{event.time}</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <MapPinIcon className="w-6 h-6 text-brics-yellow" />
+                                <span>{event.location}</span>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-3">
-                            <ClockIcon className="w-6 h-6 text-brics-yellow" />
-                            <span>{event.time}</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <MapPinIcon className="w-6 h-6 text-brics-yellow" />
-                            <span>{event.location}</span>
-                        </div>
+
+                        <button
+                            onClick={() => document.getElementById('share-experience')?.scrollIntoView({ behavior: 'smooth' })}
+                            className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 transition-all group w-fit"
+                        >
+                            <CameraIcon className="w-6 h-6 text-brics-yellow group-hover:scale-110 transition-transform" />
+                            <span className="font-bold">Take Selfie with us</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -250,8 +265,8 @@ export default function EventDetails() {
             </main>
 
             {/* Event Interaction Section */}
-            <section className="max-w-[800px] mx-auto px-4 mb-8">
-                <EventInteraction eventId={event.id} onCommentSubmit={handleCommentSubmit} />
+            <section id="share-experience" className="max-w-[800px] mx-auto px-4 mb-8 scroll-mt-24">
+                <EventInteraction onCommentSubmit={handleCommentSubmit} />
             </section>
 
             {/* Comments Section */}
