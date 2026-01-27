@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import EventInteraction from '../components/EventInteraction.tsx';
+import EventComments from '../components/EventComments.tsx';
+import type { Comment } from '../components/EventComments.tsx';
 import eventsData from '../data/db.json';
 import {
     CalendarIcon,
@@ -38,6 +41,57 @@ export default function EventDetails() {
     const { id } = useParams();
     const [event, setEvent] = useState<EventItem | null>(null);
     const [loading, setLoading] = useState(true);
+
+    // Mock initial comments - in production, fetch from API
+    const [comments, setComments] = useState<Comment[]>([
+        {
+            id: '1',
+            eventId: 8,
+            userName: 'Priya Sharma',
+            comment: 'This event was absolutely amazing! The AR technology was mind-blowing and the organizers did a fantastic job. Can\'t wait for next year!',
+            selfieUrl: 'https://i.pravatar.cc/150?img=1',
+            timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
+            replies: [
+                {
+                    id: 'r1',
+                    userName: 'Rahul Kumar',
+                    comment: 'I totally agree! The AR builder challenge was incredible.',
+                    timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000)
+                }
+            ]
+        },
+        {
+            id: '2',
+            eventId: 8,
+            userName: 'Anonymous',
+            comment: 'Great learning experience. The mentors were very helpful and patient with beginners.',
+            timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000),
+            replies: []
+        },
+        {
+            id: '3',
+            eventId: 8,
+            userName: 'Amit Patel',
+            comment: 'Loved the hands-on approach! Built my first AR application today. Thank you to all the organizers and volunteers!',
+            selfieUrl: 'https://i.pravatar.cc/150?img=12',
+            timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000),
+            replies: []
+        }
+    ]);
+
+    const handleCommentSubmit = (data: { userName: string; comment: string; imageUrl?: string }) => {
+        const newComment: Comment = {
+            id: `c${Date.now()}`,
+            eventId: event?.id || 0,
+            userName: data.userName,
+            comment: data.comment,
+            selfieUrl: data.imageUrl,
+            timestamp: new Date(),
+            replies: []
+        };
+
+        setComments([newComment, ...comments]);
+    };
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -112,8 +166,11 @@ export default function EventDetails() {
 
             <main className="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
 
-                {/* Left Column: Description & Schedule */}
+                {/* Left Column: Interaction, Description & Schedule */}
                 <div className="lg:col-span-2 space-y-12">
+                    {/* Event Interaction Section */}
+                    <EventInteraction eventId={event.id} onCommentSubmit={handleCommentSubmit} />
+
                     <section>
                         <h2 className="text-3xl font-bold text-[var(--color-text)] mb-6 transition-colors duration-300">About the Event</h2>
                         <div className="prose prose-lg text-[var(--color-text)] opacity-80 leading-relaxed whitespace-pre-line transition-colors duration-300">
@@ -185,7 +242,15 @@ export default function EventDetails() {
 
             </main>
 
+            {/* Comments Section */}
+            <EventComments
+                eventId={event.id}
+                comments={comments.filter(c => c.eventId === event.id)}
+            />
+
             <Footer />
         </div>
     );
 }
+
+

@@ -98,7 +98,11 @@ h6 {
 
 /* Hide default cursor globally */
 @media (pointer: fine) {
-  body, a, button, [role="button"] {
+
+  body,
+  a,
+  button,
+  [role="button"] {
     cursor: none !important;
   }
 }
@@ -114,4 +118,22 @@ h6 {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@layer utilities {
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }

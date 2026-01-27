@@ -16,6 +16,7 @@ import { ThemeProvider } from './context/ThemeContext';
 
 import ManthanInfrastructure from './pages/ManthanInfrastructure';
 import ManthanInnovation from './pages/ManthanInnovation';
+import SubmitAbstract from './pages/SubmitAbstract.tsx';
 import CustomCursor from './components/CustomCursor';
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
           <Route path="/manthan" element={<Manthan />} />
           <Route path="/manthan/infrastructure" element={<ManthanInfrastructure />} />
           <Route path="/manthan/innovation" element={<ManthanInnovation />} />
+          <Route path="/manthan/submit-abstract" element={<SubmitAbstract />} />
         </Routes>
       </Router>
     </ThemeProvider>

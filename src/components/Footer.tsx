@@ -5,6 +5,8 @@ const FOOTER_LINKS = [
   { label: 'Zones', href: '/zones' },
   { label: 'Vision 2026', href: '/vision' },
   { label: 'Manthan', href: '/manthan' },
+  { label: 'Schedule', href: '/schedule' },
+  { label: 'Events', href: '/events' },
   { label: 'Team', href: '/team' },
 ];
 

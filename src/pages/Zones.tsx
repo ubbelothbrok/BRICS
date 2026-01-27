@@ -1,6 +1,6 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { BeakerIcon, CpuChipIcon, PaintBrushIcon, BookOpenIcon, RocketLaunchIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { BeakerIcon, CpuChipIcon, PaintBrushIcon, RocketLaunchIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 
 const ZONES_DATA = [
     {
@@ -57,17 +57,6 @@ const ZONES_DATA = [
         color: "bg-red-50 text-red-600 border-red-100",
         image: "/images/tinkering_workshop.png",
         activities: ["School Project Expo", "Peer Learning", "Competition Displays", "Interactive Models"]
-    },
-    {
-        id: 'books',
-        name: "Book Zone",
-        tagline: "Knowledge Unbound",
-        description: "A comprehensive collection of books to inspire young curious minds.",
-        longDescription: "A quiet corner for the curious. Browse through a carefully curated collection of books ranging from popular science and technology to biographies of great innovators. Sit down, read a page, and let your mind wander.",
-        icon: BookOpenIcon,
-        color: "bg-yellow-50 text-yellow-600 border-yellow-100",
-        image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=800",
-        activities: ["Book Fair", "Reading Corner", "Author Sessions", "Literary Quizzes"]
     }
 ];
 
@@ -82,7 +71,7 @@ export default function Zones() {
                         Explore Our <span className="text-brics-blue">Engagement Zones</span>
                     </h1>
                     <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Pragyaan 2026 is divided into six distinct zones, each offering unique experiences designed to spark curiosity, foster creativity, and celebrate innovation.
+                        Pragyaan 2026 is divided into five distinct zones, each offering unique experiences designed to spark curiosity, foster creativity, and celebrate innovation.
                     </p>
                 </div>
 
