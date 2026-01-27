@@ -72,31 +72,7 @@ export default function ManthanInnovation() {
                         </div>
                     </section>
 
-                    <section>
-                        <h2 className="text-3xl font-bold text-[var(--color-text)] mb-6 transition-colors duration-300 font-heading">Session Schedule</h2>
-                        <div className="bg-[var(--color-card-bg)] rounded-2xl p-8 border border-[var(--color-text)]/10 transition-colors duration-300">
-                            <div className="space-y-6">
-                                <div className="flex gap-6 pb-6 border-b border-[var(--color-text)]/10 transition-colors duration-300">
-                                    <div className="w-24 flex-shrink-0 font-bold text-brics-blue">02:00 PM</div>
-                                    <div className="text-[var(--color-text)] font-medium opacity-90 transition-colors duration-300">
-                                        Innovation Ecosystems: Transforming ATLs
-                                    </div>
-                                </div>
-                                <div className="flex gap-6 pb-6 border-b border-[var(--color-text)]/10 transition-colors duration-300">
-                                    <div className="w-24 flex-shrink-0 font-bold text-brics-blue">02:30 PM</div>
-                                    <div className="text-[var(--color-text)] font-medium opacity-90 transition-colors duration-300">
-                                        Educator 2.0: Upskilling Without Burnout
-                                    </div>
-                                </div>
-                                <div className="flex gap-6 pb-0 transition-colors duration-300">
-                                    <div className="w-24 flex-shrink-0 font-bold text-brics-blue">03:00 PM</div>
-                                    <div className="text-[var(--color-text)] font-medium opacity-90 transition-colors duration-300">
-                                        Outcome-Based Learning: AI & Robotics Integration
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+
                 </div>
 
                 {/* Right Column: Key Focus Areas */}
