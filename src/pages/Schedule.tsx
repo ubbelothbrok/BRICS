@@ -220,9 +220,6 @@ export default function Schedule() {
             <main className="pt-32 pb-24 px-4 max-w-[1600px] mx-auto">
                 {/* Header */}
                 <div className="text-center mb-10">
-                    <span className="inline-block px-4 py-1.5 bg-brics-blue/10 text-brics-blue rounded-full text-sm font-bold uppercase tracking-widest mb-4">
-                        Horizontal View
-                    </span>
                     <h1 className="text-5xl font-bold text-gray-900 mb-6 font-heading">
                         Program <span className="text-transparent bg-clip-text bg-gradient-to-r from-brics-blue to-brics-green">Timeline</span>
                     </h1>
