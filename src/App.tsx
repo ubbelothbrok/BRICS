@@ -19,6 +19,7 @@ import ManthanInnovation from './pages/ManthanInnovation';
 import SubmitAbstract from './pages/SubmitAbstract.tsx';
 import BharatDome from './pages/BharatDome';
 import NavRobotec from './pages/NavRobotec';
+import LivePolling from './pages/LivePolling';
 import CustomCursor from './components/CustomCursor';
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
           <Route path="/manthan/infrastructure" element={<ManthanInfrastructure />} />
           <Route path="/manthan/innovation" element={<ManthanInnovation />} />
           <Route path="/manthan/submit-abstract" element={<SubmitAbstract />} />
+          <Route path="/manthan/live-polling" element={<LivePolling />} />
           <Route path="/demos/bharat-dome" element={<BharatDome />} />
           <Route path="/demos/navrobotec" element={<NavRobotec />} />
         </Routes>
