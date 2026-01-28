@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { DocumentCheckIcon, PencilSquareIcon, MapIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { DocumentCheckIcon, PencilSquareIcon, MapIcon, UserGroupIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 export default function Manthan() {
     return (
@@ -43,6 +43,13 @@ export default function Manthan() {
                             >
                                 View Agenda
                             </button>
+                            <Link
+                                to="/manthan/live-polling"
+                                className="px-8 py-3.5 bg-gray-900/80 hover:bg-gray-900 text-white rounded-full font-bold text-lg transition-all duration-300 cursor-pointer backdrop-blur-sm flex items-center justify-center gap-3 shadow-lg"
+                            >
+                                <ChartBarIcon className="w-6 h-6 text-yellow-400" />
+                                Polling
+                            </Link>
                         </div>
                     </div>
                 </div>
