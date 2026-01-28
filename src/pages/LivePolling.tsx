@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import { PaperAirplaneIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+import { useNavigate } from 'react-router-dom';
+import { PaperAirplaneIcon, UserCircleIcon, ChevronDownIcon, ArrowLeftIcon } from '@heroicons/react/24/solid';
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
 
 interface Poll {
@@ -16,6 +17,7 @@ interface ChatMessage {
 }
 
 function LivePolling() {
+    const navigate = useNavigate();
     // Sample polls (in real app, this would come from admin/backend)
     const [polls] = useState<Poll[]>([
         {
@@ -31,6 +33,7 @@ function LivePolling() {
     ]);
 
     const [selectedOptions, setSelectedOptions] = useState<{ [key: number]: number }>({});
+    const [expandedPolls, setExpandedPolls] = useState<{ [key: number]: boolean }>({});
     const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
         {
             id: 1,
@@ -59,6 +62,10 @@ function LivePolling() {
         setSelectedOptions({ ...selectedOptions, [pollId]: optionIndex });
     };
 
+    const togglePoll = (pollId: number) => {
+        setExpandedPolls(prev => ({ ...prev, [pollId]: !prev[pollId] }));
+    };
+
     const handleSendMessage = (e: React.FormEvent) => {
         e.preventDefault();
         if (newMessage.trim()) {
@@ -78,16 +85,25 @@ function LivePolling() {
             <main className="w-full sm:max-w-[900px] h-full flex items-center justify-center">
 
                 {/* Combined Box: Chat with Embedded Poll */}
-                <div className="bg-white rounded-none sm:rounded-2xl shadow-lg border-x sm:border border-gray-200 w-full h-full flex flex-col">
+                <div className="bg-white rounded-none sm:rounded-2xl shadow-lg border-x sm:border border-gray-200 w-full h-full flex flex-col relative overflow-hidden">
                     {/* Live Chat Section */}
                     <div className="flex flex-col h-full">
                         {/* Chat Header */}
-                        <div className="bg-brics-blue px-4 py-3 sm:px-6 sm:py-4 flex-shrink-0">
-                            <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                                <ChatBubbleLeftRightIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-                                Live Discussion
-                            </h2>
-                            <p className="text-blue-100 text-[10px] sm:text-sm mt-0.5 sm:mt-1">Join the conversation</p>
+                        <div className="bg-brics-blue px-4 py-3 sm:px-6 sm:py-4 flex-shrink-0 flex items-center gap-4">
+                            <button
+                                onClick={() => navigate(-1)}
+                                className="text-white/80 hover:text-white transition-colors p-1 -ml-1"
+                                title="Go Back"
+                            >
+                                <ArrowLeftIcon className="w-6 h-6 sm:w-7 sm:h-7" />
+                            </button>
+                            <div>
+                                <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                                    <ChatBubbleLeftRightIcon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-200" />
+                                    Live Discussion
+                                </h2>
+                                <p className="text-blue-100 text-[10px] sm:text-sm mt-0.5">Join the conversation</p>
+                            </div>
                         </div>
 
                         {/* Pinned Poll Section - Fixed at Top (Unified with Chat) */}
@@ -101,7 +117,12 @@ function LivePolling() {
                                 const totalVotes = voteData.reduce((sum, data) => sum + data.votes, 0);
 
                                 return (
-                                    <div key={poll.id} className="group bg-yellow-50 rounded-xl sm:rounded-2xl p-3 sm:p-5 shadow-md border-2 border-yellow-300 hover:border-yellow-500 hover:shadow-2xl hover:scale-[1.01] sm:hover:scale-[1.02] cursor-pointer relative">
+                                    <div
+                                        key={poll.id}
+                                        onClick={() => togglePoll(poll.id)}
+                                        className={`group bg-yellow-50 rounded-xl sm:rounded-2xl p-3 sm:p-5 shadow-md border-2 transition-all duration-300 cursor-pointer relative ${expandedPolls[poll.id] ? 'border-yellow-500 shadow-2xl scale-[1.01] sm:scale-[1.02]' : 'border-yellow-300 hover:border-yellow-400'
+                                            }`}
+                                    >
 
                                         {/* Content */}
                                         <div className="relative z-10">
@@ -114,12 +135,13 @@ function LivePolling() {
                                                     <h3 className="font-bold text-gray-900 text-sm sm:text-base leading-tight">Event Poll</h3>
                                                     <p className="text-[10px] sm:text-xs text-gray-500">📌 Pinned</p>
                                                 </div>
+                                                <ChevronDownIcon className={`w-5 h-5 text-yellow-600 transition-transform duration-300 ${expandedPolls[poll.id] ? 'rotate-180' : ''}`} />
                                             </div>
 
                                             <p className="text-xs sm:text-sm text-gray-700 mb-3 sm:mb-4 font-medium leading-normal">{poll.question}</p>
 
-                                            {/* Poll Options - Reveal on Hover */}
-                                            <div className="max-h-0 group-hover:max-h-[1000px] transition-all duration-700 ease-in-out overflow-hidden">
+                                            {/* Poll Options - Reveal on Click/Tap */}
+                                            <div className={`transition-all duration-700 ease-in-out overflow-hidden ${expandedPolls[poll.id] ? 'max-h-[1000px]' : 'max-h-0'}`}>
                                                 <div className="space-y-4 pt-4 mt-2 border-t border-yellow-200/40">
                                                     {poll.options.slice(0, 3).map((option, index) => {
                                                         const data = voteData[index];
