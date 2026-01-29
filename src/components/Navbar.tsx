@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
 
+import { fetchApi } from '../utils/api';
+
 const MENU_ITEMS = [
     { label: 'Home', href: '/' },
     { label: 'Zones', href: '/zones' },
@@ -15,6 +17,7 @@ const MENU_ITEMS = [
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [user, setUser] = useState<any>(null);
     const { pathname } = useLocation();
     const isHome = pathname === '/' || pathname === '/manthan';
 
@@ -23,8 +26,24 @@ export default function Navbar() {
             setIsScrolled(window.scrollY > 50);
         };
         window.addEventListener('scroll', handleScroll);
+
+        // Fetch user auth status
+        fetchApi('/me/')
+            .then(data => setUser(data))
+            .catch(() => setUser(null));
+
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    const handleLogout = async () => {
+        try {
+            await fetchApi('/logout/', { method: 'POST' });
+            setUser(null);
+            window.location.reload();
+        } catch (error) {
+            console.error('Logout failed', error);
+        }
+    };
 
     // Close menu on route change
     useEffect(() => {
@@ -76,16 +95,33 @@ export default function Navbar() {
                             );
                         })}
 
-                        {/* Join Now CTA */}
-                        <Link
-                            to="/login"
-                            className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg ${effectiveScrolled
-                                ? 'bg-brics-blue text-white hover:bg-opacity-90'
-                                : 'bg-white text-brics-blue hover:bg-gray-100'
-                                }`}
-                        >
-                            Join Now
-                        </Link>
+                        {/* Join Now / User Profile CTA */}
+                        {user ? (
+                            <div className="flex items-center gap-4">
+                                <span className={`text-sm font-bold ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`}>
+                                    Hi, {user.username}
+                                </span>
+                                <button
+                                    onClick={handleLogout}
+                                    className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg ${effectiveScrolled
+                                        ? 'bg-red-500 text-white hover:bg-red-600'
+                                        : 'bg-white text-red-500 hover:bg-gray-100'
+                                        }`}
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg ${effectiveScrolled
+                                    ? 'bg-brics-blue text-white hover:bg-opacity-90'
+                                    : 'bg-white text-brics-blue hover:bg-gray-100'
+                                    }`}
+                            >
+                                Join Now
+                            </Link>
+                        )}
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -137,12 +173,21 @@ export default function Navbar() {
 
                         {/* Mobile Join Now CTA */}
                         <div className={`pt-8 transition-all duration-500 delay-300 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
-                            <Link
-                                to="/login"
-                                className="inline-block w-full py-5 rounded-2xl bg-brics-blue text-white text-center text-xl font-bold shadow-xl active:scale-95 transition-all"
-                            >
-                                Join Now
-                            </Link>
+                            {user ? (
+                                <button
+                                    onClick={handleLogout}
+                                    className="inline-block w-full py-5 rounded-2xl bg-red-500 text-white text-center text-xl font-bold shadow-xl active:scale-95 transition-all"
+                                >
+                                    Logout ({user.username})
+                                </button>
+                            ) : (
+                                <Link
+                                    to="/login"
+                                    className="inline-block w-full py-5 rounded-2xl bg-brics-blue text-white text-center text-xl font-bold shadow-xl active:scale-95 transition-all"
+                                >
+                                    Join Now
+                                </Link>
+                            )}
                         </div>
                     </div>
                 </div>
