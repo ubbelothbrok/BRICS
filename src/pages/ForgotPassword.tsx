@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { EnvelopeIcon, ArrowRightIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon, ArrowRightIcon, ArrowLeftIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import { fetchApi } from '../utils/api';
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState('');
+    const [otp, setOtp] = useState('');
+    const [otpSent, setOtpSent] = useState(false);
     const [loading, setLoading] = useState(false);
     const [focusedField, setFocusedField] = useState<string | null>(null);
     const navigate = useNavigate();
@@ -14,17 +16,35 @@ export default function ForgotPassword() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        try {
-            await fetchApi('/auth/forgot-password', {
-                method: 'POST',
-                body: JSON.stringify({ email })
-            });
-            alert('Password reset link sent to your email!');
-            navigate('/login');
-        } catch (error: any) {
-            alert(error.message || 'Error connecting to server');
-        } finally {
-            setLoading(false);
+
+        if (otpSent) {
+            // Verify OTP Logic
+            try {
+                // Mock API call for verification
+                // await fetchApi('/auth/verify-otp', { method: 'POST', body: JSON.stringify({ email, otp }) });
+                console.log('Verifying OTP:', otp);
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate delay
+                alert('OTP Verified Successfully! Redirecting to reset password...');
+                navigate('/reset-password'); // Assuming a reset password route exists or back to login
+            } catch (error: any) {
+                alert(error.message || 'Invalid OTP');
+            } finally {
+                setLoading(false);
+            }
+        } else {
+            // Send OTP Logic
+            try {
+                await fetchApi('/auth/forgot-password', {
+                    method: 'POST',
+                    body: JSON.stringify({ email })
+                });
+                alert('OTP sent to your email!');
+                setOtpSent(true);
+            } catch (error: any) {
+                alert(error.message || 'Error connecting to server');
+            } finally {
+                setLoading(false);
+            }
         }
     };
 
@@ -49,34 +69,69 @@ export default function ForgotPassword() {
                                 Recover <span className="text-brics-blue underline decoration-brics-blue/30 underline-offset-8">Password</span>
                             </h1>
                             <p className="text-lg opacity-60 font-medium text-[var(--color-text)]">
-                                Enter your email to receive a reset link
+                                {otpSent ? 'Enter the security code sent to your email' : 'Enter your email to receive an OTP'}
                             </p>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-8">
                             <div className="space-y-6">
-                                {/* Email Field */}
-                                <div className="group/input relative">
-                                    <label className={`block text-xs font-bold uppercase tracking-widest mb-2 transition-all duration-300 ${focusedField === 'email' ? 'text-brics-blue translate-x-1' : 'opacity-50 text-[var(--color-text)]'}`}>
-                                        Email Address
-                                    </label>
-                                    <div className="relative group">
-                                        <div className={`absolute inset-0 bg-gradient-to-r from-brics-blue to-brics-blue/40 rounded-2xl blur-md transition-opacity duration-300 ${focusedField === 'email' ? 'opacity-10' : 'opacity-0'}`}></div>
-                                        <div className="relative">
-                                            <EnvelopeIcon className={`w-5 h-5 absolute left-5 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === 'email' ? 'text-brics-blue' : 'opacity-30'}`} />
-                                            <input
-                                                type="email"
-                                                required
-                                                onFocus={() => setFocusedField('email')}
-                                                onBlur={() => setFocusedField(null)}
-                                                className="w-full pl-14 pr-6 py-5 rounded-2xl bg-white/50 dark:bg-black/20 border border-white/30 dark:border-white/10 text-[var(--color-text)] text-lg placeholder:opacity-30 focus:bg-white dark:focus:bg-black/40 transition-all duration-500 outline-none shadow-sm group-hover/input:border-white/50"
-                                                placeholder="name@example.com"
-                                                value={email}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                            />
+                                {!otpSent ? (
+                                    /* Email Field */
+                                    <div className="group/input relative">
+                                        <label className={`block text-xs font-bold uppercase tracking-widest mb-2 transition-all duration-300 ${focusedField === 'email' ? 'text-brics-blue translate-x-1' : 'opacity-50 text-[var(--color-text)]'}`}>
+                                            Email Address
+                                        </label>
+                                        <div className="relative group">
+                                            <div className={`absolute inset-0 bg-gradient-to-r from-brics-blue to-brics-blue/40 rounded-2xl blur-md transition-opacity duration-300 ${focusedField === 'email' ? 'opacity-10' : 'opacity-0'}`}></div>
+                                            <div className="relative">
+                                                <EnvelopeIcon className={`w-5 h-5 absolute left-5 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === 'email' ? 'text-brics-blue' : 'opacity-30'}`} />
+                                                <input
+                                                    type="email"
+                                                    required
+                                                    onFocus={() => setFocusedField('email')}
+                                                    onBlur={() => setFocusedField(null)}
+                                                    className="w-full pl-14 pr-6 py-5 rounded-2xl bg-transparent border border-white/30 dark:border-white/10 text-[var(--color-text)] text-lg placeholder:opacity-30 focus:bg-white/10 dark:focus:bg-black/10 transition-all duration-500 outline-none shadow-sm group-hover/input:border-white/50"
+                                                    placeholder="name@example.com"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                ) : (
+                                    /* OTP Field */
+                                    <div className="group/input relative animate-fadeIn">
+                                        <label className={`block text-xs font-bold uppercase tracking-widest mb-2 transition-all duration-300 ${focusedField === 'otp' ? 'text-brics-blue translate-x-1' : 'opacity-50 text-[var(--color-text)]'}`}>
+                                            Enter OTP
+                                        </label>
+                                        <div className="relative group">
+                                            <div className={`absolute inset-0 bg-gradient-to-r from-brics-blue to-brics-blue/40 rounded-2xl blur-md transition-opacity duration-300 ${focusedField === 'otp' ? 'opacity-10' : 'opacity-0'}`}></div>
+                                            <div className="relative">
+                                                <LockClosedIcon className={`w-5 h-5 absolute left-5 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === 'otp' ? 'text-brics-blue' : 'opacity-30'}`} />
+                                                <input
+                                                    type="text"
+                                                    required
+                                                    maxLength={6}
+                                                    onFocus={() => setFocusedField('otp')}
+                                                    onBlur={() => setFocusedField(null)}
+                                                    className="w-full pl-14 pr-6 py-5 rounded-2xl bg-transparent border border-white/30 dark:border-white/10 text-[var(--color-text)] text-lg placeholder:opacity-30 focus:bg-white/10 dark:focus:bg-black/10 transition-all duration-500 outline-none shadow-sm group-hover/input:border-white/50 tracking-[0.5em] font-mono text-center"
+                                                    placeholder="......"
+                                                    value={otp}
+                                                    onChange={(e) => setOtp(e.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="text-center mt-4">
+                                            <button
+                                                type="button"
+                                                onClick={() => { setOtpSent(false); setOtp(''); }}
+                                                className="text-xs font-bold uppercase tracking-widest opacity-40 hover:opacity-100 hover:text-brics-blue transition-all"
+                                            >
+                                                Change Email
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             <button
@@ -90,7 +145,7 @@ export default function ForgotPassword() {
                                         <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                                     ) : (
                                         <>
-                                            <span>Send Reset Link</span>
+                                            <span>{otpSent ? 'Verify OTP' : 'Send OTP'}</span>
                                             <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                         </>
                                     )}

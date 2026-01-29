@@ -58,11 +58,11 @@ export default function Registration() {
                     <div className="flex flex-col lg:flex-row items-center gap-16">
                         {/* Left Side: Info */}
                         <div className="hidden lg:block lg:w-1/2 lg:-mt-3">
-                            <Link to="/" className="text-brics-blue font-semibold flex items-center gap-2 mb-8 hover:gap-3 transition-all">
+                            <Link to="/login" className="text-brics-blue font-semibold flex items-center gap-2 mb-8 hover:gap-3 transition-all">
                                 <svg className="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
-                                Back to Home
+                                Back to Login
                             </Link>
 
                             <h1 className="text-5xl font-bold text-[var(--color-text)] mb-6 leading-tight transition-colors duration-300">

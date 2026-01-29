@@ -161,6 +161,7 @@ export default function Navbar() {
                                     to={item.href}
                                     className={`text-4xl font-bold transition-all duration-300 transform flex items-center gap-4 ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'}`}
                                     style={{ transitionDelay: `${idx * 50}ms` }}
+                                    onClick={() => setIsMenuOpen(false)}
                                 >
                                     {isActive && <div className="w-3 h-3 rounded-full bg-brics-blue shadow-[0_0_10px_rgba(0,39,118,0.5)]"></div>}
                                     <span className={`bg-clip-text text-transparent bg-gradient-to-r ${item.special ? 'from-brics-orange to-brics-red' : (isActive ? 'from-brics-blue to-brics-blue' : 'from-gray-900 to-gray-600')}`}>
@@ -175,7 +176,10 @@ export default function Navbar() {
                         <div className={`pt-8 transition-all duration-500 delay-300 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
                             {user ? (
                                 <button
-                                    onClick={handleLogout}
+                                    onClick={() => {
+                                        handleLogout();
+                                        setIsMenuOpen(false);
+                                    }}
                                     className="inline-block w-full py-5 rounded-2xl bg-red-500 text-white text-center text-xl font-bold shadow-xl active:scale-95 transition-all"
                                 >
                                     Logout ({user.username})
@@ -184,6 +188,7 @@ export default function Navbar() {
                                 <Link
                                     to="/login"
                                     className="inline-block w-full py-5 rounded-2xl bg-brics-blue text-white text-center text-xl font-bold shadow-xl active:scale-95 transition-all"
+                                    onClick={() => setIsMenuOpen(false)}
                                 >
                                     Join Now
                                 </Link>
