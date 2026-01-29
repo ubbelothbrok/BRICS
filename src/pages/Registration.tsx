@@ -12,10 +12,32 @@ export default function Registration() {
         email: '',
         phone: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        otp: ''
     });
 
     const [loading, setLoading] = useState(false);
+    const [otpSent, setOtpSent] = useState(false);
+
+    const handleSendOTP = async () => {
+        if (!formData.schoolName || !formData.contactPerson || !formData.email) {
+            alert('Please fill in School Name, Full Name, and Email Address to send OTP');
+            return;
+        }
+        setLoading(true);
+        try {
+            await fetchApi('/send-otp/', {
+                method: 'POST',
+                body: JSON.stringify({ email: formData.email })
+            });
+            setOtpSent(true);
+            alert('OTP sent to your email!');
+        } catch (error: any) {
+            alert(error.message || 'Failed to send OTP');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -33,7 +55,8 @@ export default function Registration() {
                 contact_person: formData.contactPerson,
                 phone_number: formData.phone,
                 email: formData.email,
-                password: formData.password
+                password: formData.password,
+                otp: formData.otp
             };
 
             await fetchApi('/register/', {
@@ -42,6 +65,7 @@ export default function Registration() {
             });
             alert('Registration successful!');
             console.log(formData);
+            // Redirect or clear form here
         } catch (error: any) {
             alert(error.message || 'Error connecting to server');
         } finally {
@@ -118,7 +142,7 @@ export default function Registration() {
                             <div className="bg-[var(--color-card-bg)] p-5 lg:p-10 rounded-3xl lg:rounded-[2.5rem] border border-[var(--color-text)]/10 shadow-sm transition-colors duration-300">
                                 <form onSubmit={handleSubmit} className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">School Name</label>
+                                        <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">School Name <span className="text-red-500">*</span></label>
                                         <input
                                             type="text"
                                             required
@@ -131,12 +155,12 @@ export default function Registration() {
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Contact Person</label>
+                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Full Name <span className="text-red-500">*</span></label>
                                             <input
                                                 type="text"
                                                 required
                                                 className="w-full px-4 py-2.5 lg:py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
-                                                placeholder="FullName"
+                                                placeholder="Full Name"
                                                 value={formData.contactPerson}
                                                 onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
                                             />
@@ -145,7 +169,6 @@ export default function Registration() {
                                             <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Phone Number</label>
                                             <input
                                                 type="tel"
-                                                required
                                                 className="w-full px-4 py-2.5 lg:py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
                                                 placeholder="+91"
                                                 value={formData.phone}
@@ -155,20 +178,46 @@ export default function Registration() {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Email Address</label>
-                                        <input
-                                            type="email"
-                                            required
-                                            className="w-full px-4 py-2.5 lg:py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
-                                            placeholder="school@example.com"
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        />
+                                        <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Email Address <span className="text-red-500">*</span></label>
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="email"
+                                                required
+                                                className="flex-1 px-4 py-2.5 lg:py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                                placeholder="school@example.com"
+                                                value={formData.email}
+                                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                                disabled={otpSent}
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={handleSendOTP}
+                                                disabled={loading || otpSent || !formData.email}
+                                                className="px-4 py-2 bg-brics-blue text-white rounded-xl font-bold text-sm hover:bg-opacity-90 transition-all disabled:opacity-50 whitespace-nowrap"
+                                            >
+                                                {otpSent ? 'OTP Sent' : 'Send OTP'}
+                                            </button>
+                                        </div>
                                     </div>
+
+                                    {otpSent && (
+                                        <div>
+                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Enter OTP <span className="text-red-500">*</span></label>
+                                            <input
+                                                type="text"
+                                                required
+                                                maxLength={6}
+                                                className="w-full px-4 py-2.5 lg:py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                                placeholder="Enter 6-digit OTP"
+                                                value={formData.otp}
+                                                onChange={(e) => setFormData({ ...formData, otp: e.target.value })}
+                                            />
+                                        </div>
+                                    )}
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Password</label>
+                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Password <span className="text-red-500">*</span></label>
                                             <input
                                                 type="password"
                                                 required
@@ -179,7 +228,7 @@ export default function Registration() {
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Confirm Password</label>
+                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Confirm Password <span className="text-red-500">*</span></label>
                                             <input
                                                 type="password"
                                                 required
@@ -193,7 +242,7 @@ export default function Registration() {
 
                                     <button
                                         type="submit"
-                                        disabled={loading}
+                                        disabled={loading || !otpSent}
                                         className="w-full py-3.5 lg:py-4 bg-brics-blue text-white rounded-xl font-bold text-lg hover:bg-opacity-90 shadow-lg hover:shadow-xl transition-all mt-2 disabled:opacity-50"
                                     >
                                         {loading ? 'Submitting...' : 'Complete Registration'}
