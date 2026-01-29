@@ -75,6 +75,17 @@ export default function Navbar() {
                                 </Link>
                             );
                         })}
+
+                        {/* Join Now CTA */}
+                        <Link
+                            to="/login"
+                            className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg ${effectiveScrolled
+                                ? 'bg-brics-blue text-white hover:bg-opacity-90'
+                                : 'bg-white text-brics-blue hover:bg-gray-100'
+                                }`}
+                        >
+                            Join Now
+                        </Link>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -123,11 +134,20 @@ export default function Navbar() {
                                 </Link>
                             );
                         })}
+
+                        {/* Mobile Join Now CTA */}
+                        <div className={`pt-8 transition-all duration-500 delay-300 ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
+                            <Link
+                                to="/login"
+                                className="inline-block w-full py-5 rounded-2xl bg-brics-blue text-white text-center text-xl font-bold shadow-xl active:scale-95 transition-all"
+                            >
+                                Join Now
+                            </Link>
+                        </div>
                     </div>
-
-
                 </div>
             </div>
         </nav>
     );
 }
+

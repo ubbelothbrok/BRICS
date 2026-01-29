@@ -11,8 +11,8 @@ export default function Registration() {
         contactPerson: '',
         email: '',
         phone: '',
-        studentCount: '',
-        interest: 'Science & Technology'
+        password: '',
+        confirmPassword: ''
     });
 
     const [loading, setLoading] = useState(false);
@@ -20,13 +20,19 @@ export default function Registration() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
+        if (formData.password !== formData.confirmPassword) {
+            alert('Passwords do not match');
+            setLoading(false);
+            return;
+        }
+
         try {
-            // Store student data
-            await fetchApi('/students', {
+            // Store registration data
+            await fetchApi('/auth/register', {
                 method: 'POST',
                 body: JSON.stringify(formData)
             });
-            alert('Registration submitted successfully! We will contact you soon.');
+            alert('Registration successful!');
             console.log(formData);
         } catch (error: any) {
             alert(error.message || 'Error connecting to server');
@@ -43,7 +49,7 @@ export default function Registration() {
                 <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
                     <div className="flex flex-col lg:flex-row gap-16">
                         {/* Left Side: Info */}
-                        <div className="lg:w-1/2">
+                        <div className="hidden lg:block lg:w-1/2">
                             <Link to="/" className="text-brics-blue font-semibold flex items-center gap-2 mb-8 hover:gap-3 transition-all">
                                 <svg className="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -90,7 +96,17 @@ export default function Registration() {
                         </div>
 
                         {/* Right Side: Form */}
-                        <div className="lg:w-1/2">
+                        <div className="lg:w-1/2 w-full">
+                            {/* Mobile Only Header */}
+                            <div className="lg:hidden mb-10 text-center px-4">
+                                <h1 className="text-4xl font-bold text-[var(--color-text)] leading-tight transition-colors duration-300">
+                                    Register for <span className="text-brics-blue">Pragyaan 2026</span>
+                                </h1>
+                                <p className="mt-4 text-lg text-[var(--color-text)] opacity-60 leading-relaxed transition-colors duration-300">
+                                    Join the region's largest educational open-day event.
+                                </p>
+                            </div>
+
                             <div className="bg-[var(--color-card-bg)] p-8 lg:p-12 rounded-3xl border border-[var(--color-text)]/10 shadow-sm transition-colors duration-300">
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <div>
@@ -144,28 +160,26 @@ export default function Registration() {
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Expected Students</label>
+                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Password</label>
                                             <input
-                                                type="number"
+                                                type="password"
                                                 required
                                                 className="w-full px-4 py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
-                                                placeholder="e.g. 50"
-                                                value={formData.studentCount}
-                                                onChange={(e) => setFormData({ ...formData, studentCount: e.target.value })}
+                                                placeholder="••••••••"
+                                                value={formData.password}
+                                                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Area of Interest</label>
-                                            <select
-                                                className="w-full px-4 py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none dark:bg-slate-800"
-                                                value={formData.interest}
-                                                onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                                            >
-                                                <option className="dark:bg-slate-800">Science & Technology</option>
-                                                <option className="dark:bg-slate-800">Arts & Culture</option>
-                                                <option className="dark:bg-slate-800">Entrepreneurship</option>
-                                                <option className="dark:bg-slate-800">Social Innovation</option>
-                                            </select>
+                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Confirm Password</label>
+                                            <input
+                                                type="password"
+                                                required
+                                                className="w-full px-4 py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                                placeholder="••••••••"
+                                                value={formData.confirmPassword}
+                                                onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                                            />
                                         </div>
                                     </div>
 
