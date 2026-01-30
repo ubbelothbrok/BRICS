@@ -1,164 +1,97 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { EnvelopeIcon, ArrowRightIcon, ArrowLeftIcon, LockClosedIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { fetchApi } from '../utils/api';
+import toast from 'react-hot-toast';
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState('');
-    const [otp, setOtp] = useState('');
-    const [otpSent, setOtpSent] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [focusedField, setFocusedField] = useState<string | null>(null);
-    const navigate = useNavigate();
+    const [sent, setSent] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-
-        if (otpSent) {
-            // Verify OTP Logic
-            try {
-                // Mock API call for verification
-                // await fetchApi('/auth/verify-otp', { method: 'POST', body: JSON.stringify({ email, otp }) });
-                console.log('Verifying OTP:', otp);
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate delay
-                alert('OTP Verified Successfully! Redirecting to reset password...');
-                navigate('/reset-password'); // Assuming a reset password route exists or back to login
-            } catch (error: any) {
-                alert(error.message || 'Invalid OTP');
-            } finally {
-                setLoading(false);
-            }
-        } else {
-            // Send OTP Logic
-            try {
-                await fetchApi('/auth/forgot-password', {
-                    method: 'POST',
-                    body: JSON.stringify({ email })
-                });
-                alert('OTP sent to your email!');
-                setOtpSent(true);
-            } catch (error: any) {
-                alert(error.message || 'Error connecting to server');
-            } finally {
-                setLoading(false);
-            }
+        try {
+            await fetchApi('/forgot-password/', {
+                method: 'POST',
+                body: JSON.stringify({ email })
+            });
+            setSent(true);
+            toast.success('Reset link sent to your email');
+        } catch (error: any) {
+            toast.error(error.message || 'Failed to send reset link');
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen bg-[var(--color-bg)] transition-colors duration-500 overflow-hidden relative">
+        <div className="min-h-screen bg-[var(--color-bg)] transition-colors duration-300">
             <Navbar />
 
-            {/* Premium Background Elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brics-blue/10 rounded-full blur-[120px] animate-pulse"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brics-blue/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }}></div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-brics-cyan/5 rounded-full blur-[150px]"></div>
-            </div>
+            <main className="pt-32 pb-24 px-4 min-h-[calc(100vh-80px)] flex items-center justify-center">
+                <div className="max-w-md w-full">
+                    <div className="mb-8">
+                        <Link to="/login" className="text-brics-blue font-semibold flex items-center gap-2 mb-8 hover:gap-3 transition-all w-fit">
+                            <ArrowLeftIcon className="w-5 h-5" />
+                            Back to Login
+                        </Link>
 
-            <main className="relative pt-32 pb-24 flex items-center justify-center min-h-screen z-10 px-4">
-                <div className="max-w-xl w-full">
-                    {/* Glassmorphism Card */}
-                    <div className="bg-white/10 dark:bg-white/5 backdrop-blur-2xl p-8 lg:p-14 rounded-[2.5rem] border border-white/20 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500 hover:shadow-[0_30px_60px_rgba(0,0,0,0.15)] group animate-fadeIn">
+                        <h1 className="text-3xl font-bold text-[var(--color-text)] mb-3">
+                            Forgot Password?
+                        </h1>
+                        <p className="text-[var(--color-text)] opacity-60">
+                            Enter your email address and we'll send you a link to reset your password.
+                        </p>
+                    </div>
 
-                        <div className="mb-12 text-center">
-                            <h1 className="text-4xl lg:text-5xl font-bold font-heading mb-4 tracking-tight text-[var(--color-text)]">
-                                Recover <span className="text-brics-blue underline decoration-brics-blue/30 underline-offset-8">Password</span>
-                            </h1>
-                            <p className="text-lg opacity-60 font-medium text-[var(--color-text)]">
-                                {otpSent ? 'Enter the security code sent to your email' : 'Enter your email to receive an OTP'}
-                            </p>
-                        </div>
-
-                        <form onSubmit={handleSubmit} className="space-y-8">
-                            <div className="space-y-6">
-                                {!otpSent ? (
-                                    /* Email Field */
-                                    <div className="group/input relative">
-                                        <label className={`block text-xs font-bold uppercase tracking-widest mb-2 transition-all duration-300 ${focusedField === 'email' ? 'text-brics-blue translate-x-1' : 'opacity-50 text-[var(--color-text)]'}`}>
-                                            Email Address
-                                        </label>
-                                        <div className="relative group">
-                                            <div className={`absolute inset-0 bg-gradient-to-r from-brics-blue to-brics-blue/40 rounded-2xl blur-md transition-opacity duration-300 ${focusedField === 'email' ? 'opacity-10' : 'opacity-0'}`}></div>
-                                            <div className="relative">
-                                                <EnvelopeIcon className={`w-5 h-5 absolute left-5 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === 'email' ? 'text-brics-blue' : 'opacity-30'}`} />
-                                                <input
-                                                    type="email"
-                                                    required
-                                                    onFocus={() => setFocusedField('email')}
-                                                    onBlur={() => setFocusedField(null)}
-                                                    className="w-full pl-14 pr-6 py-5 rounded-2xl bg-transparent border border-white/30 dark:border-white/10 text-[var(--color-text)] text-lg placeholder:opacity-30 focus:bg-white/10 dark:focus:bg-black/10 transition-all duration-500 outline-none shadow-sm group-hover/input:border-white/50"
-                                                    placeholder="name@example.com"
-                                                    value={email}
-                                                    onChange={(e) => setEmail(e.target.value)}
-                                                />
-                                            </div>
-                                        </div>
+                    <div className="bg-[var(--color-card-bg)] p-8 rounded-3xl border border-[var(--color-text)]/10 shadow-lg">
+                        {!sent ? (
+                            <form onSubmit={handleSubmit} className="space-y-6">
+                                <div>
+                                    <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2">Email Address</label>
+                                    <div className="relative">
+                                        <EnvelopeIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-text)] opacity-30" />
+                                        <input
+                                            type="email"
+                                            required
+                                            className="w-full pl-12 pr-4 py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                            placeholder="name@example.com"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                        />
                                     </div>
-                                ) : (
-                                    /* OTP Field */
-                                    <div className="group/input relative animate-fadeIn">
-                                        <label className={`block text-xs font-bold uppercase tracking-widest mb-2 transition-all duration-300 ${focusedField === 'otp' ? 'text-brics-blue translate-x-1' : 'opacity-50 text-[var(--color-text)]'}`}>
-                                            Enter OTP
-                                        </label>
-                                        <div className="relative group">
-                                            <div className={`absolute inset-0 bg-gradient-to-r from-brics-blue to-brics-blue/40 rounded-2xl blur-md transition-opacity duration-300 ${focusedField === 'otp' ? 'opacity-10' : 'opacity-0'}`}></div>
-                                            <div className="relative">
-                                                <LockClosedIcon className={`w-5 h-5 absolute left-5 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === 'otp' ? 'text-brics-blue' : 'opacity-30'}`} />
-                                                <input
-                                                    type="text"
-                                                    required
-                                                    maxLength={6}
-                                                    onFocus={() => setFocusedField('otp')}
-                                                    onBlur={() => setFocusedField(null)}
-                                                    className="w-full pl-14 pr-6 py-5 rounded-2xl bg-transparent border border-white/30 dark:border-white/10 text-[var(--color-text)] text-lg placeholder:opacity-30 focus:bg-white/10 dark:focus:bg-black/10 transition-all duration-500 outline-none shadow-sm group-hover/input:border-white/50 tracking-[0.5em] font-mono text-center"
-                                                    placeholder="......"
-                                                    value={otp}
-                                                    onChange={(e) => setOtp(e.target.value)}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="text-center mt-4">
-                                            <button
-                                                type="button"
-                                                onClick={() => { setOtpSent(false); setOtp(''); }}
-                                                className="text-xs font-bold uppercase tracking-widest opacity-40 hover:opacity-100 hover:text-brics-blue transition-all"
-                                            >
-                                                Change Email
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="w-full relative group overflow-hidden rounded-2xl"
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-r from-brics-blue to-[#1a4eba] transition-transform duration-500 group-hover:scale-105"></div>
-                                <div className="relative py-5 px-6 flex items-center justify-center gap-3 text-white font-bold text-xl transition-all">
-                                    {loading ? (
-                                        <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                                    ) : (
-                                        <>
-                                            <span>{otpSent ? 'Verify OTP' : 'Send OTP'}</span>
-                                            <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                        </>
-                                    )}
                                 </div>
-                            </button>
 
-                            <div className="pt-4 text-center">
-                                <Link to="/login" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest opacity-60 hover:opacity-100 hover:text-brics-blue transition-all">
-                                    <ArrowLeftIcon className="w-4 h-4" />
-                                    Back to Login
-                                </Link>
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className="w-full py-4 bg-brics-blue text-white rounded-xl font-bold text-lg hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl disabled:opacity-50"
+                                >
+                                    {loading ? 'Sending Link...' : 'Send Reset Link'}
+                                </button>
+                            </form>
+                        ) : (
+                            <div className="text-center py-8">
+                                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <EnvelopeIcon className="w-8 h-8 text-green-600" />
+                                </div>
+                                <h3 className="text-xl font-bold text-[var(--color-text)] mb-2">Check your inbox</h3>
+                                <p className="text-[var(--color-text)] opacity-60 mb-8">
+                                    We have sent a password reset link to <br />
+                                    <span className="font-semibold text-brics-blue">{email}</span>
+                                </p>
+                                <button
+                                    onClick={() => setSent(false)}
+                                    className="text-sm font-bold text-[var(--color-text)] opacity-40 hover:opacity-100 transition-opacity"
+                                >
+                                    Try another email
+                                </button>
                             </div>
-                        </form>
+                        )}
                     </div>
                 </div>
             </main>

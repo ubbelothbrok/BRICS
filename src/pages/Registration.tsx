@@ -1,14 +1,17 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { AcademicCapIcon, UserGroupIcon, BuildingLibraryIcon } from '@heroicons/react/24/outline';
+import { AcademicCapIcon, UserGroupIcon, BuildingLibraryIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { fetchApi } from '../utils/api';
+import toast from 'react-hot-toast';
 
 export default function Registration() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         schoolName: '',
-        contactPerson: '',
+        firstName: '',
+        lastName: '',
         email: '',
         phone: '',
         password: '',
@@ -18,10 +21,40 @@ export default function Registration() {
 
     const [loading, setLoading] = useState(false);
     const [otpSent, setOtpSent] = useState(false);
+    const [timer, setTimer] = useState(0);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    useEffect(() => {
+        let interval: ReturnType<typeof setInterval>;
+        if (timer > 0) {
+            interval = setInterval(() => {
+                setTimer((prev) => prev - 1);
+            }, 1000);
+        }
+        return () => clearInterval(interval);
+    }, [timer]);
+
+    const calculatePasswordStrength = (password: string) => {
+        let strength = 0;
+        if (password.length > 7) strength++;
+        if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+        if (password.match(/\d/)) strength++;
+        if (password.match(/[^a-zA-Z\d]/)) strength++;
+        return strength;
+    };
+
+    const getStrengthColor = (strength: number) => {
+        if (strength === 0) return 'bg-gray-200';
+        if (strength <= 1) return 'bg-red-500';
+        if (strength === 2) return 'bg-yellow-500';
+        if (strength === 3) return 'bg-blue-500';
+        return 'bg-green-500';
+    };
 
     const handleSendOTP = async () => {
-        if (!formData.schoolName || !formData.contactPerson || !formData.email) {
-            alert('Please fill in School Name, Full Name, and Email Address to send OTP');
+        if (!formData.schoolName || !formData.firstName || !formData.lastName || !formData.email) {
+            toast.error('Please fill in School Name, First Name, Last Name, and Email Address to send OTP');
             return;
         }
         setLoading(true);
@@ -31,9 +64,10 @@ export default function Registration() {
                 body: JSON.stringify({ email: formData.email })
             });
             setOtpSent(true);
-            alert('OTP sent to your email!');
+            setTimer(30);
+            toast.success('OTP sent to your email!');
         } catch (error: any) {
-            alert(error.message || 'Failed to send OTP');
+            toast.error(error.message || 'Failed to send OTP');
         } finally {
             setLoading(false);
         }
@@ -43,7 +77,7 @@ export default function Registration() {
         e.preventDefault();
         setLoading(true);
         if (formData.password !== formData.confirmPassword) {
-            alert('Passwords do not match');
+            toast.error('Passwords do not match');
             setLoading(false);
             return;
         }
@@ -52,7 +86,8 @@ export default function Registration() {
             // Prepare data for backend (snake_case)
             const payload = {
                 school_name: formData.schoolName,
-                contact_person: formData.contactPerson,
+                first_name: formData.firstName,
+                last_name: formData.lastName,
                 phone_number: formData.phone,
                 email: formData.email,
                 password: formData.password,
@@ -63,11 +98,25 @@ export default function Registration() {
                 method: 'POST',
                 body: JSON.stringify(payload)
             });
-            alert('Registration successful!');
+            toast.success('Registration successful! Logging you in...');
+
+            // Auto Login
+            try {
+                await fetchApi('/login/', {
+                    method: 'POST',
+                    body: JSON.stringify({ email: formData.email, password: formData.password })
+                });
+                toast.success('Login successful!');
+                navigate('/');
+            } catch (loginError) {
+                console.error('Auto-login failed', loginError);
+                toast.error('Registration successful, but auto-login failed. Please login manually.');
+                navigate('/login');
+            }
+
             console.log(formData);
-            // Redirect or clear form here
         } catch (error: any) {
-            alert(error.message || 'Error connecting to server');
+            toast.error(error.message || 'Error connecting to server');
         } finally {
             setLoading(false);
         }
@@ -150,19 +199,33 @@ export default function Registration() {
                                             placeholder="Enter your school name"
                                             value={formData.schoolName}
                                             onChange={(e) => setFormData({ ...formData, schoolName: e.target.value })}
+                                            disabled={otpSent}
                                         />
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Full Name <span className="text-red-500">*</span></label>
+                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">First Name <span className="text-red-500">*</span></label>
                                             <input
                                                 type="text"
                                                 required
                                                 className="w-full px-4 py-2.5 lg:py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
-                                                placeholder="Full Name"
-                                                value={formData.contactPerson}
-                                                onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
+                                                placeholder="First Name"
+                                                value={formData.firstName}
+                                                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                                                disabled={otpSent}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Last Name <span className="text-red-500">*</span></label>
+                                            <input
+                                                type="text"
+                                                required
+                                                className="w-full px-4 py-2.5 lg:py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
+                                                placeholder="Last Name"
+                                                value={formData.lastName}
+                                                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                                                disabled={otpSent}
                                             />
                                         </div>
                                         <div>
@@ -173,6 +236,7 @@ export default function Registration() {
                                                 placeholder="+91"
                                                 value={formData.phone}
                                                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                                disabled={otpSent}
                                             />
                                         </div>
                                     </div>
@@ -192,10 +256,11 @@ export default function Registration() {
                                             <button
                                                 type="button"
                                                 onClick={handleSendOTP}
-                                                disabled={loading || otpSent || !formData.email}
+                                                disabled={loading || (otpSent && timer > 0) || !formData.email}
                                                 className="px-4 py-2 bg-brics-blue text-white rounded-xl font-bold text-sm hover:bg-opacity-90 transition-all disabled:opacity-50 whitespace-nowrap"
+                                                style={{ minWidth: '140px' }}
                                             >
-                                                {otpSent ? 'OTP Sent' : 'Send OTP'}
+                                                {otpSent ? (timer > 0 ? `Resend in ${timer}s` : 'Resend OTP') : 'Send OTP'}
                                             </button>
                                         </div>
                                     </div>
@@ -215,28 +280,63 @@ export default function Registration() {
                                         </div>
                                     )}
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Password <span className="text-red-500">*</span></label>
-                                            <input
-                                                type="password"
-                                                required
-                                                className="w-full px-4 py-2.5 lg:py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
-                                                placeholder="••••••••"
-                                                value={formData.password}
-                                                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                            />
+                                            <div className="mb-2 flex justify-between items-center">
+                                                <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 transition-colors duration-300">Password <span className="text-red-500">*</span></label>
+                                            </div>
+                                            <div className="relative">
+                                                <input
+                                                    type={showPassword ? "text" : "password"}
+                                                    required
+                                                    className="w-full px-4 py-2.5 lg:py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none pr-10"
+                                                    placeholder="••••••••"
+                                                    value={formData.password}
+                                                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                                                />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setShowPassword(!showPassword)}
+                                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text)] opacity-50 hover:opacity-100"
+                                                >
+                                                    {showPassword ? <EyeSlashIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+                                                </button>
+                                            </div>
+
+                                            {/* Password Strength Meter */}
+                                            {formData.password && (
+                                                <div className="mt-2 flex gap-1 h-1.5">
+                                                    {[...Array(4)].map((_, i) => (
+                                                        <div
+                                                            key={i}
+                                                            className={`flex-1 rounded-full transition-all duration-300 ${i < calculatePasswordStrength(formData.password)
+                                                                ? getStrengthColor(calculatePasswordStrength(formData.password))
+                                                                : 'bg-gray-200/20'
+                                                                }`}
+                                                        ></div>
+                                                    ))}
+                                                </div>
+                                            )}
                                         </div>
                                         <div>
                                             <label className="block text-sm font-semibold text-[var(--color-text)] opacity-80 mb-2 transition-colors duration-300">Confirm Password <span className="text-red-500">*</span></label>
-                                            <input
-                                                type="password"
-                                                required
-                                                className="w-full px-4 py-2.5 lg:py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none"
-                                                placeholder="••••••••"
-                                                value={formData.confirmPassword}
-                                                onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                                            />
+                                            <div className="relative">
+                                                <input
+                                                    type={showConfirmPassword ? "text" : "password"}
+                                                    required
+                                                    className="w-full px-4 py-2.5 lg:py-3 rounded-xl bg-transparent border border-[var(--color-text)]/20 text-[var(--color-text)] focus:border-brics-blue focus:ring-2 focus:ring-blue-100 transition-all outline-none pr-10"
+                                                    placeholder="••••••••"
+                                                    value={formData.confirmPassword}
+                                                    onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                                                />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text)] opacity-50 hover:opacity-100"
+                                                >
+                                                    {showConfirmPassword ? <EyeSlashIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
 

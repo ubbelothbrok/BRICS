@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { LockClosedIcon, EnvelopeIcon, ArrowRightIcon, UserIcon, ShieldCheckIcon, SparklesIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
-import { fetchApi } from '../utils/api';
+import { LockClosedIcon, EnvelopeIcon, ArrowRightIcon, UserIcon, ShieldCheckIcon, SparklesIcon, ArrowLeftIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { fetchApi, GOOGLE_LOGIN_URL } from '../utils/api';
+import toast from 'react-hot-toast';
 
 export default function Login() {
     const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export default function Login() {
         password: ''
     });
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const [focusedField, setFocusedField] = useState<string | null>(null);
     const navigate = useNavigate();
 
@@ -22,10 +24,10 @@ export default function Login() {
                 method: 'POST',
                 body: JSON.stringify(formData)
             });
-            alert('Login successful!');
+            toast.success('Login successful!');
             navigate('/');
         } catch (error: any) {
-            alert(error.message || 'Error connecting to server');
+            toast.error(error.message || 'Error connecting to server');
         } finally {
             setLoading(false);
         }
@@ -154,15 +156,22 @@ export default function Login() {
                                                 <div className="relative">
                                                     <LockClosedIcon className={`w-5 h-5 absolute left-5 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === 'password' ? 'text-brics-blue' : 'opacity-30'}`} />
                                                     <input
-                                                        type="password"
+                                                        type={showPassword ? "text" : "password"}
                                                         required
                                                         onFocus={() => setFocusedField('password')}
                                                         onBlur={() => setFocusedField(null)}
-                                                        className="w-full pl-12 lg:pl-14 pr-4 lg:pr-6 py-4 lg:py-5 rounded-xl lg:rounded-2xl bg-white/5 dark:bg-white/5 border border-white/30 dark:border-white/10 text-[var(--color-text)] text-base lg:text-lg placeholder:opacity-30 focus:bg-white/10 dark:focus:bg-white/10 transition-all duration-500 outline-none shadow-sm group-hover/input:border-white/50"
+                                                        className="w-full pl-12 lg:pl-14 pr-12 lg:pr-14 py-4 lg:py-5 rounded-xl lg:rounded-2xl bg-white/5 dark:bg-white/5 border border-white/30 dark:border-white/10 text-[var(--color-text)] text-base lg:text-lg placeholder:opacity-30 focus:bg-white/10 dark:focus:bg-white/10 transition-all duration-500 outline-none shadow-sm group-hover/input:border-white/50"
                                                         placeholder="••••••••"
                                                         value={formData.password}
                                                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                                     />
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setShowPassword(!showPassword)}
+                                                        className="absolute right-5 top-1/2 -translate-y-1/2 text-[var(--color-text)] opacity-30 hover:opacity-100 hover:text-brics-blue transition-all"
+                                                    >
+                                                        {showPassword ? <EyeSlashIcon className="w-5 h-5" /> : <EyeIcon className="w-5 h-5" />}
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -193,7 +202,7 @@ export default function Login() {
                                     </div>
 
                                     <a
-                                        href="http://localhost:8000/auth/login/google-oauth2/"
+                                        href={GOOGLE_LOGIN_URL}
                                         className="w-full flex items-center justify-center gap-3 py-3 rounded-2xl border border-white/20 hover:bg-white/5 transition-all duration-300 text-[var(--color-text)] font-semibold text-lg"
                                     >
                                         <svg className="w-6 h-6" viewBox="0 0 24 24">

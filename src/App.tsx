@@ -22,6 +22,9 @@ import BharatDome from './pages/BharatDome';
 import NavRobotec from './pages/NavRobotec';
 import LivePolling from './pages/LivePolling';
 import CustomCursor from './components/CustomCursor';
+import AdminAbstracts from './pages/AdminAbstracts';
+
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -40,6 +43,7 @@ function App() {
   return (
     <ThemeProvider>
       <CustomCursor />
+      <Toaster position="bottom-center" reverseOrder={false} />
       <Router>
         <ScrollToTop />
         <Routes>
@@ -61,6 +65,7 @@ function App() {
           <Route path="/manthan/live-polling" element={<LivePolling />} />
           <Route path="/demos/bharat-dome" element={<BharatDome />} />
           <Route path="/demos/navrobotec" element={<NavRobotec />} />
+          <Route path="/admin-abstracts" element={<AdminAbstracts />} />
         </Routes>
       </Router>
     </ThemeProvider>

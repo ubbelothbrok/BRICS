@@ -1,6 +1,8 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/accounts';
+export const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || `${SERVER_URL}/api/accounts`;
+export const GOOGLE_LOGIN_URL = `${SERVER_URL}/auth/login/google-oauth2/`;
 
-const getCookie = (name: string) => {
+export const getCookie = (name: string) => {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';');
@@ -36,7 +38,7 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
 
     if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `API error: ${response.status}`);
+        throw new Error(errorData.message || errorData.error || errorData.detail || `API error: ${response.status}`);
     }
 
     return response.json();

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
+import { XMarkIcon, Bars3Icon, ArrowRightOnRectangleIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
 
 import { fetchApi } from '../utils/api';
 
@@ -17,6 +17,7 @@ const MENU_ITEMS = [
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [user, setUser] = useState<any>(null);
     const { pathname } = useLocation();
     const isHome = pathname === '/' || pathname === '/manthan';
@@ -97,19 +98,67 @@ export default function Navbar() {
 
                         {/* Join Now / User Profile CTA */}
                         {user ? (
-                            <div className="flex items-center gap-4">
-                                <span className={`text-sm font-bold ${effectiveScrolled ? 'text-gray-700' : 'text-white'}`}>
-                                    Hi, {user.username}
-                                </span>
+                            <div className="relative">
                                 <button
-                                    onClick={handleLogout}
-                                    className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg ${effectiveScrolled
-                                        ? 'bg-red-500 text-white hover:bg-red-600'
-                                        : 'bg-white text-red-500 hover:bg-gray-100'
-                                        }`}
+                                    onClick={() => setIsProfileOpen(!isProfileOpen)}
+                                    className="flex items-center gap-3 focus:outline-none group"
                                 >
-                                    Logout
+                                    <div className={`flex items-center justify-center p-1 rounded-full transition-all duration-300 ${effectiveScrolled ? 'bg-gray-100/50 hover:bg-gray-100' : 'bg-white/10 hover:bg-white/20'}`}>
+                                        {user.profile_picture ? (
+                                            <img
+                                                src={user.profile_picture}
+                                                alt="Profile"
+                                                className="w-8 h-8 rounded-full object-cover border-2 border-white/50"
+                                            />
+                                        ) : (
+                                            <div className="w-8 h-8 rounded-full bg-brics-blue flex items-center justify-center text-white font-bold text-sm border-2 border-white/50">
+                                                {user.first_name ? user.first_name[0].toUpperCase() : 'U'}
+                                            </div>
+                                        )}
+                                    </div>
                                 </button>
+
+                                {/* Dropdown Menu */}
+                                {isProfileOpen && (
+                                    <div
+                                        className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden transform origin-top-right transition-all animate-in fade-in zoom-in-95 duration-200"
+                                    >
+                                        <div className="p-4 border-b border-gray-50 bg-gray-50/50">
+                                            <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Signed in as</p>
+                                            <p className="text-sm font-bold text-gray-900 truncate">
+                                                {user.first_name} {user.last_name}
+                                            </p>
+                                            <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                                        </div>
+
+                                        <div className="p-2">
+                                            {user.is_staff && (
+                                                <Link
+                                                    to="/admin-abstracts"
+                                                    className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-gray-700 rounded-xl hover:bg-gray-100 transition-colors mb-1"
+                                                >
+                                                    <ShieldCheckIcon className="w-5 h-5 text-blue-600" />
+                                                    Admin Dashboard
+                                                </Link>
+                                            )}
+                                            <button
+                                                onClick={handleLogout}
+                                                className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-red-600 rounded-xl hover:bg-red-50 transition-colors"
+                                            >
+                                                <ArrowRightOnRectangleIcon className="w-5 h-5" />
+                                                Sign out
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Backdrop to close dropdown */}
+                                {isProfileOpen && (
+                                    <div
+                                        className="fixed inset-0 z-[-1]"
+                                        onClick={() => setIsProfileOpen(false)}
+                                    ></div>
+                                )}
                             </div>
                         ) : (
                             <Link
@@ -182,7 +231,7 @@ export default function Navbar() {
                                     }}
                                     className="inline-block w-full py-5 rounded-2xl bg-red-500 text-white text-center text-xl font-bold shadow-xl active:scale-95 transition-all"
                                 >
-                                    Logout ({user.username})
+                                    Logout ({user.first_name} {user.last_name})
                                 </button>
                             ) : (
                                 <Link

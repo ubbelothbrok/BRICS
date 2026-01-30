@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-brics-green: #009b3a;
@@ -135,5 +136,28 @@ h6 {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* Abstract Content Styles */
+  .abstract-content {
+    @apply prose prose-slate max-w-none;
+  }
+  
+  .abstract-content p {
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .abstract-content ul, .abstract-content ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  .abstract-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .abstract-content b, .abstract-content strong {
+    font-weight: 700;
   }
 }
