@@ -104,9 +104,9 @@ export default function Navbar() {
                                     className="flex items-center gap-3 focus:outline-none group"
                                 >
                                     <div className={`flex items-center justify-center p-1 rounded-full transition-all duration-300 ${effectiveScrolled ? 'bg-gray-100/50 hover:bg-gray-100' : 'bg-white/10 hover:bg-white/20'}`}>
-                                        {user.profile_picture ? (
+                                        {user.avatar_url ? (
                                             <img
-                                                src={user.profile_picture}
+                                                src={user.avatar_url}
                                                 alt="Profile"
                                                 className="w-8 h-8 rounded-full object-cover border-2 border-white/50"
                                             />

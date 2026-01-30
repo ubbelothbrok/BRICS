@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
     ChatBubbleLeftIcon,
     UserCircleIcon,
-    ArrowUturnRightIcon
+    ArrowUturnRightIcon,
+    HeartIcon as HeartOutline
 } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
 import { fetchApi, SERVER_URL } from '../utils/api';
 
 interface Reply {
@@ -18,10 +20,13 @@ interface Comment {
     event_id: number;
     user_name: string;
     user_email: string;
+    user_avatar?: string;
     comment: string;
     image?: string;
     created_at: string;
     replies: Reply[];
+    likes_count: number;
+    is_liked: boolean;
 }
 
 interface EventCommentsProps {
@@ -31,13 +36,30 @@ interface EventCommentsProps {
 }
 
 export type { Comment, Reply };
-export default function EventComments({ eventId,comments: externalComments, onRefresh }: EventCommentsProps) {
+export default function EventComments({ eventId, comments: externalComments, onRefresh }: EventCommentsProps) {
     const [user, setUser] = useState<any>(null);
     const [loadingAuth, setLoadingAuth] = useState(true);
     const [replyingTo, setReplyingTo] = useState<number | null>(null);
     const [replyText, setReplyText] = useState('');
     const [isPostingReply, setIsPostingReply] = useState(false);
     const [visibleCount, setVisibleCount] = useState(3);
+    const [localComments, setLocalComments] = useState<Comment[]>([]);
+    const [pendingCount, setPendingCount] = useState(0);
+    const replyInputRef = useRef<HTMLTextAreaElement>(null);
+
+    useEffect(() => {
+        setLocalComments(externalComments);
+    }, [externalComments]);
+
+    useEffect(() => {
+        if (replyingTo !== null) {
+            // Small timeout to ensure the element is rendered before focusing
+            const timer = setTimeout(() => {
+                replyInputRef.current?.focus();
+            }, 100);
+            return () => clearTimeout(timer);
+        }
+    }, [replyingTo]);
 
     useEffect(() => {
         // Check authentication
@@ -45,7 +67,35 @@ export default function EventComments({ eventId,comments: externalComments, onRe
             .then(data => setUser(data))
             .catch(() => setUser(null))
             .finally(() => setLoadingAuth(false));
-    }, []);
+
+        // WebSocket for live updates
+        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const wsUrl = `${protocol}//${window.location.host}/ws/events/${eventId}/comments/`;
+        const ws = new WebSocket(wsUrl);
+
+        ws.onmessage = (event) => {
+            const message = JSON.parse(event.data);
+            if (message.action === 'new_comment') {
+                setPendingCount(prev => prev + 1);
+            } else if (message.action === 'new_reply') {
+                if (onRefresh) onRefresh();
+            } else if (message.action === 'like_update') {
+                setLocalComments(prev => prev.map(c =>
+                    c.id === message.comment_id
+                        ? { ...c, likes_count: message.likes_count }
+                        : c
+                ));
+            }
+        };
+
+        ws.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+
+        return () => {
+            ws.close();
+        };
+    }, [eventId, onRefresh]);
 
     const formatTimeAgo = (dateStr: string): string => {
         const date = new Date(dateStr);
@@ -82,13 +132,45 @@ export default function EventComments({ eventId,comments: externalComments, onRe
         }
     };
 
+    const handleToggleLike = async (commentId: number) => {
+        if (!user) {
+            window.location.href = `${SERVER_URL}/auth/login/google-oauth2/?next=${window.location.pathname}`;
+            return;
+        }
+
+        // Optimistic update
+        setLocalComments(prev => prev.map(c => {
+            if (c.id === commentId) {
+                return {
+                    ...c,
+                    is_liked: !c.is_liked,
+                    likes_count: c.is_liked ? c.likes_count - 1 : c.likes_count + 1
+                };
+            }
+            return c;
+        }));
+
+        try {
+            await fetchApi(`/comments/${commentId}/like/`, { method: 'POST' });
+        } catch (error) {
+            console.error('Failed to toggle like:', error);
+            // Revert on error
+            if (onRefresh) onRefresh();
+        }
+    };
+
+    const handleLoadNew = () => {
+        setPendingCount(0);
+        if (onRefresh) onRefresh();
+    };
+
     const handleSeeMore = () => {
         setVisibleCount(prev => prev + 3);
     };
 
-    const visibleComments = externalComments.slice(0, visibleCount);
+    const visibleComments = localComments.slice(0, visibleCount);
 
-    if (externalComments.length === 0) {
+    if (localComments.length === 0 && !pendingCount) {
         return (
             <section className="max-w-[800px] mx-auto px-4 py-8">
                 <div className="bg-gray-50 rounded-2xl p-8 text-center border border-gray-200">
@@ -110,6 +192,19 @@ export default function EventComments({ eventId,comments: externalComments, onRe
                 <span className="text-gray-500 text-sm">{externalComments.length} comments</span>
             </div>
 
+            {/* New Comments Floating Prompt */}
+            {pendingCount > 0 && (
+                <div className="sticky top-24 z-20 flex justify-center mb-6 animate-bounce">
+                    <button
+                        onClick={handleLoadNew}
+                        className="bg-brics-blue text-white px-4 py-2 rounded-full shadow-lg border border-white/20 text-xs font-bold hover:bg-blue-600 transition-colors flex items-center gap-2"
+                    >
+                        <ArrowUturnRightIcon className="w-3 h-3 rotate-90" />
+                        Load {pendingCount} new comments
+                    </button>
+                </div>
+            )}
+
             <div className="space-y-4 relative">
                 <div className="space-y-4">
                     {visibleComments.map((comment) => (
@@ -117,8 +212,16 @@ export default function EventComments({ eventId,comments: externalComments, onRe
                             {/* Main Comment Bubble */}
                             <div className="flex gap-3">
                                 <div className="flex-shrink-0 mt-1">
-                                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center ring-2 ring-white shadow-sm">
-                                        <UserCircleIcon className="w-5 h-5 text-indigo-500" />
+                                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center ring-2 ring-white shadow-sm overflow-hidden">
+                                        {comment.user_avatar ? (
+                                            <img
+                                                src={comment.user_avatar}
+                                                alt={comment.user_name}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            <UserCircleIcon className="w-5 h-5 text-indigo-500" />
+                                        )}
                                     </div>
                                 </div>
                                 <div className="flex-1 max-w-[85%]">
@@ -130,32 +233,44 @@ export default function EventComments({ eventId,comments: externalComments, onRe
                                     <div className="bg-white rounded-2xl rounded-tl-sm p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                                         <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{comment.comment}</p>
 
-                                        {/* Attachment Image */}
+                                        {/* Attachment Image - Synced with Preview Style */}
                                         {comment.image && (
-                                            <div className="mt-3 rounded-lg overflow-hidden">
+                                            <div className="mt-3 rounded-xl overflow-hidden border border-gray-100 shadow-sm bg-gray-50">
                                                 <img
                                                     src={comment.image.startsWith('http') ? comment.image : `${SERVER_URL}${comment.image}`}
                                                     alt="Attached"
-                                                    className="max-h-60 w-auto object-cover rounded-lg border border-gray-100"
+                                                    className="w-full aspect-[4/5] sm:aspect-video object-cover hover:scale-[1.02] transition-transform duration-500"
                                                 />
                                             </div>
                                         )}
                                     </div>
 
                                     {/* Action row */}
-                                    <div className="mt-1 flex gap-4">
+                                    <div className="mt-1.5 flex gap-4 px-2">
+                                        <button
+                                            onClick={() => handleToggleLike(comment.id)}
+                                            className={`flex items-center gap-1.5 transition-all duration-300 ${comment.is_liked ? 'text-red-500 scale-110' : 'text-gray-500 hover:text-red-400'}`}
+                                        >
+                                            {comment.is_liked ? (
+                                                <HeartSolid className="w-4 h-4" />
+                                            ) : (
+                                                <HeartOutline className="w-4 h-4" />
+                                            )}
+                                            <span className="text-xs font-bold leading-none">{comment.likes_count || ''}</span>
+                                        </button>
+
                                         <button
                                             onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
-                                            className="text-xs font-medium text-gray-500 hover:text-brics-blue transition-colors flex items-center gap-1"
+                                            className="text-xs font-bold text-gray-500 hover:text-brics-blue transition-colors flex items-center gap-1"
                                         >
-                                            <ArrowUturnRightIcon className="w-3 h-3" />
+                                            <ArrowUturnRightIcon className="w-3.5 h-3.5" />
                                             {replyingTo === comment.id ? 'Cancel' : 'Reply'}
                                         </button>
 
                                         {comment.replies.length > 0 && (
-                                            <span className="text-xs text-gray-400 flex items-center gap-1">
-                                                <ChatBubbleLeftIcon className="w-3 h-3" />
-                                                {comment.replies.length} replies
+                                            <span className="text-xs text-gray-400 font-medium flex items-center gap-1">
+                                                <ChatBubbleLeftIcon className="w-3.5 h-3.5" />
+                                                {comment.replies.length}
                                             </span>
                                         )}
                                     </div>
@@ -182,10 +297,20 @@ export default function EventComments({ eventId,comments: externalComments, onRe
                                                         Replying as {user.first_name}
                                                     </div>
                                                     <textarea
+                                                        ref={replyInputRef}
                                                         value={replyText}
-                                                        onChange={(e) => setReplyText(e.target.value)}
+                                                        onChange={(e) => {
+                                                            const cleaned = e.target.value.replace(/[\n\r]/g, '');
+                                                            setReplyText(cleaned);
+                                                        }}
+                                                        onKeyDown={(e) => {
+                                                            if (e.key === 'Enter' && !e.shiftKey) {
+                                                                e.preventDefault();
+                                                                handleReplySubmit(comment.id);
+                                                            }
+                                                        }}
                                                         placeholder="Reply..."
-                                                        className="w-full h-16 px-3 py-2 bg-white border border-gray-200 rounded text-xs focus:ring-1 focus:ring-brics-blue outline-none resize-none mb-2"
+                                                        className="w-full h-10 px-3 py-2 bg-white border border-gray-200 rounded text-xs focus:ring-1 focus:ring-brics-blue outline-none resize-none mb-2"
                                                     />
                                                     <div className="flex justify-end gap-2">
                                                         <button

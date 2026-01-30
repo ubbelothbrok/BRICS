@@ -160,8 +160,8 @@ export default function EventInteraction({ eventId, onCommentSubmit }: EventInte
                 <div className="flex gap-4">
                     <div className="flex-shrink-0 pt-2">
                         <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center overflow-hidden">
-                            {user.picture ? (
-                                <img src={user.picture} alt={user.first_name} className="w-full h-full object-cover" />
+                            {user.avatar_url ? (
+                                <img src={user.avatar_url} alt={user.first_name} className="w-full h-full object-cover" />
                             ) : (
                                 <UserCircleIcon className="w-6 h-6 text-blue-600" />
                             )}
@@ -171,25 +171,35 @@ export default function EventInteraction({ eventId, onCommentSubmit }: EventInte
                     <div className="flex-1 min-w-0">
                         <textarea
                             value={comment}
-                            onChange={(e) => setComment(e.target.value.slice(0, MAX_COMMENT_LENGTH))}
+                            onChange={(e) => {
+                                // Remove newlines from pasted/typed text
+                                const cleaned = e.target.value.replace(/[\n\r]/g, '').slice(0, MAX_COMMENT_LENGTH);
+                                setComment(cleaned);
+                            }}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && !e.shiftKey) {
+                                    e.preventDefault();
+                                    handleSubmit(e as any);
+                                }
+                            }}
                             placeholder="Share your thoughts..."
-                            className="w-full min-h-[80px] p-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brics-blue/50 focus:border-brics-blue outline-none resize-none transition-all"
+                            className="w-full min-h-[44px] p-3 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brics-blue/50 focus:border-brics-blue outline-none resize-none transition-all"
                         />
 
                         {/* Image Preview */}
                         {imagePreview && (
-                            <div className="relative mt-2 inline-block">
+                            <div className="relative mt-3 rounded-xl overflow-hidden border border-gray-100 shadow-sm bg-gray-50">
                                 <img
                                     src={imagePreview}
                                     alt="Preview"
-                                    className="h-24 w-auto object-cover rounded-lg border border-gray-200"
+                                    className="w-full aspect-[4/5] sm:aspect-video object-cover"
                                 />
                                 <button
                                     type="button"
                                     onClick={removeImage}
-                                    className="absolute -top-2 -right-2 p-1 bg-gray-800/80 text-white rounded-full hover:bg-gray-900 transition-colors"
+                                    className="absolute top-2 right-2 p-1.5 bg-black/50 text-white rounded-full hover:bg-black/70 transition-all backdrop-blur-sm shadow-lg border border-white/20"
                                 >
-                                    <XMarkIcon className="w-3 h-3" />
+                                    <XMarkIcon className="w-4 h-4" />
                                 </button>
                             </div>
                         )}
