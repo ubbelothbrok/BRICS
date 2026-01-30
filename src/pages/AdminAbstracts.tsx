@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { fetchApi, SERVER_URL, getCookie } from '../utils/api';
+import { fetchApi, SERVER_URL } from '../utils/api';
 import { DocumentTextIcon, ArrowDownTrayIcon, XMarkIcon, IdentificationIcon, AcademicCapIcon, CalendarIcon } from '@heroicons/react/24/outline';
 import 'react-quill/dist/quill.snow.css';
 
@@ -24,7 +24,7 @@ export default function AdminAbstracts() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetchApi('/me/')
+        fetchApi('/accounts/me/')
             .then(userData => {
                 if (!userData || !userData.is_staff) {
                     navigate('/');
@@ -37,16 +37,7 @@ export default function AdminAbstracts() {
 
     const fetchAbstracts = async () => {
         try {
-            const csrfToken = getCookie('csrftoken');
-            const response = await fetch(`${SERVER_URL}/api/submissions/abstracts/`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken || '',
-                },
-                credentials: 'include',
-            });
-            if (!response.ok) throw new Error('Failed to fetch');
-            const data = await response.json();
+            const data = await fetchApi('/submissions/abstracts/');
             setAbstracts(data);
         } catch (error) {
             console.error("Failed to fetch abstracts", error);
@@ -183,38 +174,33 @@ export default function AdminAbstracts() {
 
                         {/* Modal Body */}
                         <div className="flex-1 overflow-y-auto p-8">
-                            <div className="grid lg:grid-cols-2 gap-10 h-full">
-                                {/* Left Side: HTML Content */}
-                                <div className="space-y-6">
-                                    <div className="flex items-center gap-2 text-brics-blue font-bold uppercase tracking-widest text-xs">
-                                        <DocumentTextIcon className="w-4 h-4" />
-                                        Abstract Description
-                                    </div>
-                                    <div className="bg-white border border-gray-100 rounded-3xl p-8 min-h-[400px] shadow-sm">
-                                        {selectedAbstract.description ? (
+                            <div className="flex flex-col gap-10">
+                                {/* Abstract Description Section */}
+                                {selectedAbstract.description && (
+                                    <div className="space-y-6">
+                                        <div className="flex items-center gap-2 text-brics-blue font-bold uppercase tracking-widest text-xs">
+                                            <DocumentTextIcon className="w-4 h-4" />
+                                            Abstract Description
+                                        </div>
+                                        <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-sm">
                                             <div className="ql-snow">
                                                 <div
                                                     className="ql-editor abstract-content"
                                                     dangerouslySetInnerHTML={{ __html: selectedAbstract.description }}
                                                 />
                                             </div>
-                                        ) : (
-                                            <div className="h-full flex flex-col items-center justify-center text-gray-400 opacity-50 space-y-3">
-                                                <DocumentTextIcon className="w-12 h-12" />
-                                                <p className="font-medium italic">No written description provided for this submission.</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-
-                                {/* Right Side: PDF Preview / Document Info */}
-                                <div className="space-y-6">
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-2 text-brics-blue font-bold uppercase tracking-widest text-xs">
-                                            <DocumentTextIcon className="w-4 h-4" />
-                                            Uploaded Document
                                         </div>
-                                        {selectedAbstract.file && (
+                                    </div>
+                                )}
+
+                                {/* Uploaded Document Section */}
+                                {selectedAbstract.file && (
+                                    <div className="space-y-6">
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-2 text-brics-blue font-bold uppercase tracking-widest text-xs">
+                                                <DocumentTextIcon className="w-4 h-4" />
+                                                Uploaded Document
+                                            </div>
                                             <a
                                                 href={selectedAbstract.file.startsWith('http') ? selectedAbstract.file : `${SERVER_URL}${selectedAbstract.file}`}
                                                 target="_blank"
@@ -224,16 +210,14 @@ export default function AdminAbstracts() {
                                                 <ArrowDownTrayIcon className="w-3 h-3" />
                                                 Open Original
                                             </a>
-                                        )}
-                                    </div>
+                                        </div>
 
-                                    <div className="bg-gray-50 rounded-3xl overflow-hidden border border-gray-100 h-full min-h-[500px] flex flex-col items-center justify-center relative shadow-inner">
-                                        {selectedAbstract.file ? (
-                                            <div className="w-full h-full flex flex-col">
+                                        <div className="bg-gray-50 rounded-3xl overflow-hidden border border-gray-100 min-h-[600px] flex flex-col relative shadow-inner">
+                                            <div className="w-full h-full flex flex-col flex-1">
                                                 <div className="flex-1">
                                                     <iframe
                                                         src={selectedAbstract.file.startsWith('http') ? selectedAbstract.file : `${SERVER_URL}${selectedAbstract.file}`}
-                                                        className="w-full h-full border-none"
+                                                        className="w-full min-h-[600px] border-none"
                                                         title="PDF Preview"
                                                     />
                                                 </div>
@@ -249,14 +233,17 @@ export default function AdminAbstracts() {
                                                     </a>
                                                 </div>
                                             </div>
-                                        ) : (
-                                            <div className="flex flex-col items-center justify-center text-gray-400 opacity-50 space-y-3 p-10 text-center">
-                                                <XMarkIcon className="w-12 h-12" />
-                                                <p className="font-medium italic">No document file was uploaded for this submission.</p>
-                                            </div>
-                                        )}
+                                        </div>
                                     </div>
-                                </div>
+                                )}
+
+                                {/* Fallback if both are missing (shouldn't happen with current validation) */}
+                                {!selectedAbstract.description && !selectedAbstract.file && (
+                                    <div className="py-20 flex flex-col items-center justify-center text-gray-400 opacity-50 space-y-3 text-center">
+                                        <XMarkIcon className="w-12 h-12" />
+                                        <p className="font-medium italic">This submission has no content.</p>
+                                    </div>
+                                )}
                             </div>
                         </div>
 

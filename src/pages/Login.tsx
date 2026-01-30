@@ -20,7 +20,7 @@ export default function Login() {
         e.preventDefault();
         setLoading(true);
         try {
-            await fetchApi('/login/', {
+            await fetchApi('/accounts/login/', {
                 method: 'POST',
                 body: JSON.stringify(formData)
             });

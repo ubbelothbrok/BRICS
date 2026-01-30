@@ -29,7 +29,7 @@ export default function Navbar() {
         window.addEventListener('scroll', handleScroll);
 
         // Fetch user auth status
-        fetchApi('/me/')
+        fetchApi('/accounts/me/')
             .then(data => setUser(data))
             .catch(() => setUser(null));
 
@@ -38,7 +38,7 @@ export default function Navbar() {
 
     const handleLogout = async () => {
         try {
-            await fetchApi('/logout/', { method: 'POST' });
+            await fetchApi('/accounts/logout/', { method: 'POST' });
             setUser(null);
             window.location.reload();
         } catch (error) {

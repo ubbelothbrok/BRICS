@@ -6,6 +6,7 @@ import EventInteraction from '../components/EventInteraction.tsx';
 import EventComments from '../components/EventComments.tsx';
 import type { Comment } from '../components/EventComments.tsx';
 import eventsData from '../data/db.json';
+import { fetchApi } from '../utils/api';
 import {
     CalendarIcon,
     MapPinIcon,
@@ -43,63 +44,13 @@ export default function EventDetails() {
     const [event, setEvent] = useState<EventItem | null>(null);
     const [loading, setLoading] = useState(true);
 
-    // Mock initial comments - in production, fetch from API
-    const [comments, setComments] = useState<Comment[]>([
-        {
-            id: '1',
-            eventId: 8,
-            userName: 'Priya Sharma',
-            comment: 'This event was absolutely amazing! The AR technology was mind-blowing and the organizers did a fantastic job. Can\'t wait for next year!',
-            selfieUrl: 'https://i.pravatar.cc/150?img=1',
-            timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
-            replies: [
-                {
-                    id: 'r1',
-                    userName: 'Rahul Kumar',
-                    comment: 'I totally agree! The AR builder challenge was incredible.',
-                    timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000)
-                }
-            ]
-        },
-        {
-            id: '2',
-            eventId: 8,
-            userName: 'Anonymous',
-            comment: 'Great learning experience. The mentors were very helpful and patient with beginners.',
-            timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000),
-            replies: []
-        },
-        {
-            id: '3',
-            eventId: 8,
-            userName: 'Amit Patel',
-            comment: 'Loved the hands-on approach! Built my first AR application today. Thank you to all the organizers and volunteers!',
-            selfieUrl: 'https://i.pravatar.cc/150?img=12',
-            timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000),
-            replies: []
-        },
-        {
-            id: '4',
-            eventId: 8,
-            userName: 'Sarah Jenkins',
-            comment: 'Does anyone know if the recording will be available later?',
-            timestamp: new Date(Date.now() - 26 * 60 * 60 * 1000),
-            replies: []
-        }
-    ]);
+    // Comments state - will be fetched from backend
+    const [comments, setComments] = useState<Comment[]>([]);
 
-    const handleCommentSubmit = (data: { userName: string; comment: string; imageUrl?: string }) => {
-        const newComment: Comment = {
-            id: `c${Date.now()}`,
-            eventId: event?.id || 0,
-            userName: data.userName,
-            comment: data.comment,
-            selfieUrl: data.imageUrl,
-            timestamp: new Date(),
-            replies: []
-        };
-
-        setComments([newComment, ...comments]);
+    const fetchComments = (eventId: number) => {
+        fetchApi(`/events/${eventId}/comments/`)
+            .then((data: Comment[]) => setComments(data))
+            .catch(err => console.error('Failed to fetch comments:', err));
     };
 
     useEffect(() => {
@@ -108,6 +59,10 @@ export default function EventDetails() {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const foundEvent = (eventsData as any).events.find((e: any) => e.id === parseInt(id));
             setEvent(foundEvent || null);
+
+            if (foundEvent) {
+                fetchComments(foundEvent.id);
+            }
         }
         setLoading(false);
     }, [id]);
@@ -266,18 +221,17 @@ export default function EventDetails() {
 
             {/* Event Interaction Section */}
             <section id="share-experience" className="max-w-[800px] mx-auto px-4 mb-8 scroll-mt-24">
-                <EventInteraction onCommentSubmit={handleCommentSubmit} />
+                <EventInteraction eventId={event.id} onCommentSubmit={() => fetchComments(event.id)} />
             </section>
 
             {/* Comments Section */}
             <EventComments
                 eventId={event.id}
-                comments={comments.filter(c => c.eventId === event.id)}
+                comments={comments}
+                onRefresh={() => fetchComments(event.id)}
             />
 
             <Footer />
         </div>
     );
 }
-
-

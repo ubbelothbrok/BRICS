@@ -59,7 +59,7 @@ export default function Registration() {
         }
         setLoading(true);
         try {
-            await fetchApi('/send-otp/', {
+            await fetchApi('/accounts/send-otp/', {
                 method: 'POST',
                 body: JSON.stringify({ email: formData.email })
             });
@@ -94,7 +94,7 @@ export default function Registration() {
                 otp: formData.otp
             };
 
-            await fetchApi('/register/', {
+            await fetchApi('/accounts/register/', {
                 method: 'POST',
                 body: JSON.stringify(payload)
             });
@@ -102,7 +102,7 @@ export default function Registration() {
 
             // Auto Login
             try {
-                await fetchApi('/login/', {
+                await fetchApi('/accounts/login/', {
                     method: 'POST',
                     body: JSON.stringify({ email: formData.email, password: formData.password })
                 });

@@ -15,7 +15,7 @@ export default function ForgotPassword() {
         e.preventDefault();
         setLoading(true);
         try {
-            await fetchApi('/forgot-password/', {
+            await fetchApi('/accounts/forgot-password/', {
                 method: 'POST',
                 body: JSON.stringify({ email })
             });

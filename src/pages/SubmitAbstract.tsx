@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchApi, GOOGLE_LOGIN_URL, SERVER_URL, getCookie } from '../utils/api'; import Navbar from '../components/Navbar';
+import { fetchApi, GOOGLE_LOGIN_URL } from '../utils/api';
+import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { SparklesIcon, DocumentPlusIcon, CloudArrowUpIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import ReactQuill from 'react-quill';
@@ -48,7 +49,7 @@ export default function SubmitAbstract() {
         }
 
         // Check authentication
-        fetchApi('/me/')
+        fetchApi('/accounts/me/')
             .then(data => setUser(data))
             .catch(() => setUser(null))
             .finally(() => setLoadingAuth(false));
@@ -93,20 +94,10 @@ export default function SubmitAbstract() {
         }
 
         try {
-            const csrfToken = getCookie('csrftoken');
-            const response = await fetch(`${SERVER_URL}/api/submissions/abstracts/`, {
+            await fetchApi('/submissions/abstracts/', {
                 method: 'POST',
-                headers: {
-                    'X-CSRFToken': csrfToken || '',
-                },
                 body: data,
-                credentials: 'include',
             });
-
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.detail || 'Submission failed');
-            }
 
             console.log('Form Submitted Successfully');
             localStorage.removeItem('abstractFormData'); // Clear saved draft

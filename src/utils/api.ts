@@ -1,10 +1,10 @@
 export const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:8000';
-const API_BASE_URL = import.meta.env.VITE_API_URL || `${SERVER_URL}/api/accounts`;
+const API_BASE_URL = import.meta.env.VITE_API_URL || `${SERVER_URL}/api`;
 export const GOOGLE_LOGIN_URL = `${SERVER_URL}/auth/login/google-oauth2/`;
 
 export const getCookie = (name: string) => {
     let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
+    if (typeof document !== 'undefined' && document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
             const cookie = cookies[i].trim();
@@ -18,12 +18,17 @@ export const getCookie = (name: string) => {
 };
 
 export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
-    const url = `${API_BASE_URL}${endpoint}`;
+    // Standardize URL: prefix with API_BASE_URL unless it's a full URL
+    const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint.startsWith('/') ? '' : '/'}${endpoint}`;
 
     const headers: HeadersInit = {
-        'Content-Type': 'application/json',
         ...options.headers,
     };
+
+    // Only set Content-Type if not sending FormData
+    if (!(options.body instanceof FormData)) {
+        (headers as any)['Content-Type'] = 'application/json';
+    }
 
     const csrfToken = getCookie('csrftoken');
     if (csrfToken) {

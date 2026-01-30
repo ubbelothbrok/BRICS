@@ -4,44 +4,51 @@ import {
     UserCircleIcon,
     ArrowUturnRightIcon
 } from '@heroicons/react/24/outline';
+import { fetchApi, SERVER_URL } from '../utils/api';
 
 interface Reply {
-    id: string;
-    userName: string;
+    id: number;
+    user_name: string;
     comment: string;
-    timestamp: Date;
+    created_at: string;
 }
 
 interface Comment {
-    id: string;
-    eventId: number;
-    userName: string;
+    id: number;
+    event_id: number;
+    user_name: string;
+    user_email: string;
     comment: string;
-    selfieUrl?: string;
-    timestamp: Date;
+    image?: string;
+    created_at: string;
     replies: Reply[];
 }
 
 interface EventCommentsProps {
     eventId: number;
     comments: Comment[];
-    onAddComment?: (comment: Comment) => void;
+    onRefresh?: () => void;
 }
 
 export type { Comment, Reply };
-export default function EventComments({ comments: externalComments }: EventCommentsProps) {
-    const [comments, setComments] = useState<Comment[]>(externalComments);
-    const [replyingTo, setReplyingTo] = useState<string | null>(null);
+export default function EventComments({ eventId,comments: externalComments, onRefresh }: EventCommentsProps) {
+    const [user, setUser] = useState<any>(null);
+    const [loadingAuth, setLoadingAuth] = useState(true);
+    const [replyingTo, setReplyingTo] = useState<number | null>(null);
     const [replyText, setReplyText] = useState('');
-    const [replyName, setReplyName] = useState('');
+    const [isPostingReply, setIsPostingReply] = useState(false);
     const [visibleCount, setVisibleCount] = useState(3);
 
-    // Sync external comments with local state
     useEffect(() => {
-        setComments(externalComments);
-    }, [externalComments]);
+        // Check authentication
+        fetchApi('/accounts/me/')
+            .then(data => setUser(data))
+            .catch(() => setUser(null))
+            .finally(() => setLoadingAuth(false));
+    }, []);
 
-    const formatTimeAgo = (date: Date): string => {
+    const formatTimeAgo = (dateStr: string): string => {
+        const date = new Date(dateStr);
         const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
 
         if (seconds < 60) return 'just now';
@@ -51,38 +58,37 @@ export default function EventComments({ comments: externalComments }: EventComme
         return date.toLocaleDateString();
     };
 
-    const handleReplySubmit = (commentId: string) => {
-        if (!replyText.trim()) return;
+    const handleReplySubmit = async (commentId: number) => {
+        if (!replyText.trim() || isPostingReply) return;
 
-        const newReply: Reply = {
-            id: `r${Date.now()}`,
-            userName: replyName.trim() || 'Anonymous',
-            comment: replyText,
-            timestamp: new Date()
-        };
+        setIsPostingReply(true);
+        try {
+            const formData = new FormData();
+            formData.append('comment', replyText);
+            formData.append('event_id', eventId.toString());
+            await fetchApi(`/comments/${commentId}/reply/`, {
+                method: 'POST',
+                body: formData,
+            });
 
-        setComments(comments.map(comment => {
-            if (comment.id === commentId) {
-                return {
-                    ...comment,
-                    replies: [...comment.replies, newReply]
-                };
-            }
-            return comment;
-        }));
-
-        setReplyText('');
-        setReplyName('');
-        setReplyingTo(null);
+            setReplyText('');
+            setReplyingTo(null);
+            if (onRefresh) onRefresh();
+        } catch (error) {
+            console.error('Failed to submit reply:', error);
+            alert('Failed to submit reply. Please try again.');
+        } finally {
+            setIsPostingReply(false);
+        }
     };
 
     const handleSeeMore = () => {
         setVisibleCount(prev => prev + 3);
     };
 
-    const visibleComments = comments.slice(0, visibleCount);
+    const visibleComments = externalComments.slice(0, visibleCount);
 
-    if (comments.length === 0) {
+    if (externalComments.length === 0) {
         return (
             <section className="max-w-[800px] mx-auto px-4 py-8">
                 <div className="bg-gray-50 rounded-2xl p-8 text-center border border-gray-200">
@@ -101,7 +107,7 @@ export default function EventComments({ comments: externalComments }: EventComme
                     <span className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
                     Live Feedback
                 </h2>
-                <span className="text-gray-500 text-sm">{comments.length} comments</span>
+                <span className="text-gray-500 text-sm">{externalComments.length} comments</span>
             </div>
 
             <div className="space-y-4 relative">
@@ -117,18 +123,18 @@ export default function EventComments({ comments: externalComments }: EventComme
                                 </div>
                                 <div className="flex-1 max-w-[85%]">
                                     <div className="flex items-baseline gap-2 mb-1">
-                                        <span className="font-bold text-sm text-gray-900">{comment.userName}</span>
-                                        <span className="text-xs text-gray-400">{formatTimeAgo(comment.timestamp)}</span>
+                                        <span className="font-bold text-sm text-gray-900">{comment.user_name}</span>
+                                        <span className="text-xs text-gray-400">{formatTimeAgo(comment.created_at)}</span>
                                     </div>
 
                                     <div className="bg-white rounded-2xl rounded-tl-sm p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                                         <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{comment.comment}</p>
 
                                         {/* Attachment Image */}
-                                        {comment.selfieUrl && (
+                                        {comment.image && (
                                             <div className="mt-3 rounded-lg overflow-hidden">
                                                 <img
-                                                    src={comment.selfieUrl}
+                                                    src={comment.image.startsWith('http') ? comment.image : `${SERVER_URL}${comment.image}`}
                                                     alt="Attached"
                                                     className="max-h-60 w-auto object-cover rounded-lg border border-gray-100"
                                                 />
@@ -157,27 +163,41 @@ export default function EventComments({ comments: externalComments }: EventComme
                                     {/* Reply Input */}
                                     {replyingTo === comment.id && (
                                         <div className="mt-3 bg-gray-50 rounded-xl p-3 border border-gray-200 animate-slideDown">
-                                            <input
-                                                type="text"
-                                                value={replyName}
-                                                onChange={(e) => setReplyName(e.target.value)}
-                                                placeholder="Name (opt)"
-                                                className="w-full mb-2 px-3 py-1.5 bg-white border border-gray-200 rounded text-xs focus:ring-1 focus:ring-brics-blue outline-none"
-                                            />
-                                            <textarea
-                                                value={replyText}
-                                                onChange={(e) => setReplyText(e.target.value)}
-                                                placeholder="Reply..."
-                                                className="w-full h-16 px-3 py-2 bg-white border border-gray-200 rounded text-xs focus:ring-1 focus:ring-brics-blue outline-none resize-none mb-2"
-                                            />
-                                            <div className="flex justify-end gap-2">
-                                                <button
-                                                    onClick={() => handleReplySubmit(comment.id)}
-                                                    className="px-3 py-1 bg-brics-blue text-white rounded text-xs font-medium hover:bg-blue-700 transition-colors"
-                                                >
-                                                    Send
-                                                </button>
-                                            </div>
+                                            {loadingAuth ? (
+                                                <div className="text-xs text-center py-2 text-gray-500">Loading auth...</div>
+                                            ) : !user ? (
+                                                <div className="text-center py-2">
+                                                    <p className="text-xs text-gray-600 mb-2">Login to reply</p>
+                                                    <a
+                                                        href={`${SERVER_URL}/auth/login/google-oauth2/?next=${window.location.pathname}`}
+                                                        className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-gray-200 rounded text-[10px] font-bold text-gray-700 hover:bg-gray-50 transition-colors"
+                                                    >
+                                                        <img src="https://www.google.com/favicon.ico" alt="G" className="w-3 h-3" />
+                                                        Login with Google
+                                                    </a>
+                                                </div>
+                                            ) : (
+                                                <>
+                                                    <div className="text-[10px] font-medium text-gray-500 mb-2">
+                                                        Replying as {user.first_name}
+                                                    </div>
+                                                    <textarea
+                                                        value={replyText}
+                                                        onChange={(e) => setReplyText(e.target.value)}
+                                                        placeholder="Reply..."
+                                                        className="w-full h-16 px-3 py-2 bg-white border border-gray-200 rounded text-xs focus:ring-1 focus:ring-brics-blue outline-none resize-none mb-2"
+                                                    />
+                                                    <div className="flex justify-end gap-2">
+                                                        <button
+                                                            disabled={!replyText.trim() || isPostingReply}
+                                                            onClick={() => handleReplySubmit(comment.id)}
+                                                            className="px-3 py-1 bg-brics-blue text-white rounded text-xs font-medium hover:bg-blue-700 transition-colors disabled:opacity-50"
+                                                        >
+                                                            {isPostingReply ? 'Sending...' : 'Send'}
+                                                        </button>
+                                                    </div>
+                                                </>
+                                            )}
                                         </div>
                                     )}
 
@@ -187,8 +207,8 @@ export default function EventComments({ comments: externalComments }: EventComme
                                             {comment.replies.map((reply) => (
                                                 <div key={reply.id} className="bg-gray-50 rounded-xl rounded-tl-sm p-2.5">
                                                     <div className="flex items-center gap-2 mb-1">
-                                                        <span className="font-bold text-xs text-gray-800">{reply.userName}</span>
-                                                        <span className="text-[10px] text-gray-400">{formatTimeAgo(reply.timestamp)}</span>
+                                                        <span className="font-bold text-xs text-gray-800">{reply.user_name}</span>
+                                                        <span className="text-[10px] text-gray-400">{formatTimeAgo(reply.created_at)}</span>
                                                     </div>
                                                     <p className="text-gray-600 text-xs">{reply.comment}</p>
                                                 </div>
@@ -202,7 +222,7 @@ export default function EventComments({ comments: externalComments }: EventComme
                 </div>
 
                 {/* See More Button */}
-                {visibleCount < comments.length && (
+                {visibleCount < externalComments.length && (
                     <div className="text-center pt-4">
                         <button
                             onClick={handleSeeMore}
