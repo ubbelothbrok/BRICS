@@ -22,6 +22,7 @@ import BharatDome from './pages/BharatDome';
 import NavRobotec from './pages/NavRobotec';
 import LivePolling from './pages/LivePolling';
 import CustomCursor from './components/CustomCursor';
+import ManthanRegistration from './pages/ManthanRegistration';
 import AdminAbstracts from './pages/AdminAbstracts';
 
 import { Toaster } from 'react-hot-toast';
@@ -62,6 +63,7 @@ function App() {
           <Route path="/manthan/infrastructure" element={<ManthanInfrastructure />} />
           <Route path="/manthan/innovation" element={<ManthanInnovation />} />
           <Route path="/manthan/submit-abstract" element={<SubmitAbstract />} />
+          <Route path="/manthan/register" element={<ManthanRegistration />} />
           <Route path="/manthan/live-polling" element={<LivePolling />} />
           <Route path="/demos/bharat-dome" element={<BharatDome />} />
           <Route path="/demos/navrobotec" element={<NavRobotec />} />

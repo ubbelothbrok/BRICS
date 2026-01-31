@@ -17,8 +17,22 @@ interface Abstract {
     user: number;
 }
 
+interface Registration {
+    id: number;
+    name: string;
+    school_name: string;
+    email: string;
+    phone_number: string;
+    school_category: string;
+    has_atl_lab: string;
+    is_pm_shree: string;
+    created_at: string;
+}
+
 export default function AdminAbstracts() {
     const [abstracts, setAbstracts] = useState<Abstract[]>([]);
+    const [registrations, setRegistrations] = useState<Registration[]>([]);
+    const [activeTab, setActiveTab] = useState<'abstracts' | 'registrations'>('abstracts');
     const [loading, setLoading] = useState(true);
     const [selectedAbstract, setSelectedAbstract] = useState<Abstract | null>(null);
     const navigate = useNavigate();
@@ -30,7 +44,7 @@ export default function AdminAbstracts() {
                     navigate('/');
                     return;
                 }
-                fetchAbstracts();
+                Promise.all([fetchAbstracts(), fetchRegistrations()]).finally(() => setLoading(false));
             })
             .catch(() => navigate('/'));
     }, []);
@@ -41,97 +55,210 @@ export default function AdminAbstracts() {
             setAbstracts(data);
         } catch (error) {
             console.error("Failed to fetch abstracts", error);
-        } finally {
-            setLoading(false);
         }
     };
 
-    if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    const fetchRegistrations = async () => {
+        try {
+            const data = await fetchApi('/manthan/registrations/');
+            setRegistrations(data);
+        } catch (error) {
+            console.error("Failed to fetch registrations", error);
+        }
+    };
+
+    const downloadRegistrationsCSV = () => {
+        if (registrations.length === 0) return;
+
+        const headers = ["ID", "Name", "School Name", "Email", "Phone Number", "Category", "ATL Lab", "PM Shree", "Date"];
+        const csvContent = [
+            headers.join(','),
+            ...registrations.map(r => [
+                r.id,
+                `"${r.name}"`,
+                `"${r.school_name}"`,
+                r.email,
+                r.phone_number,
+                `"${r.school_category}"`,
+                r.has_atl_lab,
+                r.is_pm_shree,
+                new Date(r.created_at).toLocaleDateString()
+            ].join(','))
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", "manthan_registrations.csv");
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    if (loading) return <div className="min-h-screen flex items-center justify-center font-bold text-brics-blue">Loading Dashboard...</div>;
 
     return (
         <div className="min-h-screen bg-gray-50">
             <Navbar />
             <main className="pt-32 pb-24 px-6 max-w-[1400px] mx-auto">
-                <div className="flex justify-between items-center mb-10">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
                     <div>
-                        <h1 className="text-4xl font-bold text-gray-900 mb-2">Submitted Abstracts</h1>
-                        <p className="text-gray-500">Manage and review all incoming submissions.</p>
+                        <h1 className="text-4xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
+                        <p className="text-gray-500">Manage and review all incoming submissions and registrations.</p>
                     </div>
-                    <div className="px-4 py-2 bg-white rounded-xl shadow-sm border border-gray-200 text-sm font-bold text-gray-600">
-                        Total: {abstracts.length}
+                    <div className="flex items-center gap-4">
+                        <div className="flex bg-white p-1 rounded-2xl border border-gray-200 shadow-sm">
+                            <button
+                                onClick={() => setActiveTab('abstracts')}
+                                className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === 'abstracts' ? 'bg-brics-blue text-white shadow-lg' : 'text-gray-500 hover:text-gray-900'}`}
+                            >
+                                Abstracts
+                            </button>
+                            <button
+                                onClick={() => setActiveTab('registrations')}
+                                className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === 'registrations' ? 'bg-brics-blue text-white shadow-lg' : 'text-gray-500 hover:text-gray-900'}`}
+                            >
+                                Registrations
+                            </button>
+                        </div>
+                        <div className="px-4 py-2 bg-white rounded-xl shadow-sm border border-gray-200 text-sm font-bold text-gray-600">
+                            Total: {activeTab === 'abstracts' ? abstracts.length : registrations.length}
+                        </div>
+                        {activeTab === 'registrations' && registrations.length > 0 && (
+                            <button
+                                onClick={downloadRegistrationsCSV}
+                                className="flex items-center gap-2 px-6 py-2.5 bg-green-600 text-white rounded-xl font-bold text-sm shadow-lg hover:bg-green-700 transition-all"
+                            >
+                                <ArrowDownTrayIcon className="w-5 h-5" />
+                                Download CSV
+                            </button>
+                        )}
                     </div>
                 </div>
 
                 <div className="bg-white rounded-[2rem] shadow-xl border border-gray-100 overflow-hidden">
                     <div className="overflow-x-auto">
-                        <table className="w-full text-left">
-                            <thead className="bg-gray-50/50 border-b border-gray-100">
-                                <tr>
-                                    <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Date</th>
-                                    <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">School Info</th>
-                                    <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Abstract Title</th>
-                                    <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Content</th>
-                                    <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-gray-100">
-                                {abstracts.map((abstract) => (
-                                    <tr
-                                        key={abstract.id}
-                                        className="hover:bg-blue-50/30 transition-colors group cursor-pointer"
-                                        onClick={() => setSelectedAbstract(abstract)}
-                                    >
-                                        <td className="px-8 py-6 whitespace-nowrap text-sm text-gray-500">
-                                            {new Date(abstract.created_at).toLocaleDateString()}
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <div className="flex flex-col">
-                                                <span className="font-bold text-gray-900 mb-1">{abstract.school_name}</span>
-                                                <span className="text-sm text-gray-500">Prin. {abstract.principal_name}</span>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-6">
-                                            <span className="font-medium text-gray-900">{abstract.title}</span>
-                                        </td>
-                                        <td className="px-8 py-6 max-w-xs">
-                                            {abstract.description ? (
-                                                <div
-                                                    className="text-sm text-gray-600 line-clamp-2"
-                                                    dangerouslySetInnerHTML={{ __html: abstract.description }}
-                                                />
-                                            ) : (
-                                                <span className="text-xs text-gray-400 italic">File only submission</span>
-                                            )}
-                                        </td>
-                                        <td className="px-8 py-6 text-right">
-                                            <div className="flex justify-end gap-3">
-                                                {abstract.file && (
-                                                    <a
-                                                        href={abstract.file.startsWith('http') ? abstract.file : `${import.meta.env.VITE_SERVER_URL}${abstract.file}`}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="p-2 text-brics-blue bg-blue-50 rounded-lg hover:bg-brics-blue hover:text-white transition-colors"
-                                                        title="Download File"
-                                                    >
-                                                        <ArrowDownTrayIcon className="w-5 h-5" />
-                                                    </a>
-                                                )}
-                                                {/* Logic to view full details can be added here */}
-                                            </div>
-                                        </td>
+                        {activeTab === 'abstracts' ? (
+                            <table className="w-full text-left">
+                                <thead className="bg-gray-50/50 border-b border-gray-100">
+                                    <tr>
+                                        <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Date</th>
+                                        <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">School Info</th>
+                                        <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Abstract Title</th>
+                                        <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Content</th>
+                                        <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody className="divide-y divide-gray-100">
+                                    {abstracts.map((abstract) => (
+                                        <tr
+                                            key={abstract.id}
+                                            className="hover:bg-blue-50/30 transition-colors group cursor-pointer"
+                                            onClick={() => setSelectedAbstract(abstract)}
+                                        >
+                                            <td className="px-8 py-6 whitespace-nowrap text-sm text-gray-500">
+                                                {new Date(abstract.created_at).toLocaleDateString()}
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <div className="flex flex-col">
+                                                    <span className="font-bold text-gray-900 mb-1">{abstract.school_name}</span>
+                                                    <span className="text-sm text-gray-500">Prin. {abstract.principal_name}</span>
+                                                </div>
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <span className="font-medium text-gray-900">{abstract.title}</span>
+                                            </td>
+                                            <td className="px-8 py-6 max-w-xs">
+                                                {abstract.description ? (
+                                                    <div
+                                                        className="text-sm text-gray-600 line-clamp-2"
+                                                        dangerouslySetInnerHTML={{ __html: abstract.description }}
+                                                    />
+                                                ) : (
+                                                    <span className="text-xs text-gray-400 italic">File only submission</span>
+                                                )}
+                                            </td>
+                                            <td className="px-8 py-6 text-right">
+                                                <div className="flex justify-end gap-3">
+                                                    {abstract.file && (
+                                                        <a
+                                                            href={abstract.file.startsWith('http') ? abstract.file : `${import.meta.env.VITE_SERVER_URL}${abstract.file}`}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="p-2 text-brics-blue bg-blue-50 rounded-lg hover:bg-brics-blue hover:text-white transition-colors"
+                                                            onClick={(e) => e.stopPropagation()}
+                                                            title="Download File"
+                                                        >
+                                                            <ArrowDownTrayIcon className="w-5 h-5" />
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        ) : (
+                            <table className="w-full text-left">
+                                <thead className="bg-gray-50/50 border-b border-gray-100">
+                                    <tr>
+                                        <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Date</th>
+                                        <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Principal & School</th>
+                                        <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Contacts</th>
+                                        <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">Details</th>
+                                        <th className="px-8 py-6 text-xs font-bold text-gray-500 uppercase tracking-wider">ATL/PM</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-100">
+                                    {registrations.map((reg) => (
+                                        <tr key={reg.id} className="hover:bg-blue-50/30 transition-colors group">
+                                            <td className="px-8 py-6 whitespace-nowrap text-sm text-gray-500">
+                                                {new Date(reg.created_at).toLocaleDateString()}
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <div className="flex flex-col">
+                                                    <span className="font-bold text-gray-900 mb-1">{reg.name}</span>
+                                                    <span className="text-sm text-gray-500">{reg.school_name}</span>
+                                                </div>
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <div className="flex flex-col text-sm">
+                                                    <span className="text-gray-900 font-medium">{reg.email}</span>
+                                                    <span className="text-gray-500">{reg.phone_number}</span>
+                                                </div>
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <span className="px-3 py-1 rounded-full bg-blue-50 text-brics-blue text-xs font-bold border border-blue-100">
+                                                    {reg.school_category}
+                                                </span>
+                                            </td>
+                                            <td className="px-8 py-6">
+                                                <div className="flex gap-2">
+                                                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${reg.has_atl_lab === 'yes' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                                                        ATL: {reg.has_atl_lab}
+                                                    </span>
+                                                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${reg.is_pm_shree === 'yes' ? 'bg-purple-100 text-purple-700' : 'bg-gray-100 text-gray-500'}`}>
+                                                        PM: {reg.is_pm_shree}
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
 
-                        {abstracts.length === 0 && (
+                        {((activeTab === 'abstracts' && abstracts.length === 0) || (activeTab === 'registrations' && registrations.length === 0)) && (
                             <div className="p-12 text-center text-gray-500">
                                 <DocumentTextIcon className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-                                <p>No abstracts submitted yet.</p>
+                                <p>No {activeTab} found yet.</p>
                             </div>
                         )}
                     </div>
                 </div>
+
             </main>
 
             {/* Detailed Abstract Modal */}
