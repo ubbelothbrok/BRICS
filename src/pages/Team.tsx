@@ -1,101 +1,160 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     BeakerIcon,
     SparklesIcon,
     ShieldCheckIcon,
     WrenchScrewdriverIcon,
     PaintBrushIcon,
-    CameraIcon,
     MegaphoneIcon,
+    ChatBubbleLeftRightIcon,
     CodeBracketIcon,
+    ChevronDownIcon,
     UserGroupIcon
 } from '@heroicons/react/24/outline';
 
-// Enhanced Data Structure
-const TEAM_DATA = {
-    "Technical": [
-        { name: "Aryan Sheel", role: "Head", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Aryan" },
-        { name: "Rohan Gupta", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rohan" },
-        { name: "Sneha Patel", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sneha" },
-        { name: "Vikram Singh", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Vikram" },
-        { name: "Anjali Sharma", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Anjali" },
-        { name: "Kabir Das", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Kabir" },
-    ],
-    "Arts": [
-        { name: "Raghav Jaiman", role: "Head", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Raghav" },
-        { name: "Vaishnavi Singh", role: "Head", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Vaishnavi" },
-        { name: "Priya Mehta", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Priya" },
-        { name: "Arjun Reddy", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Arjun" },
-        { name: "Sana Khan", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sana" },
-        { name: "Mira Nair", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mira" },
-    ],
-    "Hospitality": [
-        { name: "Nipun Singh", role: "Head", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Nipun" },
-        { name: "Raj Malhotra", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Raj" },
-        { name: "Simran Kaur", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Simran" },
-        { name: "Amit Verma", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=AmitV" },
-        { name: "Neha Gupta", role: "Volunteer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Neha" },
-    ],
-    "Coverage": [
-        { name: "Yash Faujzar", role: "Head", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Yash" },
-        { name: "Deepak Kumar", role: "Editor", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Deepak" },
-        { name: "Aisha Siddiqui", role: "Photographer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Aisha" },
-        { name: "Ravi Kishan", role: "Videographer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ravi" },
-    ],
-    "Public Relations": [
-        { name: "Rahul Kumar", role: "Head", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul" },
-        { name: "Pooja Hegde", role: "Manager", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Pooja" },
-        { name: "Kunal Shah", role: "Executive", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Kunal" },
-        { name: "Tanya Roy", role: "Executive", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tanya" },
-    ],
-    "Design": [
-        { name: "Devesh Sharma", role: "Head", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Devesh" },
-        { name: "Ishan Khattar", role: "Graphic Designer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ishan" },
-        { name: "Tara Sutaria", role: "Illustrator", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tara" },
-        { name: "Zain Imam", role: "UI Designer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Zain" },
-    ],
-    "Infra": [
-        { name: "Vibhu Gupta", role: "Head", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Vibhu" },
-        { name: "Vivek Sawalkar", role: "Head", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Vivek" },
-        { name: "Sam Wilson", role: "Logistics", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sam" },
-        { name: "Natasha Romanoff", role: "Manager", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Natasha" },
-    ],
-    "Security": [
-        { name: "Vishal Kumar", role: "Head", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Vishal" },
-        { name: "Bruce Wayne", role: "Advisor", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Bruce" },
-        { name: "Clark Kent", role: "Officer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Clark" },
-        { name: "Diana Prince", role: "Officer", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Diana" },
-    ],
-    "Web Development": [
-        { name: "Aryan Raj", role: "Head", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=AryanR" },
-        { name: "Peter Parker", role: "Frontend Dev", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Peter" },
-        { name: "Tony Stark", role: "Backend Dev", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Tony" },
-        { name: "Steve Rogers", role: "QA", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Steve" },
-    ],
-    "Coordinator": [
-        { name: "Ashutosh Vishwakarma", role: "Coordinator", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ashutosh" },
-        { name: "Aditi Rao", role: "Assistant Coordinator", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Aditi" },
-        { name: "Manish Paul", role: "Manager", image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Manish" },
-    ]
-};
+interface TeamMember {
+    name: string;
+    role: string;
+    image: string;
+    team: string;
+}
 
-const CATEGORIES = Object.keys(TEAM_DATA);
-
-const VOLUNTEER_STATS = [
-    { name: "SCIENCE FAIR", count: 5, icon: BeakerIcon, color: "from-purple-500 to-indigo-500" },
-    { name: "HOSPITALITY", count: 30, icon: SparklesIcon, color: "from-pink-500 to-rose-500" },
-    { name: "SECURITY", count: 18, icon: ShieldCheckIcon, color: "from-blue-500 to-cyan-500" },
-    { name: "INFRA", count: 2, icon: WrenchScrewdriverIcon, color: "from-orange-500 to-amber-500" },
-    { name: "DESIGN", count: 8, icon: PaintBrushIcon, color: "from-fuchsia-500 to-purple-500" },
-    { name: "COVERAGE", count: 7, icon: CameraIcon, color: "from-red-500 to-orange-500" },
-    { name: "PR", count: 14, icon: MegaphoneIcon, color: "from-green-500 to-emerald-500" },
-    { name: "WEB DEV", count: 6, icon: CodeBracketIcon, color: "from-sky-500 to-blue-500" },
-];
+interface TeamData {
+    [key: string]: TeamMember[];
+}
 
 export default function Team() {
-    const [activeTab, setActiveTab] = useState("Technical");
+    const [teamData, setTeamData] = useState<TeamData>({});
+    const [categories, setCategories] = useState<string[]>([]);
+    const [activeTab, setActiveTab] = useState("");
+    const [volunteerStats, setVolunteerStats] = useState<any[]>([]);
+    const [totalStrength, setTotalStrength] = useState(0);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchTeamData = async () => {
+            try {
+                const response = await fetch('/data/team/team.csv');
+                const text = await response.text();
+                const lines = text.split('\n').filter(line => line.trim() !== '');
+
+                // Parse CSV Header (handling spaces in keys)
+                // Expected format: Timestamp,Name ,Team ,Role,Your picture 
+                const data: TeamData = {};
+                const stats: { [key: string]: number } = {};
+
+                const toTitleCase = (str: string) => {
+                    return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                };
+
+                // Skip header line 0
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i];
+                    const parts = line.split(',').map(part => part.trim());
+                    if (parts.length < 5) continue;
+
+                    const name = toTitleCase(parts[1]);
+                    const team = parts[2];
+                    const role = parts[3];
+                    let imgPath = parts[4];
+
+                    // Handle image path
+                    if (imgPath && !imgPath.startsWith('http')) {
+                        imgPath = `/data/team/${imgPath}`;
+                    }
+
+                    const member: TeamMember = {
+                        name,
+                        role,
+                        image: imgPath,
+                        team
+                    };
+
+                    if (!data[team]) {
+                        data[team] = [];
+                    }
+                    data[team].push(member);
+                    stats[team] = (stats[team] || 0) + 1;
+                }
+
+                // Sort members in each team: Head > Co-Head > others
+                Object.keys(data).forEach(team => {
+                    data[team].sort((a, b) => {
+                        const roles = ["Head", "Co-Head"];
+                        const aIndex = roles.indexOf(a.role);
+                        const bIndex = roles.indexOf(b.role);
+
+                        // If both are leaders, maintain their relative order
+                        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+                        // a is leader, b is not
+                        if (aIndex !== -1) return -1;
+                        // b is leader, a is not
+                        if (bIndex !== -1) return 1;
+                        // both are non-leaders, sort alphabetically by name
+                        return a.name.localeCompare(b.name);
+                    });
+                });
+
+                const sortedCategories = Object.keys(data).sort();
+                setTeamData(data);
+                setCategories(sortedCategories);
+                if (sortedCategories.length > 0) {
+                    setActiveTab(sortedCategories[0]);
+                }
+
+                // Map stats to UI format
+                const uiStats = Object.entries(stats).map(([name, count]) => {
+                    // Try to match with existing icons or use default
+                    const iconMap: { [key: string]: any } = {
+                        "Hospitality": SparklesIcon,
+                        "Security": ShieldCheckIcon,
+                        "Design": PaintBrushIcon,
+                        "Robotics": WrenchScrewdriverIcon,
+                        "Outreach": MegaphoneIcon,
+                        "ATL": BeakerIcon,
+                        "Coding Club": CodeBracketIcon,
+                        "AR/VR": CodeBracketIcon,
+                        "Media Making": MegaphoneIcon,
+                        "Sponsorship": SparklesIcon,
+                        "Infra": WrenchScrewdriverIcon,
+                    };
+                    const colorMap: { [key: string]: string } = {
+                        "Hospitality": "from-pink-500 to-rose-500",
+                        "Design": "from-fuchsia-500 to-purple-500",
+                        "ATL": "from-purple-500 to-indigo-500",
+                        "Security": "from-blue-500 to-cyan-500",
+                        "Coding Club": "from-blue-600 to-indigo-600",
+                        "Outreach": "from-orange-500 to-red-600",
+                        "Media Making": "from-emerald-500 to-teal-600",
+                    };
+
+                    return {
+                        name: name.toUpperCase(),
+                        count,
+                        icon: iconMap[name] || UserGroupIcon,
+                        color: colorMap[name] || "from-sky-500 to-blue-500"
+                    };
+                }).sort((a, b) => b.count - a.count); // Show all teams
+
+                const total = Object.values(stats).reduce((acc, curr) => acc + curr, 0);
+                setTotalStrength(total);
+                setVolunteerStats(uiStats);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error loading team data:", error);
+                setLoading(false);
+            }
+        };
+
+        fetchTeamData();
+    }, []);
+
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    if (loading) return <div className="min-h-screen flex items-center justify-center font-bold text-brics-blue">Loading Team...</div>;
+
 
     return (
         <div className="min-h-screen bg-[var(--color-bg)] transition-colors duration-300">
@@ -110,64 +169,83 @@ export default function Team() {
                     </p>
                 </div>
 
-                {/* Team Tabs Section */}
-                <div className="mb-24">
-                    {/* Tabs Navigation */}
-                    <div className="flex flex-wrap justify-center gap-3 mb-16 z-20 bg-[var(--color-bg)]/80 backdrop-blur-md p-4 rounded-full mx-auto max-w-fit shadow-sm border border-[var(--color-text)]/5 transition-all">
-                        {CATEGORIES.map((category) => (
-                            <button
-                                key={category}
-                                onClick={() => setActiveTab(category)}
-                                className={`px-5 py-2.5 rounded-full text-sm md:text-base font-semibold transition-all duration-300 relative overflow-hidden group ${activeTab === category
-                                    ? "text-white shadow-lg shadow-blue-500/30 scale-105"
-                                    : "text-[var(--color-text)] hover:bg-[var(--color-text)]/5"
-                                    }`}
-                            >
-                                <span className={`absolute inset-0 bg-gradient-to-r from-brics-blue to-indigo-600 transition-opacity duration-300 ${activeTab === category ? 'opacity-100' : 'opacity-0'}`}></span>
-                                <span className="relative z-10">{category}</span>
-                            </button>
-                        ))}
-                    </div>
+                {/* Team Navigation Section - Dropdown for Mobile/Desktop */}
+                <div className="mb-24 relative z-[60]">
+                    <div className="max-w-md mx-auto relative">
+                        <label className="block text-sm font-bold text-[var(--color-text)]/60 uppercase tracking-widest mb-4 text-center">
+                            Select Department
+                        </label>
+                        <button
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                            className="w-full flex items-center justify-between px-8 py-5 bg-[var(--color-card-bg)] border border-[var(--color-text)]/10 rounded-3xl shadow-xl hover:shadow-2xl hover:border-brics-blue/30 transition-all group overflow-hidden relative"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-brics-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <span className="text-xl font-bold text-[var(--color-text)] relative z-10">{activeTab || "Select Team"}</span>
+                            <ChevronDownIcon className={`w-6 h-6 text-brics-blue transition-transform duration-500 relative z-10 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                        </button>
 
-                    {/* Active Tab Content */}
-                    <div className="min-h-[400px] px-4">
-                        <div key={activeTab} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 animate-fadeIn">
-                            {TEAM_DATA[activeTab as keyof typeof TEAM_DATA].map((member, idx) => (
+                        {/* Dropdown Menu */}
+                        {isDropdownOpen && (
+                            <div className="absolute top-full left-0 right-0 mt-4 bg-[var(--color-card-bg)] border border-[var(--color-text)]/10 rounded-3xl shadow-2xl overflow-hidden z-[70] animate-fadeIn backdrop-blur-xl bg-opacity-95">
+                                <div className="max-h-[400px] overflow-y-auto py-4 custom-scrollbar">
+                                    {categories.map((category: string) => (
+                                        <button
+                                            key={category}
+                                            onClick={() => {
+                                                setActiveTab(category);
+                                                setIsDropdownOpen(false);
+                                            }}
+                                            className={`w-full text-left px-8 py-4 text-lg font-semibold transition-all hover:bg-brics-blue hover:text-white ${activeTab === category ? 'bg-brics-blue/10 text-brics-blue' : 'text-[var(--color-text)]'
+                                                }`}
+                                        >
+                                            {category}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                {/* Active Tab Content */}
+                <div className="min-h-[400px] px-4 mb-24 transition-all duration-500">
+                    <div key={activeTab} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 animate-fadeIn">
+                        {(teamData[activeTab] || []).map((member: TeamMember, idx: number) => {
+                            const isLeader = member.role.toLowerCase().includes('head');
+                            return (
                                 <div
                                     key={idx}
-                                    className="group relative bg-[var(--color-card-bg)] rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[var(--color-text)]/5 flex flex-col items-center text-center overflow-hidden hover:-translate-y-2"
+                                    className={`group relative bg-[var(--color-card-bg)] rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 flex flex-col items-center text-center overflow-hidden hover:-translate-y-2 ${isLeader
+                                        ? 'border-brics-blue/40 bg-gradient-to-b from-brics-blue/5 to-transparent'
+                                        : 'border-[var(--color-text)]/5'
+                                        }`}
                                     style={{ animationDelay: `${idx * 100}ms` }}
                                 >
                                     {/* Glassmorphism Hover Overlay */}
                                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brics-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
-                                    <div className="w-32 h-32 rounded-full p-1 bg-gradient-to-br from-blue-300 to-purple-300 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                                    <div className={`w-32 h-32 rounded-full p-1 mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md ${isLeader ? 'bg-gradient-to-br from-yellow-400 to-orange-500' : 'bg-gradient-to-br from-blue-300 to-purple-300'
+                                        }`}>
                                         <div className="w-full h-full rounded-full overflow-hidden bg-white">
                                             <img
                                                 src={member.image}
                                                 alt={member.name}
                                                 className="w-full h-full object-cover"
+                                                onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                                                    (e.target as HTMLImageElement).src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${member.name}`;
+                                                }}
                                             />
                                         </div>
                                     </div>
 
                                     <h3 className="font-bold text-[var(--color-text)] text-xl mb-2 group-hover:text-brics-blue transition-colors">{member.name}</h3>
-                                    <div className="text-sm font-semibold text-white bg-gradient-to-r from-brics-blue to-indigo-600 px-4 py-1.5 rounded-full shadow-sm">
+                                    <div className={`text-sm font-semibold text-white px-4 py-1.5 rounded-full shadow-sm ${isLeader ? 'bg-gradient-to-r from-orange-500 to-red-600' : 'bg-gradient-to-r from-brics-blue to-indigo-600'
+                                        }`}>
                                         {member.role}
                                     </div>
-
-                                    {/* Social Icons Placeholder */}
-                                    <div className="flex gap-4 mt-6 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                                        <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white cursor-pointer transition-colors">
-                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
-                                        </div>
-                                        <div className="w-8 h-8 rounded-full bg-blue-400/10 flex items-center justify-center text-blue-400 hover:bg-blue-400 hover:text-white cursor-pointer transition-colors">
-                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" /></svg>
-                                        </div>
-                                    </div>
                                 </div>
-                            ))}
-                        </div>
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -181,7 +259,7 @@ export default function Team() {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {VOLUNTEER_STATS.map((stat, idx) => (
+                        {volunteerStats.map((stat: any, idx: number) => (
                             <div
                                 key={idx}
                                 className="relative group bg-[var(--color-card-bg)] rounded-3xl p-8 border border-[var(--color-text)]/5 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
@@ -215,7 +293,7 @@ export default function Team() {
                             <div className="text-left">
                                 <p className="text-sm text-[var(--color-text)]/60 font-medium uppercase tracking-wider">Total Strength</p>
                                 <p className="text-2xl font-bold text-[var(--color-text)]">
-                                    <span className="text-brics-blue">90+</span> Dedicated Members
+                                    <span className="text-brics-blue">{totalStrength}+</span> Dedicated Members
                                 </p>
                             </div>
                         </div>

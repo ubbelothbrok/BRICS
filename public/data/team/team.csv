@@ -1,4 +1,4 @@
-Timestamp,Name ,Team ,Role,Your picture 
+Timestamp,Name ,Making ,Role,Your picture 
 2026-01-27 21:25:50.800,Siddharth Kumar ,Hospitality,Co-Head,images/1.jpg
 2026-01-27 21:26:21.778,Shubham Angural ,Hospitality,Volunteer,images/2.jpg
 2026-01-27 21:26:32.392,Afreen Mushtaq ,Hospitality,Volunteer,images/3.jpg
@@ -27,31 +27,29 @@ Timestamp,Name ,Team ,Role,Your picture
 2026-01-27 21:55:51.698,Yashan Garg,Design,Volunteer,images/25.jpg
 2026-01-27 21:59:36.782,Kovid Baid ,Sponsorship,Co-Head,images/17
 2026-01-27 22:16:42.671,NAVEEN KUMAR,Hospitality,Volunteer,images/26.jpg
-2026-01-27 22:18:39.288,Manthan Singla,Design,Head,images/27.webp
 2026-01-27 22:18:57.584,Harshul,Hospitality,Volunteer,images/28.jpg
 2026-01-27 22:28:21.904,Sonu patidar,Sponsorship,Volunteer,images/29.png
-2026-01-27 22:30:10.010,Vaibhav Mittal ,Astriaza (quiz),Co-Head,images/30.jpg
-2026-01-27 22:31:18.482,Ujjwal ,Design,Head,images/31.JPG
-2026-01-27 22:31:24.804,Pankaj Meghwal,Astriaza (quiz),Volunteer,images/32.jpg
+2026-01-27 22:30:10.010,Vaibhav Mittal ,Astriaza ,Co-Head,images/30.jpg
+2026-01-27 22:31:24.804,Pankaj Meghwal,Astriaza ,Volunteer,images/32.jpg
 2026-01-27 22:34:15.650,Tejpal ,Hospitality,Volunteer,images/33.jpg
-2026-01-27 22:43:51.340,Ansh Sharma ,Astriaza (quiz),Volunteer,images/34.jpeg
-2026-01-27 22:44:20.530,Vedant Lakade,Astriaza (quiz),Volunteer,images/35.jpg
-2026-01-27 22:46:56.639,Pranav Prabhat,Astriaza (quiz),Volunteer,images/36.jpeg
-2026-01-27 22:48:15.870,Anmol Negi,Astriaza (quiz),Volunteer,images/37.jpg
-2026-01-27 22:52:32.975,Hrishanya Singh Verma ,Astriaza (quiz),Volunteer,images/38.jpg
+2026-01-27 22:43:51.340,Ansh Sharma ,Astriaza ,Volunteer,images/34.jpeg
+2026-01-27 22:44:20.530,Vedant Lakade,Astriaza ,Volunteer,images/35.jpg
+2026-01-27 22:46:56.639,Pranav Prabhat,Astriaza ,Volunteer,images/36.jpeg
+2026-01-27 22:48:15.870,Anmol Negi,Astriaza ,Volunteer,images/37.jpg
+2026-01-27 22:52:32.975,Hrishanya Singh Verma ,Astriaza ,Volunteer,images/38.jpg
 2026-01-27 22:52:44.738,Arushi Sharma ,Sponsorship,Volunteer,images/39.heic
 2026-01-27 22:58:51.667,Suryansh Jadhav,Robotics,Co-Head,images/40.jpg
 2026-01-27 23:08:55.667,Vikash Yadav ,Design,Volunteer,images/41.jpg
 2026-01-27 23:09:45.502,Raghav Pal ,Sponsorship,Volunteer,images/42.webp
 2026-01-27 23:14:10.636,Yash Faujdar,Hospitality,Co- Convener,images/43.jpeg
-2026-01-27 23:17:14.065,Deekshitha Sarilla,Astriaza (quiz),Volunteer,images/44.jpg
+2026-01-27 23:17:14.065,Deekshitha Sarilla,Astriaza ,Volunteer,images/44.jpg
 2026-01-27 23:17:42.797,Rishii Arya ,Outreach,Volunteer,images/45.jpg
 2026-01-27 23:26:42.940,VANISHA,Hospitality,Volunteer,images/46.jpeg
 2026-01-27 23:32:50.751,Yashika Diwakar ,Outreach,Volunteer,images/47.jpg
 2026-01-27 23:35:46.872,Aman ,Hospitality,Volunteer,images/48.jpg
 2026-01-27 23:46:32.340,Arun Bijarniya,Hospitality,Volunteer,images/49.jpg
-2026-01-27 23:55:23.666,Karnam Sai Himai,Astriaza (quiz),Volunteer,images/50.jpg
-2026-01-27 23:57:54.566,Shruti Embalwar ,Astriaza (quiz),Volunteer,images/51.png
+2026-01-27 23:55:23.666,Karnam Sai Himai,Astriaza ,Volunteer,images/50.jpg
+2026-01-27 23:57:54.566,Shruti Embalwar ,Astriaza ,Volunteer,images/51.png
 2026-01-27 23:59:42.054,Rudra Chauhan ,Robotics,Volunteer,images/52.jpg
 2026-01-28 00:06:59.916,Kedar choudhary ,Hospitality,Volunteer,images/4.jpg
 2026-01-28 00:12:39.322,Mokshika Yadav,Sponsorship,Volunteer,images/53.jpg
@@ -82,201 +80,159 @@ Timestamp,Name ,Team ,Role,Your picture
 2026-01-28 10:23:33.444,Tamanna Reddy,Robotics,Volunteer,images/77.jpg
 2026-01-28 13:05:31.900,Shivesh chaudhary ,Hospitality,Volunteer,images/78.png
 2026-01-28 13:10:38.407,Ananya Singh ,Outreach,Volunteer,images/79.JPG
-2026-01-28 13:55:14.335,Priyanshi Agarwal ,Bracelet making,Volunteer,images/80.jpg
-2026-01-28 14:28:29.655,Sabeena ,Bracelet making,Volunteer,images/81.jpg
-2026-01-28 14:37:50.781,Anand Patel ,IITian interaction,Volunteer,images/72.jpg
-2026-01-28 14:46:16.906,Khushi,Bracelet making,Volunteer,images/82.jpg
+2026-01-28 13:55:14.335,Priyanshi Agarwal ,Bracelet Making,Volunteer,images/80.jpg
+2026-01-28 14:28:29.655,Sabeena ,Bracelet Making,Volunteer,images/81.jpg
+2026-01-28 14:37:50.781,Anand Patel ,IITian Interaction,Volunteer,images/72.jpg
+2026-01-28 14:46:16.906,Khushi,Bracelet Making,Volunteer,images/82.jpg
 2026-01-28 14:52:28.149,Sachin  Kumar,ATL,Volunteer,images/83.jpg
-2026-01-28 14:53:34.044,Rohit Khatri,IITian interaction,Volunteer,images/84.jpeg
-2026-01-28 15:12:40.653,Pratibha ,Bracelet making,Co-Head,images/85.jpg
-2026-01-28 15:31:02.270,Aayush Singh,Drone showcase,Co-Head,images/86.jpg
-2026-01-28 15:39:06.615,Aradhya Sharna,Drone showcase,Volunteer,images/87.JPG
-2026-01-28 15:39:48.858,Aradhya Sharma,Drone showcase,Volunteer,images/87.JPG
-2026-01-28 15:49:03.074,Ram Charan ,Bracelet making,Volunteer,images/88.jpg
-2026-01-28 16:06:55.809,Kashish ,Bracelet making,Volunteer,images/89.png
-2026-01-28 16:22:06.638,Harsh baisoya ,Drone showcase,Volunteer,images/90.jpg
-2026-01-28 16:25:57.702,Priyanshi Sehra,Drone showcase,Volunteer,images/91.png
+2026-01-28 14:53:34.044,Rohit Khatri,IITian Interaction,Volunteer,images/84.jpeg
+2026-01-28 15:12:40.653,Pratibha ,Bracelet Making,Co-Head,images/85.jpg
+2026-01-28 15:31:02.270,Aayush Singh,Drone,Co-Head,images/86.jpg
+2026-01-28 15:39:06.615,Aradhya Sharna,Drone,Volunteer,images/87.JPG
+2026-01-28 15:39:48.858,Aradhya Sharma,Drone,Volunteer,images/87.JPG
+2026-01-28 15:49:03.074,Ram Charan ,Bracelet Making,Volunteer,images/88.jpg
+2026-01-28 16:06:55.809,Kashish ,Bracelet Making,Volunteer,images/89.png
+2026-01-28 16:22:06.638,Harsh baisoya ,Drone,Volunteer,images/90.jpg
+2026-01-28 16:25:57.702,Priyanshi Sehra,Drone,Volunteer,images/91.png
 2026-01-28 17:17:10.632,Rudransh Ghosh,Hospitality,Volunteer,images/92.jpg
-2026-01-28 17:56:25.883,Kandunuru manaswitha reddy,Bracelet making,Volunteer,images/93.jpg
-2026-01-28 17:59:00.999,Aryan Singh,Hands on tinkering,Co-Head,images/94.jpg
-2026-01-28 18:04:33.446,Ansh Gupta ,Hands on tinkering,Volunteer,images/95.jpeg
-2026-01-28 18:05:36.130,Madhura Palkar,Hands on tinkering,Volunteer,images/96.jpg
-2026-01-28 18:06:23.013,Arpit Goyal,Hands on tinkering,Volunteer,images/97
-2026-01-28 18:07:04.272,Anushka Rana,Hands on tinkering,Volunteer,images/98.jpeg
-2026-01-28 18:07:55.822,Muskan Sahu ,Hands on tinkering,Volunteer,images/99
-2026-01-28 18:08:41.398,Nimit Aggarwal ,Hands on tinkering,Volunteer,images/100.jpeg
-2026-01-28 18:09:26.983,Anushka Jha ,Hands on tinkering,Volunteer,images/101
-2026-01-28 18:10:08.897,Jyotiraditya Jamwal,Hands on tinkering,Volunteer,images/102.jpeg
-2026-01-28 18:10:45.911,Amandeep ,Hands on tinkering,Volunteer,images/103.jpg
-2026-01-28 18:11:28.718,Priyanka Ramchandani,Hands on tinkering,Volunteer,images/104.jpg
-2026-01-28 18:12:23.855,Riddhima Sharma,Hands on tinkering,Volunteer,images/105.jpg
+2026-01-28 17:56:25.883,Kandunuru manaswitha reddy,Bracelet Making,Volunteer,images/93.jpg
+2026-01-28 17:59:00.999,Aryan Singh,Hands on Tinkering,Co-Head,images/94.jpg
+2026-01-28 18:04:33.446,Ansh Gupta ,Hands on Tinkering,Volunteer,images/95.jpeg
+2026-01-28 18:05:36.130,Madhura Palkar,Hands on Tinkering,Volunteer,images/96.jpg
+2026-01-28 18:06:23.013,Arpit Goyal,Hands on Tinkering,Volunteer,images/97
+2026-01-28 18:07:04.272,Anushka Rana,Hands on Tinkering,Volunteer,images/98.jpeg
+2026-01-28 18:07:55.822,Muskan Sahu ,Hands on Tinkering,Volunteer,images/99
+2026-01-28 18:08:41.398,Nimit Aggarwal ,Hands on Tinkering,Volunteer,images/100.jpeg
+2026-01-28 18:09:26.983,Anushka Jha ,Hands on Tinkering,Volunteer,images/101
+2026-01-28 18:10:08.897,Jyotiraditya Jamwal,Hands on Tinkering,Volunteer,images/102.jpeg
+2026-01-28 18:10:45.911,Amandeep ,Hands on Tinkering,Volunteer,images/103.jpg
+2026-01-28 18:11:28.718,Priyanka Ramchandani,Hands on Tinkering,Volunteer,images/104.jpg
+2026-01-28 18:12:23.855,Riddhima Sharma,Hands on Tinkering,Volunteer,images/105.jpg
 2026-01-28 18:13:02.747,Harshit Kumar ,Hospitality,Volunteer,images/106.jpg
-2026-01-28 18:13:12.947,Nehal Sahu,Hands on tinkering,Volunteer,images/107.jpg
-2026-01-28 18:14:06.260,Hardik Shakya ,Hands on tinkering,Volunteer,images/108.jpg
-2026-01-28 18:21:23.226,Madhura Palkar,Hands on tinkering,Volunteer,images/96.jpg
-2026-01-28 18:22:53.462,Simple,Bracelet making,Head,images/109.jpg
+2026-01-28 18:13:12.947,Nehal Sahu,Hands on Tinkering,Volunteer,images/107.jpg
+2026-01-28 18:14:06.260,Hardik Shakya ,Hands on Tinkering,Volunteer,images/108.jpg
+2026-01-28 18:22:53.462,Simple,Bracelet Making,Head,images/109.jpg
 2026-01-28 18:28:12.230,Jai,Outreach,Volunteer,images/110.jpg
-2026-01-28 18:30:56.154,Kunal Jain ,Drone showcase,Volunteer,images/111.jpg
-2026-01-28 18:40:24.853,G. Rakesh ,Bracelet making,Volunteer,images/112.jpg
+2026-01-28 18:30:56.154,Kunal Jain ,Drone,Volunteer,images/111.jpg
+2026-01-28 18:40:24.853,G. Rakesh ,Bracelet Making,Volunteer,images/112.jpg
 2026-01-28 19:18:58.817,Rishabh Kumar Jha,ATL,Volunteer,images/113.jpg
 2026-01-28 19:50:43.068,Mayank Kumar ,Hospitality,Volunteer,images/114.jpg
 2026-01-28 21:24:25.631,Aditi kondal,Painting,Head,images/115.jpg
 2026-01-28 21:26:07.204,Anshu ,AR/VR,Volunteer,images/116.jpg
-2026-01-28 21:26:37.613,Prateek Tyagi,AR/VR,Co-Head,images/117.jpg
 2026-01-28 21:26:39.617,Tanmay Sharma ,AR/VR,Head,images/118.jpg
 2026-01-28 21:44:00.610,Daksh Gupta,AR/VR,Volunteer,images/119.jpg
-2026-01-28 21:50:15.044,Adwait Aditya ,IITian interaction,Volunteer,images/120.png
-2026-01-28 21:56:01.685,Akshitha,Drone showcase,Volunteer,images/121.jpeg
+2026-01-28 21:50:15.044,Adwait Aditya ,IITian Interaction,Volunteer,images/120.png
+2026-01-28 21:56:01.685,Akshitha,Drone,Volunteer,images/121.jpeg
 2026-01-28 22:04:18.653,Anmol ratan srivastav,Locked Library,Head,images/122.jpeg
 2026-01-28 22:26:39.107,MD NAFIS ,Jigsaw,Volunteer,images/123.jpg
 2026-01-28 22:31:00.710,Rudransh Ghosh,Outreach,Volunteer,images/92.jpg
-2026-01-28 22:31:06.210,Arun Bijarniya ,Hospitality,Volunteer,images/49.jpg
-2026-01-28 22:31:09.816,Sri Tharang Pullipudi ,Hospitality,Volunteer,images/16.jpg
 2026-01-28 22:31:12.130,Jeetesh Gupta,Hospitality,Volunteer,images/21.jpg
-2026-01-28 22:31:13.784,Deependra Singh ,Hospitality,Volunteer,images/13.jpg
 2026-01-28 22:31:23.604,Hriday Rana,Robotics,Co-Head,images/124.jpg
-2026-01-28 22:31:32.057,Ananya Singh ,Outreach,Volunteer,images/79.JPG
-2026-01-28 22:31:41.548,Sri Tharang Pullipudi ,Hospitality,Volunteer,images/16.jpg
-2026-01-28 22:32:05.982,Hardik Shakya ,Hands on tinkering,Volunteer,images/125.jpg
+2026-01-28 22:32:05.982,Hardik Shakya ,Hands on Tinkering,Volunteer,images/125.jpg
 2026-01-28 22:32:28.362,Akshita Saxena,Locked Library,Volunteer,images/126.jpg
 2026-01-28 22:32:34.280,Rohit Singh Sikarwar ,Hospitality,Volunteer,images/127.jpg
-2026-01-28 22:32:34.823,Kalpna,Hospitality,Volunteer,images/12.jpg
 2026-01-28 22:32:47.333,Raamaansh gupta ,Locked Library,Volunteer,images/128.jpg
 2026-01-28 22:32:51.109,Navya Gupta ,Locked Library,Volunteer,images/129.jpg
 2026-01-28 22:33:04.927,Shubham Angural ,Hospitality,Volunteer,images/130.jpg
 2026-01-28 22:33:28.862,Muzammil Hasan,Locked Library,Volunteer,images/131.jpg
-2026-01-28 22:33:36.033,Harsh kumar,Astriaza (quiz),Volunteer,images/132.jpg
+2026-01-28 22:33:36.033,Harsh kumar,Astriaza ,Volunteer,images/132.jpg
 2026-01-28 22:33:51.213,Aryan Gupta ,Locked Library,Volunteer,images/133.jpg
 2026-01-28 22:35:16.365,Sidhdarth chaurasiya ,Hospitality,Volunteer,images/134.jpeg
-2026-01-28 22:38:57.225,SANJEEV KUSHWAHA ,Hospitality,Volunteer,images/10.webp
 2026-01-28 22:41:02.500,Manthan Singla ,Design,Head,images/27.webp
-2026-01-28 22:41:03.427,Bhautik,ATL,Volunteer,images/73.webp
 2026-01-28 22:41:32.796,Reeshi Arya ,Outreach,Volunteer,images/135.jpg
-2026-01-28 22:42:09.276,Harnoor  Singh,Hospitality,Volunteer,images/24.jpeg
-2026-01-28 22:42:15.189,Partiksha Goyal ,Hospitality,Volunteer,images/6.jpg
-2026-01-28 22:42:48.466,Riddhima Sharma,Hands on tinkering,Volunteer,images/136.jpg
+2026-01-28 22:42:48.466,Riddhima Sharma,Hands on Tinkering,Volunteer,images/136.jpg
 2026-01-28 22:43:05.307,Siddharth Kumar,Hospitality,Co-Head,images/137.jpg
 2026-01-28 22:43:29.252,Tanish Nagotra,Hospitality,Volunteer,images/138.jpg
-2026-01-28 22:45:00.093,Prakhar Arora ,Media Team,Volunteer,images/139.jpg
+2026-01-28 22:45:00.093,Prakhar Arora ,Media Making,Volunteer,images/139.jpg
 2026-01-28 22:45:34.701,Hemant nagar,Coding Club,Volunteer,images/140.jpg
-2026-01-28 22:45:57.055,Prithvi Singh Solanki ,Media Team,Volunteer,images/141.jpg
-2026-01-28 22:46:16.673,Uday prakash makija ,Food tinkers,Head,images/142.jpg
+2026-01-28 22:45:57.055,Prithvi Singh Solanki ,Media Making,Volunteer,images/141.jpg
+2026-01-28 22:46:16.673,Uday prakash makija ,Food Tinkers,Head,images/142.jpg
 2026-01-28 22:48:52.799,Ananya Singh ,Outreach,Volunteer,images/143.jpg
-2026-01-28 22:49:43.836,Kunjan Bansal,Drone showcase,Volunteer,images/144.jpeg
-2026-01-28 22:50:32.950,Aryan krishna ,Food tinkers,Co-Head,images/145.jpg
-2026-01-28 22:52:59.599,Tanwar ,Food tinkers,Volunteer,images/146.jpg
+2026-01-28 22:49:43.836,Kunjan Bansal,Drone,Volunteer,images/144.jpeg
+2026-01-28 22:50:32.950,Aryan krishna ,Food Tinkers,Co-Head,images/145.jpg
+2026-01-28 22:52:59.599,Tanwar ,Food Tinkers,Volunteer,images/146.jpg
 2026-01-28 22:54:10.979,Mohit joshi ,Locked Library,Volunteer,images/147.jpg
-2026-01-28 22:54:29.557,Arun Yadav ,Hospitality,Volunteer,images/67.webp
 2026-01-28 22:56:18.991,Mohammed Dabal,Locked Library,Volunteer,images/148.jpeg
 2026-01-28 22:56:35.270,Surjeet Kumar Rai ,Hospitality,Volunteer,images/149
-2026-01-28 22:59:59.520,ROUSHAN KUMAR ,Hospitality,Volunteer,images/71.jpg
 2026-01-28 23:03:36.468,Kanhiya Agrawal,Locked Library,Volunteer,images/150.jpeg
-2026-01-28 23:05:30.551,Era Maini,Drone showcase,Volunteer,images/151.jpeg
+2026-01-28 23:05:30.551,Era Maini,Drone,Volunteer,images/151.jpeg
 2026-01-28 23:06:30.553,Shriyansh Ingvasia ,Locked Library,Volunteer,images/152.jpg
-2026-01-28 23:09:12.348,Kedar choudhary ,Hospitality,Co-Head,images/4.jpg
 2026-01-28 23:11:26.048,Ujjwal ,Design,Head,images/31.JPG
-2026-01-28 23:19:48.895,Sabeena ,Bracelet making,Volunteer,images/81.jpg
-2026-01-28 23:22:24.003,Tejpal ,Hospitality,Volunteer,images/33.jpg
-2026-01-28 23:28:46.308,Harsh Agarwal,Food tinkers,Volunteer,images/153.jpg
+2026-01-28 23:28:46.308,Harsh Agarwal,Food Tinkers,Volunteer,images/153.jpg
 2026-01-28 23:32:32.290,Soham Kakkar ,Coding Club,Co-Head,images/154.jpg
-2026-01-28 23:33:01.201,Datti Eswar ,Media Team,Head,images/155.jpeg
+2026-01-28 23:33:01.201,Datti Eswar ,Media Making,Head,images/155.jpeg
 2026-01-28 23:35:56.881,Anuj Saxena ,Outreach,Volunteer,images/156.webp
 2026-01-28 23:36:27.677,Rishi Chauhan,Coding Club,Volunteer,images/157.jpg
-2026-01-28 23:36:53.115,Aaryan,Media Team,Volunteer,images/158.jpeg
+2026-01-28 23:36:53.115,Aaryan,Media Making,Volunteer,images/158.jpeg
 2026-01-28 23:38:06.258,Abhay kumar mishra ,Coding Club,Volunteer,images/159.jpg
 2026-01-28 23:39:10.690,Abhineet Kumar,Jigsaw,Co-Head,images/160.jpeg
-2026-01-28 23:44:17.934,Hozaifa Nazar Siddiqui ,Hands on tinkering,Volunteer,images/161.jpg
-2026-01-28 23:45:27.085,Mujtaba Maqbool,Media Team,Co-Head,images/162.jpeg
-2026-01-28 23:46:57.317,Anushka Rana ,Hands on tinkering,Volunteer,images/163.jpg
+2026-01-28 23:44:17.934,Hozaifa Nazar Siddiqui ,Hands on Tinkering,Volunteer,images/161.jpg
+2026-01-28 23:45:27.085,Mujtaba Maqbool,Media Making,Co-Head,images/162.jpeg
+2026-01-28 23:46:57.317,Anushka Rana ,Hands on Tinkering,Volunteer,images/163.jpg
 2026-01-28 23:50:32.339,Arushi Sharma ,Coding Club,Volunteer,images/39.heic
 2026-01-28 23:51:44.109,Manaswi,Coding Club,Volunteer,images/164.jpg
 2026-01-28 23:51:53.511,Gursimran Singh Thukral,Robotics,Volunteer,images/165.jpg
-2026-01-28 23:53:24.434,Amandeep ,Hands on tinkering,Volunteer,images/166.jpg
-2026-01-28 23:54:13.458,Manaswi,Coding Club,Volunteer,images/164.jpg
+2026-01-28 23:53:24.434,Amandeep ,Hands on Tinkering,Volunteer,images/166.jpg
 2026-01-28 23:54:37.966,Ansh Saxena ,Sponsorship,Volunteer,images/167.jpg
-2026-01-28 23:54:43.782,Priyanshi ,Hospitality,Volunteer,images/19.jpg
 2026-01-28 23:56:38.207,Parv,Sponsorship,Co- Convener,images/168.jpg
-2026-01-28 23:58:35.333,Nehal Sahu,Hands on tinkering,Volunteer,images/169.jpg
+2026-01-28 23:58:35.333,Nehal Sahu,Hands on Tinkering,Volunteer,images/169.jpg
 2026-01-28 23:59:19.135,Divyansh Tripathi ,Robotics,Volunteer,images/170.jpg
 2026-01-29 00:02:59.853,Sumit Kumar ,Jigsaw,Volunteer,images/171.jpg
 2026-01-29 00:06:41.864,Daksh Singhal,Coding Club,Volunteer,images/172.jpg
-2026-01-29 00:12:36.334,Priyanka Ramchandani ,Hands on tinkering,Volunteer,images/173.jpg
+2026-01-29 00:12:36.334,Priyanka Ramchandani ,Hands on Tinkering,Volunteer,images/173.jpg
 2026-01-29 01:02:03.605,Lavish yadav,Security,Volunteer,images/174.jpg
 2026-01-29 02:14:31.365,Anurag,Coding Club,Volunteer,images/175.jpg
 2026-01-29 04:21:57.036,Raghav Pal,Coding Club,Volunteer,images/42.webp
 2026-01-29 04:34:07.489,Pankit Prakash Surve ,Hospitality,Volunteer,images/176.jpg
-2026-01-29 04:35:27.445,Pankit Prakash Surve ,Hospitality,Volunteer,images/176.jpg
 2026-01-29 08:07:07.987,Kanhaiya Lal ,Hospitality,Co-Head,images/177.jpg
-2026-01-29 08:51:23.253,Aniket Khana,Food tinkers,Volunteer,images/178.jpg
+2026-01-29 08:51:23.253,Aniket Khana,Food Tinkers,Volunteer,images/178.jpg
 2026-01-29 08:56:04.770,Chirag Baiflawat ,Infra,Volunteer,images/179.jpg
-2026-01-29 08:58:29.970,Ansh Gupta,Hands on tinkering,Volunteer,images/180.jpeg
-2026-01-29 09:03:15.572,Yashan Garg ,Design,Volunteer,images/181.jpg
-2026-01-29 09:09:06.783,Harshul,Hospitality,Volunteer,images/28.jpg
-2026-01-29 09:10:12.961,Hardik Shakya ,Hands on tinkering,Volunteer,images/125.jpg
-2026-01-29 09:14:22.498,Sawan Rawat,IITian interaction,Co-Head,images/182.JPG
+2026-01-29 08:58:29.970,Ansh Gupta,Hands on Tinkering,Volunteer,images/180.jpeg
 2026-01-29 09:14:53.626,Devpriya saini ,Design,Volunteer,images/183.webp
-2026-01-29 09:15:05.104,Tushar Gautam ,Food tinkers,Volunteer,images/184.jpg
+2026-01-29 09:15:05.104,Tushar Gautam ,Food Tinkers,Volunteer,images/184.jpg
 2026-01-29 09:18:11.595,Purva,Outreach,Co-Head,images/185.png
 2026-01-29 09:19:25.267,Shubham Singh,Hospitality,Volunteer,images/186.jpg
 2026-01-29 09:22:30.481,harshita Bugalia ,AR/VR,Volunteer,images/187.jpg
 2026-01-29 09:27:40.580,Yashika Diwakar ,Outreach,Volunteer,images/188.jpg
-2026-01-29 09:29:38.668,Tanwar ,Food tinkers,Volunteer,images/146.jpg
-2026-01-29 09:38:20.810,Jyotiraditya Jamwal,Hands on tinkering,Volunteer,images/189.jpeg
-2026-01-29 09:44:54.966,Kirandeep Singh ,ATL,Volunteer,images/59.jpg
+2026-01-29 09:38:20.810,Jyotiraditya Jamwal,Hands on Tinkering,Volunteer,images/189.jpeg
 2026-01-29 10:01:12.842,Ayush,ATL,Volunteer,images/190.jpeg
 2026-01-29 10:02:00.208,BARKAT DAR,Hospitality,Volunteer,images/191.jpg
-2026-01-29 10:02:35.378,Afreen Mushtaq ,Hospitality,Volunteer,images/3.jpg
-2026-01-29 10:02:38.563,SANJEEV KUSHWAHA ,Hospitality,Volunteer,images/10.webp
-2026-01-29 10:02:42.262,Arpit Goyal,Hands on tinkering,Volunteer,images/69.jpg
-2026-01-29 10:02:45.962,RAM CHARAN ,Bracelet making,Volunteer,images/88.jpg
-2026-01-29 10:02:50.997,Partiksha Goyal ,Hospitality,Volunteer,images/6.jpg
-2026-01-29 10:04:34.219,Tushar Singh,Inventory team,Co-Head,images/192.jpg
-2026-01-29 10:05:37.788,Arun Yadav ,Hospitality,Volunteer,images/67.webp
-2026-01-29 10:05:45.730,Raunak Pathak ,Inventory team,Co-Head,images/193.jpg
-2026-01-29 10:06:49.853,Kovid Baid ,Sponsorship,Co-Head,images/17
-2026-01-29 10:15:20.734,Tanish Nagotra,Hospitality,Volunteer,images/138.jpg
+2026-01-29 10:02:42.262,Arpit Goyal,Hands on Tinkering,Volunteer,images/69.jpg
+2026-01-29 10:02:45.962,RAM CHARAN ,Bracelet Making,Volunteer,images/88.jpg
+2026-01-29 10:04:34.219,Tushar Singh,Inventory,Co-Head,images/192.jpg
+2026-01-29 10:05:45.730,Raunak Pathak ,Inventory,Co-Head,images/193.jpg
 2026-01-29 10:17:18.515,Prateek Tyagi ,AR/VR,Co-Head,images/117.jpg
-2026-01-29 10:21:46.481,Shivam Prajapati,Inventory team,Co-Head,images/194.jpg
-2026-01-29 10:21:53.863,Rakshit ,Food tinkers,Volunteer,images/195.webp
-2026-01-29 10:23:27.559,Aastha,Media Team,Volunteer,images/196.jpg
-2026-01-29 10:28:14.756,Saras Sharma,Hospitality,Volunteer,images/9.png
-2026-01-29 10:30:11.506,Sri Tharang Pullipudi ,Hospitality,Volunteer,images/16.jpg
+2026-01-29 10:21:46.481,Shivam Prajapati,Inventory,Co-Head,images/194.jpg
+2026-01-29 10:21:53.863,Rakshit ,Food Tinkers,Volunteer,images/195.webp
+2026-01-29 10:23:27.559,Aastha,Media Making,Volunteer,images/196.jpg
 2026-01-29 10:31:08.562,Vaishnavi ,Hospitality,Volunteer,images/197.jpg
-2026-01-29 10:38:22.990,Mujtaba Maqbool,Media Team,Co-Head,images/162.jpeg
-2026-01-29 10:43:34.022,Utkarsh,Hospitality,Volunteer,images/14.jpg
-2026-01-29 11:07:16.782,Aman,Hospitality,Volunteer,images/48.jpg
-2026-01-29 11:40:01.362,Anushka Jha ,Hands on tinkering,Volunteer,images/198.jpg
-2026-01-29 11:40:18.095,JEETESH GUPTA,Hospitality,Volunteer,images/21.jpg
-2026-01-29 12:04:25.198,Hrushikesh ,Media Team,Volunteer,images/199.jpg
-2026-01-29 12:09:46.948,Pusala charan teja,Media Team,Volunteer,images/200.jpg
-2026-01-29 12:15:14.027,Vedant Prafulla Petkar,Food tinkers,Volunteer,images/201.jpeg
-2026-01-29 12:15:19.125,Harsh baisoya ,Drone showcase,Volunteer,images/202.jpg
+2026-01-29 11:40:01.362,Anushka Jha ,Hands on Tinkering,Volunteer,images/198.jpg
+2026-01-29 12:04:25.198,Hrushikesh ,Media Making,Volunteer,images/199.jpg
+2026-01-29 12:09:46.948,Pusala charan teja,Media Making,Volunteer,images/200.jpg
+2026-01-29 12:15:14.027,Vedant Prafulla Petkar,Food Tinkers,Volunteer,images/201.jpeg
+2026-01-29 12:15:19.125,Harsh baisoya ,Drone,Volunteer,images/202.jpg
 2026-01-29 12:19:03.619,Sidhdarth chaurasiya ,Hospitality,Volunteer,images/203.png
-2026-01-29 12:44:53.099,Ashutosh kunzru ,IITian interaction,Volunteer,images/204.jpg
-2026-01-29 13:00:35.608,Aniket Khanna ,Food tinkers,Volunteer,images/205.jpeg
-2026-01-29 13:37:59.007,Saksham vijay ,Tinkerer’s lab,Volunteer,images/206.jpg
+2026-01-29 12:44:53.099,Ashutosh kunzru ,IITian Interaction,Volunteer,images/204.jpg
+2026-01-29 13:00:35.608,Aniket Khanna ,Food Tinkers,Volunteer,images/205.jpeg
+2026-01-29 13:37:59.007,Saksham vijay ,Tinkerer’s Lab,Volunteer,images/206.jpg
 2026-01-29 13:44:52.599,Prakhar Goyal ,Coding Club,Volunteer,images/207.jpg
 2026-01-29 13:47:56.512,Navya,Hospitality,Volunteer,images/208.jpg
 2026-01-29 13:57:01.149,Tamrakar Vaibhav Pratap ,Coding Club,Volunteer,images/209.jpg
-2026-01-29 14:26:59.239,Majied Ali,Media Team,Volunteer,images/210.webp
-2026-01-29 14:37:19.810,Nimit Aggarwal,Hands on tinkering,Volunteer,images/211.jpeg
-2026-01-29 14:55:30.180,Yuvraj,Inventory team,Volunteer,images/212.jpeg
-2026-01-29 14:59:43.357,Pranjal Parmar,IITian interaction,Volunteer,images/213.jpeg
-2026-01-29 15:01:29.626,Sawan Rawat ,IITian interaction,Co-Head,images/182.JPG
-2026-01-29 15:16:08.249,Arnav Sohani ,Food tinkers,Volunteer,images/214.jpg
-2026-01-29 15:41:34.879,Tejpal ,Hospitality,Volunteer,images/33.jpg
-2026-01-29 16:23:48.055,Tejas Boyina ,Food tinkers,Volunteer,images/215.jpg
+2026-01-29 14:26:59.239,Majied Ali,Media Making,Volunteer,images/210.webp
+2026-01-29 14:37:19.810,Nimit Aggarwal,Hands on Tinkering,Volunteer,images/211.jpeg
+2026-01-29 14:55:30.180,Yuvraj,Inventory,Volunteer,images/212.jpeg
+2026-01-29 14:59:43.357,Pranjal Parmar,IITian Interaction,Volunteer,images/213.jpeg
+2026-01-29 15:01:29.626,Sawan Rawat ,IITian Interaction,Co-Head,images/182.JPG
+2026-01-29 15:16:08.249,Arnav Sohani ,Food Tinkers,Volunteer,images/214.jpg
+2026-01-29 16:23:48.055,Tejas Boyina ,Food Tinkers,Volunteer,images/215.jpg
 2026-01-29 16:33:26.314,Heet Ghadiya ,ATL,Volunteer,images/60.jpg
-2026-01-29 17:13:28.658,ANKIT MEENA ,Media Team,Volunteer,images/216.jpg
-2026-01-29 17:34:28.143,Reeshi Arya,Outreach,Volunteer,images/135.jpg
-2026-01-29 17:36:32.968,Hitesh kumar,Food tinkers,Volunteer,images/217.jpg
+2026-01-29 17:13:28.658,ANKIT MEENA ,Media Making,Volunteer,images/216.jpg
+2026-01-29 17:36:32.968,Hitesh kumar,Food Tinkers,Volunteer,images/217.jpg
 2026-01-29 17:50:30.387,Pankit Surve ,Hospitality,Volunteer,images/176.jpg
 2026-01-29 19:47:05.291,Rohit Singh Sikarwar ,Hospitality,Volunteer,images/218.png
 2026-01-29 20:06:08.271,Chirananjeev sharma,Robotics,Volunteer,images/219.jpg
-2026-01-29 21:51:58.300,Madhura ,Hands on tinkering,Co-Head,images/220.jpg
-2026-01-29 22:01:27.891,Madhura Palkar,Hands on tinkering,Co-Head,images/96.jpg
+2026-01-29 21:51:58.300,Madhura ,Hands on Tinkering,Co-Head,images/220.jpg
+2026-01-29 22:01:27.891,Madhura Palkar,Hands on Tinkering,Co-Head,images/96.jpg
 2026-01-29 22:40:58.524,Rajul Tyagi ,Locked Library,Head,images/221.jpg
-2026-01-30 01:36:02.073,Hozaifa Nazar Siddiqui,Hands on tinkering,Volunteer,images/222
-2026-01-30 02:24:54.569,Hemant nagar,Coding Club,Volunteer,images/140.jpg
-2026-01-31 00:41:09.867,Akshita,Hospitality,Volunteer,images/22.jpg
-2026-01-31 04:33:48.737,SUJAL SUMAN,Inventory team,Volunteer,images/223.jpg
+2026-01-30 01:36:02.073,Hozaifa Nazar Siddiqui,Hands on Tinkering,Volunteer,images/222
+2026-01-31 04:33:48.737,SUJAL SUMAN,Inventory,Volunteer,images/223.jpg
