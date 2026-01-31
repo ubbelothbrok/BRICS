@@ -3,496 +3,275 @@
     {
       "id": 8,
       "title": "AR Builder Challenge",
-      "date": "Feb 15",
+      "date": "7-8 Feb",
       "time": "10:00 AM - 03:00 PM",
       "location": "Computer Center",
       "category": "Tech",
       "description": "Build virtual structures using real-world hand gestures! An interactive Augmented Reality game powered by Computer Vision. Compete for stability and height scores.",
       "image": "/ar-builder-highlight.jpg",
       "longDescription": "Experience the magic where code meets reality. The AR Builder Challenge is a unique interactive game developed by our Coding Club. Using advanced Computer Vision and gesture recognition, we've created a system where your hand movements in the real world control virtual building blocks on a massive screen.\n\nThe objective? Build the tallest, most stable tower possible within a time limit. You simply wave your hands to pick up blocks, rotate them, and stack them. The physics engine simulates gravity and balance in real-time, so one wrong move and your virtual tower comes crumbling down! It's a fun, gamified way to understand the power of Augmented Reality.",
-      "schedule": [
-        {
-          "time": "10:00 AM",
-          "activity": "System Demo & Tutorial"
-        },
-        {
-          "time": "10:30 AM",
-          "activity": "Open Challenge Slots Begin"
-        },
-        {
-          "time": "01:00 PM",
-          "activity": "Lunch Break"
-        },
-        {
-          "time": "03:00 PM",
-          "activity": "Final Logic & Stability Score Calculation"
-        }
-      ],
       "rules": [
         "One player at a time in the sensor zone.",
         "3 minutes time limit per attempt.",
         "Score is calculated based on Height x Stability.",
         "Intentional obstruction of sensors is not allowed."
-      ],
-      "teamSize": "Individual Participation",
-      "contact": "coding-club@iitjammu.ac.in"
+      ]
     },
     {
       "id": 1,
       "title": "Drone Showcase",
-      "date": "Feb 14",
+      "date": "7-8 Feb",
       "time": "10:00 AM - 04:00 PM",
       "location": "Main Ground",
       "category": "Tech",
       "description": "Witness high-end drones in action including Quadcopters, Hexacopters, and FPVs. Learn about drone technology, aerodynamics, and see a live VTOL prototype demonstration.",
       "image": "https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=1470&auto=format&fit=crop",
       "longDescription": "Step into the future of aviation at our exclusive Drone Showcase. This event brings together the cutting edge of unmanned aerial technology, featuring a diverse fleet of drones ranging from agile FPV racers to heavy-lift industrial hexacopters.\n\nParticipants will get a rare opportunity to witness live demonstrations of autonomous flight stability, obstacle avoidance systems, and high-speed maneuvers. Our expert team from the Robotics Club will explain the aerodynamics, flight controllers, and propulsion systems that make these incredible machines fly. The highlight of the event is the unveiling of our custom-built VTOL (Vertical Take-Off and Landing) prototype, combining the versatility of a helicopter with the range of a fixed-wing aircraft.",
-      "schedule": [
-        {
-          "time": "10:00 AM",
-          "activity": "Introduction to Drone Types & Safety Briefing"
-        },
-        {
-          "time": "11:30 AM",
-          "activity": "Live FPV Racing Demo"
-        },
-        {
-          "time": "01:00 PM",
-          "activity": "Lunch Break & Static Display Interaction"
-        },
-        {
-          "time": "02:30 PM",
-          "activity": "Heavy Lift & Hexacopter Showcase"
-        },
-        {
-          "time": "03:45 PM",
-          "activity": "VTOL Prototype Demonstration"
-        }
-      ],
       "rules": [
         "Do not cross the safety barriers during flight operations.",
         "Flash photography is prohibited during FPV sessions.",
         "Follow the instructions of the safety marshals at all times.",
         "Touching the drones is only allowed during the Static Display session."
-      ],
-      "teamSize": "Open for all visitors",
-      "contact": "robotics-club@iitjammu.ac.in"
+      ]
     },
     {
       "id": 4,
       "title": "Painting Competition",
-      "date": "Feb 15",
+      "date": "7-8 Feb",
       "time": "09:00 AM - 12:00 PM",
       "location": "Art Studio",
       "category": "Arts",
       "description": "An on-the-spot painting competition to unleash your imagination. Materials provided. Themes will be announced at the venue. Winners will be awarded certificates and prizes.",
       "image": "/images/painting_live.jpg",
       "longDescription": "Colors speak louder than words. The Painting Competition is a sanctuary for the artists, the dreamers, and the creators. Whether you prefer the fluidity of watercolors, the texture of acrylics, or the precision of pencil sketching, this is your platform.\n\nThe event is an 'On-The-Spot' competition, meaning the theme will be revealed right at the start to ensure spontaneity and original thinking. Participants will have 3 hours to conceptualize and complete their artwork. The serene atmosphere of the Art Studio, accompanied by light instrumental music, provides the perfect ambiance for your creativity to flow onto the canvas.",
-      "schedule": [
-        {
-          "time": "09:00 AM",
-          "activity": "Theme Announcement & Material Distribution"
-        },
-        {
-          "time": "09:15 AM",
-          "activity": "Painting Starts"
-        },
-        {
-          "time": "12:00 PM",
-          "activity": "Submission Deadline"
-        },
-        {
-          "time": "01:00 PM",
-          "activity": "Results & Exhibition"
-        }
-      ],
       "rules": [
         "Theme will be announced on the spot.",
         "Basic materials (paper, paints, brushes) provided; participants can bring their own specialized tools.",
         "Digital art is not included in this specific category.",
         "Plagiarism or copying from phone references is strictly prohibited."
-      ],
-      "teamSize": "Individual Participation",
-      "contact": "artihc-club@iitjammu.ac.in"
+      ]
     },
     {
       "id": 7,
       "title": "Artihc Art Gallery",
-      "date": "Feb 14 & 15",
+      "date": "7-8 Feb",
       "time": "All Day",
       "location": "Exhibition Hall",
       "category": "Arts",
       "description": "Explore a curated collection of paintings and artworks by the Artihc Club. Live demonstrations of acrylic, watercolor, and oil painting techniques by student artists.",
       "image": "/images/art_gallery_live.jpg",
       "longDescription": "Walk through a corridor of creativity at the Artihc Art Gallery. This exhibition showcases the finest works from IIT Jammu's student artists, featuring a diverse range of styles including hyper-realism, abstract expressionism, mandala art, and digital illustrations.\n\nThe gallery is more than just a display; it's an interactive space. Throughout the day, featured artists will be conducting live demonstrations, showing how a blank canvas evolves into a masterpiece. You can interact with the artists, understand their inspirations, and even try your hand at a few brush strokes at our community canvas.",
-      "schedule": [
-        {
-          "time": "10:00 AM",
-          "activity": "Gallery Opens"
-        },
-        {
-          "time": "11:00 AM",
-          "activity": "Live Watercolor Demo"
-        },
-        {
-          "time": "02:00 PM",
-          "activity": "Live Acrylic Pouring Demo"
-        },
-        {
-          "time": "05:00 PM",
-          "activity": "Gallery Closes"
-        }
-      ],
       "rules": [
         "Do not touch the exhibits.",
         "Photography is allowed without flash.",
         "Maintain silence to appreciate the art.",
         "Food and drinks are strictly prohibited inside the gallery."
-      ],
-      "teamSize": "Open for all visitors",
-      "contact": "artihc-club@iitjammu.ac.in"
+      ]
     },
     {
       "id": 6,
       "title": "Jigsaw Puzzle Challenge",
-      "date": "Feb 14",
+      "date": "7-8 Feb",
       "time": "Continuous",
       "location": "Student Activity Center",
       "category": "Arts",
       "description": "Test your spatial reasoning and teamwork with metallic, wooden, and 3D mechanical puzzles. Fastest teams to solve the puzzle sets win exciting prizes.",
       "image": "/images/jigsaw_live.jpg",
       "longDescription": "Sharpen your mind and test your patience at the Jigsaw Puzzle Challenge! This isn't just about fitting cardboard pieces together; we bring you a collection of complex 3D mechanical puzzles, metallic interlocking loops, and high-difficulty wooden brain teasers.\n\nTeams will race against the clock to solve a curated set of puzzles. The challenge tests your spatial reasoning, pattern recognition, and ability to stay calm under pressure. Whether you're a casual solver or a logic puzzle enthusiast, there's a difficulty level for everyone. It's a perfect break from the high-energy tech events, allowing you to focus and problem-solve in a fun, competitive environment.",
-      "schedule": [
-        {
-          "time": "Continuous",
-          "activity": "Walk-in participation throughout the day (10 AM - 4 PM)"
-        },
-        {
-          "time": "Hourly",
-          "activity": "Leaderboard Updates for fastest solve times"
-        }
-      ],
       "rules": [
         "Teams of up to 4 members allowed.",
         "Damaging the puzzle mechanism results in immediate disqualification.",
         "No external tools or internet help allowed.",
         "The timer stops only when the puzzle is fully solved/assembled."
-      ],
-      "teamSize": "3-4 Members",
-      "contact": "recreational-club@iitjammu.ac.in"
+      ]
     },
     {
       "id": 2,
       "title": "The Locked Library",
-      "date": "Feb 14",
+      "date": "7-8 Feb",
       "time": "10:00 AM - 04:00 PM",
       "location": "Lecture Hall Complex",
       "category": "Arts",
       "description": "An immersive literary escape room experience. Groups of 10-12 must solve interconnected riddles based on books, mythology, and logic within 10 minutes to escape.",
       "image": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2690&auto=format&fit=crop",
-      "longDescription": "The Locked Library is not just a room; it's a test of wit, teamwork, and literary knowledge. Transformed into a mysterious archive of forbidden knowledge, the Lecture Hall Complex becomes the setting for high-stakes intellectual drama.\n\nTeams will find themselves locked in a room filled with cryptic manuscripts, hidden ciphers, and mythological artifacts. To escape, you must solve a chain of 6-7 interconnected riddles that draw upon classic literature, logical reasoning, and observational skills. Every solved riddle reveals a part of the key code. But usually, time is the real enemy—you have only 10 minutes to unlock the door or be trapped in the archives forever (figuratively, of course!).",
-      "schedule": [
-        {
-          "time": "10:00 AM",
-          "activity": "Batch 1 Entry"
-        },
-        {
-          "time": "10:20 AM",
-          "activity": "Batch 2 Entry"
-        },
-        {
-          "time": "Continuous",
-          "activity": "New batches every 20 minutes until 4 PM"
-        }
-      ],
+      "longDescription": "The Locked Library is not just a room; it's a test of wit, teamwork, and literary knowledge. Transformed into a mysterious archive of forbidden knowledge, the Lecture Hall Complex becomes the setting for high-stakes intellectual drama.\n\nTeams will find themselves locked in a room filled with cryptic manuscripts, hidden ciphers, and mythological artifacts. To escape, you must solve a chain of 6-7 interconnected riddles that draw upon classic literature, logical reasoning, and observational skills. Every solved riddle reveals a part of the key code. But usually, time is the real enemy\u2014you have only 10 minutes to unlock the door or be trapped in the archives forever (figuratively, of course!).",
       "rules": [
         "Teams must consist of 10-12 members.",
         "No use of mobile phones or internet for solving riddles.",
         "Do not damage any props or books in the room.",
         "Facilitators will provide maximum 2 hints per team if stuck."
-      ],
-      "teamSize": "10-12 Members",
-      "contact": "lit-club@iitjammu.ac.in"
+      ]
     },
     {
       "id": 3,
       "title": "Cupcake Decoration Challenge",
-      "date": "Feb 14",
+      "date": "7-8 Feb",
       "time": "11:00 AM & 02:00 PM",
       "location": "Cafeteria",
       "category": "Arts",
       "description": "Showcase your culinary art skills! Learn whipping and piping techniques from experts and compete to decorate the most creative cupcake. Top 3 winners get exciting rewards.",
       "image": "https://images.unsplash.com/photo-1593187623747-7ea827ad1013?q=80&w=687&auto=format&fit=crop",
       "longDescription": "Unleash your inner pastry chef at the Cupcake Decoration Challenge! Hosted by the Food Club, this event blends culinary skill with artistic expression. It begins with a masterclass where our expert student chefs demonstrate the art of whipping cream to the perfect consistency and using various piping nozzles to create stunning floral and abstract designs.\n\nOnce the demo is done, it's your turn. You will be given a plain cupcake, a piping bag, and an assortment of edible toppings including sprinkles, choco-chips, and fondant shapes. Your task is to transform the blank canvas into a miniature edible masterpiece. Points are awarded for creativity, neatness, and color balance.",
-      "schedule": [
-        {
-          "time": "11:00 AM",
-          "activity": "Morning Batch Start & Demo"
-        },
-        {
-          "time": "11:20 AM",
-          "activity": "Decoration Phase Begins"
-        },
-        {
-          "time": "11:50 AM",
-          "activity": "Judging & Prize Distribution"
-        },
-        {
-          "time": "02:00 PM",
-          "activity": "Afternoon Batch Start & Demo"
-        },
-        {
-          "time": "02:50 PM",
-          "activity": "Judging & Prize Distribution"
-        }
-      ],
       "rules": [
         "All materials will be provided; no outside food items allowed.",
         "Hygiene must be maintained (gloves and caps provided).",
         "Decoration time is strictly limited to 30 minutes.",
         "Judges' decision on creativity and presentation is final."
-      ],
-      "teamSize": "Individual Participation",
-      "contact": "food-club@iitjammu.ac.in"
+      ]
     },
     {
       "id": 5,
       "title": "IITian Interaction",
-      "date": "Feb 14 & 15",
+      "date": "7-8 Feb",
       "time": "01:00 PM - 02:00 PM",
       "location": "Auditorium",
       "category": "General",
       "description": "A candid interactive session with IIT Jammu students. Get first-hand insights into campus life, academic preparation, career prospects, and ask your burning questions.",
       "image": "/images/iitian_interaction.jpg",
-      "longDescription": "Ever wondered what life inside an IIT is really like? Beyond the rigorous academics and competitive exams lies a vibrant world of innovation, culture, and personal growth. 'IITian Interaction' is an open forum designed to bridge the gap between school students and current IITians.\n\nIn this session, senior students from various branches will share their personal journeys—from their JEE preparation days to managing hostel life, projects, and fests. It's a no-filter conversation where you can ask about anything: how to balance studies with hobbies, what different engineering branches actually entail, and the diverse career paths available after graduation. It's not just a talk; it's a mentorship opportunity.",
-      "schedule": [
-        {
-          "time": "01:00 PM",
-          "activity": "Panel Introduction"
-        },
-        {
-          "time": "01:15 PM",
-          "activity": "Journey Sharing (JEE to IIT)"
-        },
-        {
-          "time": "01:30 PM",
-          "activity": "Open Q&A Session"
-        },
-        {
-          "time": "01:55 PM",
-          "activity": "Closing Remarks"
-        }
-      ],
+      "longDescription": "Ever wondered what life inside an IIT is really like? Beyond the rigorous academics and competitive exams lies a vibrant world of innovation, culture, and personal growth. 'IITian Interaction' is an open forum designed to bridge the gap between school students and current IITians.\n\nIn this session, senior students from various branches will share their personal journeys\u2014from their JEE preparation days to managing hostel life, projects, and fests. It's a no-filter conversation where you can ask about anything: how to balance studies with hobbies, what different engineering branches actually entail, and the diverse career paths available after graduation. It's not just a talk; it's a mentorship opportunity.",
       "rules": [
         "Respectful and relevant questioning is expected.",
         "Questions can be submitted anonymously via slips if preferred.",
         "No recording of personal stories without permission.",
         "Mobile phones should be on silent mode."
-      ],
-      "teamSize": "Audience Event",
-      "contact": "outreach@iitjammu.ac.in"
+      ]
     },
     {
       "id": 9,
       "title": "AI Doodle Wizard",
-      "date": "Feb 15",
+      "date": "7-8 Feb",
       "time": "10:00 AM - 03:00 PM",
       "location": "Computer Center",
       "category": "Tech",
       "description": "Can our AI guess what you're drawing? Test our real-time machine learning model trained on the QuickDraw dataset. A fun way to see specific AI applications in action.",
       "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670&auto=format&fit=crop",
       "longDescription": "Step up to the digital canvas and challenge our AI! The AI Doodle Wizard is a machine learning model trained on millions of drawings from the Google QuickDraw dataset. Your task is simple: the system gives you a prompt (e.g., 'Draw a Cat'), and you have 20 seconds to sketch it.\n\nAs you draw, the neural network analyzes your strokes in real-time and guesses what you're making. It's a fascinating and hilarious demonstration of how Neural Networks recognize patterns. Can you draw well enough to convince the AI, or will your 'Bicycle' be mistaken for 'Eyeglasses'? Come find out!",
-      "schedule": [
-        {
-          "time": "10:00 AM",
-          "activity": "Model Training Explanation"
-        },
-        {
-          "time": "10:30 AM",
-          "activity": "Play Sessions Begin"
-        },
-        {
-          "time": "Continuous",
-          "activity": "Leaderboard for 'Most Recognized Doodles'"
-        }
-      ],
       "rules": [
         "20 seconds per drawing round.",
         "Drawings must be family-friendly.",
         "No writing words/letters to cheat the AI.",
         "Highest accuracy score of a session wins a badge."
-      ],
-      "teamSize": "Individual Participation",
-      "contact": "coding-club@iitjammu.ac.in"
+      ]
     },
     {
       "id": 10,
       "title": "Hands-On Tinkering & Technology Workshop",
-      "date": "Feb 14 & 15",
+      "date": "7-8 Feb",
       "time": "10:00 AM - 04:00 PM (Batch Sessions)",
       "location": "Tinkering Lab, IIT Jammu",
       "category": "Tech",
       "description": "An interactive workshop for school students to explore electronics, from street lights to Arduino blinking LEDs.",
       "image": "/images/tinkering_workshop.png",
-      "longDescription": "This workshop introduces school students to the exciting world of tinkering and basic electronics. Through real-life examples and guided hands-on activities, participants will learn how everyday technologies work and will build simple, functional circuits themselves. Beginning with “How does a street light work?”, students will explore LDRs, breadboards, transistors, laser alarms, and end with a basic Arduino activity where they will learn arduino and observe a blinking LED program.\n\nThe workshop aims to spark curiosity in young minds by helping them understand the science behind everyday technology. By exposing them to basic electronic components and hands-on experimentation, the workshop seeks to encourage students to question, explore, and “wonder how things work.\"",
-      "schedule": [
-        {
-          "time": "10 min",
-          "activity": "Introduction + Basic Concepts (Tinkering & Technology)"
-        },
-        {
-          "time": "15 min",
-          "activity": "Hands-On: Street Light Circuit (LDR + BC547 + LED)"
-        },
-        {
-          "time": "5 min",
-          "activity": "Laser Security Alarm Extension"
-        },
-        {
-          "time": "25 min",
-          "activity": "Arduino Basics + LED Blinking"
-        }
-      ],
+      "longDescription": "This workshop introduces school students to the exciting world of tinkering and basic electronics. Through real-life examples and guided hands-on activities, participants will learn how everyday technologies work and will build simple, functional circuits themselves. Beginning with \u201cHow does a street light work?\u201d, students will explore LDRs, breadboards, transistors, laser alarms, and end with a basic Arduino activity where they will learn arduino and observe a blinking LED program.\n\nThe workshop aims to spark curiosity in young minds by helping them understand the science behind everyday technology. By exposing them to basic electronic components and hands-on experimentation, the workshop seeks to encourage students to question, explore, and \u201cwonder how things work.\"",
       "rules": [
         "Specifically for school students visiting IIT Jammu.",
         "Students will work in batches of 50 throughout the event.",
         "Safety instructions must be strictly followed during circuit building.",
         "Team of 8-10 members will guide and assist in hands-on activities."
-      ],
-      "teamSize": "Batches of 50 students",
-      "contact": "ARYAN SINGH"
+      ]
     },
     {
       "id": 11,
       "title": "Opening Plenary: Vision 2030",
-      "date": "Feb 15",
+      "date": "Feb 8",
       "time": "11:00 AM - 11:45 AM",
       "location": "Conference Hall",
       "category": "Conclave",
       "description": "The official commencement of the Manthan Principal Conclave. Featuring keynotes from education leaders and the unveiling of the Pragyaan Education Vision 2030.",
       "image": "/images/manthan/speakers.jpg",
       "longDescription": "The Opening Plenary sets the stage for Manthan 2026. This high-level session brings together policymakers, directors of technical institutes, and school principals to discuss the evolving landscape of Indian education. The session focuses on the 'Foundations for the Future' and highlights the integration of Samagra Shiksha with modern technical aspirations.\n\nKeynote speakers will share insights on the national education roadmap, the importance of vocational training, and how engineering colleges can act as mentors for district schools. The session concludes with the ceremonial lamp lighting and the release of the Manthan Theme Paper.",
-      "schedule": [
-        {
-          "time": "11:00 AM",
-          "activity": "Welcome & Lamp Lighting"
-        },
-        {
-          "time": "11:15 AM",
-          "activity": "Keynote: The Future of Pedagogy"
-        },
-        {
-          "time": "11:40 AM",
-          "activity": "Vision 2030 Roadmap Release"
-        }
-      ],
       "rules": [
         "Exclusively for registered Principals and Educators.",
         "ID badges mandatory.",
         "Prior registration required for physical attendance."
-      ],
-      "teamSize": "Delegates Only",
-      "contact": "conclave@iitjammu.ac.in"
+      ]
     },
     {
       "id": 12,
       "title": "Equity & Infrastructure Summit",
-      "date": "Feb 15",
+      "date": "Feb 8",
       "time": "11:45 AM - 01:45 PM",
       "location": "Conference Hall",
       "category": "Conclave",
       "description": "A deep-dive discussion into bridging the digital divide and modernizing rural school infrastructure. Part of the Manthan Conclave Theme 1.",
       "image": "/images/manthan/infra.png",
       "longDescription": "Theme 1 of Manthan addresses the critical bottleneck of infrastructure and access. How can we ensure that a student in a remote village has the same digital opportunities as a student in a metro? This summit discusses the 'PM SHRI' school model, the deployment of high-speed internet in border areas, and the creation of shared lab facilities.\n\nPanelists will discuss actionable strategies for resource sharing between higher technical institutes and secondary schools. The goal is to create a 'Foundations' document that outlines minimal viable infrastructure for 21st-century learning.",
-      "schedule": [
-        {
-          "time": "11:45 AM",
-          "activity": "Panel Discussion: The Infrastructure Gap"
-        },
-        {
-          "time": "12:45 PM",
-          "activity": "Case Studies: Successful Rural Digitalization"
-        },
-        {
-          "time": "01:15 PM",
-          "activity": "Open Forum for Principals"
-        }
-      ],
       "rules": [
         "Part of the full-day Conclave pass.",
         "Q&A session included."
-      ],
-      "teamSize": "Panel Event",
-      "contact": "conclave@iitjammu.ac.in"
+      ]
     },
     {
       "id": 13,
       "title": "Innovation & STEM Showcase",
-      "date": "Feb 15",
+      "date": "Feb 8",
       "time": "02:30 PM - 03:15 PM",
       "location": "Conference Hall",
       "category": "Conclave",
       "description": "Demonstrating the future of classroom learning through AI, Robotics, and VR. Part of the Manthan Conclave Theme 2.",
       "image": "/images/manthan/stem.png",
       "longDescription": "Theme 2 of Manthan focuses on the 'What' and 'How' of teaching. This session is a live showcase of educational technologies that are ready for adoption in schools. From low-cost robotics kits to VR modules for science labs, educators will see firsthand how tech can enhance retention and interest.\n\nWe will also discuss teacher upskilling programs and how to integrate Tinkering Labs (ATLs) more effectively into the weekly school schedule.",
-      "schedule": [
-        {
-          "time": "02:30 PM",
-          "activity": "Live EdTech Demos"
-        },
-        {
-          "time": "02:50 PM",
-          "activity": "Teacher Training Roadmap Announcement"
-        },
-        {
-          "time": "03:00 PM",
-          "activity": "Best Practices from Top Schools"
-        }
-      ],
       "rules": [
         "Interactive session for educators.",
         "Demo kits available for inspection."
-      ],
-      "teamSize": "Showcase Event",
-      "contact": "conclave@iitjammu.ac.in"
+      ]
     },
     {
       "id": 14,
       "title": "Charter of Resolution Signing",
-      "date": "Feb 15",
+      "date": "Feb 8",
       "time": "03:15 PM - 04:00 PM",
       "location": "Conference Hall",
       "category": "Conclave",
       "description": "The closing session of Manthan where all participating leaders sign a collective resolution for the year 2026.",
       "image": "/images/manthan/students.png",
       "longDescription": "The culmination of Manthan 2026. Throughout the day, discussions are synthesized into a single 'Charter of Resolution'. This document outlines the commitments made by IIT Jammu and the participating schools for mentorship, resource sharing, and joint events over the next year.\n\nThe signing ceremony is followed by the valedictory address and the presentation of tokens of appreciation to the key contributors of the conclave.",
-      "schedule": [
-        {
-          "time": "03:15 PM",
-          "activity": "Synthesis of Resolution Points"
-        },
-        {
-          "time": "03:40 PM",
-          "activity": "Signing Ceremony"
-        },
-        {
-          "time": "03:55 PM",
-          "activity": "Valedictory Address"
-        }
-      ],
       "rules": [
         "Formal closing ceremony.",
         "Press/Media invited."
-      ],
-      "teamSize": "Ceremonial",
-      "contact": "conclave@iitjammu.ac.in"
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Bracelet Mania",
+      "date": "7-8 Feb",
+      "time": "Continuous (20 min sessions)",
+      "location": "Pushkar, 4th floor",
+      "category": "Arts",
+      "description": "Design your own colorful bracelet and survive a fun wheel-based elimination game to win exciting prizes.",
+      "image": "/images/events/bracelet-mania.png",
+      "longDescription": "Bracelet Mania is a lively and interactive event that blends creativity with fun competition. Participants will be provided with ziplock packets containing colorful beads, strings, and charms. Using these materials, students will design and create their own unique bracelets within a limited time.\n\nOnce the bracelet-making session is complete, the excitement continues with a wheel-based elimination game. Each participant will take turns spinning a wheel that stops at a random color. If the spun color appears in the participant\u2019s bracelet, they will be eliminated from the game. The rounds continue until only one participant remains, who will be declared the winner.",
+      "rules": [
+        "Open to registered Pragyaan participants only.",
+        "Only provided materials must be used.",
+        "Exchanging materials is not allowed.",
+        "Bracelet making must be completed within the allotted time.",
+        "Decision of the organizers will be final."
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Documentary Screening",
+      "date": "7-8 Feb",
+      "time": "09:00 AM - 04:00 PM",
+      "location": "LHC 2022",
+      "category": "General",
+      "description": "Explore real stories and powerful ideas through engaging documentary screenings that inspire curiosity, awareness, and learning.",
+      "image": "/images/events/documentary-screening.png",
+      "longDescription": "The Documentary event is an engaging and informative screening experience designed to introduce students to the real world beyond textbooks through visual storytelling. The event features a curated selection of short documentaries covering themes such as science, technology, environment, innovation, and inspiring human stories.\n\nThe documentaries are chosen to be age-appropriate, visually appealing, and easy to understand, allowing students to grasp important concepts while enjoying an immersive viewing experience. The focus is on awareness, curiosity, and real-world learning rather than passive watching.",
+      "rules": [
+        "No nuisance or disturbance allowed during screening.",
+        "Students requested to remain seated calmly.",
+        "Mobile phones should be on silent mode.",
+        "Dispose of waste in dustbins provided."
+      ]
     }
   ],
   "demos": [
     {
       "id": 1,
       "title": "Immersive Bharat Dome",
-      "description": "A breathtaking 360° projection dome offering virtual walkthroughs of India's space missions (Chandrayaan & Gaganyaan) and heritage sites. Experience history and future in surround sound.",
+      "description": "A breathtaking 360\u00b0 projection dome offering virtual walkthroughs of India's space missions (Chandrayaan & Gaganyaan) and heritage sites. Experience history and future in surround sound.",
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Bharat_Mandapam_Pragati_Maidan.jpg/1280px-Bharat_Mandapam_Pragati_Maidan.jpg",
       "link": "/demos/bharat-dome",
       "tags": [
@@ -512,6 +291,176 @@
         "STEAM",
         "Education"
       ]
+    }
+  ],
+  "stalls": [
+    {
+      "id": 1,
+      "title": "Robotic Arm",
+      "organizer": "Hriday Rana - Robosapiens",
+      "description": "Experience precision engineering in motion with our high-torque robotic arm, demonstrating advanced kinematics and industrial automation solutions.",
+      "image": "/images/stalls/2.png",
+      "category": "Technology"
+    },
+    {
+      "id": 2,
+      "title": "Robohand ( BASIC ) under robotics Club",
+      "organizer": "Hriday rana ( coordinator robotics club )",
+      "description": "A biomechanical masterpiece mimicking human dexterity through precision servo-control and tendon-based articulation.",
+      "image": "/images/stalls/3.jpg",
+      "category": "Technology"
+    },
+    {
+      "id": 3,
+      "title": "Drone stall",
+      "organizer": "Drone team",
+      "description": "A comprehensive showcase of aerial robotics, from high-speed FPV racing drones to professional VTOL mapping platforms. witness live flight dynamics in action.",
+      "image": "/images/stalls/13.png",
+      "category": "Technology"
+    },
+    {
+      "id": 4,
+      "title": "Machenics and Motions -ATL",
+      "organizer": "ATL ",
+      "description": "Showcasing and teaching laws of COM, angular and linear momentum and there conservation.",
+      "image": "/images/stalls/14.png",
+      "category": "Innovation"
+    },
+    {
+      "id": 5,
+      "title": "Loop wire game-ATL",
+      "organizer": "ATL",
+      "description": "Based on conductions",
+      "image": "/images/stalls/16.png",
+      "category": "Innovation"
+    },
+    {
+      "id": 6,
+      "title": "Power generation -ATL",
+      "organizer": "ATL",
+      "description": "Types/ways to generate electricity.",
+      "image": "/images/stalls/19.png",
+      "category": "Innovation"
+    },
+    {
+      "id": 7,
+      "title": "Optics -Atl",
+      "organizer": "ATL",
+      "description": "Teach students about light and their phenomenons",
+      "image": "/images/stalls/21.png",
+      "category": "Innovation"
+    },
+    {
+      "id": 8,
+      "title": "Thermodynamics -ATL",
+      "organizer": "ATL",
+      "description": "Explaining laws of thermodynamics",
+      "image": "/images/stalls/22.png",
+      "category": "Innovation"
+    },
+    {
+      "id": 9,
+      "title": "Astronomy -ATL",
+      "organizer": "ATL ",
+      "description": "Make aware student about motion of plants and solar,lunar eclipse",
+      "image": "/images/stalls/23.png",
+      "category": "Innovation"
+    },
+    {
+      "id": 10,
+      "title": "Electricity -ATL",
+      "organizer": "ATL",
+      "description": "Wireless transportation of electricity, and creation of plasma",
+      "image": "/images/stalls/24.png",
+      "category": "Innovation"
+    },
+    {
+      "id": 11,
+      "title": "Magnetism -ATL",
+      "organizer": "ATL",
+      "description": "Explaining properties of magnets",
+      "image": "/images/stalls/25.png",
+      "category": "Innovation"
+    },
+    {
+      "id": 12,
+      "title": "AUTONOMOUS BOT ",
+      "organizer": "Riyaz khan - ATL",
+      "description": "Discover the algorithms behind self-navigating robotics. Our Inter-IIT project showcase explores real-time path planning and object avoidance.",
+      "image": "/images/stalls/26.png",
+      "category": "Innovation"
+    },
+    {
+      "id": 13,
+      "title": "VR Experience Zone",
+      "organizer": "Tanmay Sharma Club-AR/VR",
+      "description": "Step into the future of immersive learning. Explore cosmic landscapes, anatomical wonders, and high-octane simulations through state-of-the-art virtual reality.",
+      "image": "/images/stalls/27.jpg",
+      "category": "Technology"
+    },
+    {
+      "id": 14,
+      "title": "AR Builder Game",
+      "organizer": "Coding Club ",
+      "description": "Architect the virtual world with your hands. An interactive Augmented Reality experience where gestures become tools for digital construction.",
+      "image": "/images/stalls/28.jpg",
+      "category": "Technology"
+    },
+    {
+      "id": 15,
+      "title": "Hexapod (Robotics)",
+      "organizer": "Hriday Rana / Robosapiens",
+      "description": "Display of hexapod robot",
+      "image": "/images/stalls/29.png",
+      "category": "Technology"
+    },
+    {
+      "id": 16,
+      "title": "Octopus Arm",
+      "organizer": "Robosapiens",
+      "description": "Robotic Octopus Arm",
+      "image": "/images/stalls/30.jpg",
+      "category": "Technology"
+    },
+    {
+      "id": 17,
+      "title": "Doodle Classifier",
+      "organizer": "Soham and Coding Club",
+      "description": "Where art meets AI. Watch as our neural network identifies your hand-drawn creations in real-time, showcasing the power of computer vision.",
+      "image": "/images/stalls/31.png",
+      "category": "Technology"
+    },
+    {
+      "id": 18,
+      "title": "ROBOTIC HAND",
+      "organizer": "Robotics Club",
+      "description": "Control robotics with your own gestures. Witness OpenCV-powered real-time tracking translating human hand motions into mechanical movement.",
+      "image": "/images/stalls/32.png",
+      "category": "Technology"
+    },
+    {
+      "id": 19,
+      "title": "Battlebots ",
+      "organizer": "Robosepians ",
+      "description": "Witness the raw power of mechanical combat. indestructible metal titans designed for extreme durability and kinetic impact face off in a masterclass of engineering.",
+      "image": "/images/stalls/33.jpg",
+      "category": "Technology"
+    },
+    {
+      "id": 20,
+      "title": "Voice-Controlled SimulBot: Offline 3D Car Simulation",
+      "organizer": "Coding club ",
+      "description": "A browser-based interactive 3D car simulation controlled entirely by voice commands. The demo uses offline speech recognition and real-time 3D graphic...",
+      "image": "/images/stalls/34.png",
+      "category": "Technology"
+    },
+    {
+      "id": 21,
+      "title": "Line follower robot ",
+      "organizer": "Hriday Rana / Robosapiens",
+      "description": "A line-following robot is an autonomous, mobile machine designed to detect and trace a predefined, high-contrast line on a surface. Using IR or light ...",
+      "image": "/images/stalls/35.jpg",
+      "category": "Technology"
     }
   ]
 }

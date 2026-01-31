@@ -9,7 +9,7 @@ const MENU_ITEMS = [
     { label: 'Zones', href: '/zones' },
     { label: 'Vision 2026', href: '/vision' },
     { label: 'Manthan', href: '/manthan', special: true },
-    { label: 'Schedule', href: '/schedule' },
+    { label: 'Stalls', href: '/stalls' },
     { label: 'Events', href: '/events' },
     { label: 'Team', href: '/team' },
 ];

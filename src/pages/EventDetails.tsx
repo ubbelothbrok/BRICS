@@ -12,16 +12,9 @@ import {
     MapPinIcon,
     ClockIcon,
     ArrowLeftIcon,
-    UserGroupIcon,
     ExclamationTriangleIcon,
-    EnvelopeIcon,
     CameraIcon
 } from '@heroicons/react/24/outline';
-
-interface ScheduleItem {
-    time: string;
-    activity: string;
-}
 
 interface EventItem {
     id: number;
@@ -33,10 +26,7 @@ interface EventItem {
     description: string;
     image: string;
     longDescription?: string;
-    schedule?: ScheduleItem[];
     rules?: string[];
-    teamSize?: string;
-    contact?: string;
 }
 
 export default function EventDetails() {
@@ -155,25 +145,7 @@ export default function EventDetails() {
                         </div>
                     </section>
 
-                    {event.schedule && (
-                        <section>
-                            <h2 className="text-3xl font-bold text-[var(--color-text)] mb-6 transition-colors duration-300">Event Schedule</h2>
-                            <div className="bg-[var(--color-card-bg)] rounded-2xl p-8 border border-[var(--color-text)]/10 transition-colors duration-300">
-                                <div className="space-y-6">
-                                    {event.schedule.map((slot, index) => (
-                                        <div key={index} className="flex gap-6 pb-6 border-b border-[var(--color-text)]/10 last:border-0 last:pb-0 transition-colors duration-300">
-                                            <div className="w-24 flex-shrink-0 font-bold text-brics-blue">
-                                                {slot.time}
-                                            </div>
-                                            <div className="text-[var(--color-text)] font-medium opacity-90 transition-colors duration-300">
-                                                {slot.activity}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </section>
-                    )}
+
                 </div>
 
                 {/* Right Column: Rules & Info */}
@@ -196,23 +168,7 @@ export default function EventDetails() {
                             </ul>
                         )}
 
-                        <div className="pt-6 border-t border-[var(--color-text)]/10 space-y-4 transition-colors duration-300">
-                            <div className="flex items-center gap-3">
-                                <UserGroupIcon className="w-5 h-5 opacity-40" />
-                                <div>
-                                    <p className="text-xs text-[var(--color-text)] opacity-60 uppercase font-bold transition-colors duration-300">Team Size</p>
-                                    <p className="font-medium text-[var(--color-text)] transition-colors duration-300">{event.teamSize || 'N/A'}</p>
-                                </div>
-                            </div>
 
-                            <div className="flex items-center gap-3">
-                                <EnvelopeIcon className="w-5 h-5 opacity-40" />
-                                <div>
-                                    <p className="text-xs text-[var(--color-text)] opacity-60 uppercase font-bold transition-colors duration-300">Contact</p>
-                                    <p className="font-medium text-[var(--color-text)] transition-colors duration-300">{event.contact || 'N/A'}</p>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>

@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import AllEvents from './pages/AllEvents';
 import Zones from './pages/Zones';
 import Vision from './pages/Vision';
-import Schedule from './pages/Schedule';
+import Stalls from './pages/Stalls';
 import Team from './pages/Team';
 import EventDetails from './pages/EventDetails';
 import Loading from './components/Loading';
@@ -54,7 +54,7 @@ function App() {
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/zones" element={<Zones />} />
           <Route path="/vision" element={<Vision />} />
-          <Route path="/schedule" element={<Schedule />} />
+          <Route path="/stalls" element={<Stalls />} />
           <Route path="/team" element={<Team />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
