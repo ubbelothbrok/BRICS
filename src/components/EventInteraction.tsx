@@ -21,7 +21,7 @@ export default function EventInteraction({ eventId, onCommentSubmit }: EventInte
     const [isSubmitted, setIsSubmitted] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+    const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
     const MAX_COMMENT_LENGTH = 500;
 
     useEffect(() => {
@@ -43,7 +43,7 @@ export default function EventInteraction({ eventId, onCommentSubmit }: EventInte
         }
 
         if (file.size > MAX_FILE_SIZE) {
-            alert('Image size must be less than 5MB');
+            alert('Image size must be less than 15MB');
             return;
         }
 
