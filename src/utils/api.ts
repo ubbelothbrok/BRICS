@@ -1,4 +1,4 @@
-export const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:8000';
+export const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'https://pragyaan.navrobotec.com';
 const API_BASE_URL = import.meta.env.VITE_API_URL || `${SERVER_URL}/api`;
 export const GOOGLE_LOGIN_URL = `${SERVER_URL}/auth/login/google-oauth2/`;
 
