@@ -3,10 +3,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import stallsData from '../data/db.json';
 import {
-    BeakerIcon,
     CpuChipIcon,
     RocketLaunchIcon,
-    GlobeAltIcon,
     MagnifyingGlassIcon,
     UserGroupIcon
 } from '@heroicons/react/24/outline';
@@ -74,8 +72,8 @@ export default function Stalls() {
                                     key={cat}
                                     onClick={() => setActiveCategory(cat)}
                                     className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${activeCategory === cat
-                                            ? 'bg-brics-blue text-white shadow-lg shadow-brics-blue/20 scale-105'
-                                            : 'bg-[var(--color-card-bg)] text-[var(--color-text)] opacity-70 hover:opacity-100 hover:bg-gray-100'
+                                        ? 'bg-brics-blue text-white shadow-lg shadow-brics-blue/20 scale-105'
+                                        : 'bg-[var(--color-card-bg)] text-[var(--color-text)] opacity-70 hover:opacity-100 hover:bg-gray-100'
                                         }`}
                                 >
                                     {cat}

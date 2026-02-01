@@ -8,7 +8,6 @@ import {
     WrenchScrewdriverIcon,
     PaintBrushIcon,
     MegaphoneIcon,
-    ChatBubbleLeftRightIcon,
     CodeBracketIcon,
     ChevronDownIcon,
     UserGroupIcon
