@@ -19,6 +19,7 @@ export default function EventInteraction({ eventId, onCommentSubmit }: EventInte
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [comment, setComment] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
@@ -67,9 +68,11 @@ export default function EventInteraction({ eventId, onCommentSubmit }: EventInte
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!comment.trim() && !selectedImage) {
+        if ((!comment.trim() && !selectedImage) || isSubmitting) {
             return;
         }
+
+        setIsSubmitting(true);
 
         try {
             const formData = new FormData();
@@ -99,6 +102,8 @@ export default function EventInteraction({ eventId, onCommentSubmit }: EventInte
         } catch (error) {
             console.error('Failed to submit comment:', error);
             alert('Failed to submit comment. Please try again.');
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -237,10 +242,14 @@ export default function EventInteraction({ eventId, onCommentSubmit }: EventInte
                                 </span>
                                 <button
                                     type="submit"
-                                    disabled={(!comment.trim() && !selectedImage) || isSubmitted}
+                                    disabled={(!comment.trim() && !selectedImage) || isSubmitted || isSubmitting}
                                     className="px-4 py-1.5 bg-brics-blue hover:bg-blue-700 text-white text-xs font-bold rounded-full shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-1.5"
                                 >
-                                    {isSubmitted ? (
+                                    {isSubmitting ? (
+                                        <>
+                                            Posting... <div className="animate-spin h-3 w-3 border-2 border-white rounded-full border-t-transparent"></div>
+                                        </>
+                                    ) : isSubmitted ? (
                                         'Posted!'
                                     ) : (
                                         <>
