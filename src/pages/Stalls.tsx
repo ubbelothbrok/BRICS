@@ -101,7 +101,7 @@ export default function Stalls() {
                         </div>
                     ) : filteredStalls.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {filteredStalls.map((stall) => (
+                            {filteredStalls.map((stall, index) => (
                                 <Link
                                     to={`/stalls/${stall.id}`}
                                     key={stall.id}
@@ -113,6 +113,7 @@ export default function Stalls() {
                                             src={stall.image}
                                             alt={stall.title}
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            loading={index < 6 ? 'eager' : 'lazy'}
                                             onError={(e) => {
                                                 (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1470&auto=format&fit=crop';
                                             }}

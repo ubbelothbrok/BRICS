@@ -218,6 +218,7 @@ export default function EventComments({ eventId, comments: externalComments, onR
                                                 src={comment.user_avatar}
                                                 alt={comment.user_name}
                                                 className="w-full h-full object-cover"
+                                                loading="lazy"
                                             />
                                         ) : (
                                             <UserCircleIcon className="w-5 h-5 text-indigo-500" />
@@ -240,6 +241,7 @@ export default function EventComments({ eventId, comments: externalComments, onR
                                                     src={comment.image.startsWith('http') ? comment.image : `${SERVER_URL}${comment.image}`}
                                                     alt="Attached"
                                                     className="w-full aspect-[4/5] sm:aspect-video object-cover hover:scale-[1.02] transition-transform duration-500"
+                                                    loading="lazy"
                                                 />
                                             </div>
                                         )}

@@ -230,6 +230,7 @@ export default function Team() {
                                                 src={member.image}
                                                 alt={member.name}
                                                 className="w-full h-full object-cover"
+                                                loading={idx < 12 ? 'eager' : 'lazy'}
                                                 onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                                                     (e.target as HTMLImageElement).src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${member.name}`;
                                                 }}
