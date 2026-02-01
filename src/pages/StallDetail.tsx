@@ -9,7 +9,6 @@ import stallsData from '../data/db.json';
 import { fetchApi } from '../utils/api';
 import {
     ArrowLeftIcon,
-    ExclamationTriangleIcon,
     CameraIcon,
     UserGroupIcon,
     CpuChipIcon
