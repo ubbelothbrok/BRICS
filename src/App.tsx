@@ -24,6 +24,7 @@ import LivePolling from './pages/LivePolling';
 import CustomCursor from './components/CustomCursor';
 import ManthanRegistration from './pages/ManthanRegistration';
 import AdminAbstracts from './pages/AdminAbstracts';
+import StallDetail from './pages/StallDetail';
 
 import { Toaster } from 'react-hot-toast';
 
@@ -55,6 +56,7 @@ function App() {
           <Route path="/zones" element={<Zones />} />
           <Route path="/vision" element={<Vision />} />
           <Route path="/stalls" element={<Stalls />} />
+          <Route path="/stalls/:id" element={<StallDetail />} />
           <Route path="/team" element={<Team />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />

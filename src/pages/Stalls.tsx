@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import stallsData from '../data/db.json';
@@ -101,9 +102,10 @@ export default function Stalls() {
                     ) : filteredStalls.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {filteredStalls.map((stall) => (
-                                <div
+                                <Link
+                                    to={`/stalls/${stall.id}`}
                                     key={stall.id}
-                                    className="group relative bg-[var(--color-card-bg)] rounded-[2rem] overflow-hidden border border-gray-100/50 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
+                                    className="group relative bg-[var(--color-card-bg)] rounded-[2rem] overflow-hidden border border-gray-100/50 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 block"
                                 >
                                     {/* Image Container */}
                                     <div className="h-64 relative overflow-hidden">
@@ -148,7 +150,7 @@ export default function Stalls() {
 
                                     {/* Hover Action Overlay */}
                                     <div className="absolute inset-0 bg-brics-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     ) : (
