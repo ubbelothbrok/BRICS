@@ -159,10 +159,10 @@ export default function Manthan() {
 
                     {/* MOBILE TIMELINE - Vertical Left-Aligned */}
                     <div className="md:hidden space-y-8">
-                        {/* Item 1 */}
+                        {/* 10:00 AM */}
                         <div className="relative pl-12">
                             <div className="absolute left-5 top-0 bottom-0 w-0.5 h-[calc(100%+2rem)] bg-gray-300"></div>
-                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-brics-blue text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">11:00</div>
+                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-brics-blue text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">10:00</div>
                             <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
                                 <h4 className="text-xl font-bold text-gray-900 mb-2">Opening Plenary</h4>
                                 <p className="text-gray-600 text-sm mb-3">Vision setting: Framing the 'Why'. High-impact talks by IIT Jammu Leadership & Ministry Officials.</p>
@@ -170,21 +170,32 @@ export default function Manthan() {
                             </div>
                         </div>
 
-                        {/* Item 2 */}
+                        {/* 11:00 AM */}
                         <div className="relative pl-12">
                             <div className="absolute left-5 top-0 bottom-0 w-0.5 h-[calc(100%+2rem)] bg-gray-300"></div>
-                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-brics-orange text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">11:45</div>
+                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">11:00</div>
                             <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
-                                <h4 className="text-xl font-bold text-gray-900 mb-2">Envisioning Schools of 2030</h4>
-                                <p className="text-gray-600 text-sm mb-3">A comprehensive 2-hour working session with Principals and Policymakers to draft the roadmap.</p>
-                                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">Discussion</span>
+                                <h4 className="text-xl font-bold text-gray-900 mb-2">Introduction to I2EDC</h4>
+                                <p className="text-gray-600 text-sm mb-3">Unveiling the Innovation, Incubation, and Entrepreneurship Development Center.</p>
+                                <span className="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium">Keynote</span>
                             </div>
                         </div>
 
-                        {/* Item 3 */}
+                        {/* 12:00 PM */}
                         <div className="relative pl-12">
                             <div className="absolute left-5 top-0 bottom-0 w-0.5 h-[calc(100%+2rem)] bg-gray-300"></div>
-                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-gray-400 text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">13:45</div>
+                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-brics-orange text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">12:00</div>
+                            <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
+                                <h4 className="text-xl font-bold text-gray-900 mb-2">Discussion 1: Infrastructure & Equity</h4>
+                                <p className="text-gray-600 text-sm mb-3">Bridging the gap in physical and digital infrastructure for inclusive education.</p>
+                                <span className="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs font-medium">Roundtable</span>
+                            </div>
+                        </div>
+
+                        {/* 1:00 PM */}
+                        <div className="relative pl-12">
+                            <div className="absolute left-5 top-0 bottom-0 w-0.5 h-[calc(100%+2rem)] bg-gray-300"></div>
+                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-gray-400 text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">13:00</div>
                             <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
                                 <h4 className="text-xl font-bold text-gray-900 mb-2">Lunch Break</h4>
                                 <p className="text-gray-600 text-sm mb-3">Networking lunch for stakeholders to connect informally.</p>
@@ -192,20 +203,31 @@ export default function Manthan() {
                             </div>
                         </div>
 
-                        {/* Item 4 */}
+                        {/* 2:00 PM */}
                         <div className="relative pl-12">
                             <div className="absolute left-5 top-0 bottom-0 w-0.5 h-[calc(100%+2rem)] bg-gray-300"></div>
-                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-brics-green text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">14:30</div>
+                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-brics-green text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">14:00</div>
                             <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
-                                <h4 className="text-xl font-bold text-gray-900 mb-2">Innovation Showcase</h4>
-                                <p className="text-gray-600 text-sm mb-3">45 minutes of spotlighting cutting-edge ed-tech and pedagogical innovations.</p>
-                                <span className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Showcase</span>
+                                <h4 className="text-xl font-bold text-gray-900 mb-2">Discussion 2: Future Skills & NEP 22</h4>
+                                <p className="text-gray-600 text-sm mb-3">Integrating AI, Robotics, and critical thinking into the curriculum.</p>
+                                <span className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Workshop</span>
                             </div>
                         </div>
 
-                        {/* Item 5 */}
+                        {/* 3:30 PM - Innovation */}
                         <div className="relative pl-12">
-                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-brics-blue text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">15:15</div>
+                            <div className="absolute left-5 top-0 bottom-0 w-0.5 h-[calc(100%+2rem)] bg-gray-300"></div>
+                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">15:30</div>
+                            <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
+                                <h4 className="text-xl font-bold text-gray-900 mb-2">Innovation Showcase</h4>
+                                <p className="text-gray-600 text-sm mb-3">Spotlighting cutting-edge ed-tech and pedagogical innovations.</p>
+                                <span className="inline-block px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-xs font-medium">Showcase</span>
+                            </div>
+                        </div>
+
+                        {/* 3:30 PM - Conclusion */}
+                        <div className="relative pl-12">
+                            <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-brics-blue text-white flex items-center justify-center font-bold text-xs shadow-lg z-10">15:30</div>
                             <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
                                 <h4 className="text-xl font-bold text-gray-900 mb-2">Conclusion</h4>
                                 <p className="text-gray-600 text-sm mb-3">Release of the "Pragyaan Charter". Commitment statements and next-year roadmap.</p>
@@ -216,65 +238,89 @@ export default function Manthan() {
 
                     {/* DESKTOP TIMELINE - Alternating Layout */}
                     <div className="hidden md:block relative">
-                        {/* Connector Line - Trimmed to align with circles */}
+                        {/* Connector Line */}
                         <div className="absolute left-1/2 transform -translate-x-1/2 top-10 bottom-10 w-1 bg-gray-200"></div>
 
                         <div className="space-y-12">
-                            {/* Item 1 */}
+                            {/* 10:00 AM */}
                             <div className="flex flex-col md:flex-row items-center justify-between group">
                                 <div className="md:w-5/12 text-right pr-8">
                                     <h4 className="text-2xl font-bold text-gray-900 group-hover:text-brics-blue transition-colors">Opening Plenary</h4>
                                     <p className="text-gray-600 mt-2">Vision setting: Framing the 'Why'. High-impact talks by IIT Jammu Leadership & Ministry Officials.</p>
                                 </div>
-                                <div className="w-12 h-12 rounded-full bg-brics-blue text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">11:00</div>
+                                <div className="w-12 h-12 rounded-full bg-brics-blue text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">10:00</div>
                                 <div className="md:w-5/12 pl-8">
                                     <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Vision Setting</span>
                                 </div>
                             </div>
 
-                            {/* Item 2 */}
+                            {/* 11:00 AM */}
                             <div className="flex flex-col md:flex-row items-center justify-between group">
                                 <div className="md:w-5/12 text-right pr-8">
-                                    <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Discussion</span>
+                                    <span className="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">Keynote</span>
                                 </div>
-                                <div className="w-12 h-12 rounded-full bg-brics-orange text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">11:45</div>
+                                <div className="w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">11:00</div>
                                 <div className="md:w-5/12 pl-8">
-                                    <h4 className="text-2xl font-bold text-gray-900 group-hover:text-brics-orange transition-colors">Envisioning Schools of 2030</h4>
-                                    <p className="text-gray-600 mt-2">A comprehensive 2-hour working session with Principals and Policymakers to draft the roadmap.</p>
+                                    <h4 className="text-2xl font-bold text-gray-900 group-hover:text-purple-600 transition-colors">Introduction to I2EDC</h4>
+                                    <p className="text-gray-600 mt-2">Unveiling the Innovation, Incubation, and Entrepreneurship Development Center.</p>
                                 </div>
                             </div>
 
-                            {/* Item 3 */}
+                            {/* 12:00 PM */}
                             <div className="flex flex-col md:flex-row items-center justify-between group">
                                 <div className="md:w-5/12 text-right pr-8">
+                                    <h4 className="text-2xl font-bold text-gray-900 group-hover:text-brics-orange transition-colors">Discussion 1: Infrastructure & Equity</h4>
+                                    <p className="text-gray-600 mt-2">Bridging the gap in physical and digital infrastructure for inclusive education.</p>
+                                </div>
+                                <div className="w-12 h-12 rounded-full bg-brics-orange text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">12:00</div>
+                                <div className="md:w-5/12 pl-8">
+                                    <span className="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">Roundtable</span>
+                                </div>
+                            </div>
+
+                            {/* 1:00 PM */}
+                            <div className="flex flex-col md:flex-row items-center justify-between group">
+                                <div className="md:w-5/12 text-right pr-8">
+                                    <span className="inline-block px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-medium">Networking</span>
+                                </div>
+                                <div className="w-12 h-12 rounded-full bg-gray-400 text-white flex items-center justify-center font-bold z-10 shadow-lg">13:00</div>
+                                <div className="md:w-5/12 pl-8">
                                     <h4 className="text-2xl font-bold text-gray-900 group-hover:text-gray-700 transition-colors">Lunch Break</h4>
                                     <p className="text-gray-600 mt-2">Networking lunch for stakeholders to connect informally.</p>
                                 </div>
-                                <div className="w-12 h-12 rounded-full bg-gray-400 text-white flex items-center justify-center font-bold z-10 shadow-lg">13:45</div>
-                                <div className="md:w-5/12 pl-8">
-                                    <span className="inline-block px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-medium">Networking</span>
-                                </div>
                             </div>
 
-                            {/* Item 4 */}
+                            {/* 2:00 PM */}
                             <div className="flex flex-col md:flex-row items-center justify-between group">
                                 <div className="md:w-5/12 text-right pr-8">
-                                    <span className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Showcase</span>
+                                    <h4 className="text-2xl font-bold text-gray-900 group-hover:text-brics-green transition-colors">Discussion 2: Future Skills & NEP 22</h4>
+                                    <p className="text-gray-600 mt-2">Integrating AI, Robotics, and critical thinking into the curriculum.</p>
                                 </div>
-                                <div className="w-12 h-12 rounded-full bg-brics-green text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">14:30</div>
+                                <div className="w-12 h-12 rounded-full bg-brics-green text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">14:00</div>
                                 <div className="md:w-5/12 pl-8">
-                                    <h4 className="text-2xl font-bold text-gray-900 group-hover:text-brics-green transition-colors">Innovation Showcase</h4>
-                                    <p className="text-gray-600 mt-2">45 minutes of spotlighting cutting-edge ed-tech and pedagogical innovations.</p>
+                                    <span className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Workshop</span>
                                 </div>
                             </div>
 
-                            {/* Item 5 */}
+                            {/* 3:30 PM - Innovation */}
+                            <div className="flex flex-col md:flex-row items-center justify-between group">
+                                <div className="md:w-5/12 text-right pr-8">
+                                    <span className="inline-block px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-sm font-medium">Showcase</span>
+                                </div>
+                                <div className="w-12 h-12 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">15:30</div>
+                                <div className="md:w-5/12 pl-8">
+                                    <h4 className="text-2xl font-bold text-gray-900 group-hover:text-teal-600 transition-colors">Innovation Showcase</h4>
+                                    <p className="text-gray-600 mt-2">Spotlighting cutting-edge ed-tech and pedagogical innovations.</p>
+                                </div>
+                            </div>
+
+                            {/* 3:30 PM - Conclusion */}
                             <div className="flex flex-col md:flex-row items-center justify-between group">
                                 <div className="md:w-5/12 text-right pr-8">
                                     <h4 className="text-2xl font-bold text-gray-900 group-hover:text-brics-blue transition-colors">Conclusion</h4>
                                     <p className="text-gray-600 mt-2">Release of the "Pragyaan Charter". Commitment statements and next-year roadmap.</p>
                                 </div>
-                                <div className="w-12 h-12 rounded-full bg-brics-blue text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">15:15</div>
+                                <div className="w-12 h-12 rounded-full bg-brics-blue text-white flex items-center justify-center font-bold z-10 shadow-lg group-hover:scale-125 transition-transform duration-300">15:30</div>
                                 <div className="md:w-5/12 pl-8">
                                     <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Charter Release</span>
                                 </div>
