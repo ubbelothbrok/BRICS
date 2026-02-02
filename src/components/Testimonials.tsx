@@ -121,7 +121,7 @@ export default function Testimonials() {
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-[var(--color-text)] transition-colors duration-300">{review.name}</h4>
-                                    <p className="text-sm text-brics-blue font-medium">{review.role}</p>
+
                                 </div>
                             </div>
                         </div>
