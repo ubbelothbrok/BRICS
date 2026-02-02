@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { ArrowLeftIcon, CpuChipIcon, AcademicCapIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, CpuChipIcon, AcademicCapIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 
 export default function NavRobotec() {
     return (
@@ -20,7 +20,7 @@ export default function NavRobotec() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
 
-                <div className="relative z-20 max-w-[1400px] mx-auto px-6 lg:px-12 w-full h-full flex items-center pt-20">
+                <div className="relative z-20 max-w-[1400px] mx-auto px-6 lg:px-12 w-full h-full flex items-center justify-between pt-20">
                     <div className="max-w-4xl">
                         <Link to="/" className="text-white/80 hover:text-white font-medium flex items-center gap-2 mb-8 w-fit transition-colors">
                             <ArrowLeftIcon className="w-5 h-5" />
@@ -38,6 +38,32 @@ export default function NavRobotec() {
                         <p className="text-xl text-gray-300 max-w-2xl leading-relaxed">
                             Building the next generation of robotics and IoT kits for STEAM learning. Empowering students from Class 6 to 9 with Computational Thinking and Design Thinking curriculums.
                         </p>
+
+                        {/* Mobile Navigation Button */}
+                        <div className="block lg:hidden mt-8">
+                            <a
+                                href="https://www.navrobotec.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group flex items-center gap-3 px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 rounded-full text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 w-fit"
+                            >
+                                <span>Visit NAVRobotec</span>
+                                <ArrowTopRightOnSquareIcon className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Desktop Navigation Button */}
+                    <div className="hidden lg:block relative z-30 ml-8 mt-48">
+                        <a
+                            href="https://www.navrobotec.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group flex items-center gap-3 px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 rounded-full text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
+                        >
+                            <span>Visit NAVRobotec</span>
+                            <ArrowTopRightOnSquareIcon className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </a>
                     </div>
                 </div>
             </div>
