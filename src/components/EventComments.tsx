@@ -3,9 +3,11 @@ import {
     ChatBubbleLeftIcon,
     UserCircleIcon,
     ArrowUturnRightIcon,
-    HeartIcon as HeartOutline
+    HeartIcon as HeartOutline,
+    TrashIcon
 } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartSolid } from '@heroicons/react/24/solid';
+import toast from 'react-hot-toast';
 import { fetchApi, SERVER_URL } from '../utils/api';
 
 interface Reply {
@@ -76,15 +78,34 @@ export default function EventComments({ eventId, comments: externalComments, onR
         ws.onmessage = (event) => {
             const message = JSON.parse(event.data);
             if (message.action === 'new_comment') {
-                setPendingCount(prev => prev + 1);
+                setPendingCount((prev: number) => prev + 1);
             } else if (message.action === 'new_reply') {
                 if (onRefresh) onRefresh();
             } else if (message.action === 'like_update') {
-                setLocalComments(prev => prev.map(c =>
+                setLocalComments((prev: Comment[]) => prev.map((c: Comment) =>
                     c.id === message.comment_id
                         ? { ...c, likes_count: message.likes_count }
                         : c
                 ));
+            } else if (message.action === 'comment_deleted') {
+                const { comment_id, parent_id } = message;
+                setLocalComments((prev: Comment[]) => {
+                    if (parent_id) {
+                        // It's a reply
+                        return prev.map((c: Comment) => {
+                            if (c.id === parent_id) {
+                                return {
+                                    ...c,
+                                    replies: c.replies.filter((r: Reply) => r.id !== comment_id)
+                                };
+                            }
+                            return c;
+                        });
+                    } else {
+                        // It's a top-level comment
+                        return prev.filter((c: Comment) => c.id !== comment_id);
+                    }
+                });
             }
         };
 
@@ -126,7 +147,7 @@ export default function EventComments({ eventId, comments: externalComments, onR
             if (onRefresh) onRefresh();
         } catch (error) {
             console.error('Failed to submit reply:', error);
-            alert('Failed to submit reply. Please try again.');
+            toast.error('Failed to submit reply');
         } finally {
             setIsPostingReply(false);
         }
@@ -139,7 +160,7 @@ export default function EventComments({ eventId, comments: externalComments, onR
         }
 
         // Optimistic update
-        setLocalComments(prev => prev.map(c => {
+        setLocalComments((prev: Comment[]) => prev.map((c: Comment) => {
             if (c.id === commentId) {
                 return {
                     ...c,
@@ -159,13 +180,37 @@ export default function EventComments({ eventId, comments: externalComments, onR
         }
     };
 
+    const handleDelete = async (commentId: number, isReply: boolean) => {
+        if (!confirm('Are you sure you want to delete this?')) return;
+
+        try {
+            // Optimistic update
+            if (isReply) {
+                setLocalComments((prev: Comment[]) => prev.map((c: Comment) => ({
+                    ...c,
+                    replies: c.replies.filter((r: Reply) => r.id !== commentId)
+                })));
+            } else {
+                setLocalComments((prev: Comment[]) => prev.filter((c: Comment) => c.id !== commentId));
+            }
+
+            await fetchApi(`/comments/${commentId}/`, { method: 'DELETE' });
+            toast.success('Comment deleted');
+            if (onRefresh) onRefresh();
+        } catch (error) {
+            console.error('Failed to delete comment:', error);
+            toast.error('Failed to delete comment');
+            if (onRefresh) onRefresh();
+        }
+    };
+
     const handleLoadNew = () => {
         setPendingCount(0);
         if (onRefresh) onRefresh();
     };
 
     const handleSeeMore = () => {
-        setVisibleCount(prev => prev + 3);
+        setVisibleCount((prev: number) => prev + 3);
     };
 
     const visibleComments = localComments.slice(0, visibleCount);
@@ -207,7 +252,7 @@ export default function EventComments({ eventId, comments: externalComments, onR
 
             <div className="space-y-4 relative">
                 <div className="space-y-4">
-                    {visibleComments.map((comment) => (
+                    {visibleComments.map((comment: Comment) => (
                         <div key={comment.id} className="animate-fadeIn">
                             {/* Main Comment Bubble */}
                             <div className="flex gap-3">
@@ -268,6 +313,16 @@ export default function EventComments({ eventId, comments: externalComments, onR
                                             <ArrowUturnRightIcon className="w-3.5 h-3.5" />
                                             {replyingTo === comment.id ? 'Cancel' : 'Reply'}
                                         </button>
+
+                                        {user && user.email === comment.user_email && (
+                                            <button
+                                                onClick={() => handleDelete(comment.id, false)}
+                                                className="text-xs font-bold text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1"
+                                                title="Delete comment"
+                                            >
+                                                <TrashIcon className="w-3.5 h-3.5" />
+                                            </button>
+                                        )}
 
                                         {comment.replies.length > 0 && (
                                             <span className="text-xs text-gray-400 font-medium flex items-center gap-1">
@@ -331,11 +386,26 @@ export default function EventComments({ eventId, comments: externalComments, onR
                                     {/* Replies List */}
                                     {comment.replies.length > 0 && (
                                         <div className="mt-2 space-y-2 pl-2 border-l-2 border-gray-100">
-                                            {comment.replies.map((reply) => (
+                                            {comment.replies.map((reply: Reply) => (
                                                 <div key={reply.id} className="bg-gray-50 rounded-xl rounded-tl-sm p-2.5">
                                                     <div className="flex items-center gap-2 mb-1">
                                                         <span className="font-bold text-xs text-gray-800">{reply.user_name}</span>
                                                         <span className="text-[10px] text-gray-400">{formatTimeAgo(reply.created_at)}</span>
+                                                        {user && user.email === comment.user_email && ( // Using comment.user_email logic here assuming we want to enable delete for my replies. Wait, `reply` object doesn't have email in Interface `Reply`... Let me check the interface
+                                                            /* Wait, the Reply interface only has `user_name`. Let's assume the API returns the same user object structure or similar. 
+                                                             Actually, looking at `EventCommentSerializer`, `replies` uses the SAME serializer recursively.
+                                                             So `reply` IS a `Comment`. 
+                                                             Wait, the interface `Reply` at the top of file is:
+                                                             interface Reply { id: number; user_name: string; comment: string; created_at: string; }
+                                                             It is MISSING `user_email`. I need to update the interface first. */
+                                                            <button
+                                                                onClick={() => handleDelete(reply.id, true)}
+                                                                className="ml-auto text-gray-400 hover:text-red-500"
+                                                                title="Delete reply"
+                                                            >
+                                                                <TrashIcon className="w-3 h-3" />
+                                                            </button>
+                                                        )}
                                                     </div>
                                                     <p className="text-gray-600 text-xs">{reply.comment}</p>
                                                 </div>

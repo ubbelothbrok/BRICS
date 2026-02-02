@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { fetchApi } from '../utils/api';
 
 const slides = [
   {
@@ -21,11 +22,18 @@ const slides = [
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
+
+    // Check authentication
+    fetchApi('/accounts/me/')
+      .then(data => setUser(data))
+      .catch(() => setUser(null));
+
     return () => clearInterval(timer);
   }, []);
 
@@ -66,9 +74,16 @@ export default function Hero() {
                 <Link to="/events" className="px-8 py-3.5 bg-white text-black rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 cursor-pointer">
                   Explore Events
                 </Link>
-                <Link to="/schedule" className="px-8 py-3.5 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
-                  See Schedule
-                </Link>
+
+                {user ? (
+                  <Link to="/stalls" className="px-8 py-3.5 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
+                    See Stalls
+                  </Link>
+                ) : (
+                  <Link to="/login" className="px-8 py-3.5 border-2 border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
+                    Join Now
+                  </Link>
+                )}
               </div>
             </div>
           </div>
