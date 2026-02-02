@@ -2,20 +2,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ArrowTrendingUpIcon, LightBulbIcon, SparklesIcon, GlobeAltIcon, BuildingLibraryIcon } from '@heroicons/react/24/outline';
 
-const LEADERSHIP_MESSAGES = [
-    {
-        role: "Faculty In-Charge (Event)",
-        name: "Dr. Faculty Name",
-        image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Faculty1",
-        note: "Pragyaan is a testament to our commitment to open innovation. We are building a platform where the boundaries between school and university education blur, fostering a continuum of learning."
-    },
-    {
-        role: "Faculty In-Charge (Manthan)",
-        name: "Dr. Faculty Name",
-        image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Faculty2",
-        note: "Manthan is not just a discussion; it's a policy incubator. By bringing principals and policymakers together, we aim to draft actionable strategies that will shape the future of our classrooms."
-    }
-];
+
 
 const STUDENT_LEADERSHIP = [
     {
@@ -164,19 +151,7 @@ export default function Vision() {
                         <h2 className="text-4xl font-bold text-center mb-16 text-gray-900 font-heading">Leadership Speak</h2>
 
                         {/* Faculty Section */}
-                        <div className="grid md:grid-cols-2 gap-12 mb-20">
-                            {LEADERSHIP_MESSAGES.map((leader, i) => (
-                                <div key={i} className="bg-gray-50 p-8 rounded-3xl shadow-sm border border-gray-100 flex items-start gap-6 relative overflow-hidden group hover:shadow-lg transition-all">
-                                    <div className="absolute top-0 left-0 w-2 h-full bg-brics-blue"></div>
-                                    <img src={leader.image} alt={leader.name} className="w-20 h-20 rounded-full object-cover border-2 border-white shrink-0 shadow-md" />
-                                    <div>
-                                        <div className="text-sm font-bold text-brics-blue uppercase tracking-wider mb-1">{leader.role}</div>
-                                        <h3 className="text-xl font-bold text-gray-900 mb-4">{leader.name}</h3>
-                                        <p className="text-gray-600 italic leading-relaxed">"{leader.note}"</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+
 
                         {/* Student Section */}
                         <div className="grid md:grid-cols-3 gap-8">
