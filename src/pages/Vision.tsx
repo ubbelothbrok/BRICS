@@ -6,22 +6,10 @@ import { ArrowTrendingUpIcon, LightBulbIcon, SparklesIcon, GlobeAltIcon, Buildin
 
 const STUDENT_LEADERSHIP = [
     {
-        role: "Student Convenor",
-        name: "Student Name",
-        image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Student1",
-        note: "Leading Pragyaan has been about turning a vision into reality. We want every visiting student to leave with a spark of curiosity that stays with them forever."
-    },
-    {
-        role: "Student Convenor",
-        name: "Student Name",
-        image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Student2",
-        note: "Our goal was to create an experience, not just an event. From the tech demos to the art zones, every detail is crafted to inspire."
-    },
-    {
-        role: "Head, Principal Conclave",
-        name: "Student Name",
-        image: "https://api.dicebear.com/7.x/avataaars/svg?seed=ManthanHead",
-        note: "Manthan bridges the gap between administration and aspiration. It's inspiring to see school leaders so passionate about adopting future-ready pedagogies."
+        role: "Convenor Pragyaan",
+        name: "Bhavisya Kundu",
+        image: "/bhavisya.jpeg",
+        note: "Pragyaan is an initiative to ignite innovation, leadership, and critical thinking among students. We believe real learning begins when curiosity turns into action."
     }
 ];
 

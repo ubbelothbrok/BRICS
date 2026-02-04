@@ -188,7 +188,7 @@ export default function Manthan() {
                             <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
                                 <h4 className="text-xl font-bold text-gray-900 mb-2">Discussion 1: Infrastructure & Equity</h4>
                                 <p className="text-gray-600 text-sm mb-3">Bridging the gap in physical and digital infrastructure for inclusive education.</p>
-                                <span className="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs font-medium">Discussion Panel</span>
+                                <span className="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs font-medium">Panel Discussion</span>
                             </div>
                         </div>
 
@@ -210,7 +210,7 @@ export default function Manthan() {
                             <div className="bg-white rounded-2xl p-5 shadow-md relative z-10">
                                 <h4 className="text-xl font-bold text-gray-900 mb-2">Discussion 2: Future Skills & NEP 22</h4>
                                 <p className="text-gray-600 text-sm mb-3">Integrating AI, Robotics, and critical thinking into the curriculum.</p>
-                                <span className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Discussion Panel</span>
+                                <span className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Panel Discussion</span>
                             </div>
                         </div>
 
